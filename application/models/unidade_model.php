@@ -6,4 +6,11 @@ public function salva($unidade)
 {
     $this->db->insert("tb_unidade", $unidade);// (tabela do banco,array recebido)
 }
+    public function altera($unidade){
+        $this->db->where('cd_cpsouza', $unidade['cd_cpsouza']);
+        $this->db->update('tb_unidade', $unidade);
+    }
+    public function buscaUnidades(){
+        return $this->db->get("tb_unidade")->result_array();
+    }
 }
