@@ -5,7 +5,7 @@ class Unidade extends CI_Controller
 {
 
     public function index(){
-        $this->load->view('unidade/verificacao-cadastro');
+        $this->load->view('unidade/verificacao-alteracao');
 
     }
 

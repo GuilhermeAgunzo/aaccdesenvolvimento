@@ -12,6 +12,7 @@ class Aluno extends CI_Controller
         $unidades = array("tb_unidade" => $retornoUnidades);
 
         $this->load->view('aluno/formulario_cadastro', array_merge($turmas, $unidades));
+        //$this->load->view('unidade/verificacao-alteracao', $unidades);
 
     }
     public function novo(){
