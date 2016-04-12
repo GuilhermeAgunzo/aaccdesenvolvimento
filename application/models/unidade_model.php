@@ -13,4 +13,12 @@ public function salva($unidade)
     public function buscaUnidades(){
         return $this->db->get("tb_unidade")->result_array();
     }
+    public function verifica($codigoCPS){
+        $result  = $this->db->get_where('tb_unidade',array('cd_cpsouza'=> $codigoCPS))->result_array();
+        if(count($result) > 0) {
+            return true;
+        }else {
+            return false;
+        }
+    }
 }

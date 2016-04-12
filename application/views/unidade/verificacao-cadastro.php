@@ -1,0 +1,30 @@
+<head>
+    <link rel="stylesheet" href="<?=base_url("css/bootstrap.css")?>">
+    <meta charset="utf-8">
+</head>
+<body>
+<div class="container">
+    <br>
+    <?php if($this->session->flashdata("success")) { ?>
+        <p class="alert alert-success text-center"><?= $this->session->flashdata("success") ?></p>
+    <?php } ?>
+    <?php if($this->session->flashdata("danger")) { ?>
+        <p class="alert alert-danger text-center"><?= $this->session->flashdata("danger") ?></p>
+    <?php } ?>
+    <h1 class="text-center">Cadastro de unidade</h1>
+<?php
+//Inicia Formulario
+echo form_open("unidade/verifica");
+
+//Cria um label e um campo de texto
+echo form_label("Codigo Centro Paula Souza", "codigo");
+echo form_input(array("name" => "codigo", "class" => "form-control", "id" => "codigo", "maxlength" => "50","value" => set_value("","")));
+echo form_error('codigo');
+
+echo form_button(array("class" => "btn", "content" => "Verificar", "type" => "submit"));
+
+    echo form_close();
+?>
+</div>
+</body>
+</html>

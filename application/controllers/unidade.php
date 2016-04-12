@@ -5,7 +5,7 @@ class Unidade extends CI_Controller
 {
 
     public function index(){
-       // $this->load->view('unidade/formulario_alteracao');
+        $this->load->view('unidade/verificacao-cadastro');
 
     }
 
@@ -27,7 +27,7 @@ class Unidade extends CI_Controller
             $this->load->model("unidade_model");
             $this->unidade_model->salva($unidade);
             $this->session->set_flashdata("success", "Cadastro efetuado com sucesso!");
-            redirect('/');
+            $this->load->view('unidade/verificacao-cadastro');
         }
 
     public function altera(){
@@ -46,9 +46,23 @@ class Unidade extends CI_Controller
         );
 
         $this->load->model("unidade_model");
-        $this->unidade_model->altera($unidade,$id);
+        $this->unidade_model->altera($unidade);
         $this->session->set_flashdata("success", "Alteração efetuada com sucesso!");
         redirect('/');
     }
+
+    public function verifica(){
+        $codigoCPS = $this->input->post("codigo");
+        $this->load->model("unidade_model");
+        if($this->unidade_model->verifica($codigoCPS)){
+            $this->session->set_flashdata("danger", "Unidade já cadastrada!");
+            redirect('/');
+        }else{
+            $this->load->view('unidade/formulario_cadastro');
+
+        }
+
+    }
+
 
 }

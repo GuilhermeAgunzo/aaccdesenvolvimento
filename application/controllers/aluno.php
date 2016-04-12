@@ -24,8 +24,8 @@ class Aluno extends CI_Controller
             "nm_turno" => $this->input->post("turno"),
             "id_user_adm_cadastrou" => "1",
             "id_user_adm_desativou" => "0",
-            "id_turma" => $this->input->post("id_turma"),
-            "id_unidade" => $this->input->post("id_unidade")
+            "id_turma" => $this->input->post("turma"),
+            "id_unidade" => $this->input->post("unidade")
         );
 
         $this->load->model("aluno_model");
@@ -50,7 +50,7 @@ class Aluno extends CI_Controller
         );
 
         $this->load->model("unidade_model");
-        $this->unidade_model->altera($unidade,$id);
+        $this->unidade_model->altera($unidade);
         $this->session->set_flashdata("success", "Alteração efetuada com sucesso!");
         redirect('/');
     }

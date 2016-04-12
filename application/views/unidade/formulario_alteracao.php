@@ -18,7 +18,7 @@
     echo form_open("unidade/altera");
 
     //Cria um label e um campo de texto
-    echo form_label("Codigo", "codigo");
+    echo form_label("Codigo Centro Paula Souza", "codigo");
     echo form_input(array("name" => "codigo", "class" => "form-control", "id" => "codigo", "maxlength" => "50","value" => set_value("codigo","")));
     echo form_error('codigo');
     echo form_button(array("class" => "btn", "content" => "Pesquisar", "type" => "button"));

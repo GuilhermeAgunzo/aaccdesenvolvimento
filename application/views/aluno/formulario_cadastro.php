@@ -41,23 +41,39 @@
     echo form_input(array("name" => "celular", "class" => "form-control", "id" => "celular", "type" => "number","value" => set_value("celular","")));
     echo form_error("celular");
 
-    //Dropdown list Estados
 
     $unidades = array_column($tb_unidade,'nm_unidade');
+    $optUnidades = array('unidade' => $unidades);
     $extra = array("class" => "form-control", "value" => "set_value");
+
     echo form_label("Unidade", "unidade");
-    echo form_dropdown('id_unidade', $unidades, 'Fatec Praia Grande',$extra);
+    echo form_dropdown('unidade', $optUnidades, $optUnidades ,$extra);
 
 
-    $turmas = array_column($tb_turma,'id_turma','');
+    $turmas = array_column($tb_turma,'id_turma');
+    $optTurmas = array('turma' => $turmas);
     $extra = array("class" => "form-control");
+
     echo form_label("Turma", "turma");
-    echo form_dropdown('id_turma', $turmas, 'id_turma',$extra);
+    echo form_dropdown('turma', $optTurmas, $optTurmas,$extra);
 
     $turno = array("manha" => "Manhã","tarde" => "Tarde","noite" => "Noite");
+    $optTurno = array('turno' => $turno);
     $extra = array("class" => "form-control");
+
+
     echo form_label("Turno", "turno");
-    echo form_dropdown('turno', $turno, 'Noite',$extra);
+    echo form_dropdown('turno', $optTurno,"Noite",$extra);
+
+    $options = array(
+        'small'         => 'Small Shirt',
+        'med'           => 'Medium Shirt',
+        'large'         => 'Large Shirt',
+        'xlarge'        => 'Extra Large Shirt',
+    );
+
+    $shirts_on_sale = array('small', 'large');
+    echo form_dropdown('shirts', $options, 'large');
 
     ?>
     <br/>

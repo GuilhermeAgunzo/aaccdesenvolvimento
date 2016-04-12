@@ -54,6 +54,7 @@
     echo form_label("Turma", "turma");
     echo form_dropdown('id_turma', $turmas, 'id_turma',$extra);
 
+
     $turno = array("manha" => "Manhã","tarde" => "Tarde","noite" => "Noite");
     $extra = array("class" => "form-control");
     echo form_label("Turno", "turno");
