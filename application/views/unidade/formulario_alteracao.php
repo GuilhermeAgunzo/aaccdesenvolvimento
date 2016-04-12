@@ -5,11 +5,12 @@
 </head>
 <body>
 <div class="container">
+    <br/>
     <?php if($this->session->flashdata("success")) { ?>
-        <p class="alert alert-success"><?= $this->session->flashdata("success") ?></p>
+        <p class="alert alert-success text-center"><?= $this->session->flashdata("success") ?></p>
     <?php } ?>
     <?php if($this->session->flashdata("danger")) { ?>
-        <p class="alert alert-danger"><?= $this->session->flashdata("danger") ?></p>
+        <p class="alert alert-danger text-center"><?= $this->session->flashdata("danger") ?></p>
     <?php } ?>
     <h1 class="text-center">Alteração de unidade</h1>
     <?php

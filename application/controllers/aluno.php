@@ -20,8 +20,12 @@ class Aluno extends CI_Controller
             "nm_aluno" => $this->input->post("nome"),
             "cd_tel_celular" => $this->input->post("celular"),
             "cd_tel_residencial" => $this->input->post("telefone"),
+            "nm_email" => $this->input->post("email"),
+            "nm_turno" => $this->input->post("turno"),
             "id_user_adm_cadastrou" => "1",
-            "id_user_adm_desativou" => $this->input->post("endereco"),
+            "id_user_adm_desativou" => "0",
+            "id_turma" => $this->input->post("id_turma"),
+            "id_unidade" => $this->input->post("id_unidade")
         );
 
         $this->load->model("aluno_model");

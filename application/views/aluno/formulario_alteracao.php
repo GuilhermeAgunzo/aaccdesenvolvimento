@@ -12,7 +12,7 @@
     <?php if($this->session->flashdata("danger")) { ?>
         <p class="alert alert-danger text-center"><?= $this->session->flashdata("danger") ?></p>
     <?php } ?>
-    <h1 class="text-center">Cadastro de aluno</h1>
+    <h1 class="text-center">Alteração de aluno</h1>
     <?php
     //Inicia Formulario
     echo form_open("aluno/novo");

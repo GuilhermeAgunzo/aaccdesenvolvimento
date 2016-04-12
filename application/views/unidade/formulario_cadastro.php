@@ -5,23 +5,25 @@
 </head>
 <body>
 <div class="container">
+    <br/>
     <?php if($this->session->flashdata("success")) { ?>
-        <p class="alert alert-success"><?= $this->session->flashdata("success") ?></p>
+        <p class="alert alert-success text-center"><?= $this->session->flashdata("success") ?></p>
     <?php } ?>
     <?php if($this->session->flashdata("danger")) { ?>
-        <p class="alert alert-danger"><?= $this->session->flashdata("danger") ?></p>
+        <p class="alert alert-danger text-center"><?= $this->session->flashdata("danger") ?></p>
     <?php } ?>
     <h1 class="text-center">Cadastro de unidade</h1>
     <?php
     //Inicia Formulario
     echo form_open("unidade/novo");
 
+    ?>
     //Cria um label e um campo de texto
     echo form_label("Codigo", "codigo");
     echo form_input(array("name" => "codigo", "class" => "form-control", "id" => "codigo", "maxlength" => "50","value" => set_value("codigo","")));
     echo form_error('codigo');
     echo form_button(array("class" => "btn", "content" => "Pesquisar", "type" => "button"));
-
+    <?php
     ?>
     <br/>
     <?php
