@@ -18,7 +18,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="admin.html">Projeto AACC - teste ka</a>
+            <a class="navbar-brand" href="admin.html">Projeto AACC - teste da karina</a>
         </div>
 
         <!-- Top Menu Items -->
