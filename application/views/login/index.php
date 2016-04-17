@@ -89,7 +89,6 @@
 
                 ?>
                 <a href="<?= base_url("#") ?>"><i class=""></i>Esqueceu a senha?</a>
-                <a href="<?= base_url("administrador/index.php") ?>"><i class=""></i>Administrador</a>
             </div>
             <div class="about-left">
 
