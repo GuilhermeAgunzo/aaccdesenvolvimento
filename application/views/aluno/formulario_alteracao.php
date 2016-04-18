@@ -1,6 +1,6 @@
 <html lang="pt-br">
 <head>
-    <link rel="stylesheet" href="<?=base_url("css/bootstrap.css")?>">
+    <link rel="stylesheet" href="<?=base_url("css/bootstrap2.css")?>">
     <link rel="stylesheet" href="<?=base_url("css/sb-admin.css")?>">
 
     <meta charset="utf-8">
