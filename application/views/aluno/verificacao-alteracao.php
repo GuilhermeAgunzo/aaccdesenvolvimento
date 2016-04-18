@@ -20,16 +20,16 @@
         //Inicia Formulario
         echo form_open("unidade/buscaCadastroAlteracao");
         echo form_label("Codigo Centro Paula Souza", "codigo");
-        echo form_input(array(  "name" => "codigo",
-                                "class" => "form-control",
-                                "id" => "codigo",
-                                "maxlength" => "5",
-                                "value" => set_value("codigo","")));
+        echo form_input(array("name" => "codigo",
+                              "class" => "form-control",
+                              "id" => "codigo",
+                              "maxlength" => "5",
+                              "value" => set_value("codigo","")));
         echo form_error("codigo");
 
-        echo form_button(array( "class" => "btn",
-                                "content" => "Buscar",
-                                "type" => "submit"));
+        echo form_button(array("class" => "btn",
+                               "content" => "Buscar",
+                               "type" => "submit"));
 
         echo form_close();
         ?>

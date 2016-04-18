@@ -14,9 +14,9 @@ public function salva($unidade)
         return $this->db->get("tb_unidade")->result_array();
     }
     public function verifica($codigoCPS){
-        $result  = $this->db->get_where('tb_unidade',array('cd_cpsouza'=> $codigoCPS))->result_array();
+        $result  = $this->db->get_where('tb_unidade',array('cd_cpsouza'=> $codigoCPS))->row_array();
         if(count($result) > 0) {
-            return true;
+            return $result;
         }else {
             return false;
         }

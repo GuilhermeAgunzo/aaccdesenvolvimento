@@ -20,33 +20,51 @@
     echo form_open("aluno/novo");
     //Cria um label e um campo numerico
     echo form_label("Numero de Matricula", "matricula");
-    echo form_input(array("name" => "matricula", "class" => "form-control", "id" => "matricula","type" => "number", "maxlength" => "255","value" => set_value("matricula"),""));
+    echo form_input(array("name" => "matricula",
+                          "class" => "form-control",
+                          "id" => "matricula",
+                          "type" => "number",
+                          "maxlength" => "255",
+                          "value" => set_value("matricula"),""));
     echo form_error("matricula");
-    echo form_button(array("class" => "btn", "content" => "Pesquisar", "type" => "button"));
-    ?>
-    <br>
-    <?php
 
     echo form_label("Nome", "nome");
-    echo form_input(array("name" => "nome", "class" => "form-control", "id" => "nome", "maxlength" => "255","value" => set_value("nome"),""));
+    echo form_input(array("name" => "nome",
+                          "class" => "form-control",
+                          "id" => "nome",
+                          "maxlength" => "255",
+                          "value" => set_value("nome"),""));
     echo form_error("nome");
 
     echo form_label("Email", "email");
-    echo form_input(array("name" => "email", "class" => "form-control", "id" => "email","type" => "email", "maxlength" => "255","value" => set_value("email"),""));
+    echo form_input(array("name" => "email",
+                          "class" => "form-control",
+                          "id" => "email",
+                          "type" => "email",
+                          "maxlength" => "255",
+                          "value" => set_value("email"),""));
     echo form_error("email");
 
     echo form_label("Telefone Residencial", "telefone");
-    echo form_input(array("name" => "telefone", "class" => "form-control", "id" => "telefone", "type" => "number","value" => set_value("telefone","")));
+    echo form_input(array("name" => "telefone",
+                          "class" => "form-control",
+                          "id" => "telefone",
+                          "type" => "number",
+                          "value" => set_value("telefone","")));
     echo form_error("telefone");
 
     echo form_label("Telefone Celular", "celular");
-    echo form_input(array("name" => "celular", "class" => "form-control", "id" => "celular", "type" => "number","value" => set_value("celular","")));
+    echo form_input(array("name" => "celular",
+                          "class" => "form-control",
+                          "id" => "celular",
+                          "type" => "number",
+                          "value" => set_value("celular","")));
     echo form_error("celular");
 
     //Dropdown list Estados
 
     $unidades = array_column($tb_unidade,'nm_unidade');
-    $extra = array("class" => "form-control", "value" => "set_value");
+    $extra = array("class" => "form-control");
     echo form_label("Unidade", "unidade");
     echo form_dropdown('id_unidade', $unidades, 'Fatec Praia Grande',$extra);
 
@@ -66,7 +84,9 @@
     <br/>
     <?php
     //Cria um botão submit para enviar os dados
-    echo form_button(array("class" => "btn btn-primary", "content" => "Cadastrar", "type" => "submit"));
+    echo form_button(array("class" => "btn btn-primary",
+                           "content" => "Cadastrar",
+                           "type" => "submit"));
     //Encerra formulario
     echo form_close();
     ?>

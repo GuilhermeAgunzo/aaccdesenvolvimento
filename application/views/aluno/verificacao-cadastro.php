@@ -14,25 +14,27 @@
     <?php if($this->session->flashdata("danger")) { ?>
         <p class="alert alert-danger text-center"><?= $this->session->flashdata("danger") ?></p>
     <?php } ?>
-    <h1 class="text-center">Cadastro de Unidade</h1>
+    <h1 class="text-center">Cadastro de Aluno</h1>
 <?php
 
 //Inicia Formulario
-echo form_open("unidade/verificaCadastro");
+echo form_open("aluno/verificaCadastro");
 
 //Cria um label e um campo de texto
-echo form_label("Codigo Centro Paula Souza", "codigo");
-echo form_input(array(  "name" => "codigo",
-                        "class" => "form-control",
-                        "id" => "codigo",
-                        "maxlength" => "4",
-                        "minlength" => "3",
-                        "type" => "number"));
-echo form_error("codigo");
+echo form_label("Matricula", "matricula");
+echo form_input(array("name" => "matricula",
+                      "class" => "form-control",
+                      "id" => "matricula",
+                      "maxlength" => "13",
+                      "minlength" => "13",
+                      "required",
+                      "type" => "number",
+                      "value" => set_value("matricula","")));
+echo form_error("matricula");
 
-echo form_button(array( "class" => "btn",
-                        "content" => "Verificar",
-                        "type" => "submit"));
+echo form_button(array("class" => "btn",
+                       "content" => "Verificar",
+                       "type" => "submit"));
 
     echo form_close();
 ?>

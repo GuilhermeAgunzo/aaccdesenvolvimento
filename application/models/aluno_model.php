@@ -14,6 +14,12 @@ class Aluno_model extends CI_Model{
     public function buscaTurmas(){
         return $this->db->get("tb_turma")->result_array();
         }
-
-
+    public function verifica($matricula){
+        $result  = $this->db->get_where('tb_aluno',array('cd_mat_aluno'=> $matricula))->row_array();
+        if(count($result) > 0) {
+            return $result;
+        }else {
+            return false;
+        }
+    }
 }

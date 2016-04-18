@@ -3,16 +3,7 @@
 class Aluno extends CI_Controller
 {
     public function index(){
-       $this->load->model("aluno_model");
-        $retornoTurmas =  $this->aluno_model->buscaTurmas();
-       $turmas = array("tb_turma" => $retornoTurmas);
-
-        $this->load->model("unidade_model");
-        $retornoUnidades =  $this->unidade_model->buscaUnidades();
-        $unidades = array("tb_unidade" => $retornoUnidades);
-
-        $this->load->view('aluno/formulario_cadastro', array_merge($turmas, $unidades));
-        //$this->load->view('unidade/verificacao-alteracao', $unidades);
+        $this->load->view('aluno/verificacao-cadastro');
 
     }
     public function novo(){
@@ -54,6 +45,46 @@ class Aluno extends CI_Controller
         $this->unidade_model->altera($unidade);
         $this->session->set_flashdata("success", "Alteração efetuada com sucesso!");
         redirect('/');
+    }
+
+    public function verificaCadastro()
+    {
+        if ($this->validaCamposCadastro()) {
+            $matricula = $this->input->post("matricula");
+            $this->load->model("aluno_model");
+            if ($this->aluno_model->verifica($matricula)) {
+                $this->session->set_flashdata("danger", "Aluno já cadastrado!");
+                redirect('/');
+            } else {
+                $this->load->model("aluno_model");
+                $retornoTurmas =  $this->aluno_model->buscaTurmas();
+                $turmas = array("tb_turma" => $retornoTurmas);
+
+                $this->load->model("unidade_model");
+                $retornoUnidades =  $this->unidade_model->buscaUnidades();
+                $unidades = array("tb_unidade" => $retornoUnidades);
+
+                //$this->load->view('aluno/formulario_cadastro', array_merge($turmas, $unidades));
+                $this->load->view('aluno/formulario_cadastro',array_merge($turmas, $unidades));
+
+            }
+        } else {
+            //redirect('unidade/verificacao-cadastro');
+            $this->load->view('aluno/verificacao-cadastro');
+        }
+    }
+
+    public function validaCamposCadastro()
+    {
+        //valida formulario
+        $this->load->library("form_validation");
+        $this->form_validation->set_rules("matricula", "matricula", "trim|required|min_length[13]|max_length[13]",
+            array(
+                'required' => 'Você precisa preencher o campo %s.',
+                'max_length[13]' => 'Insira no maximo 13 digitos.'
+            )
+        );
+        return  $this->form_validation->run();
     }
 
 }
