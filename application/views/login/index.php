@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>AACC</title>
+    <title>AACC - FATEC</title>
     <link  rel="stylesheet"  href="<?= base_url("css/bootstrap.css")?>" type="text/css" media="all" >
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -53,7 +53,7 @@
         <div class="header-matter">
             <h2>Bem vindo ao portal de Gestão e controle da <span>AACC</span></h2>
             <p>Atividades <span> Acadêmico</span>-Científico-<span>Cultural</span></p>
-            <a href="#about" class="scroll" ><img src="images/down.png" class="scroll" alt="" /></a>
+            <a href="#about" class="scroll" ><img src="<?= base_url("images/down.png")?>" class="scroll" alt="" /></a>
         </div>
     </div>
 </div>
@@ -63,6 +63,24 @@
 <!--content-->
 <div class="content">
     <div class="container">
+
+        <?php if($this->session->flashdata("success")): ?>
+            <p class="alert alert-success mensagemavisohome" id="aviso"><?= $this->session->flashdata("success"); ?></p>
+        <?php endif; ?>
+
+        <?php if($this->session->flashdata("danger")): ?>
+            <p class="alert alert-danger mensagemavisohome" id="aviso"><?= $this->session->flashdata("danger"); ?></p>
+        <?php endif; ?>
+
+        <?php if(isset($mensagemSucesso)): ?>
+            <p class="alert alert-success mensagemavisohome" id="aviso"><?= $mensagemSucesso ?></p>
+        <?php endif; ?>
+
+        <?php if(isset($mensagemErro)): ?>
+            <p class="alert alert-danger mensagemavisohome" id="aviso"><?= $mensagemErro ?></p>
+        <?php endif; ?>
+
+
         <div class="about" id="about">
 
             <div class="about-left left-about">
@@ -73,22 +91,39 @@
 
                 <!--Formulário de Login-->
                 <?php
-                echo form_open("");
-                echo form_label("Usuário ", "nome");echo "</br>";
-                echo form_input(array("name" => "nome", "id" => "nome" ,"class" => "form-control", "maxlength" => "80"));
-                echo "</br>"."</br>";
-                echo form_label("Senha ", "senha");echo "</br>";
-                echo form_password(array("name" => "senha", "id" => "senha" ,"class" => "form-control", "maxlength" => "80"));echo "</br>"."</br>";
-                // Radio Button
-                echo form_checkbox(array("name" => "admin","id" => "admin","value" => "1", "class" => ""),FALSE);
-                echo form_label("Administrador?", "admin");
                 echo "</br>";
-                echo "</br>";
-                echo form_button(array("class" => "browse", "content" => "Entrar", "type" => "submit"));
-                echo "</br>";echo "</br>";
+                $atributos = array('class' => 'form-horizontal');
+                echo form_open("acesso/login", $atributos);
+                    echo "<div class='form-group'>";
+                    echo form_label("Usuário ", "email", array("class" => "col-sm-2 control-label"));
+                    echo "<div class='col-sm-10'>";
+                    echo form_input(array("name" => "email", "id" => "email" ,"class" => "form-control", "maxlength" => "80"));
+                    echo "</div>";
+                    echo "</div>";
+
+                    echo "</br>";
+
+                    echo "<div class='form-group'>";
+                    echo form_label("Senha ", "senha", array("class" => "col-sm-2 control-label"));
+                    echo "<div class='col-sm-10'>";
+                    echo form_password(array("name" => "senha", "id" => "senha" ,"class" => "form-control", "maxlength" => "80"));
+                    echo "</div>";
+                    echo "</div>";
+
+                    $esqueceusenha = anchor(base_url('index.php/usuario/recuperarsenha'), 'Esqueceu a senha?', array('class' => ''));
+
+                    echo form_label("<h6> {$esqueceusenha} </h6>");
+
+                    echo "<div class='form-group'>";
+                    echo "<div class='col-sm-offset-2 col-sm-10'>";
+                    echo form_button(array("class" => "btn btn-default", "content" => "Entrar", "type" => "submit"));
+                    echo "</div>";
+                    echo "</div>";
+                echo form_close();
 
                 ?>
-                <a href="<?= base_url("#") ?>"><i class=""></i>Esqueceu a senha?</a>
+
+                <!--<a href="<?= base_url("administrador/index.php") ?>"><i class=""></i>Administrador</a>-->
             </div>
             <div class="about-left">
 
@@ -112,10 +147,10 @@
     <div class="footer">
         <div class="container">
             <div class="footer-class">
-                <p class="footer-grid">&copy; 2016 <a href="http://w3layouts.com/" target="_blank">AACC</a> </p>
+                <p class="footer-grid">&copy; 2016 AACC </p>
                 <ul class="social-ic-icons">
-                    <li class="facebook"><a href="#"><span> </span></a></li>
-                    <li class="gmail"><a href="#"><span> </span></a></li>
+                    <li class="facebook"><a href="https://www.facebook.com/centropaulasouza/" target="_blank"><span> </span></a></li>
+                    <li class="twitter"><a href="https://twitter.com/paulasouzasp" target="_blank"><span> </span></a></li>
                 </ul>
                 <div class="clearfix"> </div>
             </div>

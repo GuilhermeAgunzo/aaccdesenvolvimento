@@ -49,10 +49,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-<<<<<<< HEAD
-$route['default_controller'] = 'aluno';
-=======
-$route['default_controller'] = 'login';
->>>>>>> 52592a8aff86bc3ae8cb81a2db14f6da29ccea99
+$route['default_controller'] = 'acesso';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
