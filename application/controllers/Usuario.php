@@ -62,24 +62,19 @@ class Usuario extends CI_Controller{
             $this->load->model("usuario_model");
             $this->usuario_model->cadastrarUsuario($usuario);
 
-            $dados = array(
-                "id_usuario" => $this->_retornaIdUsuario($email),
-                "valido" => true
-            );
+            $id_usuario = $this->_retornaIdUsuario($email);
+
 
 
 
         }else{
 
-            $dados = array(
-                "valido" => false
-            );
+            $id_usuario = 0;
 
 
         }
 
-        return $dados;
-
+        return $id_usuario;
     }
 
 
@@ -313,13 +308,14 @@ class Usuario extends CI_Controller{
 
             $cadastrado = $this->_cadastrarUsuario($email, $nivelAcesso);
 
-            if($cadastrado["valido"]){
+            if($cadastrado > 0){
                 $dados = array("mensagemSucesso" => "Cadastrado com sucesso");
-                $this->session->set_flashdata("success", "Cadastrado com sucesso. Usuário com id: {$cadastrado["id_usuario"]}");
+                $this->session->set_flashdata("success", "Cadastrado com sucesso. Usuário com id: {$cadastrado}");
             }else{
                 $dados = array("mensagemErro" => "Erro: email já cadastrado");
-                $this->session->set_flashdata("danger", "Erro: email já cadastrado");
+                $this->session->set_flashdata("danger", "Erro: email já cadastrado {$cadastrado}");
             }
+
 
         }else{
             $dados = array("mensagemErro" => "Erro no formulário");
