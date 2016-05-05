@@ -5,8 +5,9 @@ $atributos = array('class' => 'form-horizontal');
 echo form_open('email/send', $atributos);
 echo "<div class='form-group'>";
 echo form_label("Título do Evento", "tituloDoEvento", array("class" => "col-sm-2 control-label"));
-echo "<div class='col-sm-8'>";
-echo form_input(array("name" => "nmEvento", "id" => "nmEvento" ,"class" => "form-control", "maxlength" => "100"));
+echo "<div class='col-sm-10'>";
+$nmEvento = array('Nome do Evento' => 'Selecione o Evento','evento1' => 'Evento 1','evento2' => 'Evento 2');
+echo form_dropdown('NomedoEvento', $nmEvento, array("class" => "form-control"));
 echo "</div>";
 echo "</div>";
 
