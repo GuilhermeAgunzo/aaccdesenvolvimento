@@ -39,6 +39,10 @@ body a:hover{
 .main-content {
     position: relative;
 }
+
+.main-page{
+	margin-top: 35px;
+}
 /*-------HEADER SECTION------*/
 /* ----STICKY HEADER----*/
 .sticky-header{

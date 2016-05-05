@@ -22,10 +22,16 @@ class Usuario extends CI_Controller{
         $this->load->template("usuario/formularioalterar.php");
     }
 
-    public function formularioAlterarSenha(){
+    public function configuracaoaluno(){
         //chama metodo de "autentifica_helper" com nível de acesso 1 (aluno)
         autoriza(1);
-        $this->load->template("usuario/formularioalterarsenha.php");
+        $this->load->template_usuario_aluno("configuracaoAluno/configuracaoAluno.php");
+    }
+
+    public function configuracaoadm(){
+        //chama metodo de "autentifica_helper" com nível de acesso 1 (aluno)
+        autoriza(2);
+        $this->load->template_admin("configuracaoAluno/configuracaoAluno.php");
     }
 
     public function recuperarsenha(){
@@ -227,7 +233,13 @@ class Usuario extends CI_Controller{
             $this->session->set_flashdata("danger", "Não foi possível realizar a alteração.");
         }
 
-        $this->load->template("usuario/formularioalterarsenha");
+        if( $usuarioLogado['cd_nivel'] == 1 ){
+            $this->load->template_usuario_aluno("configuracaoAluno/configuracaoAluno.php");
+        }elseif( $usuarioLogado['cd_nivel'] == 2 ){
+            $this->load->template_admin("configuracaoAluno/configuracaoAluno.php");
+        }else{
+            redirect('/');
+        }
 
     }
 

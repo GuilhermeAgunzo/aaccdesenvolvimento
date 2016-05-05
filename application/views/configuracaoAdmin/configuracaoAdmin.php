@@ -2,7 +2,7 @@
             echo form_fieldset("<h1>Configurações</h1>");
 
             $atributos = array('class' => 'form-horizontal');
-            echo form_open('email/send', $atributos);
+            echo form_open('usuario/alterarSenha', $atributos);
             echo "<div class='form-group'>";
             echo form_label("Alterar email", "alterarEmail", array("class" => "col-sm-2 control-label"));
             echo "<div class='col-sm-8'>";

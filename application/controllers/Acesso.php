@@ -63,7 +63,6 @@ class Acesso extends CI_Controller{
             }elseif( $usuarioLogado['cd_nivel'] == 2 ){
                 redirect('/temporario/administrador');
             }else{
-                $this->session->set_flashdata("danger", "Usuário sem privilégios");
                 redirect('/');
             }
 

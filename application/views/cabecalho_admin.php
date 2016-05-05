@@ -257,12 +257,12 @@
                         <ul class="dropdown-menu drp-mnu">
                             <li>
                                 <i class="fa fa-cog">
-                                    <?=anchor(base_url('index.php/configuracao/configuracaoAdmin/'), 'Configurações', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                                    <?=anchor(base_url('index.php/usuario/configuracaoadm'), 'Configurações', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
                                 </i>
                             </li>
                             <li>
                                 <i class="fa fa-user">
-                                    <?=anchor(base_url('index.php/configuracao/configuracaoAdmin/'), 'Perfil', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                                    <?=anchor(base_url('index.php/usuario/configuracaoadm'), 'Perfil', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
                                 </i>
                             </li>
                             <li>

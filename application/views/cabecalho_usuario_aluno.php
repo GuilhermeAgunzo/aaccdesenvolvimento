@@ -138,12 +138,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <ul class="dropdown-menu drp-mnu">
                             <li>
                                 <i class="fa fa-cog">
-                                    <?=anchor(base_url('index.php/configuracao/configuracaoAluno/'), 'Configurações', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                                    <?=anchor(base_url('index.php/usuario/configuracaoaluno/'), 'Configurações', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
                                 </i>
                             </li>
                             <li>
                                 <i class="fa fa-user">
-                                    <?=anchor(base_url('index.php/configuracao/configuracaoAluno/'), 'Perfil', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                                    <?=anchor(base_url('index.php/usuario/configuracaoaluno'), 'Perfil', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
                                 </i>
                             </li>
                             <li>
