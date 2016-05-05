@@ -54,7 +54,20 @@ class Acesso extends CI_Controller{
                 $this->session->set_flashdata("danger", "Usuário ou senha inválida");
             }
 
-            redirect('/');
+
+            $usuarioLogado = $this->session->userdata("usuario_logado");
+
+
+            if( $usuarioLogado['cd_nivel'] == 1 ){
+                redirect('/temporario/aluno');
+            }elseif( $usuarioLogado['cd_nivel'] == 2 ){
+                redirect('/temporario/administrador');
+            }else{
+                $this->session->set_flashdata("danger", "Usuário sem privilégios");
+                redirect('/');
+            }
+
+
 
 
         }

@@ -135,7 +135,7 @@ class Usuario extends CI_Controller{
 
 
 
-    public function _alterarUsuario($ativo, $emailantigo, $emailnovo = null){
+    public function _alterarUsuario($ativo, $emailAntigo, $emailNovo = null){
         //chama metodo de "autentifica_helper" com nível de acesso 2 (professor)
         autoriza(2);
         $this->load->helper(array('date'));
@@ -146,13 +146,13 @@ class Usuario extends CI_Controller{
             'status_ativo' => $ativo
         );
 
-        if(!empty($emailnovo)){
+        if(!empty($emailNovo)){
             //insere no array o novo email para salvar no BD
-            $usuario["nm_email"] = $emailnovo;
+            $usuario["nm_email"] = $emailNovo;
         }
 
         $this->load->model("usuario_model");
-        $sucesso = $this->usuario_model->alterarEmail($usuario, $emailantigo);
+        $sucesso = $this->usuario_model->alterarEmail($usuario, $emailAntigo);
 
         if($sucesso){
             return true;
@@ -361,11 +361,11 @@ class Usuario extends CI_Controller{
 
         if($sucesso) {
 
-            $emailantigo = $this->input->post("emailantigo");
-            $emailnovo = $this->input->post("emailnovo");
+            $emailAntigo = $this->input->post("emailantigo");
+            $emailNovo = $this->input->post("emailnovo");
             $ativo = $this->input->post("ativo");
 
-            $alterarUsuario = $this->_alterarUsuario($ativo, $emailantigo, $emailnovo);
+            $alterarUsuario = $this->_alterarUsuario($ativo, $emailAntigo, $emailNovo);
 
             if($alterarUsuario){
                 $this->session->set_flashdata("success", "Atualizado com sucesso.");
