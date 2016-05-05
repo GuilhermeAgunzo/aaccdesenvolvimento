@@ -1,5 +1,4 @@
             <?php
-            echo "</br>";
             echo form_fieldset("<h1>Alteração de Turma</h1>");
 
             $atributos = array('class' => 'form-horizontal');

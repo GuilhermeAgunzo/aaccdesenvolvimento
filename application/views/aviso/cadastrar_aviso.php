@@ -19,15 +19,16 @@
             echo "</div>";
 
             echo "<div class='form-group'>";
-            echo form_label("Vencimento", "vencimentoAviso", array("class" => "col-sm-2 control-label"));
+            echo form_label("Vencimento", "vencimento_aviso", array("class" => "col-sm-2 control-label"));
             echo "<div class='col-sm-3'>";
-            echo form_input(array("name" => "dtVencimentoAviso", "id" => "dtVencimentoAviso" ,"class" => "form-control", "maxlength" => "14"));
+            echo form_input(array('name' => 'vencimento_aviso', 'id' => 'vencimento_aviso','class' => 'form-control', "maxlength" => "8"));
             echo "</div>";
             echo "</div>";
 
+
             echo "<div class='form-group'>";
             echo "<div class='col-sm-offset-2 col-sm-10'>";
-            echo form_button(array("class" => "btn btn-default", "content" => "Cadastrar", "type" => "submit"));
+            echo form_button(array("class" => "btn btn-default", "content" => "Salvar", "type" => "submit"));
             echo "</div>";
             echo "</div>";
 

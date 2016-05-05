@@ -1,13 +1,14 @@
-            <?php
-            echo form_fieldset("<h1>Pesquisa de Turma</h1>");
 
+            <?php
+
+            echo form_fieldset("<h1>Pesquisa de Aluno</h1>");
 
             $atributos = array('class' => 'form-horizontal');
             echo form_open('email/send', $atributos);
             echo "<div class='form-group'>";
-            echo form_label("Código da Turma", "cd_turma", array("class" => "col-sm-2 control-label"));
+            echo form_label("Número de matrícula", "matricula", array("class" => "col-sm-2 control-label"));
             echo "<div class='col-sm-6'>";
-            echo form_input(array("name" => "cd_turma", "id" => "cd_turma" ,"class" => "form-control", "maxlength" => "80"));
+            echo form_input(array("name" => "matricula", "required" => "required", "id" => "matricula" ,"class" => "form-control", "maxlength" => "80"));
             echo "</div>";
             echo "</div>";
             echo "<div class='form-group'>";
@@ -17,4 +18,3 @@
             echo "</div>";
             echo form_close();
             ?>
-

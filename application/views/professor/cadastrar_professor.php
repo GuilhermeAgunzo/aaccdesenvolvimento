@@ -1,5 +1,5 @@
            <?php
-            echo "</br>";
+
             echo form_fieldset("<h1>Cadastro de Professor</h1>");
 
             $atributos = array('class' => 'form-horizontal');
@@ -8,7 +8,7 @@
             echo "<div class='form-group'>";
             echo form_label("Nome Completo", "nomeCompleto", array("class" => "col-sm-2 control-label"));
             echo "<div class='col-sm-8'>";
-            echo form_input(array("name" => "nome", "id" => "nomeCompleto" ,"class" => "form-control", "maxlength" => "100"));
+            echo form_input(array("name" => "nome","required" => "required", "id" => "nomeCompleto" ,"class" => "form-control", "maxlength" => "100"));
             echo "</div>";
             echo "</div>";
 
@@ -31,7 +31,7 @@
             echo "<div class='form-group'>";
             echo form_label("Email", "email", array("class" => "col-sm-2 control-label"));
             echo "<div class='col-sm-8'>";
-            echo form_input(array("name" => "email", "id" => "email" ,"class" => "form-control", "maxlength" => "80"));
+            echo form_input(array("name" => "email", "required" => "required","type" => "email", "id" => "email" ,"class" => "form-control", "maxlength" => "80"));
             echo "</div>";
             echo "</div>";
 

@@ -11,7 +11,7 @@ class Temporario extends CI_Controller{
     }
 
     public function aluno(){
-        autoriza(2);
+        autoriza(1);
         $this->load->template_usuario_aluno("usuario_aluno/pagina_inicial_usuario_aluno.php");
     }
 

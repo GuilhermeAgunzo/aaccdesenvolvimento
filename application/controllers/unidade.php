@@ -6,7 +6,7 @@ class Unidade extends CI_Controller
 
     public function index()
     {
-        $this->load->view('unidade/verificacao-cadastro');
+        $this->load->view('unidade-adilson/verificacao-cadastro');
 
     }
 
@@ -30,9 +30,9 @@ class Unidade extends CI_Controller
                 $this->load->model("unidade_model");
                 $this->unidade_model->salva($unidade);
                 $this->session->set_flashdata("success", "Cadastro efetuado com sucesso!");
-                $this->load->view('unidade/verificacao-cadastro');
+                $this->load->view('unidade-adilson/verificacao-cadastro');
             }else{
-                $this->load->view('unidade/formulario_cadastro');
+                $this->load->view('unidade-adilson/formulario_cadastro');
             }
     }
 
@@ -63,7 +63,7 @@ class Unidade extends CI_Controller
             $this->session->set_flashdata("success", "Alteração efetuada com sucesso!");
             redirect('/');
         }else{
-            $this->load->view('unidade/formulario_alteracao');
+            $this->load->view('unidade-adilson/formulario_alteracao');
         }
     }
 
@@ -82,12 +82,12 @@ class Unidade extends CI_Controller
                 $this->session->set_flashdata("danger", "Unidade já cadastrada!");
                 redirect('/');
             } else {
-                $this->load->view('unidade/formulario_cadastro');
+                $this->load->view('unidade-adilson/formulario_cadastro');
 
             }
         } else {
             //redirect('unidade/verificacao-cadastro');
-            $this->load->view('unidade/verificacao-cadastro');
+            $this->load->view('unidade-adilson/verificacao-cadastro');
         }
     }
     public function buscaCadastroAlteracao()
@@ -98,14 +98,14 @@ class Unidade extends CI_Controller
             $unidade = $this->unidade_model->verifica($codigoCPS);
             if ($unidade) {
                 $dados = array("unidade" => $unidade);
-                $this->load->view('unidade/formulario_alteracao', $dados);
+                $this->load->view('unidade-adilson/formulario_alteracao', $dados);
             } else if(empty($unidade)){
                 $this->session->set_flashdata("danger", "Unidade não encontrada!");
-                $this->load->view('unidade/verificacao-alteracao');
+                $this->load->view('unidade-adilson/verificacao-alteracao');
             }
         } else {
             //redirect('unidade/verificacao-cadastro');
-            $this->load->view('unidade/verificacao-alteracao');
+            $this->load->view('unidade-adilson/verificacao-alteracao');
         }
     }
 

@@ -102,16 +102,16 @@
                         </ul>
                     </li>
                     <li class="">
-                        <a href="#"><i class="fa fa-book nav_icon"></i>Cadastro Motivo Endeferimento<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-book nav_icon"></i>Cadastro Motivo Indeferimento<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
                             <li>
-                                <?=anchor(base_url('index.php/endeferimento/cadastrar_endeferimento'), ' Cadastrar Motivo do Endeferimento', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                                <?=anchor(base_url('index.php/indeferimento/cadastrar_indeferimento'), ' Cadastrar Motivo do Indeferimento', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
                             </li>
                             <li>
-                                <?=anchor(base_url('index.php/endeferimento/pesquisar_endeferimento'), ' Pesquisar Motivo do Endeferimento', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                                <?=anchor(base_url('index.php/indeferimento/pesquisar_indeferimento'), ' Pesquisar Motivo do Indeferimento', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
                             </li>
                             <li>
-                                <?=anchor(base_url('index.php/endeferimento/alterar_endeferimento'), ' Alterar Motivo do Endeferimento', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                                <?=anchor(base_url('index.php/indeferimento/alterar_indeferimento'), ' Alterar Motivo do Indeferimento', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
                             </li>
                         </ul>
                     </li>
@@ -190,6 +190,9 @@
                                 <?=anchor(base_url('index.php/aluno/relatorio_aluno/'), 'Relatório de Alunos', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
                             </li>
                             <li>
+                                <?=anchor(base_url('index.php/aluno/relatorio_evento/'), 'Relatório de Eventos', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                            </li>
+                            <li>
                                 <?=anchor(base_url('index.php/aluno/validacao_relatorio/'), 'Validação de AACCs', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
                             </li>
                         </ul>
@@ -264,7 +267,7 @@
                             </li>
                             <li>
                                 <i class="fa fa-sign-out">
-                                    <?=anchor(base_url('index.php/acesso/logout'), 'Sair', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                                    <?=anchor(base_url('index.php/acesso/logout/'), 'Sair', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
                                 </i>
                             </li>
                         </ul>

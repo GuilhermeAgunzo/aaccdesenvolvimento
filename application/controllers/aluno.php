@@ -3,7 +3,7 @@
 class Aluno extends CI_Controller
 {
     public function index(){
-        $this->load->view('aluno/verificacao-cadastro');
+        $this->load->view('aluno-adilson/verificacao-cadastro');
 
     }
     public function novo(){
@@ -64,13 +64,13 @@ class Aluno extends CI_Controller
                 $retornoUnidades =  $this->unidade_model->buscaUnidades();
                 $unidades = array("tb_unidade" => $retornoUnidades);
 
-                //$this->load->view('aluno/formulario_cadastro', array_merge($turmas, $unidades));
-                $this->load->view('aluno/formulario_cadastro',array_merge($turmas, $unidades));
+                //$this->load->view('aluno-adilson/formulario_cadastro', array_merge($turmas, $unidades));
+                $this->load->view('aluno-adilson/formulario_cadastro',array_merge($turmas, $unidades));
 
             }
         } else {
             //redirect('unidade/verificacao-cadastro');
-            $this->load->view('aluno/verificacao-cadastro');
+            $this->load->view('aluno-adilson/verificacao-cadastro');
         }
     }
 

@@ -1,5 +1,4 @@
 <?php
-echo "</br>";
 echo form_fieldset("<h1>Pesquisa de Evento</h1>");
 
 $atributos = array('class' => 'form-horizontal');

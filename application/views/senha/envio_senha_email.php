@@ -26,22 +26,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <div class="in-form">
             <?php
             $atributos = array('class' => 'form-horizontal');
-            echo form_open('usuario/resetarSenha', $atributos);
+            echo form_open('email/send', $atributos);
             echo "<div class='centralizarForm'>";
-            echo form_input(array("name" => "nmEmail", "id" => "nmEmail" ,"class" => "", "maxlength" => "80", "placeholder" => "Digite seu Email de Login", "required" => "required"));
-            echo form_error("nmEmail");
+            echo form_input(array("name" => "nmEmail","required" => "required","type" => "email", "id" => "nmEmail" ,"class" => "", "maxlength" => "80", "placeholder" => "Digite seu Email de Login"));
             echo "<br>"."<br>"."<br>";
             echo "</div>";
             echo form_button(array("class" => "check-sub", "type" => "submit", "content" => "Enviar"));
             echo form_close();
             ?>
-
-            <?= anchor(base_url('/'), "<button class='check-sub'>Cancelar</button>", array('class' => 'check-sub')) ?>
-
+            <?= anchor(base_url('/'),"<button class='check-sub'> Cancelar</button>", array('class' => 'check-sub')); ?>
         </div>
     </div>
     <div class="copy-right">
-        <p>Design by AACC</p>
+        <p>Design by <a>AACC</a></p>
     </div>
 </div>
 <!-- //main -->

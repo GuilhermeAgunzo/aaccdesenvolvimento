@@ -28,9 +28,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						$atributos = array('class' => 'form-horizontal');
 						echo form_open('email/send', $atributos);
 						echo "<div class='centralizarForm'>";
-						echo form_input(array("name" => "senhaNova", "id" => "recadastroDeSenha" ,"class" => "", "maxlength" => "80", "placeholder" => "Senha nova"));
+						echo form_input(array("name" => "senhaNova","required" => "required", "id" => "recadastroDeSenha" ,"class" => "", "maxlength" => "80", "placeholder" => "Senha nova"));
 						echo "<br>"."<br>";
-						echo form_input(array("name" => "confirmarSenhaNova", "id" => "recadastroDeSenha" ,"class" => "", "maxlength" => "80", "placeholder" => "Confirmar senha nova"));
+						echo form_input(array("name" => "confirmarSenhaNova", "required" => "required","id" => "recadastroDeSenha" ,"class" => "", "maxlength" => "80", "placeholder" => "Confirmar senha nova"));
 						echo "</div>";
 						echo form_button(array("class" => "check-sub", "type" => "submit", "content" => "Entrar"));
 						echo form_close();
