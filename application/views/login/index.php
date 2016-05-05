@@ -23,6 +23,10 @@
 <body>
 <div class="header">
     <div class="container">
+
+
+
+
         <div class="header-top">
 
             <div class="top-nav">
@@ -62,6 +66,23 @@
 <!--content-->
 <div class="content">
     <div class="container">
+
+        <?php if($this->session->flashdata("success")): ?>
+            <p class="alert alert-success mensagemavisohome" id="aviso"><?= $this->session->flashdata("success"); ?></p>
+        <?php endif; ?>
+
+        <?php if($this->session->flashdata("danger")): ?>
+            <p class="alert alert-danger mensagemavisohome" id="aviso"><?= $this->session->flashdata("danger"); ?></p>
+        <?php endif; ?>
+
+        <?php if(isset($mensagemSucesso)): ?>
+            <p class="alert alert-success mensagemavisohome" id="aviso"><?= $mensagemSucesso ?></p>
+        <?php endif; ?>
+
+        <?php if(isset($mensagemErro)): ?>
+            <p class="alert alert-danger mensagemavisohome" id="aviso"><?= $mensagemErro ?></p>
+        <?php endif; ?>
+
         <div class="about" id="about">
 
             <div class="about-left left-about">
@@ -74,11 +95,11 @@
                 <?php
                 echo "</br>";
                 $atributos = array('class' => 'form-horizontal');
-                echo form_open('email/send', $atributos);
+                echo form_open('acesso/login', $atributos);
                 echo "<div class='form-group'>";
-                echo form_label("Email ", "nome", array("class" => "col-sm-2 control-label"));
+                echo form_label("Email ", "email", array("class" => "col-sm-2 control-label"));
                 echo "<div class='col-sm-10'>";
-                echo form_input(array("name" => "nome","required" => "required","type" => "email","class" => "form-control", "maxlength" => "80"));
+                echo form_input(array("name" => "email", "required" => "required","type" => "email", "class" => "form-control", "maxlength" => "80"));
                 echo "</div>";
                 echo "</div>";
 
@@ -98,7 +119,7 @@
                 echo "</div>";
 
                 echo "<div class='form-group'>";
-                echo anchor(base_url('index.php/senha/index'), 'Esqueci minha senha',array('class'=>'', 'id'=>'', 'title'=>''));
+                echo anchor(base_url('index.php/usuario/recuperarsenha'), 'Esqueci minha senha',array('class'=>'', 'id'=>'', 'title'=>''));
                 echo "</div>";
 
                 echo form_close();
@@ -127,10 +148,10 @@
     <div class="footer">
         <div class="container">
             <div class="footer-class">
-                <p class="footer-grid">&copy; 2016 <a href="http://w3layouts.com/" target="_blank">AACC</a> </p>
+                <p class="footer-grid">&copy; 2016 AACC</p>
                 <ul class="social-ic-icons">
-                    <li class="facebook"><a href="#"><span> </span></a></li>
-                    <li class="gmail"><a href="#"><span> </span></a></li>
+                    <li class="facebook"><a href="https://www.facebook.com/centropaulasouza/" target="_blank"><span> </span></a></li>
+                    <li class="twitter"><a href="https://twitter.com/paulasouzasp" target="_blank"><span> </span></a></li>
                 </ul>
                 <div class="clearfix"> </div>
             </div>

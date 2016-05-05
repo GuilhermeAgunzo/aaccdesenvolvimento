@@ -100,7 +100,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5754f2', end
     background:#D3CCA9;
     content: '';
 }
-.main-info1 input[type="text"],.main-info1 input[type="password"]{
+.main-info1 input,.main-info1 input[type="password"]{
 	background:none;
 	border:1px solid #999;
 	font-size:14px;
@@ -160,7 +160,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5754f2', end
 }
 .centralizarForm {
 	position: center;
-	margin-left: 20%;
 	padding: 10px;
 }
 .caixaInput{
@@ -178,15 +177,15 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5754f2', end
 }
 
 /*-- sign-in --*/
-.in-form input[type="text"],.in-form input[type="password"]{
+.in-form input,.in-form input[type="password"]{
 	background: none;
     border: 1px solid #999;
     font-size: 14px;
     color: #999;
-    padding: 13px 10px;
+    padding: 13px 5%;
     outline: none;
-    width: 120%;
-	margin-left: -80px;
+    width: 90%;
+	float: left;
 	}
 .in-form input[type="password"]{
 	margin:1em 0;
@@ -390,7 +389,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5754f2', end
 	.main-info, .main-info2 {
 		width: 70%;
 	}
-	.main-info1 input[type="text"], .main-info1 input[type="password"],.in-form input[type="text"], .in-form input[type="password"] {
+	.main-info1 input, .main-info1 input[type="password"],.in-form input, .in-form input[type="password"] {
 		padding: 10px 10px;
 	}
 	.main-info1 input[type="password"] {
@@ -456,14 +455,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5754f2', end
 		padding: 1em;
 		width: 80%;
 	}
-	.main-info1 input[type="text"], .main-info1 input[type="password"],.in-form input[type="text"], .in-form input[type="password"] {
+	.main-info1 input, .main-info1 input[type="password"],.in-form input, .in-form input[type="password"] {
 		width: 91%;
 	}
 	.main-info1 p {
 		margin: 1.5em 0;
 		font-size: 13px;
 	}
-	.main-info1 input[type="text"], .main-info1 input[type="password"],.in-form input[type="text"], .in-form input[type="password"] {
+	.main-info1 input, .main-info1 input[type="password"],.in-form input, .in-form input[type="password"] {
 		font-size: 13px;
 	}
 	.checkbox,.copy-right p {
