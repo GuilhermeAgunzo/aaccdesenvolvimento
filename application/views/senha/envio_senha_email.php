@@ -16,6 +16,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         function hideURLbar(){ window.scrollTo(0,1); } </script>
     <!-- //for-mobile-apps -->
     <link href="<?= base_url("css/style_senha.css")?>" rel="stylesheet" type="text/css" media="all" />
+    <link href="<?= base_url("css/bootstrap.css")?>" rel='stylesheet' type='text/css' />
     <link href='//fonts.googleapis.com/css?family=Droid+Serif:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
 </head>
 <body>
@@ -26,13 +27,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <div class="in-form">
             <?php
             $atributos = array('class' => 'form-horizontal');
-            echo form_open('email/send', $atributos);
-            echo form_input(array("name" => "nmEmail","required" => "required","type" => "email", "id" => "nmEmail" ,"class" => "", "maxlength" => "80", "placeholder" => "Digite seu Email de Login"));
-            echo "<br>"."<br>"."<br>";
+            echo form_open('usuario/resetarSenha', $atributos);
+            echo form_input(array("name" => "email", "required" => "required","type" => "email", "id" => "email" ,"class" => "", "maxlength" => "80", "placeholder" => "Digite seu Email de Login"));
+            echo form_error("email");
             echo form_button(array("class" => "check-sub", "type" => "submit", "content" => "Enviar"));
             echo form_close();
             ?>
-            <?= anchor(base_url('/'),"<button class='check-sub'> Cancelar</button>", array('class' => 'check-sub')); ?>
+            <?= anchor(base_url('/'),"<button class='check-sub'>Cancelar</button>", array('class' => 'check-sub')); ?>
         </div>
     </div>
     <div class="copy-right">

@@ -29,11 +29,11 @@ img{max-width:100%;}
 /*end reset*/
 body{
 	font-family: 'Droid Serif', serif;
+	background:url(../images/pg.jpg) 0px 0px no-repeat;
 }
 /*-- main --*/
 .main{
 	padding:6em 0;
-	background:url(../images/pg.jpg) 0px 0px no-repeat;
 }
 .main-info,.main-info2{
 	width:30%;
@@ -184,8 +184,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5754f2', end
     color: #999;
     padding: 13px 5%;
     outline: none;
-    width: 90%;
-	float: left;
+    width: 100%;
 	}
 .in-form input[type="password"]{
 	margin:1em 0;
