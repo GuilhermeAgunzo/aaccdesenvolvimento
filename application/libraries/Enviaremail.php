@@ -6,7 +6,7 @@
  * Date: 06/05/2016
  * Time: 14:04
  */
-class EnviaEmail
+class Enviaremail
 {
     public function enviarEmail($email, $mensagem, $titulo){
         $ci = get_instance();
