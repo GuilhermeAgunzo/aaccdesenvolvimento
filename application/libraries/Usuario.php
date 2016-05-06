@@ -11,7 +11,7 @@ class Usuario
 
 
         //chama metodo de "autentifica_helper" com nível de acesso 2 (professor)
-        autoriza(2);
+        //autoriza(2);
         $senha = $this->gerarSenha();
         $sucesso = $this->emailCadastrado($email);
 
