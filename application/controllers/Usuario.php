@@ -8,7 +8,7 @@ class Usuario extends CI_Controller{
     public function formularioCadastro(){
         //chama metodo de "autentifica_helper" com nível de acesso 2 (professor)
         autoriza(2);
-        $this->load->template("usuario/formulariocadastro.php");
+        $this->load->view("usuario/formulariocadastro.php");
     }
 
     public function formularioPesquisa(){
@@ -272,7 +272,7 @@ class Usuario extends CI_Controller{
                 $titulo = "Nova senha AACC";
 
                 //tirar comentario
-                //$this->_enviarEmail($email, $mensagem, $titulo);
+                $this->_enviarEmail($email, $mensagem, $titulo);
 
                 $usuario = array(
                     "nm_senha" => md5($senha)
@@ -335,7 +335,7 @@ class Usuario extends CI_Controller{
             $dados = array("mensagemErro" => "Erro no formulário");
         }
 
-        $this->load->template("usuario/formulariocadastro", $dados);
+        $this->load->view("usuario/formulariocadastro", $dados);
 
     }
 

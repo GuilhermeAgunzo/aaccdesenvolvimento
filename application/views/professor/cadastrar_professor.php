@@ -1,9 +1,13 @@
            <?php
 
             echo form_fieldset("<h1>Cadastro de Professor</h1>");
+           if($this->session->flashdata("cadastrado"))
+               echo "<p class='alert alert-success'>" . $this->session->flashdata("cadastrado") . "</p>";
+           if($this->session->flashdata("naoCadastrado"))
+               echo "<p class='alert alert-danger'>" . $this->session->flashdata("naoCadastrado") . "</p>";
 
             $atributos = array('class' => 'form-horizontal');
-            echo form_open('email/send', $atributos);
+            echo form_open('professor/cadastroProfessor', $atributos);
 
             echo "<div class='form-group'>";
             echo form_label("Nome Completo", "nomeCompleto", array("class" => "col-sm-2 control-label"));
@@ -48,6 +52,20 @@
             echo form_input(array("name" => "celular", "id" => "celular" ,"class" => "form-control", "maxlength" => "80"));
             echo "</div>";
             echo "</div>";
+
+           echo "<div class='form-group'>";
+           echo form_label("Data de entrada", "data_entrada", array("class" => "col-sm-2 control-label"));
+           echo "<div class='col-sm-6'>";
+           echo form_input(array("name" => "data_entrada", "id" => "data_entrada" ,"class" => "form-control", "maxlength" => "10"));
+           echo "</div>";
+           echo "</div>";
+
+           echo "<div class='form-group'>";
+           echo form_label("Data de saída", "data_saida", array("class" => "col-sm-2 control-label"));
+           echo "<div class='col-sm-6'>";
+           echo form_input(array("name" => "data_saida", "id" => "data_saida" ,"class" => "form-control", "maxlength" => "80"));
+           echo "</div>";
+           echo "</div>";
 
             echo "<div class='form-group'>";
             echo "<div class='col-sm-offset-2 col-sm-10'>";
