@@ -65,7 +65,7 @@ class Usuario
         }
 
         $ci->load->model("usuario_model");
-        $sucesso = $ci->usuario_model->alterarEmail($usuario, $emailAntigo);
+        $sucesso = $ci->usuario_model->alterarUsuario($usuario, $id_usuario);
 
         if($sucesso){
             return true;
