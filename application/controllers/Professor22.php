@@ -23,12 +23,10 @@ class Professor extends CI_Controller{
         $this->load->template_admin("professor/alterar_professor.php");
     }
 
-
     public function desativar_cadastro_professor(){
         autoriza(2);
         $this->load->template_admin("professor/desativar_professor.php");
     }
-
 
     public function cadastro_aviso(){
         autoriza(2);
@@ -113,18 +111,13 @@ class Professor extends CI_Controller{
 
     public function alteraProfessor(){
         autoriza(2);
+
         $this->load->model("professor_model");
-        $this->load->library("usuario");
 
         $id_professor = $this->input->post("cd_professor");
         $data_entrada = implode("-", array_reverse(explode("/", $this->input->post("data_entrada"))));
         $data_saida = implode("-", array_reverse(explode("/", $this->input->post("data_saida"))));
         $email = $this->input->post("email");
-        $professor = $this->professor_model->buscaProfessor($id_professor);
-
-        $id_usuario = $professor["id_usuario"];
-
-        $this->usuario->alterarUsuario($id_usuario,1,$email);
 
         if($data_saida == "")
             $data_saida = null;
@@ -153,15 +146,9 @@ class Professor extends CI_Controller{
         autoriza(2);
         $this->load->helper("date");
         $this->load->model("professor_model");
-        $this->load->library('usuario');
 
         $id_professor = $this->input->post("cd_professor");
         $usuarioLogado = $this->session->userdata("usuario_logado");
-
-        $professor = $this->professor_model->buscaProfessor($id_professor);
-        $id_usuario = $professor["id_usuario"];
-
-        $this->usuario->alterarUsuario($id_usuario,0);
 
         $professor = array(
             "dt_desativado" => mdate("%Y-%m-%d %H:%i:%s", time()),
@@ -181,6 +168,7 @@ class Professor extends CI_Controller{
 
     public function buscaDesativaProfessor(){
         autoriza(2);
+
         $this->load->library("form_validation");
         $this->form_validation->set_rules("cd_professor","cd_professor","required");
 
@@ -199,6 +187,7 @@ class Professor extends CI_Controller{
 
     public function buscaAlteraProfessor(){
         autoriza(2);
+
         $this->load->library("form_validation");
         $this->form_validation->set_rules("cd_professor","cd_professor","required");
 

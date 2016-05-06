@@ -8,7 +8,6 @@ class Usuario{
 
         $ci = get_instance();
 
-
         $senha = $this->gerarSenha();
         $sucesso = $this->emailCadastrado($email);
 
@@ -41,11 +40,9 @@ class Usuario{
 
             $id_usuario = 0;
 
-
         }
 
         return $id_usuario;
-
 
     }
 
