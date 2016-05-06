@@ -54,7 +54,7 @@ class Professor extends CI_Controller{
         autoriza(2);
         $this->load->helper("date");
         $this->load->model("professor_model");
-        $this->load->library('usuario');
+        $this->load->library('usuariolb');
 
         $data_entrada = implode("-", array_reverse(explode("/", $this->input->post("data_entrada"))));
         $data_saida = implode("-", array_reverse(explode("/", $this->input->post("data_saida"))));
@@ -67,7 +67,7 @@ class Professor extends CI_Controller{
 
         $usuarioLogado = $this->session->userdata("usuario_logado");
 
-        $id_usuario = $this->usuario->cadastrarUsuario($email,2);
+        $id_usuario = $this->usuariolb->cadastrarUsuario($email,2);
 
         $professor = array(
             "nm_professor" => $this->input->post("nome"),
@@ -114,7 +114,7 @@ class Professor extends CI_Controller{
     public function alteraProfessor(){
         autoriza(2);
         $this->load->model("professor_model");
-        $this->load->library("usuario");
+        $this->load->library("usuariolb");
 
         $id_professor = $this->input->post("cd_professor");
         $data_entrada = implode("-", array_reverse(explode("/", $this->input->post("data_entrada"))));
@@ -124,7 +124,7 @@ class Professor extends CI_Controller{
 
         $id_usuario = $professor["id_usuario"];
 
-        $this->usuario->alterarUsuario($id_usuario,1,$email);
+        $this->usuariolb->alterarUsuario($id_usuario,1,$email);
 
         if($data_saida == "")
             $data_saida = null;
@@ -153,7 +153,7 @@ class Professor extends CI_Controller{
         autoriza(2);
         $this->load->helper("date");
         $this->load->model("professor_model");
-        $this->load->library('usuario');
+        $this->load->library('usuariolb');
 
         $id_professor = $this->input->post("cd_professor");
         $usuarioLogado = $this->session->userdata("usuario_logado");
@@ -161,7 +161,7 @@ class Professor extends CI_Controller{
         $professor = $this->professor_model->buscaProfessor($id_professor);
         $id_usuario = $professor["id_usuario"];
 
-        $this->usuario->alterarUsuario($id_usuario,0);
+        $this->usuariolb->alterarUsuario($id_usuario,0);
 
         $professor = array(
             "dt_desativado" => mdate("%Y-%m-%d %H:%i:%s", time()),

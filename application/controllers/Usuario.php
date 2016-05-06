@@ -186,12 +186,19 @@ class Usuario extends CI_Controller{
                 redirect('/usuario/resetSenhaForm');
             }else{
 
-                $senha = $this->_gerarSenha();
+                $this->load->library('usuariolb');
+                $senha = $this->usuariolb->gerarSenha();
+
+
+                //$senha = $this->_gerarSenha();
                 $mensagem = "Sua nova senha é: {$senha}";
                 $titulo = "Nova senha AACC";
 
-                //tirar comentario
-                $this->_enviarEmail($email, $mensagem, $titulo);
+
+
+                $this->load->library('enviaremail');
+                $this->enviaremail->enviarEmail($email, $mensagem, $titulo);
+                //$this->_enviarEmail($email, $mensagem, $titulo);
 
                 $usuario = array(
                     "nm_senha" => md5($senha)
@@ -219,26 +226,6 @@ class Usuario extends CI_Controller{
         return random_string('numeric', 8);
     }
 
-
-    /**
-     * @param $email
-     * @param $mensagem
-     * @param $titulo
-     * @return bool
-     */
-    public function _enviarEmail($email, $mensagem, $titulo){
-        $de = 'noreply@cjaacc.96.lt';                    //CAPTURA O VALOR DA CAIXA DE TEXTO 'E-mail Remetente'
-        $para = $email;                                  //CAPTURA O VALOR DA CAIXA DE TEXTO 'E-mail de Destino'
-        $msg = $mensagem;                                //CAPTURA O VALOR DA CAIXA DE TEXTO 'Mensagem'
-        $this->load->library('email');                   //CARREGA A CLASSE EMAIL DENTRO DA LIBRARY DO FRAMEWORK
-        $this->email->from($de, 'AACC');                 //ESPECIFICA O FROM(REMETENTE) DA MENSAGEM DENTRO DA CLASSE
-        $this->email->to($para);                         //ESPECIFICA O DESTINATÁRIO DA MENSAGEM DENTRO DA CLASSE
-        $this->email->subject($titulo);                  //ESPECIFICA O ASSUNTO DA MENSAGEM DENTRO DA CLASSE
-        $this->email->message($msg);	                 //ESPECIFICA O TEXTO DA MENSAGEM DENTRO DA CLASSE
-        $this->email->send();                            //AÇÃO QUE ENVIA O E-MAIL COM OS PARÂMETROS DEFINIDOS ANTERIORMENTE
-
-        return true;
-    }
 
 
     /**
