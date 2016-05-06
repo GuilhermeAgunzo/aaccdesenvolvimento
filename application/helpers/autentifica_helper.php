@@ -36,11 +36,17 @@ function autoriza($nivelAcesso, $primeiroAcessoLiberado = null){
 
 
         //verifica se o usuário já trocou a senha temporária
-    }elseif( ( $usuarioBD['cd_status_validacao'] == 0) && !( $urlAtual == "usuario/formularioalterarsenha" || $urlAtual == "usuario/alterarSenha" ) ){
+    }elseif( ( $usuarioBD['cd_status_validacao'] == 0) && !( $urlAtual == "usuario/configuracaoaluno" || $urlAtual == "usuario/configuracaoadm" || $urlAtual == "usuario/alterarSenha" ) ){
 
         $ci->session->set_flashdata("danger", "Você precisa alterar sua senha no primeiro acesso.");
 
-        redirect("/usuario/formularioalterarsenha");
+        if($usuarioBD['cd_nivel'] == 2){
+            redirect("/usuario/configuracaoadm");
+        }else{
+            redirect("/usuario/configuracaoaluno");
+        }
+
+
 
         //verifica se o usuário tem nível de acesso para entrar na tela
     }elseif( $usuarioBD['cd_nivel'] >= $nivelAcesso ){

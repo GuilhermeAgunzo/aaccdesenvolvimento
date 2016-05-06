@@ -142,31 +142,31 @@ class Usuario extends CI_Controller{
 
 
     public function _alterarUsuario($ativo, $emailAntigo, $emailNovo = null){
-        //chama metodo de "autentifica_helper" com nível de acesso 2 (professor)
-        autoriza(2);
-        $this->load->helper(array('date'));
-        $horaAtual = date('Y-m-d H:i:s');
+    //chama metodo de "autentifica_helper" com nível de acesso 2 (professor)
+    autoriza(2);
+    $this->load->helper(array('date'));
+    $horaAtual = date('Y-m-d H:i:s');
 
-        $usuario = array(
-            "dt_cadastro" => $horaAtual,
-            'status_ativo' => $ativo
-        );
+    $usuario = array(
+        "dt_cadastro" => $horaAtual,
+        'status_ativo' => $ativo
+    );
 
-        if(!empty($emailNovo)){
-            //insere no array o novo email para salvar no BD
-            $usuario["nm_email"] = $emailNovo;
-        }
-
-        $this->load->model("usuario_model");
-        $sucesso = $this->usuario_model->alterarEmail($usuario, $emailAntigo);
-
-        if($sucesso){
-            return true;
-        }else{
-            return false;
-        }
-
+    if(!empty($emailNovo)){
+        //insere no array o novo email para salvar no BD
+        $usuario["nm_email"] = $emailNovo;
     }
+
+    $this->load->model("usuario_model");
+    $sucesso = $this->usuario_model->alterarEmail($usuario, $emailAntigo);
+
+    if($sucesso){
+        return true;
+    }else{
+        return false;
+    }
+
+}
 
 
 
@@ -228,6 +228,17 @@ class Usuario extends CI_Controller{
             $this->usuario_model->alterarUsuario($usuario, $usuarioLogado['id_usuario']);
 
             $this->session->set_flashdata("success", "Atualizado com sucesso!");
+
+
+            if( $usuarioLogado['cd_nivel'] == 1 ){
+                redirect('/usuario/configuracaoaluno');
+            }elseif( $usuarioLogado['cd_nivel'] == 2 ){
+                redirect('/usuario/configuracaoadm');
+            }else{
+                redirect('/');
+            }
+
+
 
         }else{
             $this->session->set_flashdata("danger", "Não foi possível realizar a alteração.");

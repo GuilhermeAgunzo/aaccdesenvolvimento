@@ -315,3 +315,20 @@
     <!-- CONTEUDO DA PAGINA -->
     <div id="page-wrapper">
         <div class="main-page">
+
+
+            <?php if($this->session->flashdata("success")): ?>
+                <p class="alert alert-success mensagemavisohome" id="aviso"><?= $this->session->flashdata("success"); ?></p>
+            <?php endif; ?>
+
+            <?php if($this->session->flashdata("danger")): ?>
+                <p class="alert alert-danger mensagemavisohome" id="aviso"><?= $this->session->flashdata("danger"); ?></p>
+            <?php endif; ?>
+
+            <?php if(isset($mensagemSucesso)): ?>
+                <p class="alert alert-success mensagemavisohome" id="aviso"><?= $mensagemSucesso ?></p>
+            <?php endif; ?>
+
+            <?php if(isset($mensagemErro)): ?>
+                <p class="alert alert-danger mensagemavisohome" id="aviso"><?= $mensagemErro ?></p>
+            <?php endif; ?>

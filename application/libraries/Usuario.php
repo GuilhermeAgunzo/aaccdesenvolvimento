@@ -10,10 +10,11 @@ class Usuario
         $ci = get_instance();
 
 
-        //chama metodo de "autentifica_helper" com nível de acesso 2 (professor)
-        //autoriza(2);
         $senha = $this->gerarSenha();
         $sucesso = $this->emailCadastrado($email);
+
+        $ci->load->helper(array('date'));
+        $horaAtual = date('Y-m-d H:i:s');
 
         if($sucesso) {
 
@@ -21,6 +22,7 @@ class Usuario
                 "cd_nivel" => $nivelAcesso,
                 "nm_email" => $email,
                 "nm_senha" => md5($senha),
+                "dt_cadastro" => $horaAtual,
             );
 
             $mensagem = "Sua senha de acesso ao AACC é: {$senha}";
@@ -42,6 +44,34 @@ class Usuario
 
         return $id_usuario;
 
+
+    }
+
+    public function alterarUsuario($id_usuario, $ativo, $emailNovo = null){
+
+        $ci = get_instance();
+
+        $ci->load->helper(array('date'));
+        $horaAtual = date('Y-m-d H:i:s');
+
+        $usuario = array(
+            "dt_cadastro" => $horaAtual,
+            'status_ativo' => $ativo
+        );
+
+        if(!empty($emailNovo)){
+            //insere no array o novo email para salvar no BD
+            $usuario["nm_email"] = $emailNovo;
+        }
+
+        $ci->load->model("usuario_model");
+        $sucesso = $ci->usuario_model->alterarEmail($usuario, $emailAntigo);
+
+        if($sucesso){
+            return true;
+        }else{
+            return false;
+        }
 
     }
 

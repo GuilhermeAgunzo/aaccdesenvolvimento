@@ -41,14 +41,6 @@
                 echo "</div>";
 
                 echo "<div class='form-group'>";
-                echo form_label("Turma", "turma", array("class" => "col-sm-2 control-label"));
-                echo "<div class='col-sm-10'>";
-                $turma = array('turma' => 'Selecione a turma','turma1' => '1º semestre, 1º Ciclo, ADS, 2012','turma2' => '1º semestre, 2º Ciclo, ADS, 2012', 'turma3' => '1º semestre, 3º Ciclo, ADS, 2012');
-                echo form_dropdown('Turma', $turma, array("class" => "form-control"));
-                echo "</div>";
-                echo "</div>";
-
-                echo "<div class='form-group'>";
                 echo form_label("Unidade", "unidade", array("class" => "col-sm-2 control-label"));
                 echo "<div class='col-sm-10'>";
                 $unidade = array('unidade' => 'Selecione','unidade1' => 'Fatec Praia Grande','unidade2' => 'Fatec Santos');
