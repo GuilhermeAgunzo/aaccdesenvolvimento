@@ -24,7 +24,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <script src="<?= base_url("js/jquery-1.11.1.min.js")?>"></script>
     <script src="<?= base_url("js/modernizr.custom.js")?>"></script>
     <!--webfonts-->
-    <link href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
     <!--//webfonts-->
     <!--animate-->
     <link href="<?= base_url("css/animate2.css")?>" rel="stylesheet" type="text/css" media="all">
