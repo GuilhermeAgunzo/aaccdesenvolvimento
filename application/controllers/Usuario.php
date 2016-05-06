@@ -5,23 +5,6 @@ class Usuario extends CI_Controller{
 
     /*  PRIMEIRO METODOS QUE CHAMAM SOMENTE VIEWS   */
 
-    public function formularioCadastro(){
-        //chama metodo de "autentifica_helper" com nível de acesso 2 (professor)
-        autoriza(2);
-        $this->load->view("usuario/formulariocadastro.php");
-    }
-
-    public function formularioPesquisa(){
-        autoriza(2);
-        $this->load->template("usuario/formulariopesquisa.php");
-    }
-
-    public function formularioAlterar(){
-        //chama metodo de "autentifica_helper" com nível de acesso 1 (aluno)
-        autoriza(2);
-        $this->load->template("usuario/formularioalterar.php");
-    }
-
     public function configuracaoaluno(){
         //chama metodo de "autentifica_helper" com nível de acesso 1 (aluno)
         autoriza(1);
@@ -40,49 +23,6 @@ class Usuario extends CI_Controller{
 
 
     /*  METODOS PRINCIPAIS    */
-
-    /**
-     * @param $email
-     * @param $senha
-     * @param $nivelAcesso
-     * @return bool
-     */
-    public function _cadastrarUsuario($email, $nivelAcesso){
-        //chama metodo de "autentifica_helper" com nível de acesso 2 (professor)
-        autoriza(2);
-        $senha = $this->_gerarSenha();
-        $sucesso = $this->emailCadastrado($email);
-
-        if($sucesso) {
-
-            $usuario = array(
-                "cd_nivel" => $nivelAcesso,
-                "nm_email" => $email,
-                "nm_senha" => md5($senha),
-            );
-
-            $mensagem = "Sua senha de acesso ao AACC é: {$senha}";
-            $titulo = "Senha AACC";
-            $this->_enviarEmail($email, $mensagem, $titulo);
-
-            $this->load->model("usuario_model");
-            $this->usuario_model->cadastrarUsuario($usuario);
-
-            $id_usuario = $this->_retornaIdUsuario($email);
-
-
-
-
-        }else{
-
-            $id_usuario = 0;
-
-
-        }
-
-        return $id_usuario;
-    }
-
 
     /**
      * @param $id_usuario
@@ -138,36 +78,6 @@ class Usuario extends CI_Controller{
 
 
     }
-
-
-
-    public function _alterarUsuario($ativo, $emailAntigo, $emailNovo = null){
-    //chama metodo de "autentifica_helper" com nível de acesso 2 (professor)
-    autoriza(2);
-    $this->load->helper(array('date'));
-    $horaAtual = date('Y-m-d H:i:s');
-
-    $usuario = array(
-        "dt_cadastro" => $horaAtual,
-        'status_ativo' => $ativo
-    );
-
-    if(!empty($emailNovo)){
-        //insere no array o novo email para salvar no BD
-        $usuario["nm_email"] = $emailNovo;
-    }
-
-    $this->load->model("usuario_model");
-    $sucesso = $this->usuario_model->alterarEmail($usuario, $emailAntigo);
-
-    if($sucesso){
-        return true;
-    }else{
-        return false;
-    }
-
-}
-
 
 
     /**
@@ -238,8 +148,6 @@ class Usuario extends CI_Controller{
                 redirect('/');
             }
 
-
-
         }else{
             $this->session->set_flashdata("danger", "Não foi possível realizar a alteração.");
         }
@@ -301,109 +209,6 @@ class Usuario extends CI_Controller{
         }
 
         $this->load->view("senha/envio_senha_email");
-    }
-
-
-
-    /*  MÉTODOS QUE VALIDAM FORMULARIOS */
-
-    public function cadastrarUsuarioForm(){
-        //chama metodo de "autentifica_helper" com nível de acesso 2 (professor)
-        autoriza(2);
-        $this->load->library("form_validation");
-        $this->form_validation->set_rules("email", "email", "required|callback_emailCadastrado|valid_email",
-            array(
-                'required' => 'Você precisa preencher %s.',
-                'valid_email' => 'Você precisa preencher um email válido.'
-            )
-        );
-        $this->form_validation->set_rules("nivelacesso", "nivelacesso", "required",
-            array(
-                'required' => 'Escolha o nível de acesso.'
-            )
-        );
-        $this->form_validation->set_error_delimiters('<p class="alert alert-danger">', '</p>');
-
-        $sucesso = $this->form_validation->run();
-
-        if($sucesso) {
-
-            $email = $this->input->post("email");
-            $nivelAcesso = $this->input->post("nivelacesso");
-
-            $cadastrado = $this->_cadastrarUsuario($email, $nivelAcesso);
-
-            if($cadastrado > 0){
-                $dados = array("mensagemSucesso" => "Cadastrado com sucesso");
-                $this->session->set_flashdata("success", "Cadastrado com sucesso. Usuário com id: {$cadastrado}");
-            }else{
-                $dados = array("mensagemErro" => "Erro: email já cadastrado");
-                $this->session->set_flashdata("danger", "Erro: email já cadastrado {$cadastrado}");
-            }
-
-
-        }else{
-            $dados = array("mensagemErro" => "Erro no formulário");
-        }
-
-        $this->load->view("usuario/formulariocadastro", $dados);
-
-    }
-
-
-    public function alterarUsuarioForm(){
-
-        //chama metodo de "autentifica_helper" com nível de acesso 2 (professor)
-        autoriza(2);
-
-        $this->load->helper(array('date'));
-
-        $this->load->library("form_validation");
-
-        $this->form_validation->set_rules("emailantigo", "emailantigo", "required|valid_email|callback__emailNaoCadastrado",
-            array(
-                'required' => 'Você precisa preencher %s.',
-                'valid_email' => 'Você precisa preencher um email válido.'
-            )
-        );
-
-        $this->form_validation->set_rules("emailnovo", "emailnovo", "valid_email",
-            array(
-                'required' => 'Você precisa preencher %s.',
-                'valid_email' => 'Você precisa preencher um email válido.'
-            )
-        );
-
-        $this->form_validation->set_rules("ativo", "ativo", "required",
-            array(
-                'required' => 'Você precisa preencher %s.'
-            )
-        );
-
-        $this->form_validation->set_error_delimiters('<p class="alert alert-danger">', '</p>');
-
-        $sucesso = $this->form_validation->run();
-
-        if($sucesso) {
-
-            $emailAntigo = $this->input->post("emailantigo");
-            $emailNovo = $this->input->post("emailnovo");
-            $ativo = $this->input->post("ativo");
-
-            $alterarUsuario = $this->_alterarUsuario($ativo, $emailAntigo, $emailNovo);
-
-            if($alterarUsuario){
-                $this->session->set_flashdata("success", "Atualizado com sucesso.");
-            }else{
-                $this->session->set_flashdata("danger", "Falha ao atualizar.");
-            }
-
-        }else{
-            $this->session->set_flashdata("danger", "Não foi possível atualizar");
-        }
-
-        $this->load->template("usuario/formularioalterar");
-
     }
 
 

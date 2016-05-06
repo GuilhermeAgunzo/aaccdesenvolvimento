@@ -23,12 +23,10 @@ class Professor extends CI_Controller{
         $this->load->template_admin("professor/alterar_professor.php");
     }
 
-
     public function desativar_cadastro_professor(){
         autoriza(2);
         $this->load->template_admin("professor/desativar_professor.php");
     }
-
 
     public function cadastro_aviso(){
         autoriza(2);

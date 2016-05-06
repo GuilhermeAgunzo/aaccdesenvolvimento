@@ -3,10 +3,12 @@
 class Aluno extends CI_Controller
 {
     public function index(){
+        autoriza(1);
         $this->load->view('aluno-adilson/verificacao-cadastro');
 
     }
     public function novo(){
+        autoriza(1);
         $aluno = array(
             "cd_mat_aluno" => $this->input->post("matricula"),
             "nm_aluno" => $this->input->post("nome"),
@@ -27,6 +29,7 @@ class Aluno extends CI_Controller
     }
 
     public function altera(){
+        autoriza(1);
         $unidade = array(
             "cd_cpsouza" => $this->input->post("codigo"),
             "nm_unidade" => $this->input->post("nome"),
@@ -47,8 +50,8 @@ class Aluno extends CI_Controller
         redirect('/');
     }
 
-    public function verificaCadastro()
-    {
+    public function verificaCadastro(){
+        autoriza(1);
         if ($this->validaCamposCadastro()) {
             $matricula = $this->input->post("matricula");
             $this->load->model("aluno_model");
@@ -74,8 +77,8 @@ class Aluno extends CI_Controller
         }
     }
 
-    public function validaCamposCadastro()
-    {
+    public function validaCamposCadastro(){
+        autoriza(1);
         //valida formulario
         $this->load->library("form_validation");
         $this->form_validation->set_rules("matricula", "matricula", "trim|required|min_length[13]|max_length[13]",

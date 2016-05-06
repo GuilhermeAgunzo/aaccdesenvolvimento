@@ -15,24 +15,6 @@ class Temporario extends CI_Controller{
         $this->load->template_usuario_aluno("usuario_aluno/pagina_inicial_usuario_aluno.php");
     }
 
-    public function teste($nome){
-        $email = $nome."@anmtv.com";
-        $nivelAcesso = 1;
-
-        echo $email;
-        echo "<br>";
-        echo "<br>";
-
-        $this->load->library('usuario');
-
-        echo $this->usuario->cadastrarUsuario($email, $nivelAcesso);
-
-        echo "<br>";
-        echo "<br>";
-
-
-
-    }
 
 
 }
