@@ -7,7 +7,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 function autoriza($nivelAcesso, $primeiroAcessoLiberado = null){
     //CI = CodeIgniter
-    $ci = get_instance();
+    $ci =& get_instance();
     $urlAtual = uri_string();
 
     if( empty($primeiroAcessoLiberado) ){

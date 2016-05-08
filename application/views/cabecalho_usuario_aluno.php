@@ -5,7 +5,7 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 <!DOCTYPE HTML>
-<html>
+<html lang="pt-br">
 <head>
     <title>Aluno AACC</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -38,6 +38,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <script src="<?= base_url("js/custom.js")?>"></script>
     <link href="<?= base_url("css/custom.css")?>" rel="stylesheet">
     <!--//Metis Menu -->
+
 </head>
 <body class="cbp-spmenu-push">
 <div class="main-content">

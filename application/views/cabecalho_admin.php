@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="pt-br">
 <head>
     <title>Administrador AACC</title>
     <script type="text/javascript" src="<?= base_url("js/jquery-1.2.6.pack.js")?>"></script><script type="text/javascript" src="<?= base_url("js/jquery.maskedinput-1.1.4.pack.js")?>"></script>
@@ -8,6 +8,7 @@
             $("#telefone").mask("(99)9999-99999");
         });
     </script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="AACC Gestão e Controle de Atividades Acadêmico - Científico Cultural" />

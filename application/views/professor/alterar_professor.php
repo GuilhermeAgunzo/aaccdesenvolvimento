@@ -72,14 +72,14 @@
                 echo "<div class='form-group'>";
                 echo form_label("Data de entrada", "data_entrada", array("class" => "col-sm-2 control-label"));
                 echo "<div class='col-sm-6'>";
-                echo form_input(array("name" => "data_entrada", "type" => "date", "id" => "data_entrada" ,"class" => "form-control", "maxlength" => "10", "value" => $professor["dt_entrada"]));
+                echo form_input(array("name" => "data_entrada", "type" => "date", "id" => "data_entrada" ,"class" => "form-control", "maxlength" => "10", "placeholder"=>"mm-dd-yyyy", "value" => $professor["dt_entrada"]));
                 echo "</div>";
                 echo "</div>";
 
                 echo "<div class='form-group'>";
                 echo form_label("Data de saída", "data_saida", array("class" => "col-sm-2 control-label"));
                 echo "<div class='col-sm-6'>";
-                echo form_input(array("name" => "data_saida", "type" => "date", "id" => "data_saida" ,"class" => "form-control", "maxlength" => "80", "value" => $professor["dt_saida"]));
+                echo form_input(array("name" => "data_saida", "type" => "date", "id" => "data_saida" ,"class" => "form-control", "maxlength" => "10", "placeholder"=>"mm-dd-yyyy", "value" => $professor["dt_saida"]));
                 echo "</div>";
                 echo "</div>";
 

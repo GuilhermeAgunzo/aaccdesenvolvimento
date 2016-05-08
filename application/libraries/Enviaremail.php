@@ -9,6 +9,8 @@
 class Enviaremail
 {
     public function enviarEmail($email, $mensagem, $titulo){
+
+
         $ci = get_instance();
         $de = 'noreply@cjaacc.96.lt';                    //CAPTURA O VALOR DA CAIXA DE TEXTO 'E-mail Remetente'
         $para = $email;                                  //CAPTURA O VALOR DA CAIXA DE TEXTO 'E-mail de Destino'

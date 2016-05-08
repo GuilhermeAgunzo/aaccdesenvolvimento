@@ -76,7 +76,6 @@ class Usuario extends CI_Controller{
             $this->load->template("usuario/formulariopesquisa.php");
         }
 
-
     }
 
 
@@ -191,11 +190,8 @@ class Usuario extends CI_Controller{
                 $this->load->library('usuariolb');
                 $senha = $this->usuariolb->gerarSenha();
 
-
                 $mensagem = "Sua nova senha é: {$senha}";
                 $titulo = "Nova senha AACC";
-
-
 
                 $this->load->library('enviaremail');
                 $this->enviaremail->enviarEmail($email, $mensagem, $titulo);
@@ -208,7 +204,6 @@ class Usuario extends CI_Controller{
                 $this->load->model("usuario_model");
                 $this->usuario_model->alterarEmail($usuario, $email);
 
-
                 $this->session->set_flashdata("success", "Em alguns instantes você receberá uma nova senha em {$email}");
                 redirect('/');
 
@@ -219,9 +214,7 @@ class Usuario extends CI_Controller{
         $this->load->view("senha/envio_senha_email");
     }
 
-
     /*  METODOS AUXILIARES  */
-
 
     /**
      * @param $email

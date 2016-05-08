@@ -3,10 +3,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Usuariolb{
 
-
+    /**
+     * @param $email
+     * @param $nivelAcesso
+     * @return int
+     */
     public function cadastrarUsuario($email, $nivelAcesso){
 
-        $ci = get_instance();
+        $ci =& get_instance();
 
         $senha = $this->gerarSenha();
         $sucesso = $this->emailCadastrado($email);
@@ -25,7 +29,6 @@ class Usuariolb{
 
             $mensagem = "Sua senha de acesso ao AACC é: {$senha}";
             $titulo = "Senha AACC";
-
 
             $ci->load->library('enviaremail');
             $ci->enviaremail->enviarEmail($email, $mensagem, $titulo);
@@ -46,9 +49,15 @@ class Usuariolb{
 
     }
 
+    /**
+     * @param $id_usuario
+     * @param $ativo
+     * @param null $emailNovo
+     * @return bool
+     */
     public function alterarUsuario($id_usuario, $ativo, $emailNovo = null){
 
-        $ci = get_instance();
+        $ci =& get_instance();
 
         $ci->load->helper(array('date'));
         $horaAtual = date('Y-m-d H:i:s');
@@ -74,9 +83,6 @@ class Usuariolb{
 
     }
 
-
-
-
     public function retornaIdUsuario($email){
 
         $ci = get_instance();
@@ -85,9 +91,12 @@ class Usuariolb{
         return $usuario['id_usuario'];
     }
 
+    /**
+     * @return string
+     */
     public function gerarSenha(){
 
-        $ci = get_instance();
+        $ci =& get_instance();
 
         $ci->load->helper('string');
         return random_string('numeric', 8);
@@ -95,7 +104,7 @@ class Usuariolb{
 
     public function emailCadastrado($email){
 
-        $ci = get_instance();
+        $ci =& get_instance();
 
         $ci->load->model("usuario_model");
         if ( $ci->usuario_model->emailCadastrado($email) ){
@@ -105,7 +114,5 @@ class Usuariolb{
         }
 
     }
-
-
 
 }
