@@ -54,7 +54,7 @@
             <div class="clearfix"> </div>
         </div>
         <div class="header-matter">
-            <h2>Bem vindo ao portal de Gestão e controle da <span>AACC</span></h2>
+            <h2>Bem-vindo ao portal de Gestão e controle da <span>AACC</span></h2>
             <p>Atividades <span> Acadêmico</span>-Científico-<span>Cultural</span></p>
             <a href="#about" class="scroll" ><img class="scroll" alt="" src= <?= base_url("images/down.png")?>  /></a>
         </div>
