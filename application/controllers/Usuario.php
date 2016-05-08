@@ -179,7 +179,9 @@ class Usuario extends CI_Controller{
 
         if($sucesso){
             $email = $this->input->post("email");
-            $emailExiste = $this->emailCadastrado($email);
+
+            $this->load->library('usuariolb');
+            $emailExiste = $this->usuariolb->emailCadastrado($email);
 
             if($emailExiste){
                 $this->session->set_flashdata("danger", "Email não cadastrado.");
@@ -190,7 +192,6 @@ class Usuario extends CI_Controller{
                 $senha = $this->usuariolb->gerarSenha();
 
 
-                //$senha = $this->_gerarSenha();
                 $mensagem = "Sua nova senha é: {$senha}";
                 $titulo = "Nova senha AACC";
 
@@ -221,29 +222,6 @@ class Usuario extends CI_Controller{
 
     /*  METODOS AUXILIARES  */
 
-    public function _gerarSenha(){
-        $this->load->helper('string');
-        return random_string('numeric', 8);
-    }
-
-
-
-    /**
-     * @param $email
-     * @return bool
-     * Retorna true caso não existe este email cadastrado em tb_usuario - para ser usado em callback
-     */
-    public function emailCadastrado($email){
-        $this->load->model("usuario_model");
-        if ( $this->usuario_model->emailCadastrado($email) ){
-            $this->form_validation->set_message('emailCadastrado', 'Email já cadastrado.');
-            return FALSE;
-        }else{
-            return TRUE;
-        }
-
-    }
-
 
     /**
      * @param $email
@@ -251,6 +229,7 @@ class Usuario extends CI_Controller{
      */
     public function _emailNaoCadastrado($email){
         $this->load->model("usuario_model");
+
         $sucesso = $this->usuario_model->emailCadastrado($email);
         if ($sucesso){
             return TRUE;
@@ -259,12 +238,6 @@ class Usuario extends CI_Controller{
             return FALSE;
         }
 
-    }
-
-    public function _retornaIdUsuario($email){
-        $this->load->model("usuario_model");
-        $usuario = $this->usuario_model->pesquisarUsuario($email);
-        return $usuario['id_usuario'];
     }
 
 }

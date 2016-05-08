@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>AACC</title>
+    <title>AACC - FATEC</title>
     <link  rel="stylesheet"  href="<?= base_url("css/bootstrap.css")?>" type="text/css" media="all" >
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
