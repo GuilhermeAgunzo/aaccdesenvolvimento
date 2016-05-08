@@ -1,9 +1,3 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -47,10 +41,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <div class="navbar-collapse">
             <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
                 <ul class="nav" id="side-menu">
-                    <li>
-                        <?=anchor(base_url('index.php/login/index/'), 'Inicio', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
-                    </li>
-
                     <li class="">
                         <a href="#"><i class="fa fa-desktop nav_icon"></i>Tutorial<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
@@ -81,7 +71,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <a href="#"><i class="fa fa-pencil-square nav_icon"></i>Cadastro de AACC's<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
                             <li>
-                                <?=anchor(base_url('index.php/usuario_aluno/cadastrar_relatorio/'), 'Cadastrar Relatório', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                                <?=anchor(base_url('index.php/usuario_aluno/cadastrar_relatorio/'), 'Cadastrar Relatório de AACC', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
                             </li>
                         </ul>
                         <!-- /nav-second-level -->
@@ -137,13 +127,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         </a>
                         <ul class="dropdown-menu drp-mnu">
                             <li>
-                                <i class="fa fa-cog">
-                                    <?=anchor(base_url('index.php/usuario/configuracaoaluno/'), 'Configurações', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                                <i class="fa fa-home">
+                                    <?=anchor(base_url('index.php/usuario_aluno/index/'), 'Página Inicial', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
                                 </i>
                             </li>
                             <li>
-                                <i class="fa fa-user">
-                                    <?=anchor(base_url('index.php/usuario/configuracaoaluno'), 'Perfil', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                                <i class="fa fa-desktop">
+                                    <?=anchor(base_url('index.php/usuario_aluno/tutorial_aluno/'), 'Tutorial', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                                </i>
+                            </li>
+                            <li>
+                                <i class="fa fa-cog">
+                                    <?=anchor(base_url('index.php/usuario/configuracaoaluno/'), 'Configurações', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
                                 </i>
                             </li>
                             <li>
@@ -155,43 +150,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     </li>
                 </ul>
             </div>
-
-
-            <div class="profile_details">
-                <ul>
-                    <li class="dropdown profile_details_drop">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                            <div class="profile_img">
-                                <span class="prfil-img"><img src="<?= base_url("images/home.png")?>" alt=""> </span>
-                                <div class="user-name">
-                                    <p>Início</p>
-                                    <span>Aluno</span>
-                                </div>
-                                <i class="fa fa-angle-down lnr"></i>
-                                <i class="fa fa-angle-up lnr"></i>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                        <ul class="dropdown-menu drp-mnu">
-                            <li>
-                                <i class="fa fa-home">
-                                    <?=anchor(base_url('index.php/usuario_aluno/index/'), 'Página Inicial', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
-                                </i>
-                            </li>
-                            <li>
-                                <i class="fa fa-desktop">
-                                    <?=anchor(base_url('index.php/usuario_aluno/tutorial_aluno/'), 'Tutorial', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
-                                </i>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-
-
-            <div class="clearfix"> </div>
         </div>
-        <div class="clearfix"> </div>
     </div>
 
     <!-- //header-ends -->
