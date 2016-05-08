@@ -19,22 +19,29 @@ echo "</div>";
 
 echo "<div class='form-group'>";
 echo form_label("Data do Evento", "dataDoEvento", array("class" => "col-sm-2 control-label"));
-echo "<div class='col-sm-3'>";
-echo form_input(array("name" => "dtEvento","required" => "required", "id" => "dtEvento" ,"class" => "form-control", "maxlength" => "10"));
+echo "<div class='col-sm-4'>";
+echo form_input(array("name" => "dtEvento","required" => "required","type" => "date", "id" => "dtEvento" ,"class" => "form-control", "maxlength" => "10"));
+echo "</div>";
+echo "</div>";
+
+echo "<div class='form-group'>";
+echo form_label("Data Final do Evento", "dataFinalDoEvento", array("class" => "col-sm-2 control-label"));
+echo "<div class='col-sm-4'>";
+echo form_input(array("name" => "dtFinalEvento","required" => "required","type" => "date", "id" => "dtFinalEvento" ,"class" => "form-control", "maxlength" => "10"));
 echo "</div>";
 echo "</div>";
 
 echo "<div class='form-group'>";
 echo form_label("Hora do Evento", "horaDoEvento", array("class" => "col-sm-2 control-label"));
 echo "<div class='col-sm-3'>";
-echo form_input(array("name" => "hrEvento","required" => "required", "id" => "hrEvento" ,"class" => "form-control", "maxlength" => "10"));
+echo form_input(array("name" => "hrEvento","required" => "required","type" => "time", "id" => "hrEvento" ,"class" => "form-control", "maxlength" => "10"));
 echo "</div>";
 echo "</div>";
 
 echo "<div class='form-group'>";
-echo form_label("Duração do Evento", "duracaoDoEvento", array("class" => "col-sm-2 control-label"));
+echo form_label("Duração do Evento (em horas)", "duracaoDoEvento", array("class" => "col-sm-2 control-label"));
 echo "<div class='col-sm-3'>";
-echo form_input(array("name" => "qtHorasEvento", "required" => "required", "id" => "qtHorasEvento" ,"class" => "form-control", "maxlength" => "12"));
+echo form_input(array("name" => "qtHorasEvento","required" => "required","type" => "number", "id" => "qtHorasEvento" ,"class" => "form-control", "maxlength" => "3", "min" => "1", "max" => "999"));
 echo "</div>";
 echo "</div>";
 

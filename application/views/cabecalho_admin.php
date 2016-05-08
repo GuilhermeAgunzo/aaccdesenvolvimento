@@ -256,60 +256,26 @@
                             </div>
                         </a>
                         <ul class="dropdown-menu drp-mnu">
-                            <li>
-                                <i class="fa fa-cog">
-                                    <?=anchor(base_url('index.php/usuario/configuracaoadm'), 'Configurações', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
-                                </i>
-                            </li>
-                            <li>
-                                <i class="fa fa-user">
-                                    <?=anchor(base_url('index.php/usuario/configuracaoadm'), 'Perfil', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
-                                </i>
-                            </li>
-                            <li>
-                                <i class="fa fa-sign-out">
-                                    <?=anchor(base_url('index.php/acesso/logout/'), 'Sair', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
-                                </i>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-
-
-            <div class="profile_details">
-                <ul>
-                    <li class="dropdown profile_details_drop">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                            <div class="profile_img">
-                                <span class="prfil-img"><img src="<?= base_url("images/home.png")?>" alt=""> </span>
-                                <div class="user-name">
-                                    <p>Início</p>
-                                    <span>Administrador</span>
-                                </div>
-                                <i class="fa fa-angle-down lnr"></i>
-                                <i class="fa fa-angle-up lnr"></i>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                        <ul class="dropdown-menu drp-mnu">
-                            <li>
-                                <i class="fa fa-home">
-                                    <?=anchor(base_url('index.php/administrador/index/'), 'Página Inicial', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
-                                </i>
-                            </li>
-                            <li>
+                             <li>
                                 <i class="fa fa-desktop">
                                     <?=anchor(base_url('index.php/administrador/tutorial_professor/'), 'Tutorial', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
                                 </i>
                             </li>
+                            <li>
+                                <i class="fa fa-cog">
+                                    <?=anchor(base_url('index.php/configuracao/configuracaoAdmin/'), 'Configurações', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                                </i>
+                            </li>
+                            <li>
+                                <i class="fa fa-sign-out">
+                                    <?=anchor(base_url('index.php/login/index/'), 'Sair', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                                </i>
+                            </li>
                         </ul>
                     </li>
                 </ul>
             </div>
-
         </div>
-
 </div>
     <!-- //header-ends -->
 
