@@ -31,7 +31,7 @@ class Usuariolb{
             $titulo = "Senha AACC";
 
             $ci->load->library('enviaremail');
-            $ci->enviaremail->enviarEmail($email, $mensagem, $titulo);
+            $ci->enviaremail->enviandoEmail($email, $mensagem, $titulo);
 
             $ci->load->model("usuario_model");
             $ci->usuario_model->cadastrarUsuario($usuario);

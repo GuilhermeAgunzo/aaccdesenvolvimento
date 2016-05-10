@@ -3,11 +3,11 @@
 
 
             $atributos = array('class' => 'form-horizontal');
-            echo form_open('email/send', $atributos);
+            echo form_open('aluno/alteraraluno', $atributos);
             echo "<div class='form-group'>";
             echo form_label("Número de matrícula", "matricula", array("class" => "col-sm-2 control-label"));
             echo "<div class='col-sm-6'>";
-            echo form_input(array("name" => "matricula","required" => "required", "id" => "matricula" ,"class" => "form-control", "maxlength" => "80"));
+            echo form_input(array("name" => "matricula","required" => "required", "id" => "matricula" ,"class" => "form-control", "maxlength" => "80", "min" => "0"));
             echo "</div>";
             echo "</div>";
 

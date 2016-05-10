@@ -194,8 +194,7 @@ class Usuario extends CI_Controller{
                 $titulo = "Nova senha AACC";
 
                 $this->load->library('enviaremail');
-                $this->enviaremail->enviarEmail($email, $mensagem, $titulo);
-                //$this->_enviarEmail($email, $mensagem, $titulo);
+                $this->enviaremail->enviandoEmail($email, $mensagem, $titulo);
 
                 $usuario = array(
                     "nm_senha" => md5($senha)

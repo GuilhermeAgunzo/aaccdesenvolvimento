@@ -10,7 +10,6 @@ class Professor extends CI_Controller{
     public function cadastro_professor(){
         autoriza(2);
         $this->load->template_admin("professor/cadastrar_professor.php");
-
     }
 
     public function pesquisar_professor(){
@@ -23,12 +22,10 @@ class Professor extends CI_Controller{
         $this->load->template_admin("professor/alterar_professor.php");
     }
 
-
     public function desativar_cadastro_professor(){
         autoriza(2);
         $this->load->template_admin("professor/desativar_professor.php");
     }
-
 
     public function cadastro_aviso(){
         autoriza(2);
@@ -64,7 +61,6 @@ class Professor extends CI_Controller{
             $data_saida = null;
         }
 
-
         $usuarioLogado = $this->session->userdata("usuario_logado");
 
         $id_usuario = $this->usuariolb->cadastrarUsuario($email,2);
@@ -81,8 +77,6 @@ class Professor extends CI_Controller{
             "id_user_adm_cadastrou" => $usuarioLogado['id_usuario'],
             "id_usuario" => $id_usuario
         );
-
-
 
         if($this->professor_model->salvaCadastro($professor)){
             $this->session->set_flashdata("cadastrado", "Cadastrado efetuado com sucesso.");
@@ -188,7 +182,6 @@ class Professor extends CI_Controller{
 
         $this->form_validation->run();
 
-
         $id = $this->input->post("cd_professor");
         $this->load->model("professor_model");
         $professor = $this->professor_model->buscaProfessor($id);
@@ -205,7 +198,6 @@ class Professor extends CI_Controller{
         $this->form_validation->set_error_delimiters("<p class='alert alert-danger'>", "</p>");
 
         $this->form_validation->run();
-
 
         $id = $this->input->post("cd_professor");
         $this->load->model("professor_model");

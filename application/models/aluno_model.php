@@ -13,7 +13,8 @@ class Aluno_model extends CI_Model{
 
     public function buscaTurmas(){
         return $this->db->get("tb_turma")->result_array();
-        }
+    }
+
     public function verifica($matricula){
         $result  = $this->db->get_where('tb_aluno',array('cd_mat_aluno'=> $matricula))->row_array();
         if(count($result) > 0) {
@@ -22,4 +23,18 @@ class Aluno_model extends CI_Model{
             return false;
         }
     }
+
+    public function emailCadastrado($email){
+        $this->db->where('nm_email',$email);
+        $query = $this->db->get('tb_aluno');
+
+        if ($query->num_rows() > 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+
+    }
+
 }
