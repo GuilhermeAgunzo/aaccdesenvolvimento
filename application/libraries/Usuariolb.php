@@ -102,6 +102,11 @@ class Usuariolb{
         return random_string('numeric', 8);
     }
 
+    /**
+     * @param $email
+     * @return bool
+     * retorna falso caso encontre um email
+     */
     public function emailCadastrado($email){
 
         $ci =& get_instance();

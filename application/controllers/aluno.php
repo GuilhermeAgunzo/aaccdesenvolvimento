@@ -84,26 +84,67 @@ class Aluno extends CI_Controller{
         $this->load->model("aluno_model");
         $this->load->library("usuariolb");
 
+
+        $usuarioLogado = $this->session->userdata("usuario_logado");
+        $aluno = array(
+            "cd_mat_aluno" => $this->input->post("matricula"),
+            "nm_aluno" => $this->input->post("nome"),
+            "nm_email" => $this->input->post("email"),
+            "id_turma" => $this->input->post("turma"),
+            "id_user_adm_cadastrou" => $usuarioLogado['id_usuario'],
+            "dt_cadastro" => mdate("%Y-%m-%d %H:%i:%s", time()),
+            "cd_tel_celular" => $this->input->post("celular"),
+            "cd_tel_residencial" => $this->input->post("telefone"),
+        );
+
+        $dados = array(
+            "aluno" => $aluno,
+            "id_aluno" => $this->input->post("id_aluno"),
+        );
+
         if($this->_validaFormulario()){
 
-            $usuarioLogado = $this->session->userdata("usuario_logado");
-            $aluno = array(
-                "cd_mat_aluno" => $this->input->post("matricula"),
-                "nm_aluno" => $this->input->post("nome"),
-                "nm_email" => $this->input->post("email"),
-                "id_turma" => $this->input->post("turma"),
-                "id_user_adm_cadastrou" => $usuarioLogado['id_usuario'],
-                "dt_cadastro" => mdate("%Y-%m-%d %H:%i:%s", time()),
-                "cd_tel_celular" => $this->input->post("celular"),
-                "cd_tel_residencial" => $this->input->post("telefone"),
-            );
-
-            $this->aluno_model->altera($aluno);
+            $this->aluno_model->alterarAluno($dados);
             $this->session->set_flashdata("success", "Alteração efetuada com sucesso!");
 
         }
 
-        $this->load->template_admin("aluno/alterar_aluno");
+        $this->load->template_admin("aluno/alterar_aluno", $dados);
+
+    }
+
+    public function buscarAlteraAluno(){
+        autoriza(2);
+        $this->load->library("form_validation");
+
+        $this->form_validation->set_rules("matricula", "matricula", "required|numeric",
+            array(
+                'required' => 'Você precisa preencher a matricula.',
+                'numeric' => 'A matricula deve conter somente números.'
+            )
+        );
+
+        $this->form_validation->set_error_delimiters('<p class="alert alert-danger">', '</p>');
+
+        $sucesso = $this->form_validation->run();
+
+        if($sucesso){
+
+            $matricula = $this->input->post("matricula");
+            $this->load->model("aluno_model");
+            $aluno = $this->aluno_model->buscarAluno($matricula);
+
+
+            $dados = array(
+                "aluno" => $aluno,
+                "id_aluno" => $aluno['id_aluno'],
+                "ola" => "ola"
+            );
+
+
+            $this->load->template_admin("aluno/alterar_aluno", $dados);
+
+        }
 
     }
 
@@ -129,10 +170,10 @@ class Aluno extends CI_Controller{
             )
         );
 
-        $this->form_validation->set_rules("nome", "nome", "required|alpha_numeric",
+        $this->form_validation->set_rules("nome", "nome", "required",
             array(
                 'required' => 'Você precisa preencher %s.',
-                'alpha_numeric' => 'O nome deve conter somente caracteres alpha numericos.'
+                'alpha_numeric' => 'O nome não deve conter caracteres especiais.'
             )
         );
 

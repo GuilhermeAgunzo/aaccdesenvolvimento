@@ -4,12 +4,28 @@ class Aluno_model extends CI_Model{
 
     public function salva($aluno)
     {
-        $this->db->insert("tb_aluno", $aluno);// (tabela do banco,array recebido)
+        $this->db->insert("tb_aluno", $aluno);
     }
-    public function altera($unidade){
-        $this->db->where('cd_cpsouza', $unidade['cd_cpsouza']);
-        $this->db->update('tb_unidade', $unidade);
+
+    public function buscarAluno($matricula)
+    {
+        $this->db->where("cd_mat_aluno", $matricula);
+        return $this->db->get("tb_aluno")->row_array();
     }
+
+    public function alterarAluno($dados){
+        $this->db->where('id_aluno', $dados['id_aluno']);
+        $this->db->update('tb_aluno', $dados['aluno']);
+    }
+
+
+
+
+
+
+
+
+
 
     public function buscaTurmas(){
         return $this->db->get("tb_turma")->result_array();
