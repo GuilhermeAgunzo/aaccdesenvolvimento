@@ -52,29 +52,6 @@ class Professor extends CI_Controller{
         $this->load->helper("date");
         $this->load->model("professor_model");
         $this->load->library('usuariolb');
-        $this->load->library("form_validation");
-
-        $this->form_validation->set_rules("email", "email", "required|valid_email",
-            array(
-                'required' => 'Você precisa preencher %s.',
-                'valid_email' => 'Você precisa preencher um email válido.'
-            )
-        );
-
-        $this->form_validation->set_rules("nome", "nome", "required",
-            array(
-                'required' => 'Você precisa preencher %s.'
-            )
-        );
-
-        $this->form_validation->set_rules("data_entrada","data_entrada","required",
-            array(
-                "required" => "Você precisa preencher a data de entrada"
-            ));
-
-        $this->form_validation->set_error_delimiters('<p class="alert alert-danger">', '</p>');
-
-        $this->form_validation->run();
 
         $data_entrada = implode("-", array_reverse(explode("/", $this->input->post("data_entrada"))));
         $data_saida = implode("-", array_reverse(explode("/", $this->input->post("data_saida"))));
@@ -116,18 +93,6 @@ class Professor extends CI_Controller{
         autoriza(2);
         $id = $this->input->post("cd_professor");
         $this->load->model("professor_model");
-        $this->load->library("form_validation");
-        $this->form_validation->set_rules("cd_professor","cd_professor","required|numeric",
-            array(
-                'required' => "Você precisa preencher Código de Professor",
-                'numeric' => "O código deve conter apenas números"
-            ));
-
-        $this->form_validation->set_error_delimiters("<p class='alert alert-danger'>", "</p>");
-
-        $this->form_validation->run();
-
-
         $professor = $this->professor_model->buscaProfessor($id);
         $dados = array("professor" => $professor);
 
@@ -212,11 +177,7 @@ class Professor extends CI_Controller{
     public function buscaDesativaProfessor(){
         autoriza(2);
         $this->load->library("form_validation");
-        $this->form_validation->set_rules("cd_professor","cd_professor","required|numeric",
-            array(
-                'required' => "Você precisa preencher Código de Professor",
-                'numeric' => "O código deve conter apenas números"
-            ));
+        $this->form_validation->set_rules("cd_professor","cd_professor","required");
 
         $this->form_validation->set_error_delimiters("<p class='alert alert-danger'>", "</p>");
 
@@ -233,11 +194,7 @@ class Professor extends CI_Controller{
     public function buscaAlteraProfessor(){
         autoriza(2);
         $this->load->library("form_validation");
-        $this->form_validation->set_rules("cd_professor","cd_professor","required|numeric",
-            array(
-                'required' => "Você precisa preencher Código de Professor",
-                'numeric' => "O código deve conter apenas números"
-            ));
+        $this->form_validation->set_rules("cd_professor","cd_professor","required");
 
         $this->form_validation->set_error_delimiters("<p class='alert alert-danger'>", "</p>");
 

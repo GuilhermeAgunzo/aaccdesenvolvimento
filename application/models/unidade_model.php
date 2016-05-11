@@ -2,10 +2,11 @@
 
 class Unidade_model extends CI_Model{
 
-public function salva($unidade)
-{
-    $this->db->insert("tb_unidade", $unidade);// (tabela do banco,array recebido)
-}
+    public function salva($unidade)
+    {
+        $this->db->insert("tb_unidade", $unidade);// (tabela do banco,array recebido)
+    }
+
     public function altera($unidade){
         $this->db->where('cd_cpsouza', $unidade['cd_cpsouza']);
         $this->db->update('tb_unidade', $unidade);

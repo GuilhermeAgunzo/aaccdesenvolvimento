@@ -3,7 +3,7 @@
 
 
             $atributos = array('class' => 'form-horizontal');
-            echo form_open('email/send', $atributos);
+            echo form_open('unidade/alteraUnidade', $atributos);
             echo "<div class='form-group'>";
             echo form_label("Código da Unidade", "cd_unidade", array("class" => "col-sm-2 control-label"));
             echo "<div class='col-sm-6'>";

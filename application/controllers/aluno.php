@@ -165,6 +165,51 @@ class Aluno extends CI_Controller{
 
     }
 
+    public function desativarAluno(){
+
+        $this->load->library("form_validation");
+
+            $this->form_validation->set_rules("matricula", "matricula", "required|numeric",
+                array(
+                    'required' => 'Você precisa preencher %s.',
+                    'numeric' => 'A matricula deve conter somente números.'
+                )
+            );
+
+        $this->form_validation->set_error_delimiters('<p class="alert alert-danger">', '</p>');
+
+        if($this->form_validation->run()){
+
+            $this->load->model("aluno_model");
+            $this->load->library('usuariolb');
+            $usuarioLogado = $this->session->userdata("usuario_logado");
+
+            $matricula = $this->input->post("matricula");
+
+            $aluno = $this->aluno_model->buscarAluno($matricula);
+            $id_usuario = $aluno["id_usuario"];
+
+            $this->usuariolb->alterarUsuario($id_usuario,0);
+
+            $aluno = array(
+                "dt_desativado" => mdate("%Y-%m-%d %H:%i:%s", time()),
+                "status_ativo" => 0,
+                "id_user_adm_desativou" => $usuarioLogado['id_usuario']
+            );
+
+            $this->aluno_model->desativaAluno($matricula,$aluno);
+
+            $this->session->set_flashdata("success", "Aluno desativado com sucesso.");
+        }else{
+            $this->session->set_flashdata("danger", "Erro na matricula.");
+        }
+
+        redirect("/aluno/desativar_cadastro");
+
+    }
+
+
+
 
 
     /*  MÉTODOS AUXILIARES  */

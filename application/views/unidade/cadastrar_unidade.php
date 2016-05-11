@@ -2,12 +2,19 @@
             echo form_fieldset("<h1>Cadastro de Unidade</h1>");
 
             $atributos = array('class' => 'form-horizontal');
-            echo form_open('email/send', $atributos);
+            echo form_open('unidade/cadastrarUnidade', $atributos);
 
             echo "<div class='form-group'>";
             echo form_label("Nome da Unidade", "nm_unidade", array("class" => "col-sm-2 control-label"));
             echo "<div class='col-sm-8'>";
             echo form_input(array("name" => "nm_unidade", "id" => "nm_unidade" ,"class" => "form-control", "maxlength" => "100"));
+            echo "</div>";
+            echo "</div>";
+
+            echo "<div class='form-group'>";
+            echo form_label("Código da Unidade", "codigo", array("class" => "col-sm-2 control-label"));
+            echo "<div class='col-sm-8'>";
+            echo form_input(array("name" => "codigo", "id" => "codigo" ,"class" => "form-control", "maxlength" => "100"));
             echo "</div>";
             echo "</div>";
 
@@ -23,7 +30,7 @@
             echo "<div class='form-group'>";
             echo form_label("Número", "numero", array("class" => "col-sm-2 control-label"));
             echo "<div class='col-sm-6'>";
-            echo form_input(array("name" => "numero", "id" => "numero" ,"class" => "form-control", "maxlength" => "10"));
+            echo form_input(array("name" => "numero", "type"=> "number", "id" => "numero" ,"class" => "form-control", "maxlength" => "10"));
             echo "</div>";
             echo "</div>";
 
@@ -55,7 +62,7 @@
             echo "<div class='form-group'>";
             echo form_label("Cidade", "cidade", array("class" => "col-sm-2 control-label"));
             echo "<div class='col-sm-6'>";
-            echo form_input(array("name" => "cidade", "id" => "cidade" ,"class" => "form-control", "maxlength" => "4"));
+            echo form_input(array("name" => "cidade", "id" => "cidade" ,"class" => "form-control", "maxlength" => "80"));
             echo "</div>";
             echo "</div>";
 
