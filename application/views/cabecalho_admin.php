@@ -263,7 +263,7 @@
                             </li>
                             <li>
                                 <i class="fa fa-cog">
-                                    <?=anchor(base_url('index.php/configuracao/configuracaoAdmin/'), 'Configurações', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                                    <?=anchor(base_url('index.php/usuario/configuracaoadm'), 'Configurações', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
                                 </i>
                             </li>
                             <li>

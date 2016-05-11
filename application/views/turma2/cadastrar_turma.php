@@ -3,7 +3,7 @@
 
 
             $atributos = array('class' => 'form-horizontal');
-            echo form_open("turma/cadastro_turma",$atributos);
+            echo form_open('email/send', $atributos);
             echo "</br>";
 
             echo "<div class='form-group'>";
@@ -36,20 +36,7 @@
             echo "</div>";
             echo "</div>";
 
-            echo "<div class='form-group'>";
-            echo form_label("Unidade", "unidade", array("class" => "col-sm-2 control-label"));
-            echo "<div class='col-sm-2'>";
-            echo form_input(array("name" => "unidade", "id" => "unidade" ,"class" => "form-control", "maxlength" => "4"));
-            echo "</div>";
-            echo "</div>";
-            
-            echo "<div class='form-group'>";
-            echo form_label("Código da Turma", "matricula", array("class" => "col-sm-2 control-label"));
-            echo "<div class='col-sm-2'>";
-            echo form_input(array("name" => "cd_mat_turma", "id" => "cd_mat_turma" ,"class" => "form-control", "maxlength" => "4"));
-            echo "</div>";
-            echo "</div>";
-            
+
             echo "<div class='form-group'>";
             echo form_label("Curso", "curso", array("class" => "col-sm-2 control-label"));
             echo "<div class='col-sm-10'>";
@@ -57,14 +44,7 @@
             echo form_dropdown('curso', $curso, array("class" => "form-control"));
             echo "</div>";
             echo "</div>";
-			
-            echo "<div class='form-group'>";
-            echo form_label("Semestre","semestre", array("class" => "col-sm-2 control-label"));
-            echo "<div class='col-sm-10'>";
-            $semestre=array('Selecione','1','2');
-            echo form_dropdown('semestre',$semestre, array("class" => "col-sm-2 control-label"));
-            echo "</div>";
-            echo "</div>";
+
 
             echo "<div class='form-group'>";
             echo form_label("Turno", "turno", array("class" => "col-sm-2 control-label"));
@@ -78,19 +58,10 @@
             echo "<div class='form-group'>";
             echo form_label("Ciclo", "ciclo", array("class" => "col-sm-2 control-label"));
             echo "<div class='col-sm-10'>";
-            $ciclo = array('Selecione','1º Ciclo','2º Ciclo','3º Ciclo','4º Ciclo','5º Ciclo','6º Ciclo');
+            $ciclo = array('Selecione','1º Semestre','2º Semestre','3º Semestre','4º Semestre','5º Semestre','6º Semestre');
             echo form_dropdown('ciclo', $ciclo, array("class" => "form-control"));
             echo "</div>";
             echo "</div>";
-            
-            echo "<div class='form-group'>";
-            echo form_label("Status", "status", array("class" => "col-sm-2 control-label"));
-            echo "<div class='col-sm-10'>";
-            $status = array('Selecione','Ativado','Desativado');
-            echo form_dropdown('status', $status, array("class" => "form-control"));
-            echo "</div>";
-            echo "</div>";
-            
 
 
             echo "<div class='form-group'>";

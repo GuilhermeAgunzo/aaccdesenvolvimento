@@ -3,11 +3,11 @@
 
 
             $atributos = array('class' => 'form-horizontal');
-            echo form_open("turma/pesquisa_turma", $atributos);
+            echo form_open('email/send', $atributos);
             echo "<div class='form-group'>";
             echo form_label("Código da Turma", "cd_turma", array("class" => "col-sm-2 control-label"));
             echo "<div class='col-sm-6'>";
-            echo form_input(array("name" => "cd_mat_turma", "id" => "cd_mat_turma" ,"class" => "form-control", "maxlength" => "80"));
+            echo form_input(array("name" => "cd_turma", "id" => "cd_turma" ,"class" => "form-control", "maxlength" => "80"));
             echo "</div>";
             echo "</div>";
             echo "<div class='form-group'>";

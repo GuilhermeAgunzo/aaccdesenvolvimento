@@ -71,6 +71,7 @@ class Professor extends CI_Controller{
             "cd_tel_residencial" => $this->input->post("telefone"),
             "cd_tel_celular" => $this->input->post("celular"),
             "dt_entrada" => $data_entrada,
+            "id_unidade" => 1,
             "dt_saida" => $data_saida,
             "dt_cadastro" => mdate("%Y-%m-%d %H:%i:%s", time()),
             "status_ativo" => 1,
