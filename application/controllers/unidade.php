@@ -93,6 +93,23 @@ class Unidade extends CI_Controller{
         }
     }
 
+    public function pesquisarUnidade(){
+        autoriza(2);
+        $cd_cpsouza = $this->input->post("cd_cpsouza");
+
+        $this->load->model("unidade_model");
+        $unidade = $this->unidade_model->buscarUnidade($cd_cpsouza);
+        $dados = array("unidade" => $unidade);
+
+        if($unidade){
+            $this->load->template_admin("unidade/pesquisar_unidade.php", $dados);
+        }else{
+            $this->session->set_flashdata("danger", "Cadastro  não foi localizado. Verifique os dados ou tente novamente mais tarde");
+            redirect("/unidade/pesquisar_unidade");
+        }
+
+    }
+
 
 
     /*  Metodos auxiliares  */

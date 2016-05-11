@@ -90,6 +90,7 @@ class Unidade extends CI_Controller
             $this->load->view('unidade-adilson/verificacao-cadastro');
         }
     }
+
     public function buscaCadastroAlteracao()
     {
         if ($this->validaVerificacao()) {
