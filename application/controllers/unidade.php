@@ -29,7 +29,7 @@ class Unidade extends CI_Controller{
             $usuarioLogado = $this->session->userdata("usuario_logado");
 
             $unidade = array(
-                "cd_cpsouza" => $this->input->post("codigo"),
+                "cd_cpsouza" => $this->input->post("cd_cpsouza"),
                 "nm_unidade" => $this->input->post("nm_unidade"),
                 "UF_estado" => $this->input->post("uf"),
                 "nm_cidade" => $this->input->post("cidade"),
@@ -49,8 +49,8 @@ class Unidade extends CI_Controller{
 
             $this->session->set_flashdata("success", "Cadastro efetuado com sucesso!");
 
-            $this->load->template_admin("unidade/cadastrar_unidade");
-            //redirect('/unidade/cadastrar_unidade');
+            //$this->load->template_admin("unidade/cadastrar_unidade");
+            redirect('/unidade/cadastrar_unidade');
         }else{
             $this->session->set_flashdata("danger", "Erro ao cadastrar!");
             $this->load->template_admin("unidade/cadastrar_unidade");
@@ -62,11 +62,11 @@ class Unidade extends CI_Controller{
     public function alteraUnidade(){
         autoriza(2);
 
-        if($this->validaFormulario()) {
+        if($this->_validaFormulario()) {
             $usuarioLogado = $this->session->userdata("usuario_logado");
             $unidade = array(
-                "cd_cpsouza" => $this->input->post("codigo"),
-                "nm_unidade" => $this->input->post("nome"),
+                "cd_cpsouza" => $this->input->post("cd_cpsouza"),
+                "nm_unidade" => $this->input->post("nm_unidade"),
                 "UF_estado" => $this->input->post("uf"),
                 "nm_cidade" => $this->input->post("cidade"),
                 "nm_bairro" => $this->input->post("bairro"),
@@ -80,13 +80,13 @@ class Unidade extends CI_Controller{
             );
 
             if($unidade['status_ativo'] == '0'){
-                array_push($unidade['dt_cadastro'],$this->buscaDataAtual());
+                array_push($unidade['dt_cadastro'],mdate("%Y-%m-%d %H:%i:%s", time()));
                 array_push($unidade['id_user_adm_desativou'],"1");
             }
             $this->load->model("unidade_model");
             $this->unidade_model->altera($unidade);
             $this->session->set_flashdata("success", "Alteração efetuada com sucesso!");
-            redirect('/');
+            redirect('/unidade/alterar_unidade');
         }else{
             $this->session->set_flashdata("danger", "Erro ao alterar!");
             $this->load->template_admin("unidade/alterar_unidade");
@@ -110,6 +110,35 @@ class Unidade extends CI_Controller{
 
     }
 
+    public function buscarAlteraUnidade(){
+        autoriza(2);
+        $this->load->library("form_validation");
+
+        $this->form_validation->set_rules("cd_cpsouza", "cd_cpsouza", "required|numeric",
+            array(
+                'required' => 'Você precisa preencher o código do CPS.',
+                'numeric' => 'O código deve conter somente números.'
+            )
+        );
+
+        $this->form_validation->set_error_delimiters('<p class="alert alert-danger">', '</p>');
+
+
+        if($this->form_validation->run()){
+
+            $cd_cpsouza = $this->input->post("cd_cpsouza");
+            $this->load->model("unidade_model");
+            $unidade = $this->unidade_model->buscarUnidade($cd_cpsouza);
+
+            $dados = array(
+                "unidade" => $unidade
+            );
+
+            $this->load->template_admin("unidade/alterar_unidade", $dados);
+
+        }
+
+    }
 
 
     /*  Metodos auxiliares  */
@@ -117,7 +146,7 @@ class Unidade extends CI_Controller{
 
     public function _validaFormulario(){
         $this->load->library("form_validation");
-        $this->form_validation->set_rules("codigo", "codigo", "required|min_length[3]|max_length[5]");//adiciona regra de validação
+        $this->form_validation->set_rules("cd_cpsouza", "cd_cpsouza", "required|min_length[1]|max_length[5]");//adiciona regra de validação
         $this->form_validation->set_rules("nm_unidade", "nm_unidade", "required|min_length[1]|max_length[50]");//adiciona regra de validação
         $this->form_validation->set_rules("cidade", "cidade", "required|min_length[3]|max_length[50]");//adiciona regra de validação
         $this->form_validation->set_rules("bairro", "bairro", "required|min_length[5]|max_length[50]");//adiciona regra de validação

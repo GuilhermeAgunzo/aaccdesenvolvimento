@@ -137,8 +137,7 @@ class Aluno extends CI_Controller{
 
             $dados = array(
                 "aluno" => $aluno,
-                "id_aluno" => $aluno['id_aluno'],
-                "ola" => "ola"
+                "id_aluno" => $aluno['id_aluno']
             );
 
 
