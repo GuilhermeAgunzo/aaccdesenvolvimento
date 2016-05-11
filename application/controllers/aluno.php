@@ -148,6 +148,23 @@ class Aluno extends CI_Controller{
 
     }
 
+    public function pesquisarAluno(){
+        autoriza(2);
+        $matricula = $this->input->post("matricula");
+
+        $this->load->model("aluno_model");
+        $aluno = $this->aluno_model->buscarAluno($matricula);
+        $dados = array("aluno" => $aluno);
+
+        if($aluno){
+            $this->load->template_admin("aluno/pesquisar_aluno.php", $dados);
+        }else{
+            $this->session->set_flashdata("danger", "Cadastro  não foi localizado. Verifique os dados ou tente novamente mais tarde");
+            redirect("/aluno/pesquisar_aluno");
+        }
+
+    }
+
 
 
     /*  MÉTODOS AUXILIARES  */

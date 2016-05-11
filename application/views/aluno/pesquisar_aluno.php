@@ -4,7 +4,7 @@
             echo form_fieldset("<h1>Pesquisa de Aluno</h1>");
 
             $atributos = array('class' => 'form-horizontal');
-            echo form_open('email/send', $atributos);
+            echo form_open('aluno/pesquisaraluno', $atributos);
             echo "<div class='form-group'>";
             echo form_label("Número de matrícula", "matricula", array("class" => "col-sm-2 control-label"));
             echo "<div class='col-sm-6'>";
@@ -17,4 +17,13 @@
             echo "</div>";
             echo "</div>";
             echo form_close();
+
+
+            if(isset($aluno)){
+                print_r($aluno);
+            }
+
+
+
+
             ?>

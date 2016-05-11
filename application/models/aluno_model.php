@@ -27,6 +27,8 @@ class Aluno_model extends CI_Model{
 
 
 
+
+
     public function buscaTurmas(){
         return $this->db->get("tb_turma")->result_array();
     }
