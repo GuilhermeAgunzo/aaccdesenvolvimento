@@ -15,7 +15,8 @@
             echo "</div>";
             echo "</div>";
             echo form_close();
-            if($this->session->flashdata("foiBuscar") && isset($professor)){
+
+            if(isset($professor)){
 
 
                 echo "<table>";
@@ -78,9 +79,7 @@
                 echo "</table>";
 
             }
-            if($this->session->flashdata("naoFoiBuscar")){
-                echo "<p class='alert alert-danger'>" . $this->session->flashdata("naoFoiBuscar") . "</p>";
-            }
+
 
             ?>
 

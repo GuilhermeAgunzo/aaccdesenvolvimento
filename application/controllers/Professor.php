@@ -97,9 +97,9 @@ class Professor extends CI_Controller{
         $dados = array("professor" => $professor);
 
         if($professor){
-            $this->session->set_flashdata("foiBuscar", "Cadastro localizado");
+            //$this->session->set_flashdata("success", "Cadastro localizado");
         }else{
-            $this->session->set_flashdata("naoFoiBuscar", "Cadastro  não localizado. Verifique os dados ou Tente novamente mais tarde");
+            $this->session->set_flashdata("danger", "Cadastro  não localizado. Verifique os dados ou Tente novamente mais tarde");
             redirect("/professor/pesquisar_professor");
         }
 
