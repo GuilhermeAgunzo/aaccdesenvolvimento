@@ -268,7 +268,7 @@
                             </li>
                             <li>
                                 <i class="fa fa-sign-out">
-                                    <?=anchor(base_url('index.php/login/index/'), 'Sair', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                                    <?=anchor(base_url('index.php/acesso/logout/'), 'Sair', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
                                 </i>
                             </li>
                         </ul>
