@@ -2,7 +2,7 @@
 
 class Aluno_model extends CI_Model{
 
-    public function salva($aluno)
+    public function cadastrarAluno($aluno)
     {
         $this->db->insert("tb_aluno", $aluno);
     }
@@ -18,9 +18,13 @@ class Aluno_model extends CI_Model{
         $this->db->update('tb_aluno', $dados['aluno']);
     }
 
-    public function desativaAluno($matricula, $aluno){
+    public function desativarAluno($matricula, $aluno){
         $this->db->where("cd_mat_aluno",$matricula);
         return $this->db->update("tb_aluno",$aluno);
+    }
+
+    public function buscaTurmas($cd_cpsouza){
+
     }
 
 
@@ -29,10 +33,8 @@ class Aluno_model extends CI_Model{
 
 
 
-
-
     //sobrou do adilson
-    public function buscaTurmas(){
+    public function buascaTurmas2(){
         return $this->db->get("tb_turma")->result_array();
     }
 

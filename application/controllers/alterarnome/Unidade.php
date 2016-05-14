@@ -57,8 +57,6 @@ class Unidade extends CI_Controller{
         }
     }
 
-
-
     public function alteraUnidade(){
         autoriza(2);
 
@@ -143,7 +141,6 @@ class Unidade extends CI_Controller{
 
     /*  Metodos auxiliares  */
 
-
     public function _validaFormulario(){
         $this->load->library("form_validation");
         $this->form_validation->set_rules("cd_cpsouza", "cd_cpsouza", "required|min_length[1]|max_length[5]");//adiciona regra de validação
@@ -159,6 +156,5 @@ class Unidade extends CI_Controller{
         return $this->form_validation->run();//roda regra
 
     }
-
 
 }

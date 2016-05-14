@@ -60,7 +60,7 @@ class Aluno extends CI_Controller{
                         "cd_tel_residencial" => $this->input->post("telefone"),
                     );
 
-                    $this->aluno_model->salva($aluno);
+                    $this->aluno_model->cadastrarAluno($aluno);
                     $this->session->set_flashdata("success", "Cadastro efetuado com sucesso!");
                     redirect('/aluno/cadastro_aluno');
 
@@ -196,7 +196,7 @@ class Aluno extends CI_Controller{
                 "id_user_adm_desativou" => $usuarioLogado['id_usuario']
             );
 
-            $this->aluno_model->desativaAluno($matricula,$aluno);
+            $this->aluno_model->desativarAluno($matricula,$aluno);
 
             $this->session->set_flashdata("success", "Aluno desativado com sucesso.");
         }else{
@@ -206,9 +206,6 @@ class Aluno extends CI_Controller{
         redirect("/aluno/desativar_cadastro");
 
     }
-
-
-
 
 
     /*  MÉTODOS AUXILIARES  */
