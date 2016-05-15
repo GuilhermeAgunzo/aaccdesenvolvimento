@@ -18,12 +18,39 @@ echo "</div>";
 echo form_close();
 
 
-if(isset($turma)){
-    echo "<pre>";
-    print_r($turma);
-    echo "</pre>";
-}
+if(isset($turma)){ ?>
+
+    <table>
+        <tr>
+            <td>Código da Turma</td>
+            <td><?= $turma['cd_mat_turma'] ?></td>
+        </tr>
+        <tr>
+            <td>Unidade</td>
+            <td><?= $turma['id_unidade'] ?></td>
+        </tr>
+        <tr>
+            <td>Ano de Ingresso</td>
+            <td><?= $turma['aa_ingresso'] ?></td>
+        </tr>
+        <tr>
+            <td>Semestre</td>
+            <td><?= $turma['dt_semestre'] ?></td>
+        </tr>
+        <tr>
+            <td>Turno</td>
+            <td><?= $turma['nm_turno'] ?></td>
+        </tr>
+        <tr>
+            <td>Ciclo</td>
+            <td><?= $turma['qt_ciclo'] ?></td>
+        </tr>
+    </table>
 
 
-?>
+
+
+
+<?php } ?>
+
 

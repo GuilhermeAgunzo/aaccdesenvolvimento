@@ -51,7 +51,7 @@
         echo form_label("Turma", "turma", array("class" => "col-sm-2 control-label"));
         echo "<div class='col-sm-10'>";
         $turma = array('turma' => 'Selecione a turma','1' => '1º semestre, 1º Ciclo, ADS, 2012','2' => '1º semestre, 2º Ciclo, ADS, 2012', '3' => '1º semestre, 3º Ciclo, ADS, 2012');
-        echo form_dropdown('turma', $turma, array("class" => "form-control"));
+        echo form_dropdown('turma', $turma, "", array("class" => "form-control"));
         echo form_error("turma");
         echo "</div>";
         echo "</div>";

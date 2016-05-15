@@ -19,13 +19,46 @@ echo "</div>";
 echo form_close();
 
 
-if(isset($aluno)){
-    echo "<pre>";
-    print_r($aluno);
-    echo "</pre>";
-}
+if(isset($aluno)){ ?>
 
+    <table>
+        <tr>
+            <td>Número de matrícula</td>
+            <td><?= $aluno['cd_mat_aluno'] ?></td>
+        </tr>
+        <tr>
+            <td>Nome Completo</td>
+            <td><?= $aluno['nm_aluno'] ?></td>
+        </tr>
+        <tr>
+            <td>Turma</td>
+            <td><?= $aluno['id_turma'] ?></td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td><?= $aluno['nm_email'] ?></td>
+        </tr>
+        <tr>
+            <td>Telefone Residencial</td>
+            <td><?php if($aluno['cd_tel_residencial'] != 0) echo $aluno['cd_tel_residencial']; ?></td>
+        </tr>
+        <tr>
+            <td>Telefone Celular</td>
+            <td><?php if($aluno['cd_tel_celular'] != 0) echo $aluno['cd_tel_celular']; ?></td>
+        </tr>
+        <tr>
+            <td>Status</td>
+            <td>
 
+                <?php
 
+                if($aluno['status_ativo'] != 0)
+                    echo "Ativo";
+                else
+                    echo "Desativado";
+                ?>
+            </td>
+        </tr>
+    </table>
 
-?>
+<?php } ?>
