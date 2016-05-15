@@ -1,5 +1,6 @@
 <?php
 class Professor_model extends CI_Model{
+
     public function salvaCadastro($professor){
         return $this->db->insert("tb_professor",$professor);
 
