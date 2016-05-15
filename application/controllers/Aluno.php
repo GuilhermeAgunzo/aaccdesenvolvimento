@@ -38,42 +38,38 @@ class Aluno extends CI_Controller{
 
         $email = $this->input->post("email");
 
-        if($this->_emailCadastrado($email)){
+        if($this->_validaFormulario(true, true)){
 
-            if($this->_validaFormulario()){
+            $id_usuario = $this->usuariolb->cadastrarUsuario($email,1);
 
-                $id_usuario = $this->usuariolb->cadastrarUsuario($email,1);
+            if($id_usuario > 0){
 
-                if($id_usuario > 0){
+                $usuarioLogado = $this->session->userdata("usuario_logado");
 
-                    $usuarioLogado = $this->session->userdata("usuario_logado");
+                $aluno = array(
+                    "cd_mat_aluno" => $this->input->post("matricula"),
+                    "nm_aluno" => $this->input->post("nome"),
+                    "nm_email" => $this->input->post("email"),
+                    "id_turma" => $this->input->post("turma"),
+                    "id_usuario" => $id_usuario,
+                    "dt_cadastro" => mdate("%Y-%m-%d %H:%i:%s", time()),
+                    "id_user_adm_cadastrou" => $usuarioLogado['id_usuario'],
+                    "cd_tel_celular" => $this->input->post("celular"),
+                    "cd_tel_residencial" => $this->input->post("telefone"),
+                );
 
-                    $aluno = array(
-                        "cd_mat_aluno" => $this->input->post("matricula"),
-                        "nm_aluno" => $this->input->post("nome"),
-                        "nm_email" => $this->input->post("email"),
-                        "id_turma" => $this->input->post("turma"),
-                        "id_usuario" => $id_usuario,
-                        "dt_cadastro" => mdate("%Y-%m-%d %H:%i:%s", time()),
-                        "id_user_adm_cadastrou" => $usuarioLogado['id_usuario'],
-                        "cd_tel_celular" => $this->input->post("celular"),
-                        "cd_tel_residencial" => $this->input->post("telefone"),
-                    );
+                $this->aluno_model->cadastrarAluno($aluno);
+                $this->session->set_flashdata("success", "Cadastro efetuado com sucesso!");
+                redirect('/aluno/cadastro_aluno');
 
-                    $this->aluno_model->cadastrarAluno($aluno);
-                    $this->session->set_flashdata("success", "Cadastro efetuado com sucesso!");
-                    redirect('/aluno/cadastro_aluno');
-
-                }else{
-                    $this->session->set_flashdata("danger", "Email já cadastrado com outro usuário.");
-                    $this->load->template_admin("aluno/cadastroAluno");
-                }
-
+            }else{
+                $this->session->set_flashdata("danger", "Email já cadastrado com outro usuário.");
+                $this->load->template_admin("aluno/cadastroAluno");
             }
 
-        }else{
-            $this->session->set_flashdata("danger", "Email já foi cadastrado por outro aluno.");
         }
+
+
 
         $this->load->template_admin("aluno/cadastroAluno");
 
@@ -97,12 +93,29 @@ class Aluno extends CI_Controller{
             "cd_tel_residencial" => $this->input->post("telefone"),
         );
 
+
+
         $dados = array(
             "aluno" => $aluno,
             "id_aluno" => $this->input->post("id_aluno"),
         );
 
-        if($this->_validaFormulario()){
+        $alunoBD = $this->aluno_model->buscarAluno($aluno['cd_mat_aluno']);
+
+        $emailUnique = false;
+        $matriculaUnique = false;
+
+        if($aluno['nm_email'] != $alunoBD['nm_email']){
+            $emailUnique = true;
+        }
+
+        if($aluno['cd_mat_aluno'] != $alunoBD['cd_mat_aluno']){
+            $matriculaUnique = true;
+        }
+
+
+
+        if($this->_validaFormulario($emailUnique, $matriculaUnique)){
 
             $this->aluno_model->alterarAluno($dados);
             $this->session->set_flashdata("success", "Alteração efetuada com sucesso!");
@@ -210,35 +223,38 @@ class Aluno extends CI_Controller{
 
     /*  MÉTODOS AUXILIARES  */
 
-    public function _validaFormulario(){
+    public function _validaFormulario($emailUnique, $matriculaUnique){
 
         $this->load->library("form_validation");
 
-        $this->form_validation->set_rules("email", "email", "required|valid_email",
-            array(
-                'required' => 'Você precisa preencher %s.',
-                'valid_email' => 'Você precisa preencher um email válido.'
-            )
+        $mensagem = array(
+            'required' => 'Você precisa preencher %s.',
+            'numeric' => 'A matricula deve conter somente números.',
+            'is_unique' => 'Já existe um aluno cadastrado com esta matricula.'
         );
 
-        $this->form_validation->set_rules("matricula", "matricula", "required|numeric",
-            array(
-                'required' => 'Você precisa preencher %s.',
-                'numeric' => 'A matricula deve conter somente números.'
-            )
+        $mensagemEmail = array(
+            'valid_email' => 'Você precisa preencher um email válido.',
+            'is_unique' => 'Já existe um usuário cadastrado com este email.'
         );
 
-        $this->form_validation->set_rules("nome", "nome", "required",
-            array(
-                'required' => 'Você precisa preencher %s.',
-                'alpha_numeric' => 'O nome não deve conter caracteres especiais.'
-            )
-        );
+        if($emailUnique){
+            $this->form_validation->set_rules("email", "email", "required|valid_email|is_unique[tb_usuario.nm_email]", $mensagemEmail);
+        }else{
+            $this->form_validation->set_rules("email", "email", "required|valid_email", $mensagemEmail);
+        }
 
-        $this->form_validation->set_rules("turma", "turma", "required|numeric",
+        if($matriculaUnique){
+            $this->form_validation->set_rules("matricula", "matricula", "required|numeric|is_unique[tb_aluno.cd_mat_aluno]", $mensagem);
+        }else{
+            $this->form_validation->set_rules("matricula", "matricula", "required|numeric", $mensagem);
+        }
+
+        $this->form_validation->set_rules("nome", "nome", "required", $mensagem);
+
+        $this->form_validation->set_rules("turma", "turma", "required|is_natural",
             array(
-                'required' => 'Você precisa preencher %s.',
-                'numeric' => 'Selecione uma turma válida.'
+                'is_natural' => 'Selecione uma turma válida.'
             )
         );
 

@@ -51,7 +51,6 @@ class Turma extends CI_Controller{
         $this->load->template_admin("turma/cadastrar_turma");
     }
 
-
     public function alterarTurma(){
         autoriza(2);
         $usuarioLogado = $this->session->userdata("usuario_logado");
@@ -110,7 +109,6 @@ class Turma extends CI_Controller{
         $this->load->template_admin("turma/alterar_turma", $dados);
 
     }
-
 
     public function pesquisarTurma(){
         autoriza(2);
