@@ -9,7 +9,15 @@ class Aluno extends CI_Controller{
 
     public function cadastro_aluno(){
         autoriza(2);
-        $this->load->template_admin("aluno/cadastroAluno");
+
+        $this->load->model("turma_model");
+        $dropDownTurma = $this->turma_model->dropDownTurma();
+
+        $dados = array(
+            'dropDownTurma' => $dropDownTurma
+        );
+
+        $this->load->template_admin("aluno/cadastroAluno", $dados);
     }
 
     public function alterar_aluno(){
@@ -94,13 +102,14 @@ class Aluno extends CI_Controller{
         );
 
 
+        $id_aluno = $this->input->post("id_aluno");
 
         $dados = array(
             "aluno" => $aluno,
-            "id_aluno" => $this->input->post("id_aluno"),
+            "id_aluno" => $id_aluno,
         );
 
-        $alunoBD = $this->aluno_model->buscarAluno($aluno['cd_mat_aluno']);
+        $alunoBD = $this->aluno_model->buscarAlunoId($id_aluno);
 
         $emailUnique = false;
         $matriculaUnique = false;
@@ -130,10 +139,10 @@ class Aluno extends CI_Controller{
         autoriza(2);
         $this->load->library("form_validation");
 
-        $this->form_validation->set_rules("matricula", "matricula", "required|numeric",
+        $this->form_validation->set_rules("matricula", "matricula", "required|is_natural|exact_length[13]",
             array(
                 'required' => 'Você precisa preencher a matricula.',
-                'numeric' => 'A matricula deve conter somente números.'
+                'is_natural' => 'A matricula deve conter somente números.'
             )
         );
 
@@ -144,19 +153,31 @@ class Aluno extends CI_Controller{
         if($sucesso){
 
             $matricula = $this->input->post("matricula");
+
             $this->load->model("aluno_model");
             $aluno = $this->aluno_model->buscarAluno($matricula);
 
+            if($aluno['cd_tel_celular'] == 0){ $aluno['cd_tel_celular'] = ""; }
+            if($aluno['cd_tel_residencial'] == 0){ $aluno['cd_tel_residencial'] = ""; }
+
+            $this->load->model("turma_model");
+            $dropDownTurma = $this->turma_model->dropDownTurma();
 
             $dados = array(
                 "aluno" => $aluno,
-                "id_aluno" => $aluno['id_aluno']
+                "id_aluno" => $aluno['id_aluno'],
+                'dropDownTurma' => $dropDownTurma
             );
 
 
             $this->load->template_admin("aluno/alterar_aluno", $dados);
 
+        }else{
+            $this->load->template_admin("aluno/alterar_aluno");
         }
+
+
+
 
     }
 
@@ -166,6 +187,11 @@ class Aluno extends CI_Controller{
 
         $this->load->model("aluno_model");
         $aluno = $this->aluno_model->buscarAluno($matricula);
+
+
+        if(isset($aluno['cd_tel_celular'])){ if($aluno['cd_tel_celular'] == 0){ $aluno['cd_tel_celular'] = ""; } }
+        if(isset($aluno['cd_tel_residencial'])){ if($aluno['cd_tel_residencial'] == 0){ $aluno['cd_tel_residencial'] = ""; } }
+
         $dados = array("aluno" => $aluno);
 
         if($aluno){
@@ -229,7 +255,7 @@ class Aluno extends CI_Controller{
 
         $mensagem = array(
             'required' => 'Você precisa preencher %s.',
-            'numeric' => 'A matricula deve conter somente números.',
+            'is_natural' => 'A matricula deve conter somente números.',
             'is_unique' => 'Já existe um aluno cadastrado com esta matricula.'
         );
 
@@ -245,9 +271,9 @@ class Aluno extends CI_Controller{
         }
 
         if($matriculaUnique){
-            $this->form_validation->set_rules("matricula", "matricula", "required|numeric|is_unique[tb_aluno.cd_mat_aluno]", $mensagem);
+            $this->form_validation->set_rules("matricula", "matricula", "required|is_natural|exact_length[13]|is_unique[tb_aluno.cd_mat_aluno]", $mensagem);
         }else{
-            $this->form_validation->set_rules("matricula", "matricula", "required|numeric", $mensagem);
+            $this->form_validation->set_rules("matricula", "matricula", "required|is_natural|exact_length[13]", $mensagem);
         }
 
         $this->form_validation->set_rules("nome", "nome", "required", $mensagem);

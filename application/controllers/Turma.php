@@ -6,7 +6,17 @@ class Turma extends CI_Controller{
 
     public function cadastrar_turma(){
         autoriza(2);
-        $this->load->template_admin("turma/cadastrar_turma");
+
+        $this->load->model("unidade_model");
+        $dropDownUnidade = $this->unidade_model->dropDownUnidade();
+
+        $dados = array(
+            'dropDownUnidade' => $dropDownUnidade
+        );
+
+
+
+        $this->load->template_admin("turma/cadastrar_turma", $dados);
     }
 
     public function alterar_turma(){
@@ -48,24 +58,33 @@ class Turma extends CI_Controller{
             $this->session->set_flashdata("danger", "Erro ao cadastrar");
         }
 
-        $this->load->template_admin("turma/cadastrar_turma");
+        $this->load->model("unidade_model");
+        $dropDownUnidade = $this->unidade_model->dropDownUnidade();
+
+        $dados = array(
+            'dropDownUnidade' => $dropDownUnidade
+        );
+
+        $this->load->template_admin("turma/cadastrar_turma", $dados);
     }
 
     public function alterarTurma(){
         autoriza(2);
         $usuarioLogado = $this->session->userdata("usuario_logado");
 
+
+        $turma = array(
+            "cd_mat_turma" => $this->input->post("cd_mat_turma"),
+            "nm_turno" => $this->input->post("turno"),
+            "aa_ingresso" => $this->input->post("ano"),
+            "dt_semestre" => $this->input->post("semestre"),
+            "qt_ciclo" => $this->input->post("ciclo"),
+            "id_user_adm_cadastrou" => $usuarioLogado['id_usuario'],
+            "dt_cadastro" => mdate("%Y-%m-%d %H:%i:%s", time()),
+        );
+
         if($this->_validaForm(false)){
 
-            $turma = array(
-                "cd_mat_turma" => $this->input->post("cd_mat_turma"),
-                "nm_turno" => $this->input->post("turno"),
-                "aa_ingresso" => $this->input->post("ano"),
-                "dt_semestre" => $this->input->post("semestre"),
-                "qt_ciclo" => $this->input->post("ciclo"),
-                "id_user_adm_cadastrou" => $usuarioLogado['id_usuario'],
-                "dt_cadastro" => mdate("%Y-%m-%d %H:%i:%s", time()),
-            );
 
             $this->load->model("turma_model");
             $this->turma_model->alteraTurma($turma);
@@ -75,9 +94,18 @@ class Turma extends CI_Controller{
 
         }else{
             $this->session->set_flashdata("danger", "Erro ao alterar.");
+
+
+
+            $dados = array(
+                "turma" => $turma,
+            );
+
         }
 
-        $this->load->template_admin("turma/alterar_turma");
+
+
+        $this->load->template_admin("turma/alterar_turma", $dados);
     }
 
     public function buscarAlterarTurma(){
@@ -101,8 +129,14 @@ class Turma extends CI_Controller{
             $this->load->model("turma_model");
             $turma = $this->turma_model->buscarTurma($cd_mat_turma);
 
+
+
+            $this->load->model("unidade_model");
+            $dropDownUnidade = $this->unidade_model->dropDownUnidade();
+
             $dados = array(
-                "turma" => $turma
+                "turma" => $turma,
+                "dropDownUnidade" => $dropDownUnidade
             );
         }
 
@@ -139,7 +173,9 @@ class Turma extends CI_Controller{
 
         $this->load->library("form_validation");
 
-        $mensagem = array();
+        $mensagem = array(
+            "is_unique" => "Já existe uma turma cadastrada com este código"
+        );
 
         if($cadastrar){
             $this->form_validation->set_rules("unidade", "unidade", "required|is_natural", $mensagem);

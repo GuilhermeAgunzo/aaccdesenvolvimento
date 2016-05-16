@@ -7,8 +7,8 @@ class Unidade_model extends CI_Model{
         $this->db->insert("tb_unidade", $unidade);// (tabela do banco,array recebido)
     }
 
-    public function altera($unidade){
-        $this->db->where('cd_cpsouza', $unidade['cd_cpsouza']);
+    public function altera($unidade, $id_turma){
+        $this->db->where('id_unidade', $unidade['id_unidade']);
         $this->db->update('tb_unidade', $unidade);
     }
 
@@ -33,4 +33,20 @@ class Unidade_model extends CI_Model{
             return false;
         }
     }
+
+
+    public function dropDownUnidade(){
+
+        $result = $this->db->query("select concat(cd_cpsouza, ' - ' , nm_unidade) as unidade, id_unidade from tb_unidade;");
+
+        $retorno = array();
+        if($result->num_rows() > 0) {
+            foreach($result->result_array() as $row) {
+                $retorno[$row['id_unidade']] = $row['unidade'];
+            }
+        }
+
+        return $retorno;
+    }
+
 }

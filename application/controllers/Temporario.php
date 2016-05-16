@@ -14,6 +14,28 @@ class Temporario extends CI_Controller{
     }
 
 
+    public function listarUnidade(){
+        autoriza(2);
+        $this->load->model("unidade_model");
+        $dropDownUnidade = $this->unidade_model->dropDownUnidade();
+
+        echo "<pre>";
+        print_r($dropDownUnidade);
+        echo "</pre>";
+
+    }
+
+    public function listarTurma(){
+        autoriza(2);
+        $this->load->model("turma_model");
+        $dropDownTurma = $this->turma_model->dropDownTurma();
+
+        echo "<pre>";
+        print_r($dropDownTurma);
+        echo "</pre>";
+
+    }
+
 
 }
 

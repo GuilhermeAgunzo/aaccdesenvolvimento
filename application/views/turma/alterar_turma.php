@@ -8,7 +8,7 @@ echo "</br>";
 
 echo "<div class='form-group'>";
 echo form_label("Código da Turma", "matricula", array("class" => "col-sm-2 control-label"));
-echo "<div class='col-sm-2'>";
+echo "<div class='col-sm-10'>";
 echo form_input(array("name" => "cd_mat_turma", "type" => "number", "value" => set_value("cd_mat_turma",""), "id" => "cd_mat_turma" ,"class" => "form-control", "maxlength" => "5", "required" => "required"));
 echo form_error("cd_mat_turma");
 echo "</div>";
@@ -24,7 +24,7 @@ echo form_close();
 
 echo "<br>";
 
-if(isset($turma)){
+if(isset($turma) || $this->session->flashdata("danger")){
 
     $atributos = array('class' => 'form-horizontal');
     echo form_open("turma/alterarTurma",$atributos);
@@ -32,7 +32,7 @@ if(isset($turma)){
 
     echo "<div class='form-group'>";
     echo form_label("Código da Turma", "matricula", array("class" => "col-sm-2 control-label"));
-    echo "<div class='col-sm-2'>";
+    echo "<div class='col-sm-10'>";
     echo form_input(array("name" => "cd_mat_turma", "type" => "number", "value" => set_value("cd_mat_turma",$turma['cd_mat_turma']), "id" => "cd_mat_turma" ,"class" => "form-control", "maxlength" => "5", "required" => "required"));
     echo form_error("cd_mat_turma");
     echo "</div>";
@@ -40,8 +40,8 @@ if(isset($turma)){
 
     echo "<div class='form-group'>";
     echo form_label("Ano de Ingresso", "ano", array("class" => "col-sm-2 control-label"));
-    echo "<div class='col-sm-2'>";
-    echo form_input(array("name" => "ano", "type" => "number", "value" => set_value("ano",$turma['aa_ingresso']), "id" => "ano" ,"class" => "form-control", "maxlength" => "4", "minlength" => "4", "required" => "required", "min" => "1969"));
+    echo "<div class='col-sm-10'>";
+    echo form_input(array("name" => "ano", "type" => "number", "value" => set_value("ano",$turma['aa_ingresso']), "id" => "ano" ,"class" => "form-control", "pattern" => "{4,4}", "required" => "required", "min" => "1969"));
     echo form_error("ano");
     echo "</div>";
     echo "</div>";

@@ -13,6 +13,13 @@ class Aluno_model extends CI_Model{
         return $this->db->get("tb_aluno")->row_array();
     }
 
+
+    public function buscarAlunoId($id_aluno)
+    {
+        $this->db->where("id_aluno", $id_aluno);
+        return $this->db->get("tb_aluno")->row_array();
+    }
+
     public function alterarAluno($dados){
         $this->db->where('id_aluno', $dados['id_aluno']);
         $this->db->update('tb_aluno', $dados['aluno']);
@@ -21,10 +28,6 @@ class Aluno_model extends CI_Model{
     public function desativarAluno($matricula, $aluno){
         $this->db->where("cd_mat_aluno",$matricula);
         return $this->db->update("tb_aluno",$aluno);
-    }
-
-    public function buscaTurmas($cd_cpsouza){
-
     }
 
 
