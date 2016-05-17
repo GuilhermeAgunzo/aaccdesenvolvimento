@@ -1,7 +1,6 @@
 <?php
 echo form_fieldset("<h1>Alteração de Turma</h1>");
 
-
 $atributos = array('class' => 'form-horizontal');
 echo form_open("turma/buscarAlterarTurma",$atributos);
 echo "</br>";
@@ -49,7 +48,7 @@ if(isset($turma) || $this->session->flashdata("danger")){
     echo "<div class='form-group'>";
     echo form_label("Semestre","semestre", array("class" => "col-sm-2 control-label"));
     echo "<div class='col-sm-10'>";
-    $semestre=array('' => 'Selecione','1' => '1','2' => '2');
+    $semestre = array('' => 'Selecione','1' => '1','2' => '2');
     echo form_dropdown('semestre',$semestre, $turma['dt_semestre'], array("class" => "form-control"));
     echo form_error("semestre");
     echo "</div>";

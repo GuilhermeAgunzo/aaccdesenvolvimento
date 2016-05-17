@@ -24,6 +24,10 @@ if(isset($unidade) || isset($erro)) {
 
     echo form_open('unidade/alteraUnidade', $atributos);
 
+    if(isset($id_unidade)){
+        echo form_hidden('id_unidade', $id_unidade);
+    }
+
     echo "<div class='form-group'>";
     echo form_label("Nome da Unidade", "nm_unidade", array("class" => "col-sm-2 control-label"));
     echo "<div class='col-sm-8'>";

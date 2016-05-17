@@ -43,8 +43,8 @@
                 echo "<div class='form-group'>";
                 echo form_label("Unidade", "unidade", array("class" => "col-sm-2 control-label"));
                 echo "<div class='col-sm-10'>";
-                $unidade = array('unidade' => 'Selecione','1' => 'Fatec Praia Grande','2' => 'Fatec Santos');
-                echo form_dropdown('Unidade', $unidade, array("class" => "form-control"));
+                
+                echo form_dropdown('Unidade', $unidades,$professor['id_unidade'], array("class" => "form-control"));
                 echo "</div>";
                 echo "</div>";
 

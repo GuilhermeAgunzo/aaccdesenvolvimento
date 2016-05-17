@@ -9,12 +9,21 @@ class Professor extends CI_Controller{
 
     public function cadastro_professor(){
         autoriza(2);
-        $this->load->template_admin("professor/cadastrar_professor.php");
+        $this->load->model("unidade_model");
+        $unidades = $this->unidade_model->dropDownUnidade();
+        $dados = array("unidades" => $unidades);
+        $this->load->template_admin("professor/cadastrar_professor.php",$dados);
     }
 
     public function pesquisar_professor(){
         autoriza(2);
-        $this->load->template_admin("professor/pesquisar_professor.php");
+
+        $this->load->model("unidade_model");
+        $unidades = $this->unidade_model->buscaUnidades();
+
+        $dados = array("unidades" => $unidades);
+        $this->load->template_admin("professor/pesquisar_professor.php",$dados);
+
     }
 
     public function alterar_professor(){
@@ -79,7 +88,15 @@ class Professor extends CI_Controller{
         $data_entrada = implode("-", array_reverse(explode("/", $this->input->post("data_entrada"))));
         $data_saida = implode("-", array_reverse(explode("/", $this->input->post("data_saida"))));
         $email = $this->input->post("email");
+        $telefone = $this->input->post("telefone");
+        $celular = $this->input->post("celular");
 
+        if($telefone == ""){
+            $telefone = null;
+        }
+        if($celular == ""){
+            $celular = null;
+        }
         if($data_saida == ""){
             $data_saida = null;
         }
@@ -91,10 +108,10 @@ class Professor extends CI_Controller{
         $professor = array(
             "nm_professor" => $this->input->post("nome"),
             "nm_email" => $email,
-            "cd_tel_residencial" => $this->input->post("telefone"),
-            "cd_tel_celular" => $this->input->post("celular"),
+            "cd_tel_residencial" => $telefone,
+            "cd_tel_celular" => $celular,
             "dt_entrada" => $data_entrada,
-            "id_unidade" => 1,
+            "id_unidade" => $this->input->post("Unidade"),
             "dt_saida" => $data_saida,
             "dt_cadastro" => mdate("%Y-%m-%d %H:%i:%s", time()),
             "status_ativo" => 1,
@@ -112,15 +129,28 @@ class Professor extends CI_Controller{
         }
     }
 
-    public function pesquisaProfessor(){
+    public function pesquisaProfessores($unidade){
         autoriza(2);
-        $id = $this->input->post("cd_professor");
+
+        $idUnidade = $unidade;
+
         $this->load->model("professor_model");
+        $this->load->model("unidade_model");
+        $professores = $this->professor_model->buscaProfessoresUnidade($idUnidade);
+        $unidades = $this->unidade_model->buscaUnidades();
+        $dados = array("professores" => $professores,"unidades"=>$unidades, "unidadeAtual" => $idUnidade);
+        $this->load->template_admin("professor/pesquisar_professor.php",$dados);
+    }
+    public function pesquisaNomeProfessor(){
+        autoriza(2);
+        $termo = $this->input->post("nm_professor");
+        $idUnidade = $this->input->post("idUnidade");
+        $this->load->model("professor_model");
+        $this->load->model("unidade_model");
         $this->load->library("form_validation");
-        $this->form_validation->set_rules("cd_professor","cd_professor","required|numeric",
+        $this->form_validation->set_rules("nm_professor","nm_professor","required",
             array(
-                'required' => "Você precisa preencher Código de Professor",
-                'numeric' => "O código deve conter apenas números"
+                'required' => "Você precisa preencher o nome do professor"
             ));
 
         $this->form_validation->set_error_delimiters("<p class='alert alert-danger'>", "</p>");
@@ -128,14 +158,15 @@ class Professor extends CI_Controller{
         $this->form_validation->run();
 
 
-        $professor = $this->professor_model->buscaProfessor($id);
-        $dados = array("professor" => $professor);
+        $professores = $this->professor_model->buscaNomeProfessor($termo,$idUnidade);
+        $unidades = $this->unidade_model->buscaUnidades();
 
-        if($professor){
+        $dados = array("professores" => $professores, "unidades" => $unidades, "unidadeAtual" => $idUnidade);
+
+        if(!$professores) {
             //$this->session->set_flashdata("success", "Cadastro localizado");
-        }else{
             $this->session->set_flashdata("danger", "Cadastro  não foi localizado. Verifique os dados ou tente novamente mais tarde");
-            redirect("/professor/pesquisar_professor");
+            redirect("/professor/pesquisaProfessores/" . $idUnidade);
         }
 
         $this->load->template_admin("professor/pesquisar_professor.php", $dados);
@@ -150,11 +181,19 @@ class Professor extends CI_Controller{
         $data_entrada = implode("-", array_reverse(explode("/", $this->input->post("data_entrada"))));
         $data_saida = implode("-", array_reverse(explode("/", $this->input->post("data_saida"))));
         $email = $this->input->post("email");
+        $telefone = $this->input->post("telefone");
+        $celular = $this->input->post("celular");
         $professor = $this->professor_model->buscaProfessor($id_professor);
 
         $id_usuario = $professor["id_usuario"];
 
         $this->usuariolb->alterarUsuario($id_usuario,1,$email);
+        if($telefone == ""){
+            $telefone = null;
+        }
+        if($celular == ""){
+            $celular = null;
+        }
 
         if($data_saida == "")
             $data_saida = null;
@@ -162,8 +201,9 @@ class Professor extends CI_Controller{
         $professor = array(
             "nm_professor" => $this->input->post("nome"),
             "nm_email" => $email,
-            "cd_tel_residencial" => $this->input->post("telefone"),
-            "cd_tel_celular" => $this->input->post("celular"),
+            "id_unidade" => $this->input->post("Unidade"),
+            "cd_tel_residencial" => $telefone,
+            "cd_tel_celular" => $celular,
             "dt_entrada" => $data_entrada,
             "dt_saida" => $data_saida
         );
@@ -224,8 +264,12 @@ class Professor extends CI_Controller{
 
         $id = $this->input->post("cd_professor");
         $this->load->model("professor_model");
+        $this->load->model("unidade_model");
+
         $professor = $this->professor_model->buscaProfessor($id);
-        $dados = array("professor" => $professor);
+        $unidades = $this->unidade_model->dropDownUnidade();
+
+        $dados = array("professor" => $professor, "unidades" => $unidades);
         $this->load->template_admin("professor/desativar_professor", $dados);
 
     }
@@ -245,8 +289,11 @@ class Professor extends CI_Controller{
 
         $id = $this->input->post("cd_professor");
         $this->load->model("professor_model");
+        $this->load->model("unidade_model");
+
         $professor = $this->professor_model->buscaProfessor($id);
-        $dados = array("professor" => $professor);
+        $unidades = $this->unidade_model->dropDownUnidade();
+        $dados = array("professor" => $professor,"unidades" => $unidades);
         $this->load->template_admin("professor/alterar_professor", $dados);
 
     }

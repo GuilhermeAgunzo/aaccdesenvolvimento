@@ -77,9 +77,14 @@ class Aluno extends CI_Controller{
 
         }
 
+        $this->load->model("turma_model");
+        $dropDownTurma = $this->turma_model->dropDownTurma();
 
+        $dados = array(
+            'dropDownTurma' => $dropDownTurma
+        );
 
-        $this->load->template_admin("aluno/cadastroAluno");
+        $this->load->template_admin("aluno/cadastroAluno", $dados);
 
     }
 

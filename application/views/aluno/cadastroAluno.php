@@ -6,7 +6,7 @@
 	echo "<div class='form-group'>";
 	echo form_label("Número de matrícula", "matricula", array("class" => "col-sm-2 control-label"));
 	echo "<div class='col-sm-6'>";
-	echo form_input(array("name" => "matricula", "value" => set_value("matricula",""), "required" => "required","type" => "number", "id" => "matricula" ,"class" => "form-control", "maxlength" => "13", "minlength" => "13", "min" => "0"));
+	echo form_input(array("name" => "matricula", "value" => set_value("matricula",""), "required" => "required","type" => "text", "id" => "matricula" ,"class" => "form-control", "maxlength" => "13", "minlength" => "13", "min" => "0"));
 	echo form_error("matricula");
 	echo "</div>";
 	echo "</div>";
@@ -22,7 +22,7 @@
 	echo "<div class='form-group'>";
 	echo form_label("Turma", "turma", array("class" => "col-sm-2 control-label"));
 	echo "<div class='col-sm-10'>";
-	echo form_dropdown('turma', $dropDownTurma, "", array("class" => "form-control"));
+	echo form_dropdown('turma', $dropDownTurma, set_value("turma", ""), array("class" => "form-control"));
 	echo form_error("turma");
 	echo "</div>";
 	echo "</div>";

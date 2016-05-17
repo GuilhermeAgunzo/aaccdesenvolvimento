@@ -14,8 +14,6 @@ class Turma extends CI_Controller{
             'dropDownUnidade' => $dropDownUnidade
         );
 
-
-
         $this->load->template_admin("turma/cadastrar_turma", $dados);
     }
 

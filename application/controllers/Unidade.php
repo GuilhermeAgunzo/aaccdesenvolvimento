@@ -63,12 +63,12 @@ class Unidade extends CI_Controller{
 
     public function alteraUnidade(){
         autoriza(2);
-
-
+        $this->output->enable_profiler(TRUE);
 
         if($this->_validaFormulario(false)) {
             $usuarioLogado = $this->session->userdata("usuario_logado");
             $unidade = array(
+                "id_unidade" => $this->input->post("id_unidade"),
                 "cd_cpsouza" => $this->input->post("cd_cpsouza"),
                 "nm_unidade" => $this->input->post("nm_unidade"),
                 "UF_estado" => $this->input->post("uf"),
@@ -91,52 +91,25 @@ class Unidade extends CI_Controller{
             $this->unidade_model->altera($unidade);
             $this->session->set_flashdata("success", "Alteração efetuada com sucesso!");
 
-            $this->output->enable_profiler(TRUE);
+
             //redirect('/unidade/alterar_unidade');
 
             $this->load->template_admin("unidade/alterar_unidade");
         }else{
             $this->session->set_flashdata("danger", "Erro ao alterar!");
 
-
-
-            $cd_cpsouza = $this->input->post("cd_cpsouza");
+            $id_unidade = $this->input->post("id_unidade");
             $this->load->model("unidade_model");
-            $unidade = $this->unidade_model->buscarUnidade($cd_cpsouza);
+            $unidade = $this->unidade_model->buscarUnidade($id_unidade);
 
-            $erro = "erro";
             $dados = array(
                 "unidade" => $unidade,
-                "erro" => $erro,
+                "id_unidade" => $this->input->post("id_unidade")
             );
-
-
 
             $this->load->template_admin("unidade/alterar_unidade", $dados);
 
-
-
-
-
-            //$this->load->template_admin("unidade/alterar_unidade");
         }
-    }
-
-    public function pesquisarUnidade(){
-        autoriza(2);
-        $cd_cpsouza = $this->input->post("cd_cpsouza");
-
-        $this->load->model("unidade_model");
-        $unidade = $this->unidade_model->buscarUnidade($cd_cpsouza);
-        $dados = array("unidade" => $unidade);
-
-        if($unidade){
-            $this->load->template_admin("unidade/pesquisar_unidade.php", $dados);
-        }else{
-            $this->session->set_flashdata("danger", "Cadastro  não foi localizado. Verifique os dados ou tente novamente mais tarde");
-            redirect("/unidade/pesquisar_unidade");
-        }
-
     }
 
     public function buscarAlteraUnidade(){
@@ -163,11 +136,29 @@ class Unidade extends CI_Controller{
             $unidade = $this->unidade_model->buscarUnidade($cd_cpsouza);
 
             $dados = array(
-                "unidade" => $unidade
+                "unidade" => $unidade,
+                "id_unidade" => $unidade['id_unidade']
             );
 
             $this->load->template_admin("unidade/alterar_unidade", $dados);
 
+        }
+
+    }
+
+    public function pesquisarUnidade(){
+        autoriza(2);
+        $cd_cpsouza = $this->input->post("cd_cpsouza");
+
+        $this->load->model("unidade_model");
+        $unidade = $this->unidade_model->buscarUnidade($cd_cpsouza);
+        $dados = array("unidade" => $unidade);
+
+        if($unidade){
+            $this->load->template_admin("unidade/pesquisar_unidade.php", $dados);
+        }else{
+            $this->session->set_flashdata("danger", "Cadastro  não foi localizado. Verifique os dados ou tente novamente mais tarde");
+            redirect("/unidade/pesquisar_unidade");
         }
 
     }
