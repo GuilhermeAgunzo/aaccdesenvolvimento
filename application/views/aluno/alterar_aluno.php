@@ -46,7 +46,6 @@
         echo "</div>";
         echo "</div>";
 
-        print_r($dropDownTurma);
 
         echo "<div class='form-group'>";
         echo form_label("Turma", "turma", array("class" => "col-sm-2 control-label"));

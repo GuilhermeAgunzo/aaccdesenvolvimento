@@ -63,7 +63,7 @@ class Unidade extends CI_Controller{
 
     public function alteraUnidade(){
         autoriza(2);
-        $this->output->enable_profiler(TRUE);
+
 
         if($this->_validaFormulario(false)) {
             $usuarioLogado = $this->session->userdata("usuario_logado");
@@ -104,7 +104,8 @@ class Unidade extends CI_Controller{
 
             $dados = array(
                 "unidade" => $unidade,
-                "id_unidade" => $this->input->post("id_unidade")
+                "id_unidade" => $this->input->post("id_unidade"),
+                "erro" => "Errado"
             );
 
             $this->load->template_admin("unidade/alterar_unidade", $dados);
@@ -115,7 +116,7 @@ class Unidade extends CI_Controller{
     public function buscarAlteraUnidade(){
         autoriza(2);
 
-        $this->output->enable_profiler(TRUE);
+
 
         $this->load->library("form_validation");
 
@@ -135,10 +136,16 @@ class Unidade extends CI_Controller{
             $this->load->model("unidade_model");
             $unidade = $this->unidade_model->buscarUnidade($cd_cpsouza);
 
+            if(isset($unidade['cd_telefone'])){
+                if($unidade['cd_telefone'] == 0){ $unidade['cd_telefone'] = ""; }
+            }
+
             $dados = array(
                 "unidade" => $unidade,
                 "id_unidade" => $unidade['id_unidade']
             );
+
+
 
             $this->load->template_admin("unidade/alterar_unidade", $dados);
 

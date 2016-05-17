@@ -109,12 +109,19 @@ class Aluno extends CI_Controller{
 
         $id_aluno = $this->input->post("id_aluno");
 
+
+        $this->load->model("turma_model");
+        $dropDownTurma = $this->turma_model->dropDownTurma();
+
         $dados = array(
             "aluno" => $aluno,
             "id_aluno" => $id_aluno,
+            'dropDownTurma' => $dropDownTurma,
         );
 
         $alunoBD = $this->aluno_model->buscarAlunoId($id_aluno);
+
+
 
         $emailUnique = false;
         $matriculaUnique = false;
@@ -162,8 +169,17 @@ class Aluno extends CI_Controller{
             $this->load->model("aluno_model");
             $aluno = $this->aluno_model->buscarAluno($matricula);
 
-            if($aluno['cd_tel_celular'] == 0){ $aluno['cd_tel_celular'] = ""; }
-            if($aluno['cd_tel_residencial'] == 0){ $aluno['cd_tel_residencial'] = ""; }
+
+
+            if(isset($aluno['cd_tel_celular'])){
+                if($aluno['cd_tel_celular'] == 0){ $aluno['cd_tel_celular'] = ""; }
+            }
+
+            if(isset($aluno['cd_tel_residencial'])){
+                if($aluno['cd_tel_residencial'] == 0){ $aluno['cd_tel_residencial'] = ""; }
+            }
+
+
 
             $this->load->model("turma_model");
             $dropDownTurma = $this->turma_model->dropDownTurma();
