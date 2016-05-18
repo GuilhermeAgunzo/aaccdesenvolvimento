@@ -63,7 +63,6 @@ class Unidade extends CI_Controller{
 
     public function alteraUnidade(){
         autoriza(2);
-        $this->output->enable_profiler(TRUE);
 
         if($this->_validaFormulario(false)) {
             $usuarioLogado = $this->session->userdata("usuario_logado");
@@ -115,8 +114,6 @@ class Unidade extends CI_Controller{
 
     public function buscarAlteraUnidade(){
         autoriza(2);
-
-        $this->output->enable_profiler(TRUE);
 
         $this->load->library("form_validation");
 

@@ -8,7 +8,7 @@ echo form_open('aluno/pesquisaraluno', $atributos);
 echo "<div class='form-group'>";
 echo form_label("Número de matrícula", "matricula", array("class" => "col-sm-2 control-label"));
 echo "<div class='col-sm-6'>";
-echo form_input(array("name" => "matricula", "required" => "required", "id" => "matricula" ,"class" => "form-control", "maxlength" => "80"));
+echo form_input(array("name" => "matricula", "required" => "required", "id" => "matricula" ,"class" => "form-control", "maxlength" => "13", "minlength" => "13"));
 echo "</div>";
 echo "</div>";
 echo "<div class='form-group'>";
@@ -40,11 +40,11 @@ if(isset($aluno)){ ?>
         </tr>
         <tr>
             <td>Telefone Residencial</td>
-            <td><?php if($aluno['cd_tel_residencial'] != 0) echo $aluno['cd_tel_residencial']; ?></td>
+            <td><?php echo $aluno['cd_tel_residencial']; ?></td>
         </tr>
         <tr>
             <td>Telefone Celular</td>
-            <td><?php if($aluno['cd_tel_celular'] != 0) echo $aluno['cd_tel_celular']; ?></td>
+            <td><?php echo $aluno['cd_tel_celular']; ?></td>
         </tr>
         <tr>
             <td>Status</td>

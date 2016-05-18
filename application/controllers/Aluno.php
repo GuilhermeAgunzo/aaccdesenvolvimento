@@ -170,14 +170,6 @@ class Aluno extends CI_Controller{
             $aluno = $this->aluno_model->buscarAluno($matricula);
 
 
-            if(isset($aluno['cd_tel_celular'])){
-                if($aluno['cd_tel_celular'] == 0){ $aluno['cd_tel_celular'] = ""; }
-            }
-
-            if(isset($aluno['cd_tel_residencial'])){
-                if($aluno['cd_tel_residencial'] == 0){ $aluno['cd_tel_residencial'] = ""; }
-            }
-
             $this->load->model("turma_model");
             $dropDownTurma = $this->turma_model->dropDownTurma();
 
@@ -201,10 +193,6 @@ class Aluno extends CI_Controller{
 
         $this->load->model("aluno_model");
         $aluno = $this->aluno_model->buscarAluno($matricula);
-
-
-        if(isset($aluno['cd_tel_celular'])){ if($aluno['cd_tel_celular'] == 0){ $aluno['cd_tel_celular'] = ""; } }
-        if(isset($aluno['cd_tel_residencial'])){ if($aluno['cd_tel_residencial'] == 0){ $aluno['cd_tel_residencial'] = ""; } }
 
         $dados = array("aluno" => $aluno);
 
@@ -257,6 +245,39 @@ class Aluno extends CI_Controller{
         }
 
         redirect("/aluno/desativar_cadastro");
+
+    }
+
+    public function buscaDesativarAluno(){
+        autoriza(2);
+
+        $this->load->library("form_validation");
+        $this->form_validation->set_rules("matricula","matricula","required|is_natural|exact_length[13]",
+            array(
+                'is_natural' => "A matricula deve conter apenas números"
+            ));
+
+        $this->form_validation->set_error_delimiters("<p class='alert alert-danger'>", "</p>");
+
+
+        if($this->form_validation->run()){
+
+            $matricula = $this->input->post("matricula");
+            $this->load->model("aluno_model");
+            $aluno = $this->aluno_model->buscarAluno($matricula);
+
+            $this->load->model("turma_model");
+            $dropDownTurma = $this->turma_model->dropDownTurma();
+
+            $dados = array(
+                "aluno" => $aluno,
+                "dropDownTurma" => $dropDownTurma
+            );
+            $this->load->template_admin("aluno/desativar_aluno", $dados);
+
+        }else{
+            $this->load->template_admin("aluno/desativar_aluno");
+        }
 
     }
 
