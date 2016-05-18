@@ -39,16 +39,9 @@
 <link rel="stylesheet" href="<?= base_url('css/bootstrap-datepicker.min.css') ?>">
 <script src="<?= base_url('js/bootstrap-datepicker.min.js') ?>"></script>
 <script src="<?= base_url('locales/bootstrap-datepicker.pt-BR.min.js') ?>"></script>
-
-<script>
-    $(document).ready(function () {
-        $('.datepicker').datepicker({
-            format: 'dd/mm/yyyy',
-            language: 'pt-BR'
-        });
-    });
-
-</script>
+<script src="<?= base_url('js/jquery.maskedinput.min.js') ?>"></script>
+<script src="<?= base_url('js/mascaras.js') ?>"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 
 </body>
 </html>

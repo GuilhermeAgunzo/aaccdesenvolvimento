@@ -63,7 +63,7 @@ class Unidade extends CI_Controller{
 
     public function alteraUnidade(){
         autoriza(2);
-
+        $this->output->enable_profiler(TRUE);
 
         if($this->_validaFormulario(false)) {
             $usuarioLogado = $this->session->userdata("usuario_logado");
@@ -116,7 +116,7 @@ class Unidade extends CI_Controller{
     public function buscarAlteraUnidade(){
         autoriza(2);
 
-
+        $this->output->enable_profiler(TRUE);
 
         $this->load->library("form_validation");
 
@@ -136,9 +136,6 @@ class Unidade extends CI_Controller{
             $this->load->model("unidade_model");
             $unidade = $this->unidade_model->buscarUnidade($cd_cpsouza);
 
-            if(isset($unidade['cd_telefone'])){
-                if($unidade['cd_telefone'] == 0){ $unidade['cd_telefone'] = ""; }
-            }
 
             $dados = array(
                 "unidade" => $unidade,
@@ -191,7 +188,7 @@ class Unidade extends CI_Controller{
         $this->form_validation->set_rules("complemento", "complemento", "min_length[5]|max_length[50]");
         $this->form_validation->set_rules("endereco", "endereco", "required|min_length[5]|max_length[50]");
         $this->form_validation->set_rules("numero", "numero", "required|min_length[1]|max_length[8]");
-        $this->form_validation->set_rules("cep", "cep", "required|min_length[1]|max_length[8]");
+        $this->form_validation->set_rules("cep", "cep", "required|min_length[1]|max_length[9]");
         $this->form_validation->set_rules("telefone", "telefone", "min_length[8]|max_length[15]");
         $this->form_validation->set_rules("uf", "uf", "required|min_length[2]|max_length[2]");
         $this->form_validation->set_error_delimiters('<p class="alert alert-danger">', '</p>');

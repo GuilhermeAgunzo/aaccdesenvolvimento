@@ -2,12 +2,6 @@
 <html lang="pt-br">
 <head>
     <title>Administrador AACC</title>
-    <script type="text/javascript" src="<?= base_url("js/jquery-1.2.6.pack.js")?>"></script><script type="text/javascript" src="<?= base_url("js/jquery.maskedinput-1.1.4.pack.js")?>"></script>
-    <script type="text/javascript">$(document).ready(function(){
-            $("#cpf").mask("999.999.999-99");
-            $("#telefone").mask("(99)9999-99999");
-        });
-    </script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -22,7 +16,6 @@
     <link href="<?= base_url("css/font-awesome.css")?>" rel="stylesheet">
     <!-- //font-awesome icons -->
     <!-- js-->
-    <script src="<?= base_url("js/jquery-1.11.1.min.js")?>"></script>
     <script src="<?= base_url("js/modernizr.custom.js")?>"></script>
     <!--webfonts-->
     <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>

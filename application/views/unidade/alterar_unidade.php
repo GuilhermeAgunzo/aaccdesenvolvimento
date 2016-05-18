@@ -82,7 +82,7 @@ if(isset($unidade) || isset($erro)) {
     echo "<div class='form-group'>";
     echo form_label("CEP", "cep", array("class" => "col-sm-2 control-label"));
     echo "<div class='col-sm-6'>";
-    echo form_input(array("name" => "cep", "value" => set_value("cep",$unidade['cd_cep_endereco']), "id" => "cep", "class" => "form-control", "maxlength" => "80"));
+    echo form_input(array("name" => "cep", "value" => set_value("cep",$unidade['cd_cep_endereco']), "id" => "cep", "class" => "form-control cep", "maxlength" => "80"));
     echo form_error("cep");
     echo "</div>";
     echo "</div>";
@@ -109,7 +109,7 @@ if(isset($unidade) || isset($erro)) {
     echo "<div class='form-group'>";
     echo form_label("Telefone da Unidade", "telefone", array("class" => "col-sm-2 control-label"));
     echo "<div class='col-sm-6'>";
-    echo form_input(array("name" => "telefone", "value" => set_value("telefone",$unidade['cd_telefone']), "id" => "telefone", "class" => "form-control", "maxlength" => "80"));
+    echo form_input(array("name" => "telefone", "value" => set_value("tel",$unidade['cd_telefone']), "id" => "telefone", "class" => "form-control phone-mask", "maxlength" => "15"));
     echo form_error("telefone");
     echo "</div>";
     echo "</div>";

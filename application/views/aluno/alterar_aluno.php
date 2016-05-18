@@ -66,9 +66,9 @@
 
 
         echo "<div class='form-group'>";
-        echo form_label("Telefone Residencial", "telefone", array("class" => "col-sm-2 control-label"));
+        echo form_label("Telefone Residencial", "tel", array("class" => "col-sm-2 control-label"));
         echo "<div class='col-sm-6'>";
-        echo form_input(array("name" => "telefone", "value" => set_value("telefone",$aluno['cd_tel_residencial']), "id" => "telefone", "class" => "form-control", "maxlength" => "20"));
+        echo form_input(array("name" => "tel", "value" => set_value("telefone",$aluno['cd_tel_residencial']), "id" => "tel", "class" => "form-control phone-mask", "maxlength" => "20"));
         echo form_error("telefone");
         echo "</div>";
         echo "</div>";
@@ -77,7 +77,7 @@
         echo "<div class='form-group'>";
         echo form_label("Telefone Celular", "celular", array("class" => "col-sm-2 control-label"));
         echo "<div class='col-sm-6'>";
-        echo form_input(array("name" => "celular", "value" => set_value("celular",$aluno['cd_tel_celular']), "id" => "celular", "class" => "form-control", "maxlength" => "20"));
+        echo form_input(array("name" => "celular", "value" => set_value("celular",$aluno['cd_tel_celular']), "id" => "celular", "class" => "form-control phone-mask", "maxlength" => "20"));
         echo form_error("celular");
         echo "</div>";
         echo "</div>";

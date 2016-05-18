@@ -60,7 +60,7 @@ echo "</div>";
 echo "<div class='form-group'>";
 echo form_label("CEP", "cep", array("class" => "col-sm-2 control-label"));
 echo "<div class='col-sm-6'>";
-echo form_input(array("name" => "cep", "value" => set_value("cep",""), "id" => "cep" ,"class" => "form-control", "maxlength" => "80"));
+echo form_input(array("name" => "cep", "value" => set_value("cep",""), "id" => "cep" ,"class" => "form-control cep", "maxlength" => "80"));
 echo form_error("cep");
 echo "</div>";
 echo "</div>";
@@ -86,9 +86,9 @@ echo "</div>";
 
 
 echo "<div class='form-group'>";
-echo form_label("Telefone da Unidade", "telefone", array("class" => "col-sm-2 control-label"));
+echo form_label("Telefone da Unidade", "tel", array("class" => "col-sm-2 control-label"));
 echo "<div class='col-sm-6'>";
-echo form_input(array("name" => "telefone", "value" => set_value("telefone",""), "id" => "telefone" ,"class" => "form-control", "maxlength" => "80"));
+echo form_input(array("name" => "telefone", "value" => set_value("telefone",""), "id" => "tel" ,"class" => "form-control phone-mask", "maxlength" => "80"));
 echo form_error("telefone");
 echo "</div>";
 echo "</div>";
