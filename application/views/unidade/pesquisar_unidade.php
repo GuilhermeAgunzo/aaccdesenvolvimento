@@ -58,7 +58,7 @@ if(isset($unidade)){ ?>
         </tr>
         <tr>
             <td>Telefone da Unidade</td>
-            <td><?php if($unidade['cd_telefone'] != 0) echo $unidade['cd_telefone']; ?></td>
+            <td><?php echo $unidade['cd_telefone']; ?></td>
         </tr>
     </table>
 

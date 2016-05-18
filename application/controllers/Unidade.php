@@ -189,7 +189,7 @@ class Unidade extends CI_Controller{
         $this->form_validation->set_rules("endereco", "endereco", "required|min_length[5]|max_length[50]");
         $this->form_validation->set_rules("numero", "numero", "required|min_length[1]|max_length[8]");
         $this->form_validation->set_rules("cep", "cep", "required|min_length[1]|max_length[9]");
-        $this->form_validation->set_rules("telefone", "telefone", "min_length[8]|max_length[15]");
+        $this->form_validation->set_rules("telefone", "telefone", "min_length[14]|max_length[15]");
         $this->form_validation->set_rules("uf", "uf", "required|min_length[2]|max_length[2]");
         $this->form_validation->set_error_delimiters('<p class="alert alert-danger">', '</p>');
         return $this->form_validation->run();//roda regra

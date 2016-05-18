@@ -6,7 +6,7 @@ echo form_open('unidade/cadastrarUnidade', $atributos);
 
 echo "<div class='form-group'>";
 echo form_label("Nome da Unidade", "nm_unidade", array("class" => "col-sm-2 control-label"));
-echo "<div class='col-sm-8'>";
+echo "<div class='col-sm-6'>";
 echo form_input(array("name" => "nm_unidade", "value" => set_value("nm_unidade",""), "id" => "nm_unidade" ,"class" => "form-control", "maxlength" => "100"));
 echo form_error("nm_unidade");
 echo "</div>";
@@ -14,7 +14,7 @@ echo "</div>";
 
 echo "<div class='form-group'>";
 echo form_label("Código da Unidade", "cd_cpsouza", array("class" => "col-sm-2 control-label"));
-echo "<div class='col-sm-8'>";
+echo "<div class='col-sm-6'>";
 echo form_input(array("name" => "cd_cpsouza", "value" => set_value("cd_cpsouza",""), "id" => "cd_cpsouza" ,"class" => "form-control", "maxlength" => "100"));
 echo form_error("cd_cpsouza");
 echo "</div>";
@@ -23,7 +23,7 @@ echo "</div>";
 
 echo "<div class='form-group'>";
 echo form_label("Endereço", "endereco", array("class" => "col-sm-2 control-label"));
-echo "<div class='col-sm-8'>";
+echo "<div class='col-sm-6'>";
 echo form_input(array("name" => "endereco", "value" => set_value("endereco",""), "id" => "endereco" ,"class" => "form-control", "maxlength" => "100"));
 echo form_error("endereco");
 echo "</div>";
@@ -77,7 +77,7 @@ echo "</div>";
 
 echo "<div class='form-group'>";
 echo form_label("UF", "uf", array("class" => "col-sm-2 control-label"));
-echo "<div class='col-sm-10'>";
+echo "<div class='col-sm-6'>";
 $opcao = array('AC' => 'AC', 'AL' => 'AL', 'AP' => 'AP', 'AM' => 'AM', 'BA' => 'BA', 'CE' => 'CE', 'DF' => 'DF', 'ES' => 'ES', 'GO' => 'GO', 'MA' => 'MA', 'MT' => 'MT', 'MS' => 'MS', 'MG' => 'MG', 'PR' => 'PR', 'PB' => 'PB', 'PA' => 'PA', 'PE' => 'PE', 'PI' => 'PI', 'RJ' => 'RJ', 'RN' => 'RN', 'RS' => 'RS', 'RO' => 'RO', 'RR' => 'RR', 'SC' => 'SC', 'SE' => 'SE', 'SP' => 'SP', 'TO' => 'TO');
 echo form_dropdown('uf', $opcao, 'SP', array("class" => "form-control"));
 echo form_error("uf");
