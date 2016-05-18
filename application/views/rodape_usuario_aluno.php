@@ -34,5 +34,21 @@
 <!--//scrolling js-->
 <!-- Bootstrap Core JavaScript -->
 <script src="<?= base_url("js/bootstrap.js")?>"> </script>
+
+
+<link rel="stylesheet" href="<?= base_url('css/bootstrap-datepicker.min.css') ?>">
+<script src="<?= base_url('js/bootstrap-datepicker.min.js') ?>"></script>
+<script src="<?= base_url('locales/bootstrap-datepicker.pt-BR.min.js') ?>"></script>
+
+<script>
+    $(document).ready(function () {
+        $('.datepicker').datepicker({
+            format: 'dd/mm/yyyy',
+            language: 'pt-BR'
+        });
+    });
+
+</script>
+
 </body>
 </html>

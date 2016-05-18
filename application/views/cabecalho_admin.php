@@ -39,6 +39,9 @@
     <script src="<?= base_url("js/custom.js")?>"></script>
     <link href="<?= base_url("css/custom.css")?>" rel="stylesheet">
     <!--//Metis Menu -->
+
+
+
 </head>
 <body class="cbp-spmenu-push">
 <div class="main-content">
@@ -299,3 +302,10 @@
             <?php if(isset($mensagemErro)): ?>
                 <p class="alert alert-danger mensagemavisohome" id="aviso"><?= $mensagemErro ?></p>
             <?php endif; ?>
+
+            <?php
+                unset(
+                    $_SESSION['success'],
+                    $_SESSION['danger']
+                );
+            ?>

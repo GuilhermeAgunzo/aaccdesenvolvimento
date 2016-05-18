@@ -23,11 +23,15 @@ echo form_close();
 
 echo "<br>";
 
-if(isset($turma) || $this->session->flashdata("danger")){
+if(isset($turma) || isset($erro)){
 
     $atributos = array('class' => 'form-horizontal');
     echo form_open("turma/alterarTurma",$atributos);
     echo "</br>";
+
+    if(isset($id_turma)){
+        echo form_hidden('id_turma', $id_turma);
+    }
 
     echo "<div class='form-group'>";
     echo form_label("Código da Turma", "matricula", array("class" => "col-sm-2 control-label"));

@@ -13,5 +13,13 @@ class Temporario extends CI_Controller{
         $this->load->template_usuario_aluno("usuario_aluno/pagina_inicial_usuario_aluno.php");
     }
 
+    public function teste(){
+
+        echo "Data dataPtBrParaMysql: ". dataPtBrParaMysql("10/05/2016");
+        echo "<br> <br>";
+        echo "Data dataMysqlParaPtBr: ". dataMysqlParaPtBr('2016-05-17');
+
+    }
+
 }
 

@@ -57,6 +57,7 @@ class Professor extends CI_Controller{
     }
 
     public function cadastroProfessor(){
+        $this->output->enable_profiler(TRUE);
         autoriza(2);
         $this->load->helper("date");
         $this->load->model("professor_model");
@@ -85,8 +86,8 @@ class Professor extends CI_Controller{
 
         $this->form_validation->run();
 
-        $data_entrada = implode("-", array_reverse(explode("/", $this->input->post("data_entrada"))));
-        $data_saida = implode("-", array_reverse(explode("/", $this->input->post("data_saida"))));
+        $data_entrada = dataPtBrParaMysql($this->input->post("data_entrada"));
+        $data_saida = dataPtBrParaMysql($this->input->post("data_saida"));
         $email = $this->input->post("email");
         $telefone = $this->input->post("telefone");
         $celular = $this->input->post("celular");
@@ -113,7 +114,6 @@ class Professor extends CI_Controller{
             "dt_entrada" => $data_entrada,
             "id_unidade" => $this->input->post("Unidade"),
             "dt_saida" => $data_saida,
-            "dt_cadastro" => mdate("%Y-%m-%d %H:%i:%s", time()),
             "status_ativo" => 1,
             "id_user_adm_cadastrou" => $usuarioLogado['id_usuario'],
             "id_usuario" => $id_usuario
@@ -138,6 +138,7 @@ class Professor extends CI_Controller{
         $this->load->model("unidade_model");
         $professores = $this->professor_model->buscaProfessoresUnidade($idUnidade);
         $unidades = $this->unidade_model->buscaUnidades();
+
         $dados = array("professores" => $professores,"unidades"=>$unidades, "unidadeAtual" => $idUnidade);
         $this->load->template_admin("professor/pesquisar_professor.php",$dados);
     }
@@ -161,6 +162,7 @@ class Professor extends CI_Controller{
         $professores = $this->professor_model->buscaNomeProfessor($termo,$idUnidade);
         $unidades = $this->unidade_model->buscaUnidades();
 
+
         $dados = array("professores" => $professores, "unidades" => $unidades, "unidadeAtual" => $idUnidade);
 
         if(!$professores) {
@@ -178,8 +180,8 @@ class Professor extends CI_Controller{
         $this->load->library("usuariolb");
 
         $id_professor = $this->input->post("cd_professor");
-        $data_entrada = implode("-", array_reverse(explode("/", $this->input->post("data_entrada"))));
-        $data_saida = implode("-", array_reverse(explode("/", $this->input->post("data_saida"))));
+        $data_entrada = dataPtBrParaMysql($this->input->post("data_entrada"));
+        $data_saida = dataPtBrParaMysql($this->input->post("data_saida"));
         $email = $this->input->post("email");
         $telefone = $this->input->post("telefone");
         $celular = $this->input->post("celular");
@@ -195,8 +197,9 @@ class Professor extends CI_Controller{
             $celular = null;
         }
 
-        if($data_saida == "")
+        if($data_saida == ""){
             $data_saida = null;
+        }
 
         $professor = array(
             "nm_professor" => $this->input->post("nome"),

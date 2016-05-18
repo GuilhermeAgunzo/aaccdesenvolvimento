@@ -12,8 +12,8 @@ class Turma_model extends CI_Model{
         return $this->db->get("tb_turma")->row_array();
     }
 
-    public function alteraTurma($turma, $id_turma){
-        $this->db->where('cd_mat_turma', $turma['cd_mat_turma']);
+    public function alteraTurma($turma){
+        $this->db->where('id_turma', $turma['id_turma']);
         $this->db->update('tb_turma', $turma);
     }
 

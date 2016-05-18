@@ -170,7 +170,6 @@ class Aluno extends CI_Controller{
             $aluno = $this->aluno_model->buscarAluno($matricula);
 
 
-
             if(isset($aluno['cd_tel_celular'])){
                 if($aluno['cd_tel_celular'] == 0){ $aluno['cd_tel_celular'] = ""; }
             }
@@ -178,8 +177,6 @@ class Aluno extends CI_Controller{
             if(isset($aluno['cd_tel_residencial'])){
                 if($aluno['cd_tel_residencial'] == 0){ $aluno['cd_tel_residencial'] = ""; }
             }
-
-
 
             $this->load->model("turma_model");
             $dropDownTurma = $this->turma_model->dropDownTurma();
@@ -190,15 +187,11 @@ class Aluno extends CI_Controller{
                 'dropDownTurma' => $dropDownTurma
             );
 
-
             $this->load->template_admin("aluno/alterar_aluno", $dados);
 
         }else{
             $this->load->template_admin("aluno/alterar_aluno");
         }
-
-
-
 
     }
 

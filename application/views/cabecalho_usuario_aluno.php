@@ -176,3 +176,10 @@
             <?php if(isset($mensagemErro)): ?>
                 <p class="alert alert-danger mensagemavisohome" id="aviso"><?= $mensagemErro ?></p>
             <?php endif; ?>
+
+            <?php
+                unset(
+                    $_SESSION['success'],
+                    $_SESSION['danger']
+                );
+            ?>

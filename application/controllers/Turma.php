@@ -33,6 +33,8 @@ class Turma extends CI_Controller{
         autoriza(2);
         $usuarioLogado = $this->session->userdata("usuario_logado");
 
+        $dados = array();
+
         if($this->_validaForm(true)){
 
             $turma = array(
@@ -70,8 +72,10 @@ class Turma extends CI_Controller{
         autoriza(2);
         $usuarioLogado = $this->session->userdata("usuario_logado");
 
+        $this->output->enable_profiler(TRUE);
 
         $turma = array(
+            "id_turma" => $this->input->post("id_turma"),
             "cd_mat_turma" => $this->input->post("cd_mat_turma"),
             "nm_turno" => $this->input->post("turno"),
             "aa_ingresso" => $this->input->post("ano"),
@@ -81,14 +85,16 @@ class Turma extends CI_Controller{
             "dt_cadastro" => mdate("%Y-%m-%d %H:%i:%s", time()),
         );
 
-        if($this->_validaForm(false)){
 
+
+        if($this->_validaForm(false)){
 
             $this->load->model("turma_model");
             $this->turma_model->alteraTurma($turma);
 
             $this->session->set_flashdata("success", "Alteração efetuada com sucesso");
             redirect("/turma/alterar_turma");
+            //$this->load->template_admin("turma/alterar_turma");
 
         }else{
             $this->session->set_flashdata("danger", "Erro ao alterar.");
@@ -97,10 +103,15 @@ class Turma extends CI_Controller{
 
             $dados = array(
                 "turma" => $turma,
+                "erro" => "Erro",
             );
 
         }
 
+        $dados = array(
+            "turma" => $turma,
+            "erro" => "Erro",
+        );
 
 
         $this->load->template_admin("turma/alterar_turma", $dados);
@@ -134,7 +145,8 @@ class Turma extends CI_Controller{
 
             $dados = array(
                 "turma" => $turma,
-                "dropDownUnidade" => $dropDownUnidade
+                "dropDownUnidade" => $dropDownUnidade,
+                "id_turma" => $turma['id_turma'],
             );
         }
 

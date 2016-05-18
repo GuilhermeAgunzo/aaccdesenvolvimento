@@ -57,9 +57,10 @@
                     echo "<td>" . $professor["nm_email"] . "</td>";
                     echo "<td>" . $professor["cd_tel_residencial"] . "</td>";
                     echo "<td>" . $professor["cd_tel_celular"] . "</td>";
-                    echo "<td>" . date('d/m/Y',strtotime($professor["dt_entrada"])) . "</td>";
-                    echo "<td>" . implode("/", array_reverse(explode("-",$professor["dt_saida"]))) . "</td>";
-                    echo "<td>" . date('d/m/Y H:m:s',strtotime($professor["dt_cadastro"])) . "</td>";
+                    echo "<td>" . dataMysqlParaPtBr($professor["dt_entrada"]). "</td>";
+                    echo "<td>" . dataMysqlParaPtBr($professor["dt_saida"]). "</td>";
+                    echo "<td>" . dataMysqlParaPtBr($professor["dt_cadastro"]). "</td>";
+
 
                     if($professor["status_ativo"] != 0){
 
