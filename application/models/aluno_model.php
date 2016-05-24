@@ -13,11 +13,26 @@ class Aluno_model extends CI_Model{
         return $this->db->get("tb_aluno")->row_array();
     }
 
-
     public function buscarAlunoId($id_aluno)
     {
         $this->db->where("id_aluno", $id_aluno);
         return $this->db->get("tb_aluno")->row_array();
+    }
+
+    public function buscaAlunosInTurmas($id_turma){
+        $this->db->select("*");
+        $this->db->order_by('nm_aluno asc');
+    //  $this->db->where("status_ativo",'1');
+        $this->db->where("id_turma",$id_turma);
+        return $this->db->get("tb_aluno")->result_array();
+    }
+
+    public function buscaNomeAluno($termo,$idTurma){
+        $this->db->select("*");
+        $this->db->order_by('status_ativo desc');
+        $this->db->where("id_turma",$idTurma);
+        $this->db->like("nm_aluno",$termo);
+        return $this->db->get("tb_aluno")->result_array();
     }
 
     public function alterarAluno($dados){

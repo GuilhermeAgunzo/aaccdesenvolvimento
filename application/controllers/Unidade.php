@@ -90,7 +90,6 @@ class Unidade extends CI_Controller{
             $this->unidade_model->altera($unidade);
             $this->session->set_flashdata("success", "Alteração efetuada com sucesso!");
 
-
             //redirect('/unidade/alterar_unidade');
 
             $this->load->template_admin("unidade/alterar_unidade");
@@ -101,14 +100,8 @@ class Unidade extends CI_Controller{
             $this->load->model("unidade_model");
             $unidade = $this->unidade_model->buscarUnidade($id_unidade);
 
-            $dados = array(
-                "unidade" => $unidade,
-                "id_unidade" => $this->input->post("id_unidade"),
-                "erro" => "Errado"
-            );
-
+            $dados = array("unidade" => $unidade,"id_unidade" => $this->input->post("id_unidade"), "erro" => "Errado");
             $this->load->template_admin("unidade/alterar_unidade", $dados);
-
         }
     }
 
@@ -116,7 +109,6 @@ class Unidade extends CI_Controller{
         autoriza(2);
 
         $this->load->library("form_validation");
-
         $this->form_validation->set_rules("cd_cpsouza", "cd_cpsouza", "required|is_natural",
             array(
                 'required' => 'Você precisa preencher o código do CPS.',
@@ -126,25 +118,20 @@ class Unidade extends CI_Controller{
 
         $this->form_validation->set_error_delimiters('<p class="alert alert-danger">', '</p>');
 
-
         if($this->form_validation->run()){
 
             $cd_cpsouza = $this->input->post("cd_cpsouza");
             $this->load->model("unidade_model");
             $unidade = $this->unidade_model->buscarUnidade($cd_cpsouza);
 
-
-            $dados = array(
-                "unidade" => $unidade,
-                "id_unidade" => $unidade['id_unidade']
-            );
-
-
-
-            $this->load->template_admin("unidade/alterar_unidade", $dados);
-
+            if($unidade!=null) {
+                $dados = array("unidade" => $unidade, "id_unidade" => $unidade['id_unidade']);
+                $this->load->template_admin("unidade/alterar_unidade", $dados);
+            }else{
+                $this->session->set_flashdata("danger", "Unidade não Encontrada. Verifique os dados.");
+                redirect('/unidade/alterar_unidade');
+            }
         }
-
     }
 
     public function pesquisarUnidade(){
@@ -158,10 +145,9 @@ class Unidade extends CI_Controller{
         if($unidade){
             $this->load->template_admin("unidade/pesquisar_unidade.php", $dados);
         }else{
-            $this->session->set_flashdata("danger", "Cadastro  não foi localizado. Verifique os dados ou tente novamente mais tarde");
+            $this->session->set_flashdata("danger", "Unidade não Encontrada. Verifique os dados.");
             redirect("/unidade/pesquisar_unidade");
         }
-
     }
 
 
@@ -190,7 +176,5 @@ class Unidade extends CI_Controller{
         $this->form_validation->set_rules("uf", "uf", "required|min_length[2]|max_length[2]");
         $this->form_validation->set_error_delimiters('<p class="alert alert-danger">', '</p>');
         return $this->form_validation->run();//roda regra
-
     }
-
 }

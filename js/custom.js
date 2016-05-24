@@ -35,3 +35,11 @@ $(function() {
     }
 });
 
+function opcaoModalidade(){
+var modalidade  = document.getElementById('modalidade').value;
+    if(modalidade == 'Presencial'){
+        document.getElementById('turno').disabled = false;
+    }else{
+        document.getElementById('turno').disabled = true;
+    }
+};

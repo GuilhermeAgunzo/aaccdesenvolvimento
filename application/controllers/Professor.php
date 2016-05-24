@@ -19,7 +19,7 @@ class Professor extends CI_Controller{
         autoriza(2);
 
         $this->load->model("unidade_model");
-        $unidades = $this->unidade_model->buscaUnidades();
+        $unidades = $this->unidade_model->dropDownUnidade();
 
         $dados = array("unidades" => $unidades);
         $this->load->template_admin("professor/pesquisar_professor.php",$dados);
@@ -57,7 +57,6 @@ class Professor extends CI_Controller{
     }
 
     public function cadastroProfessor(){
-        $this->output->enable_profiler(TRUE);
         autoriza(2);
         $this->load->helper("date");
         $this->load->model("professor_model");
@@ -129,48 +128,46 @@ class Professor extends CI_Controller{
         }
     }
 
-    public function pesquisaProfessores($unidade){
+    public function pesquisaProfessores(){
         autoriza(2);
 
-        $idUnidade = $unidade;
+        $idUnidade = $this->input->post("Unidade");
 
         $this->load->model("professor_model");
         $this->load->model("unidade_model");
         $professores = $this->professor_model->buscaProfessoresUnidade($idUnidade);
         $unidades = $this->unidade_model->buscaUnidades();
-
-        $dados = array("professores" => $professores,"unidades"=>$unidades, "unidadeAtual" => $idUnidade);
+        $unidade = $this->unidade_model->buscarUnidadeId($idUnidade);
+        $dados = array("professores" => $professores,"unidades"=>$unidades, "unidade" => $unidade);
+        
         $this->load->template_admin("professor/pesquisar_professor.php",$dados);
     }
-    public function pesquisaNomeProfessor(){
+
+    public function pesquisaNomeProfessor()
+    {
         autoriza(2);
         $termo = $this->input->post("nm_professor");
         $idUnidade = $this->input->post("idUnidade");
+
         $this->load->model("professor_model");
         $this->load->model("unidade_model");
         $this->load->library("form_validation");
-        $this->form_validation->set_rules("nm_professor","nm_professor","required",
+        $this->form_validation->set_rules("nm_professor", "nm_professor", "required",
             array(
                 'required' => "Você precisa preencher o nome do professor"
             ));
 
         $this->form_validation->set_error_delimiters("<p class='alert alert-danger'>", "</p>");
-
         $this->form_validation->run();
 
+        $professores = $this->professor_model->buscaNomeProfessor($termo, $idUnidade);
+        $unidade = $this->unidade_model->buscarUnidadeId($idUnidade);
 
-        $professores = $this->professor_model->buscaNomeProfessor($termo,$idUnidade);
-        $unidades = $this->unidade_model->buscaUnidades();
-
-
-        $dados = array("professores" => $professores, "unidades" => $unidades, "unidadeAtual" => $idUnidade);
-
-        if(!$professores) {
-            //$this->session->set_flashdata("success", "Cadastro localizado");
-            $this->session->set_flashdata("danger", "Cadastro  não foi localizado. Verifique os dados ou tente novamente mais tarde");
-            redirect("/professor/pesquisaProfessores/" . $idUnidade);
+        if (!$professores){
+            $this->session->set_flashdata("danger", "Professor não foi localizado. Verifique os dados ou tente novamente mais tarde");
+            $professores = $this->professor_model->buscaProfessoresUnidade($idUnidade);
         }
-
+        $dados = array("professores" => $professores, "unidade" => $unidade, "termo" => $termo);
         $this->load->template_admin("professor/pesquisar_professor.php", $dados);
     }
 
@@ -272,9 +269,17 @@ class Professor extends CI_Controller{
         $professor = $this->professor_model->buscaProfessor($id);
         $unidades = $this->unidade_model->dropDownUnidade();
 
-        $dados = array("professor" => $professor, "unidades" => $unidades);
-        $this->load->template_admin("professor/desativar_professor", $dados);
-
+        if($professor!=null){
+            if($professor['status_ativo']!=1){
+                $this->session->set_flashdata("danger", "Esse Professor está Desativado.");
+                redirect('/professor/desativar_cadastro_professor');
+            }
+            $dados = array("professor" => $professor, "unidades" => $unidades);
+            $this->load->template_admin("professor/desativar_professor", $dados);
+        }else {
+            $this->session->set_flashdata("danger", "Professor não encontrado. Verifique os dados.");
+            redirect('/professor/desativar_cadastro_professor');
+        }
     }
 
     public function buscaAlteraProfessor(){
@@ -293,11 +298,17 @@ class Professor extends CI_Controller{
         $id = $this->input->post("cd_professor");
         $this->load->model("professor_model");
         $this->load->model("unidade_model");
-
-        $professor = $this->professor_model->buscaProfessor($id);
         $unidades = $this->unidade_model->dropDownUnidade();
-        $dados = array("professor" => $professor,"unidades" => $unidades);
-        $this->load->template_admin("professor/alterar_professor", $dados);
-
+        $professor = $this->professor_model->buscaProfessor($id);
+        if($professor!=null){
+            if($professor['status_ativo']!=1){
+                $this->session->set_flashdata("danger", "Esse Professor está Desativado.");
+            }
+            $dados = array("professor" => $professor, "unidades" => $unidades);
+            $this->load->template_admin("professor/alterar_professor", $dados);
+        }else{
+            $this->session->set_flashdata("danger", "Professor não encontrado. Verifique os dados.");
+            redirect('/professor/alterar_professor');
+        }
     }
 }

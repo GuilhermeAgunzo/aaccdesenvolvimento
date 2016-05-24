@@ -1,64 +1,122 @@
-
 <?php
+    echo form_fieldset("<h1>Pesquisa de Aluno</h1>");
+    //opcçoes de escolher a unidade
+    if(!isset($turmas) && !isset($alunos)){
+        echo form_open('aluno/pesquisaTurmasUnidade', 'class = form-horizontal');
+        echo "<div class='form-group'>";
+        echo form_label("Unidade", "unidade", array("class" => "col-sm-2 control-label"));
+        echo "<div class='col-sm-3'>";
+        echo form_dropdown('Unidade', $unidades, "", array("class" => "form-control"));
+        echo "</div>";
+        echo "<div class='col-sm-2'>";
+        echo form_button(array("class" => "btn btn-default", "content" => "Enviar", "type" => "submit"));
+        echo "</div>";
+        echo "<div class='col-sm-4'>";
+        echo "</div>";
+        echo "</div>";
+        echo form_close();
+    }
+    //opcoes de escolher as turmas da unidade escolhida na opcao anterior
+    if(!isset($alunos) && isset($turmas)) {
+        echo "<h3>" . $unidade["nm_unidade"] . "</h3>";
+        echo "<br/>";
+        if ($turmas != null) {
+            echo "<div class='col-sm-3'>";
+            echo "<table class='table-striped'>";
+            foreach ($turmas as $turmas) {
+                echo "<tr>";
+                echo "<td>";
+                if ($turmas['nm_turno'] != null) {
+                    echo anchor("aluno/pesquisarAluno/{$turmas['cd_mat_turma']}", "{$turmas['aa_ingresso']} - {$turmas['dt_semestre']} ºSem - {$turmas['nm_turno']}");
+                } else {
+                    echo anchor("aluno/pesquisarAluno/{$turmas['cd_mat_turma']}", "{$turmas['aa_ingresso']} - {$turmas['dt_semestre']} ºSem - {$turmas['nm_modalidade']}");
+                }
+                echo "</td>";
+                echo "</tr>";
+            }
+            echo "</table>";
+            echo "</div>";
+        } else {
+            echo "<p class='alert alert-danger'> Nenhuma Turma cadastrada nessa Unidade.</p>";
+            echo "</br>";
+            echo anchor("aluno/pesquisar_aluno/", "Voltar", 'class = "btn btn-default"');
+        }
+    }
+if(isset($alunos)) {
+    if ($alunos != null) {
+        $atributos = array('class' => 'form-horizontal');
+        echo form_open('aluno/pesquisaNomeAluno', $atributos);
+        echo "<div class='form-group'>";
+        echo form_label("Nome do Aluno", "nm_aluno", array("class" => "col-sm-2 control-label"));
+        echo "<div class='col-sm-3'>";
+        if (isset($termo)){echo form_input(array("name" => "nm_aluno", "value" => "{$termo}" ,"required" => "required", "id" => "nm_aluno", "class" => "form-control", "maxlength" => "70"));
+        }else{echo form_input(array("name" => "nm_aluno", "required" => "required", "id" => "nm_aluno", "class" => "form-control", "maxlength" => "70"));}
+        echo "</div>";
+        echo "<div class='col-sm-2'>";
+        echo form_button(array("class" => "btn btn-default", "content" => "Enviar", "type" => "submit"));
+        echo form_hidden("turma", $turma["cd_mat_turma"]);
+        echo "</div>";
+        echo form_close();
 
-echo form_fieldset("<h1>Pesquisa de Aluno</h1>");
+        echo "<div class='col-sm-2'>";
+        echo "<td>". anchor("aluno/pesquisarAluno/{$turma['cd_mat_turma']}", "Mostrar Todos", 'class = "btn btn-default"')."</td>";
+        echo "</div>";
 
-$atributos = array('class' => 'form-horizontal');
-echo form_open('aluno/pesquisaraluno', $atributos);
-echo "<div class='form-group'>";
-echo form_label("Número de matrícula", "matricula", array("class" => "col-sm-2 control-label"));
-echo "<div class='col-sm-6'>";
-echo form_input(array("name" => "matricula", "required" => "required", "id" => "matricula" ,"class" => "form-control", "maxlength" => "13", "minlength" => "13"));
-echo "</div>";
-echo "</div>";
-echo "<div class='form-group'>";
-echo "<div class='col-sm-offset-2 col-sm-10'>";
-echo form_button(array("class" => "btn btn-default", "content" => "Enviar", "type" => "submit"));
-echo "</div>";
-echo "</div>";
-echo form_close();
+        echo form_open('aluno/pesquisaTurmasUnidade', 'class=form-horizontal');
+        echo "<div class='col-sm-2'>";
+        echo form_button(array("class" => "btn btn-default", "content" => "Voltar", "type" => "submit"));
+        echo form_hidden("Unidade", $turma["id_unidade"]);
+        echo "</div>";
+        echo form_close();
+        echo "</div>";
 
+//        echo "<div class='col-sm-2'>";
+//        echo anchor("aluno/pesquisar_aluno/", "Voltar", 'class = "btn btn-default"');
+//        echo "</div>";
+//        echo "</div>";
 
-if(isset($aluno)){ ?>
+        echo "<br/><br/>";
+        echo "<h3>Turma: {$turma['aa_ingresso']} - {$turma['dt_semestre']} ºSem - {$turma['nm_turno']}</h3>";
+        echo "<br/>";
+        echo "<table class='table-responsive table-striped'>";
+        echo "<thead>";
+        echo "<tr>";
+        echo "<th>Matricula</th>";
+        echo "<th>Nome</th>";
+        echo "<th>Email</th>";
+        echo "<th>Telefone</th>";
+        echo "<th>Celular</th>";
+        echo "<th>Status</th>";
+        echo "</tr>";
+        echo "</thead>";
+        echo "<tbody>";
+        foreach ($alunos as $aluno) {
+            echo "<tr>";
+            echo "<td>" . $aluno["cd_mat_aluno"] . "</td>";
+            echo "<td>" . $aluno["nm_aluno"] . "</td>";
+            echo "<td>" . $aluno["nm_email"] . "</td>";
+            echo "<td>" . $aluno["cd_tel_residencial"] . "</td>";
+            echo "<td>" . $aluno["cd_tel_celular"] . "</td>";
 
-    <table>
-        <tr>
-            <td>Número de matrícula</td>
-            <td><?= $aluno['cd_mat_aluno'] ?></td>
-        </tr>
-        <tr>
-            <td>Nome Completo</td>
-            <td><?= $aluno['nm_aluno'] ?></td>
-        </tr>
-        <tr>
-            <td>Turma</td>
-            <td><?= $aluno['id_turma'] ?></td>
-        </tr>
-        <tr>
-            <td>Email</td>
-            <td><?= $aluno['nm_email'] ?></td>
-        </tr>
-        <tr>
-            <td>Telefone Residencial</td>
-            <td><?php echo $aluno['cd_tel_residencial']; ?></td>
-        </tr>
-        <tr>
-            <td>Telefone Celular</td>
-            <td><?php echo $aluno['cd_tel_celular']; ?></td>
-        </tr>
-        <tr>
-            <td>Status</td>
-            <td>
+            if ($aluno["status_ativo"] != 0) {
+                echo "<td>Ativo</td>";
+            } else {
+                echo "<td>Inativo</td>";
+            }
+            echo "</tr>";
+        }
+        echo "</tbody>";
+        echo "</table>";
+    }else{
+        echo "<p class='alert alert-danger'> Nenhum Aluno cadastrado nessa Turma.</p>";
+        echo "</br>";
 
-                <?php
-
-                if($aluno['status_ativo'] != 0)
-                    echo "Ativo";
-                else
-                    echo "Desativado";
-                ?>
-            </td>
-        </tr>
-    </table>
-
-<?php } ?>
+        echo form_open('aluno/pesquisaTurmasUnidade', 'class=form-horizontal');
+        echo "<div class='col-sm-2'>";
+        echo form_button(array("class" => "btn btn-default", "content" => "Voltar", "type" => "submit"));
+        echo form_hidden("Unidade", $turma["id_unidade"]);
+        echo "</div>";
+        echo form_close();
+    }
+}
+?>

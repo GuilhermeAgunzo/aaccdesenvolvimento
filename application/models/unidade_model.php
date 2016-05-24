@@ -37,20 +37,15 @@ class Unidade_model extends CI_Model{
             return false;
         }
     }
-
-
+    
     public function dropDownUnidade(){
-
         $result = $this->db->query("select concat(cd_cpsouza, ' - ' , nm_unidade) as unidade, id_unidade from tb_unidade ORDER BY cd_cpsouza;");
-
         $retorno = array();
         if($result->num_rows() > 0) {
             foreach($result->result_array() as $row) {
                 $retorno[$row['id_unidade']] = $row['unidade'];
             }
         }
-
         return $retorno;
     }
-
 }

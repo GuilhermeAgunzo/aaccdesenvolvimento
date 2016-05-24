@@ -10,13 +10,18 @@ class Aluno extends CI_Controller{
     public function cadastro_aluno(){
         autoriza(2);
 
+        $unidade = $this->input->post("Unidade");
+
+        $this->load->model("unidade_model");
         $this->load->model("turma_model");
-        $dropDownTurma = $this->turma_model->dropDownTurma();
+        $unidades = $this->unidade_model->dropDownUnidade();
 
-        $dados = array(
-            'dropDownTurma' => $dropDownTurma
-        );
-
+        if($unidade){
+            $turmasUnidade = $this->turma_model->dropDownTurmaUnidade($unidade);
+            $dados = array("unidades" => $unidades, "unidade" => $unidade, "turmasUnidade" => $turmasUnidade);
+        }else {
+            $dados = array("unidades" => $unidades);
+        }
         $this->load->template_admin("aluno/cadastroAluno", $dados);
     }
 
@@ -27,7 +32,11 @@ class Aluno extends CI_Controller{
 
     public function pesquisar_aluno(){
         autoriza(2);
-        $this->load->template_admin("aluno/pesquisar_aluno");
+        $this->load->model("unidade_model");
+        $unidades = $this->unidade_model->dropDownUnidade();
+
+        $dados = array("unidades" => $unidades);
+        $this->load->template_admin("aluno/pesquisar_aluno.php", $dados);
     }
 
     public function desativar_cadastro(){
@@ -76,13 +85,11 @@ class Aluno extends CI_Controller{
             }
 
         }
-
+        $unidade = $this->input->post("unidade");
         $this->load->model("turma_model");
-        $dropDownTurma = $this->turma_model->dropDownTurma();
 
-        $dados = array(
-            'dropDownTurma' => $dropDownTurma
-        );
+
+        $dados = array('unidade' => $unidade );
 
         $this->load->template_admin("aluno/cadastroAluno", $dados);
 
@@ -92,7 +99,6 @@ class Aluno extends CI_Controller{
         autoriza(2);
         $this->load->model("aluno_model");
         $this->load->library("usuariolb");
-
 
         $usuarioLogado = $this->session->userdata("usuario_logado");
         $aluno = array(
@@ -106,22 +112,14 @@ class Aluno extends CI_Controller{
             "cd_tel_residencial" => $this->input->post("telefone"),
         );
 
-
         $id_aluno = $this->input->post("id_aluno");
 
-
         $this->load->model("turma_model");
-        $dropDownTurma = $this->turma_model->dropDownTurma();
+        $turma = $this->turma_model->buscarTurmaId($aluno['id_turma']);
+        $dropDownTurma = $this->turma_model->dropDownTurmaUnidade($turma['id_unidade']);
 
-        $dados = array(
-            "aluno" => $aluno,
-            "id_aluno" => $id_aluno,
-            'dropDownTurma' => $dropDownTurma,
-        );
-
+        $dados = array("aluno" => $aluno, "id_aluno" => $id_aluno, 'dropDownTurma' => $dropDownTurma);
         $alunoBD = $this->aluno_model->buscarAlunoId($id_aluno);
-
-
 
         $emailUnique = false;
         $matriculaUnique = false;
@@ -134,74 +132,107 @@ class Aluno extends CI_Controller{
             $matriculaUnique = true;
         }
 
-
-
         if($this->_validaFormulario($emailUnique, $matriculaUnique)){
-
             $this->aluno_model->alterarAluno($dados);
             $this->session->set_flashdata("success", "Alteração efetuada com sucesso!");
-
+            redirect('/aluno/alterar_aluno');
         }
 
         $this->load->template_admin("aluno/alterar_aluno", $dados);
-
     }
 
-    public function buscarAlteraAluno(){
+    public function buscarAlteraAluno()
+    {
         autoriza(2);
         $this->load->library("form_validation");
-
         $this->form_validation->set_rules("matricula", "matricula", "required|is_natural|exact_length[13]",
             array(
                 'required' => 'Você precisa preencher a matricula.',
                 'is_natural' => 'A matricula deve conter somente números.'
             )
         );
-
         $this->form_validation->set_error_delimiters('<p class="alert alert-danger">', '</p>');
-
         $sucesso = $this->form_validation->run();
 
-        if($sucesso){
-
+        if ($sucesso) {
             $matricula = $this->input->post("matricula");
 
             $this->load->model("aluno_model");
             $aluno = $this->aluno_model->buscarAluno($matricula);
+            if ($aluno != null) {
+                if($aluno['status_ativo']!=1){
+                    $this->session->set_flashdata("danger", "Esse Aluno esta desativado.");
 
+                }
+                $this->load->model("turma_model");
+                $turma = $this->turma_model->buscarTurmaId($aluno['id_turma']);
+                $dropDownTurma = $this->turma_model->dropDownTurmaUnidade($turma['id_unidade']);
 
-            $this->load->model("turma_model");
-            $dropDownTurma = $this->turma_model->dropDownTurma();
+                $dados = array("aluno" => $aluno, "id_aluno" => $aluno['id_aluno'], 'dropDownTurma' => $dropDownTurma);
+                $this->load->template_admin("aluno/alterar_aluno", $dados);
 
-            $dados = array(
-                "aluno" => $aluno,
-                "id_aluno" => $aluno['id_aluno'],
-                'dropDownTurma' => $dropDownTurma
-            );
-
-            $this->load->template_admin("aluno/alterar_aluno", $dados);
-
-        }else{
-            $this->load->template_admin("aluno/alterar_aluno");
+            } else {
+                $this->session->set_flashdata("danger", "Aluno não encontrado, Verifique os dados.");
+                redirect('/aluno/alterar_aluno');
+            }
+        } else {
+            $this->session->set_flashdata("danger", "Erro ao alterar aluno, Verifique os dados.");
+            redirect('/aluno/alterar_aluno');
         }
-
     }
 
-    public function pesquisarAluno(){
+    public function pesquisaTurmasUnidade(){
         autoriza(2);
-        $matricula = $this->input->post("matricula");
+        $unidade = $this->input->post("Unidade");
+        $this->load->model("turma_model");
+        $this->load->model("unidade_model");
+        $turmas = $this->turma_model->buscarTurmasUnidade($unidade);
+        $unidade = $this->unidade_model->buscarUnidadeId($unidade);
+
+        $dados = array("turmas"=>$turmas, "unidade" => $unidade);
+        $this->load->template_admin("aluno/pesquisar_aluno.php",$dados);
+    }
+
+    public function pesquisarAluno($cd_mat_turma){
+        autoriza(2);
+        $this->load->model("aluno_model");
+        $this->load->model("turma_model");
+        $this->load->model("unidade_model");
+        $turma = $this->turma_model->buscarTurma($cd_mat_turma);
+        $idturma = $turma["id_turma"];
+        $alunos = $this->aluno_model->buscaAlunosInTurmas($idturma);
+        $unidade = $this->unidade_model->buscarUnidadeId($turma["id_unidade"]);
+
+        $dados = array("alunos" => $alunos, "turma" => $turma, "unidade" => $unidade);
+        $this->load->template_admin("aluno/pesquisar_aluno.php",$dados);
+    }
+
+    public function pesquisaNomeAluno(){
+        autoriza(2);
+        $termo = $this->input->post("nm_aluno");
+        $cd_mat_turma = $this->input->post("turma");
 
         $this->load->model("aluno_model");
-        $aluno = $this->aluno_model->buscarAluno($matricula);
+        $this->load->model("turma_model");
+        $this->load->library("form_validation");
+        $this->form_validation->set_rules("nm_aluno","nm_aluno","required",
+            array(
+                'required' => "Você precisa preencher o nome do aluno"
+            ));
+        $this->form_validation->set_error_delimiters("<p class='alert alert-danger'>", "</p>");
+        $this->form_validation->run();
 
-        $dados = array("aluno" => $aluno);
+        $turma = $this->turma_model->buscarTurma($cd_mat_turma);
+        $alunos = $this->aluno_model->buscaNomeAluno($termo,$turma["id_turma"]);
 
-        if($aluno){
-            $this->load->template_admin("aluno/pesquisar_aluno.php", $dados);
-        }else{
-            $this->session->set_flashdata("danger", "Cadastro  não foi localizado. Verifique os dados ou tente novamente mais tarde");
-            redirect("/aluno/pesquisar_aluno");
+
+        if(!$alunos){
+            $this->session->set_flashdata("danger", "Aluno  não foi localizado. Verifique os dados ou tente novamente mais tarde");
+            $alunos = $this->aluno_model->buscaAlunosInTurmas($turma["id_turma"]);
+
         }
+        $dados = array("alunos" => $alunos, "turma" => $turma, "termo" => $termo);
+        $this->load->template_admin("aluno/pesquisar_aluno.php", $dados);
 
     }
 
@@ -259,7 +290,6 @@ class Aluno extends CI_Controller{
 
         $this->form_validation->set_error_delimiters("<p class='alert alert-danger'>", "</p>");
 
-
         if($this->form_validation->run()){
 
             $matricula = $this->input->post("matricula");
@@ -267,20 +297,28 @@ class Aluno extends CI_Controller{
             $aluno = $this->aluno_model->buscarAluno($matricula);
 
             $this->load->model("turma_model");
-            $dropDownTurma = $this->turma_model->dropDownTurma();
 
-            $dados = array(
-                "aluno" => $aluno,
-                "dropDownTurma" => $dropDownTurma
-            );
-            $this->load->template_admin("aluno/desativar_aluno", $dados);
+            if ($aluno != null) {
+                if($aluno['status_ativo']!=1){
+                    $this->session->set_flashdata("danger", "Esse Aluno está desativado.");
+                    redirect('/aluno/desativar_cadastro');
+                }
 
+                $turma = $this->turma_model->buscarTurmaId($aluno['id_turma']);
+                $dropDownTurma = $this->turma_model->dropDownTurmaUnidade($turma['id_unidade']);
+
+                $dados = array("aluno" => $aluno, "dropDownTurma" => $dropDownTurma);
+                $this->load->template_admin("aluno/desativar_aluno", $dados);
+
+            }else{
+                $this->session->set_flashdata("danger", "Aluno não encontrado, Verifique os dados.");
+                redirect('/aluno/desativar_cadastro');
+            }
         }else{
-            $this->load->template_admin("aluno/desativar_aluno");
+            $this->session->set_flashdata("danger", "Aluno não encontrado, Verifique os dados.");
+            redirect('/aluno/desativar_cadastro');
         }
-
     }
-
 
     /*  MÉTODOS AUXILIARES  */
 
@@ -336,5 +374,4 @@ class Aluno extends CI_Controller{
         }
 
     }
-
 }
