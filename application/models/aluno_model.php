@@ -2,19 +2,16 @@
 
 class Aluno_model extends CI_Model{
 
-    public function cadastrarAluno($aluno)
-    {
+    public function cadastrarAluno($aluno){
         $this->db->insert("tb_aluno", $aluno);
     }
 
-    public function buscarAluno($matricula)
-    {
+    public function buscarAluno($matricula){
         $this->db->where("cd_mat_aluno", $matricula);
         return $this->db->get("tb_aluno")->row_array();
     }
 
-    public function buscarAlunoId($id_aluno)
-    {
+    public function buscarAlunoId($id_aluno){
         $this->db->where("id_aluno", $id_aluno);
         return $this->db->get("tb_aluno")->row_array();
     }

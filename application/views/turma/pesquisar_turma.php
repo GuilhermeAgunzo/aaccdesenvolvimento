@@ -34,7 +34,6 @@ if(isset($turmas)) {
         echo "<th>Modalidade</th>";
         echo "<th>Turno</th>";
         echo "<th>Ciclo</th>";
-        echo "<th>Status</th>";
         echo "</tr>";
         echo "</thead>";
         foreach ($turmas as $turma) {
@@ -46,12 +45,6 @@ if(isset($turmas)) {
             echo "<td>".$turma['nm_turno']."</td>";
             echo "<td>".$turma['qt_ciclo']."</td>";
 
-            if ($turma["status_ativo"] != 0) {
-                echo "<td>Ativo</td>";
-            } else {
-                echo "<td>Inativo</td>";
-            }
-            echo "</tr>";
         }
         echo "</table>";
     }else{

@@ -119,11 +119,11 @@ class Professor extends CI_Controller{
         );
 
         if($this->professor_model->salvaCadastro($professor)){
-            $this->session->set_flashdata("cadastrado", "Cadastrado efetuado com sucesso.");
+            $this->session->set_flashdata("success", "Cadastrado efetuado com sucesso.");
             redirect('/professor/cadastro_professor');
         }
         else{
-            $this->session->set_flashdata("naoCadastrado", "O cadastro não foi efetuado. Tente novamente mais tarde.");
+            $this->session->set_flashdata("danger", "O cadastro não foi efetuado. Tente novamente mais tarde.");
             redirect('/professor/cadastro_professor');
         }
     }
