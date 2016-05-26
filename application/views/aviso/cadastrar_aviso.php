@@ -5,7 +5,7 @@ echo form_fieldset("<h1>Cadastro de Avisos</h1>");
 $atributos = array('class' => 'form-horizontal');
 echo form_open('aviso/cadastrarAviso', $atributos);
 echo "<div class='form-group'>";
-echo form_label("Título do Aviso", "nm_aviso", array("class" => "col-sm-2 control-label"));
+echo form_label("Título", "nm_aviso", array("class" => "col-sm-2 control-label"));
 echo "<div class='col-sm-10'>";
 echo form_input(array("name" => "nm_aviso", "value" => set_value("nm_aviso",""), "required" => "required", "id" => "nm_aviso" ,"class" => "form-control", "maxlength" => "100"));
 echo form_error("nm_aviso");
@@ -24,7 +24,7 @@ echo "<div class='row'>";
 
 echo "<div class='form-group'>";
 
-echo form_label("Data Inicial do Aviso", "dt_inicio", array("class" => "col-sm-2 control-label"));
+echo form_label("Data Inicial", "dt_inicio", array("class" => "col-sm-2 control-label"));
 echo "<div class='col-sm-3'>";
 echo form_input(array("name" => "dt_inicio", "value" => set_value("dt_inicio",""),"required" => "required","type" => "text", "id" => "dtInicialAviso" ,"class" => "form-control datepicker", "maxlength" => "10"));
 echo form_error("dt_inicio");
@@ -32,7 +32,7 @@ echo "</div>";
 
 
 
-echo form_label("Data de Vencimento do Aviso", "dt_vencimento", array("class" => "col-sm-2 control-label"));
+echo form_label("Data de Vencimento", "dt_vencimento", array("class" => "col-sm-2 control-label"));
 echo "<div class='col-sm-3'>";
 echo form_input(array("name" => "dt_vencimento", "value" => set_value("dt_vencimento",""),"required" => "required","type" => "text", "id" => "dtFinalAviso" ,"class" => "form-control datepicker", "maxlength" => "10"));
 echo form_error("dt_vencimento");

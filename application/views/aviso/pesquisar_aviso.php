@@ -15,7 +15,7 @@ echo "</div>";
 echo "<div class='form-group'>";
 echo form_label("Data Final do Aviso", "dt_vencimento", array("class" => "col-sm-2 control-label"));
 echo "<div class='col-sm-4'>";
-echo form_input(array("name" => "dt_vencimento","required" => "required","type" => "date", "id" => "dt_vencimento" ,"class" => "form-control", "maxlength" => "10"));
+echo form_input(array("name" => "dt_vencimento", "value" => set_value("dt_vencimento",""),"required" => "required","type" => "text", "id" => "dtFinalAviso" ,"class" => "form-control datepicker", "maxlength" => "10"));
 echo form_error("dt_vencimento");
 echo "</div>";
 echo "</div>";
@@ -27,5 +27,39 @@ echo "</div>";
 echo "</div>";
 
 echo form_close();
+if(isset($avisos)) {
+
+    if($avisos != null){
+
+    echo "<table class='table-striped'>";
+    echo "<thead>";
+    echo "<tr>";
+    echo "<th>Título</th>";
+    echo "<th>Descrição</th>";
+    echo "<th>Data inicial</th>";
+    echo "<th>Data vencimento</th>";
+    echo "</tr>";
+    echo "</thead>";
+    echo "<tbody>";
+    foreach ($avisos as $aviso) {
+        echo "<tr>";
+        echo "<td>".$aviso['nm_aviso']."</td>";
+        echo "<td>".$aviso['ds_aviso']."</td>";
+        echo "<td>".$aviso['dt_inicial_aviso']."</td>";
+        echo "<td>".$aviso['dt_vencimento_aviso']."</td>";
+
+    }
+    echo "</tbody>";
+    echo "</table>";
+
+
+    }else{
+        echo "<p class='alert alert-danger'>Nenhuma aviso foi encontrado neste período.</p>";
+    }
+
+}
+
+
+
 ?>
 

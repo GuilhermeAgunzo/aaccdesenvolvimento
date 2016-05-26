@@ -55,19 +55,48 @@ class Aviso extends CI_Controller{
 
         $this->load->template_admin("aviso/cadastrar_aviso");
 
+    }
+
+    public function pesquisarAviso(){
+        autoriza(2);
+        $this->output->enable_profiler(TRUE);
+
+        if($this->_validaFormulario(true)){
+
+
+            $dataInicial = dataPtBrParaMysql($this->input->post("dt_inicio"));
+            $dataVencimento = dataPtBrParaMysql($this->input->post("dt_vencimento"));
+            $this->load->model("aviso_model");
+            $avisos = $this->aviso_model->pesquisarAviso($dataInicial, $dataVencimento);
+
+            $dados = array(
+                'avisos' => $avisos,
+            );
+
+            $this->load->template_admin("aviso/pesquisar_aviso", $dados);
+
+        }else{
+            $this->session->set_flashdata("danger", "Você deve escolher as datas.");
+            $this->load->template_admin("aviso/pesquisar_aviso");
+        }
+
+
 
 
     }
 
 
     /*  MÉTODOS AUXILIARES  */
-    public function _validaFormulario(){
+    public function _validaFormulario($pesquisa = null){
         $this->load->library("form_validation");
 
         $this->form_validation->set_error_delimiters('<p class="alert alert-danger">', '</p>');
 
-        $this->form_validation->set_rules("nm_aviso", "nm_aviso", "required|max_length[100]", array());
-        $this->form_validation->set_rules("ds_aviso", "ds_aviso", "required|max_length[500]", array());
+        if($pesquisa == null){
+            $this->form_validation->set_rules("nm_aviso", "nm_aviso", "required|max_length[100]", array());
+            $this->form_validation->set_rules("ds_aviso", "ds_aviso", "required|max_length[500]", array());
+        }
+
         $this->form_validation->set_rules("dt_inicio", "dt_inicio", "required", array());
         $this->form_validation->set_rules("dt_vencimento", "dt_vencimento", "required", array());
 
