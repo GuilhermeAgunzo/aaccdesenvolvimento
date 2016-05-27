@@ -41,14 +41,16 @@ class Aviso extends CI_Controller{
                 "dt_cadastro" => mdate("%Y-%m-%d %H:%i:%s", time())
             );
 
+            if($this->_periodoValido($aviso['dt_inicial_aviso'], $aviso['dt_vencimento_aviso'])){
+                $this->aviso_model->cadastrarAviso($aviso);
+                $this->session->set_flashdata("success", "Cadastrado efetuado com sucesso.");
+                redirect('/aviso/cadastrar_aviso');
+            }else{
+                $this->session->set_flashdata("danger", "A data de vencimento não pode ser anterior ao início.");
+                $this->load->template_admin("aviso/cadastrar_aviso");
+            }
 
-            echo dataPtBrParaMysql($this->input->post("dt_inicio"));
-            echo dataPtBrParaMysql($this->input->post("dt_vencimento"));
 
-            $this->aviso_model->cadastrarAviso($aviso);
-            $this->session->set_flashdata("success", "Cadastrado efetuado com sucesso.");
-
-            redirect('/aviso/cadastrar_aviso');
         }
 
         $this->session->set_flashdata("danger", "O cadastro não foi efetuado.");
@@ -152,10 +154,15 @@ class Aviso extends CI_Controller{
 
         if($this->_validaFormulario(false, true)){
 
-            $this->load->model("aviso_model");
-            $this->aviso_model->alterarAviso($aviso);
+            if($this->_periodoValido($aviso['dt_inicial_aviso'], $aviso['dt_vencimento_aviso'])){
+                $this->load->model("aviso_model");
+                $this->aviso_model->alterarAviso($aviso);
 
-            $this->session->set_flashdata("success", "Alteração efetuada com sucesso.");
+                $this->session->set_flashdata("success", "Alteração efetuada com sucesso.");
+                $this->load->template_admin("aviso/alterar_aviso", $dados);
+            }
+
+            $this->session->set_flashdata("danger", "A data de vencimento não pode ser anterior ao início.");
             $this->load->template_admin("aviso/alterar_aviso", $dados);
 
         }else{
@@ -191,6 +198,14 @@ class Aviso extends CI_Controller{
         $this->form_validation->set_error_delimiters('<p class="alert alert-danger">', '</p>');
 
         return $this->form_validation->run();
+    }
+
+
+    public function _periodoValido($dt_inicio, $dt_vencimento){
+        if($dt_inicio <= $dt_vencimento)
+            return true;
+        else
+            return false;
     }
 
 
