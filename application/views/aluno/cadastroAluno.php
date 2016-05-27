@@ -1,27 +1,30 @@
 	<?php
 	echo form_fieldset("<h1>Cadastro de Aluno</h1>");
 
-
-		echo form_open('aluno/cadastro_aluno', 'class = form-horizontal');
-		echo "<div class='form-group'>";
-		echo form_label("Unidade", "unidade", array("class" => "col-sm-2 control-label"));
-		echo "<div class='col-sm-3'>";
-		if (!isset($unidade)) {
-			echo form_dropdown('Unidade', $unidades, "", array("class" => "form-control"));
-		} else {
-			echo form_dropdown('Unidade', $unidades, $unidade, array("class" => "form-control"));
-		}
-		echo "</div>";
-		echo "<div class='col-sm-2'>";
-		echo form_button(array("class" => "btn btn-default", "content" => "Enviar", "type" => "submit"));
-		echo "</div>";
-		echo "<div class='col-sm-5'>";
-		echo "</div>";
-		echo "</div>";
-		echo form_close();
+if(isset($unidades)){
+	echo form_open('aluno/cadastro_aluno', 'class = form-horizontal');
+	echo "<div class='form-group'>";
+	echo form_label("Unidade", "unidade", array("class" => "col-sm-2 control-label"));
+	echo "<div class='col-sm-3'>";
+	if (!isset($unidade)) {
+		echo form_dropdown('Unidade', $unidades, "", array("class" => "form-control"));
+	} else {
+		echo form_dropdown('Unidade', $unidades, $unidade, array("class" => "form-control"));
+	}
+	echo "</div>";
+	echo "<div class='col-sm-2'>";
+	echo form_button(array("class" => "btn btn-default", "content" => "Enviar", "type" => "submit"));
+	echo "</div>";
+	echo "<div class='col-sm-5'>";
+	echo "</div>";
+	echo "</div>";
+	echo form_close();
 
 	echo "<hr/>";
 	echo "<br/>";
+}
+
+
 	
 	if(isset($unidade)) {
 		$atributos = array('class' => 'form-horizontal');
@@ -37,7 +40,10 @@
 		echo form_label("Turma", "turma", array("class" => "col-sm-2 control-label"));
 		echo "<div class='col-sm-3'>";
 		echo form_dropdown('turma', $turmasUnidade, set_value("turma", ""), array("class" => "form-control", "required" => "required"));
+
 		echo form_hidden("unidade", $unidade);
+
+
 		echo form_error("turma");
 		echo "</div>";
 		echo "</div>";

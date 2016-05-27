@@ -13,5 +13,15 @@ class Aviso_model extends CI_Model{
         return $this->db->get("tb_aviso")->result_array();
     }
 
+    public function buscarAviso($id_aviso){
+        $this->db->where("id_aviso", $id_aviso);
+        return $this->db->get("tb_aviso")->row_array();
+    }
+
+    public function alterarAviso($aviso){
+        $this->db->where('id_aviso', $aviso['id_aviso']);
+        $this->db->update('tb_aviso', $aviso);
+    }
+
 
 }

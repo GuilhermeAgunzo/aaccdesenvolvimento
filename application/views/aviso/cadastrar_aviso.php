@@ -1,6 +1,6 @@
 <?php
 echo "</br>";
-echo form_fieldset("<h1>Cadastro de Avisos</h1>");
+echo form_fieldset("<h1>Cadastro de Aviso</h1>");
 
 $atributos = array('class' => 'form-horizontal');
 echo form_open('aviso/cadastrarAviso', $atributos);

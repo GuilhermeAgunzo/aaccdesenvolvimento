@@ -76,6 +76,7 @@ class Aluno extends CI_Controller{
                 );
 
                 $this->aluno_model->cadastrarAluno($aluno);
+
                 $this->session->set_flashdata("success", "Cadastro efetuado com sucesso!");
                 redirect('/aluno/cadastro_aluno');
 
@@ -89,7 +90,10 @@ class Aluno extends CI_Controller{
         $this->load->model("turma_model");
 
 
-        $dados = array('unidade' => $unidade );
+        $dados = array(
+            'unidade' => $unidade,
+            'turmasUnidade' => $this->turma_model->dropDownTurmaUnidade($unidade),
+        );
 
         $this->load->template_admin("aluno/cadastroAluno", $dados);
 

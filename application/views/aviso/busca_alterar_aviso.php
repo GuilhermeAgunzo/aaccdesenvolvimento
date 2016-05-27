@@ -1,8 +1,8 @@
 <?php
-echo form_fieldset("<h1>Pesquisa de Avisos</h1>");
+echo form_fieldset("<h1>Alteração de Avisos</h1>");
 
 $atributos = array('class' => 'form-horizontal');
-echo form_open('aviso/pesquisarAviso', $atributos);
+echo form_open('aviso/buscaAlterarAviso', $atributos);
 
 echo "<div class='form-group'>";
 echo form_label("Data Inicial do Aviso", "dt_inicio", array("class" => "col-sm-2 control-label"));
@@ -31,25 +31,28 @@ if(isset($avisos)) {
 
     if($avisos != null){
 
-    echo "<table class='table-striped'>";
-    echo "<thead>";
-    echo "<tr>";
-    echo "<th>Título</th>";
-    echo "<th>Descrição</th>";
-    echo "<th>Data inicial</th>";
-    echo "<th>Data vencimento</th>";
-    echo "</tr>";
-    echo "</thead>";
-    echo "<tbody>";
-    foreach ($avisos as $aviso) {
+        echo "<table class='table-striped'>";
+        echo "<thead>";
         echo "<tr>";
-        echo "<td>".$aviso['nm_aviso']."</td>";
-        echo "<td>".$aviso['ds_aviso']."</td>";
-        echo "<td>".dataMysqlParaPtBr($aviso['dt_inicial_aviso'])."</td>";
-        echo "<td>".dataMysqlParaPtBr($aviso['dt_vencimento_aviso'])."</td>";
-    }
-    echo "</tbody>";
-    echo "</table>";
+        echo "<th>Título</th>";
+        echo "<th>Descrição</th>";
+        echo "<th>Data inicial</th>";
+        echo "<th>Data vencimento</th>";
+        echo "<th></th>";
+        echo "</tr>";
+        echo "</thead>";
+        echo "<tbody>";
+        foreach ($avisos as $aviso) {
+            echo "<tr>";
+            echo "<td>".$aviso['nm_aviso']."</td>";
+            echo "<td>".$aviso['ds_aviso']."</td>";
+            echo "<td>".dataMysqlParaPtBr($aviso['dt_inicial_aviso'])."</td>";
+            echo "<td>".dataMysqlParaPtBr($aviso['dt_vencimento_aviso'])."</td>";
+            echo "<td>".anchor("aviso/alterarAviso/{$aviso['id_aviso']}", "Alterar", 'class = "btn btn-default"')."</td>";
+
+        }
+        echo "</tbody>";
+        echo "</table>";
 
 
     }else{

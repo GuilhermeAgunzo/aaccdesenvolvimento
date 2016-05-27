@@ -20,7 +20,7 @@ class Aviso extends CI_Controller{
 
     public function alterar_aviso(){
         autoriza(2);
-        $this->load->template_admin("aviso/alterar_aviso");
+        $this->load->template_admin("aviso/busca_alterar_aviso");
     }
 
     /*  Metodos principais  */
@@ -59,10 +59,8 @@ class Aviso extends CI_Controller{
 
     public function pesquisarAviso(){
         autoriza(2);
-        $this->output->enable_profiler(TRUE);
 
         if($this->_validaFormulario(true)){
-
 
             $dataInicial = dataPtBrParaMysql($this->input->post("dt_inicio"));
             $dataVencimento = dataPtBrParaMysql($this->input->post("dt_vencimento"));
@@ -79,20 +77,110 @@ class Aviso extends CI_Controller{
             $this->session->set_flashdata("danger", "Você deve escolher as datas.");
             $this->load->template_admin("aviso/pesquisar_aviso");
         }
+    }
 
 
+    public function buscaAlterarAviso(){
+        autoriza(2);
 
+        if($this->_validaFormulario(true)){
+
+
+            $dataInicial = dataPtBrParaMysql($this->input->post("dt_inicio"));
+            $dataVencimento = dataPtBrParaMysql($this->input->post("dt_vencimento"));
+            $this->load->model("aviso_model");
+            $avisos = $this->aviso_model->pesquisarAviso($dataInicial, $dataVencimento);
+
+            $dados = array(
+                'avisos' => $avisos,
+            );
+
+            $this->load->template_admin("aviso/busca_alterar_aviso", $dados);
+
+        }else{
+            $this->session->set_flashdata("danger", "Você deve escolher as datas.");
+            $this->load->template_admin("aviso/busca_alterar_aviso");
+        }
+    }
+
+
+    public function alterarAviso($id){
+        autoriza(2);
+
+        if(isset($id)){
+
+            $this->load->model("aviso_model");
+            $aviso = $this->aviso_model->buscarAviso($id);
+
+            if($aviso != null){
+
+                $aviso['dt_inicial_aviso'] = dataMysqlParaPtBr($aviso['dt_inicial_aviso']);
+                $aviso['dt_vencimento_aviso'] = dataMysqlParaPtBr($aviso['dt_vencimento_aviso']);
+                $dados = array(
+                    'aviso' => $aviso,
+                );
+
+
+                $this->load->template_admin("aviso/alterar_aviso", $dados);
+            }else{
+                $this->session->set_flashdata("danger", "Você precisa escolher um aviso válido para alterar.");
+                redirect('/aviso/alterar_aviso');
+            }
+
+        }else{
+            $this->session->set_flashdata("danger", "Você precisa escolher um aviso para alterar.");
+            redirect('/aviso/alterar_aviso');
+        }
+
+    }
+
+    public function salvarAlterarAviso(){
+
+        $usuarioLogado = $this->session->userdata("usuario_logado");
+        $aviso = array(
+            "id_aviso" => $this->input->post("id_aviso"),
+            "nm_aviso" => $this->input->post("nm_aviso"),
+            "ds_aviso" => $this->input->post("ds_aviso"),
+            "dt_inicial_aviso"=> dataPtBrParaMysql($this->input->post("dt_inicio")),
+            "dt_vencimento_aviso" => dataPtBrParaMysql($this->input->post("dt_vencimento")),
+            "status_ativo" => 1,
+            "cd_usuario_cadastrou" => $usuarioLogado['id_usuario'],
+            "dt_cadastro" => mdate("%Y-%m-%d %H:%i:%s", time())
+        );
+        $dados = array('aviso' => $aviso);
+
+
+        if($this->_validaFormulario(false, true)){
+
+            $this->load->model("aviso_model");
+            $this->aviso_model->alterarAviso($aviso);
+
+            $this->session->set_flashdata("success", "Alteração efetuada com sucesso.");
+            $this->load->template_admin("aviso/alterar_aviso", $dados);
+
+        }else{
+
+
+            $this->session->set_flashdata("danger", "O cadastro de aviso não foi alterado.");
+            $this->load->template_admin("aviso/alterar_aviso", $dados);
+        }
 
     }
 
 
+
     /*  MÉTODOS AUXILIARES  */
-    public function _validaFormulario($pesquisa = null){
+    public function _validaFormulario($pesquisa = null, $alterar = null){
         $this->load->library("form_validation");
+
 
         $this->form_validation->set_error_delimiters('<p class="alert alert-danger">', '</p>');
 
-        if($pesquisa == null){
+        if($alterar != null){
+            $this->form_validation->set_rules("id_aviso", "id_aviso", "required", array());
+        }
+
+        if($pesquisa == null || $pesquisa == false){
             $this->form_validation->set_rules("nm_aviso", "nm_aviso", "required|max_length[100]", array());
             $this->form_validation->set_rules("ds_aviso", "ds_aviso", "required|max_length[500]", array());
         }
