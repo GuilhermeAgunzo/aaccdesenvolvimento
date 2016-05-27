@@ -1,22 +1,24 @@
-<?php
-    echo form_fieldset("<h1>Pesquisa de Tipo de Atividade</h1>");
 
-    $atributos = array('class' => 'form-horizontal');
-    echo form_open('', $atributos);
-    echo "<div class='form-group'>";
-    echo form_label("Código", "codigo_tipo_atividade", array("class" => "col-sm-2 control-label"));
-    echo "<div class='col-sm-4'>";
-    $codAtividade = array('-','001','002','003', '004');
-    echo form_dropdown('codigo_tipo_atividade', $codAtividade, array("class" => "form-control"));
-    echo "</div>";
-    echo "</div>";
+<?= form_fieldset("<h1>Pesquisa de Tipo de Atividade</h1>") ?>
+<table class='table-striped'>
 
-    echo "<div class='form-group'>";
-    echo "<div class='col-sm-offset-2 col-sm-10'>";
-    echo form_button(array("class" => "btn btn-default", "content" => "Enviar", "type" => "submit"));
-    echo "</div>";
-    echo "</div>";
+    <thead>
+        <tr>
+            <th>Tipo de Atividade</th>
+            <?php if(isset($id_tipo_atividade)) echo "<th></th>"; ?>
+        </tr>
+    </thead>
+    <tbody>
 
-    echo form_close();
+        <?php foreach($tiposAtividades as $tipoAtividade): ?>
 
-?>
+            <tr>
+                <td><?= $tipoAtividade['nm_tipo_atividade'] ?></td>
+                <?php if(isset($id_tipo_atividade)) echo "<td>".anchor("tipoAtividade/alterarTipoAtividade/{$tipoAtividade['id_tipo_atividade']}", "Alterar", 'class = "btn btn-default"')."</td>"; ?>
+            </tr>
+
+        <?php endforeach; ?>
+
+    </tbody>
+
+</table>
