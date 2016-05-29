@@ -54,8 +54,9 @@ class Aluno extends CI_Controller{
         $this->load->library("usuariolb");
 
         $email = $this->input->post("email");
+        $matricula = $this->input->post("matricula");
 
-        if($this->_validaFormulario(true, true)){
+        if($this->_validaFormulario($email, $matricula)){
 
             $id_usuario = $this->usuariolb->cadastrarUsuario($email,1);
 
@@ -76,27 +77,29 @@ class Aluno extends CI_Controller{
                 );
 
                 $this->aluno_model->cadastrarAluno($aluno);
-
                 $this->session->set_flashdata("success", "Cadastro efetuado com sucesso!");
                 redirect('/aluno/cadastro_aluno');
 
             }else{
-                $this->session->set_flashdata("danger", "Email já cadastrado com outro usuário.");
-                $this->load->template_admin("aluno/cadastroAluno");
+                $this->session->set_flashdata("danger", "O cadastro não foi efetuado. Tente novamente mais tarde.");
+                redirect('/aluno/cadastro_aluno');
             }
-
         }
+        /*else {
+            $this->session->set_flashdata("danger", "Usuario já cadastrado Verifique os dados.");
+            redirect('/aluno/cadastro_aluno');
+        }*/
+
         $unidade = $this->input->post("unidade");
+        $this->load->model("unidade_model");
         $this->load->model("turma_model");
 
+        $turmasUnidade = $this->turma_model->dropDownTurmaUnidade($unidade);
+        $unidades = $this->unidade_model->dropDownUnidade();
 
-        $dados = array(
-            'unidade' => $unidade,
-            'turmasUnidade' => $this->turma_model->dropDownTurmaUnidade($unidade),
-        );
+        $dados = array('unidade' => $unidade, 'unidades' => $unidades, 'turmasUnidade' => $turmasUnidade);
 
         $this->load->template_admin("aluno/cadastroAluno", $dados);
-
     }
 
     public function alterarAluno(){

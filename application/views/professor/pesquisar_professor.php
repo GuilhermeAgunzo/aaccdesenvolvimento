@@ -1,15 +1,15 @@
  <?php
     echo form_fieldset("<h1>Pesquisa de Professor</h1>");
     if(isset($unidades) && !isset($professores)){
-        $atributos = array('class' => 'form-horizontal');
-        echo form_open('professor/pesquisaProfessores',$atributos);
+        echo form_open('professor/pesquisaProfessores','class = form-horizontal');
         echo "<div class='form-group'>";
         echo form_label("Unidade", "unidade", array("class" => "col-sm-2 control-label"));
         echo "<div class='col-sm-3'>";
         echo form_dropdown('Unidade', $unidades, "", array("class" => "form-control"));
         echo "</div>";
-        echo "<div class='col-sm-2'>";
-        echo form_button(array("class" => "btn btn-default", "content" => "Enviar", "type" => "submit"));
+        echo "<div class='col-sm-1'>";
+        echo form_hidden("opcao", 'Pesquisar');
+        echo form_button(array("class" => "btn btn-default", "content" => "Buscar", "type" => "submit"));
         echo "</div>";
         echo "<div class='col-sm-6'>";
         echo "</div>";
@@ -19,24 +19,30 @@
     }
     if(isset($professores)){
         if($professores !=null){
-            $atributos = array('class' => 'form-horizontal');
-            echo form_open('professor/pesquisaNomeProfessor', $atributos);
-            echo "<div class='form-group'>";
+            echo form_open('professor/pesquisaNomeProfessor', 'class = form-horizontal');
             echo form_label("Nome do Professor", "nm_professor", array("class" => "col-sm-2 control-label"));
-            echo "<div class='col-sm-3'>";
-            if(isset($termo)){echo form_input(array("name" => "nm_professor", "value" => "{$termo}","required" => "required", "id" => "nm_professor" ,"class" => "form-control", "maxlength" => "70"));
-            }else{echo form_input(array("name" => "nm_professor","required" => "required", "id" => "nm_professor" ,"class" => "form-control", "maxlength" => "70"));}
+            echo "<div class='col-sm-4'>";
+            echo "<div class='input-group'>";
+            if (isset($termo)) {
+                echo form_input(array("name" => "nm_professor", "value" => "{$termo}", "required" => "required", "id" => "nm_professor", "class" => "form-control", "maxlength" => "70"));
+            } else {
+                echo form_input(array("name" => "nm_professor", "required" => "required", "id" => "nm_professor", "class" => "form-control", "maxlength" => "70"));
+            }
+            echo "<span class='input-group-btn'>";
+            echo form_button(array("class" => "btn btn-default", "content" => "Buscar", "type" => "submit"));
+            echo "</span>";
             echo "</div>";
-            echo "<div class='col-sm-2'>";
-            echo form_button(array("class" => "btn btn-default", "content" => "Enviar", "type" => "submit"));
             echo form_hidden("idUnidade", $unidade["id_unidade"]);
+            echo form_hidden("opcao", 'Pesquisar');
             echo "</div>";
             echo form_close();
-            
+
+            echo "<div class='form-group'>";
             echo form_open('professor/pesquisaProfessores', 'class=form-horizontal');
             echo "<div class='col-sm-2'>";
             echo form_button(array("class" => "btn btn-default", "content" => "Mostrar Todos", "type" => "submit"));
             echo form_hidden("Unidade", $unidade["id_unidade"]);
+            echo form_hidden("opcao", 'Pesquisar');
             echo "</div>";
             echo form_close();
         
@@ -45,12 +51,10 @@
             echo "</div>";
             echo "</div>";
 
-            echo "<br/>";
-            echo "<br/>";
+            echo "<br/><br/>";
             echo "<h3>Professores da ".$unidade["nm_unidade"]."</h3>";
-            echo "<br/>";
-
-            echo "<table class='table-responsive table-striped'>";
+            echo "<div class='table-responsive'>";
+            echo "<table class='table'>";
             echo "<thead>";
             echo "<tr>";
             echo "<th>Nome</th>";
@@ -81,6 +85,7 @@
                 echo "</tr>";
             }
             echo "</table>";
+            echo "</div>";
         }else{
             echo "<p class='alert alert-danger'> Nenhum Professor cadastrado nessa Unidade.</p>";
             echo "</br>";

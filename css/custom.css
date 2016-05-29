@@ -102,22 +102,57 @@
     }
 }
 
-.main-page table{
+/*--Modificaçoes --*/
+
+.formulario{
+    padding-right: 45px !important; 
+}
+
+.formulario input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.formulario .row{
+    margin: 0px !important;
+}
+
+.formulario table{
     border: 0 !important;
 }
-.main-page table tr{
-    border-bottom: 1px solid #A8A8A8 !important;
+
+.formulario .table{
+    margin-left: 0 !important;
+    max-width: 900px !important;
 }
-.main-page input, .main-page select, .main-page textarea{
-    width: 80% !important;
+
+.formulario tbody tr{
+    border-bottom: 1px solid #A8A8A8 !important;
+    line-height: 20px !important;
+}
+
+.formulario tbody tr:nth-child(odd){
+    background-color:#F7F7F7 !important;
+}
+
+.formulario tbody tr:hover{
+    background-color:#e8f8f5 !important;
+}
+
+.formulario table tr td{
+    width: 0!important;
+  
+}
+
+.formulario input, .main-page select, .main-page textarea{
+    width: 100% !important;
     padding: 5px !important;
 }
-
-
-#ano{
-    width: 90% !important;
-}
-.main-page input[disabled], .main-page select[disabled]{
+.formulario input[disabled], .main-page select[disabled]{
     background-color: #c6c6c6 !important;
-
 }
+
+.formulario label{
+    padding-left: 0px !important;
+}
+

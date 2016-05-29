@@ -9,6 +9,7 @@ if(!isset($unidade) && isset($unidades)){
     echo form_dropdown('Unidade', $unidades, "", array("class" => "form-control"));
     echo "</div>";
     echo "<div class='col-sm-2'>";
+    echo form_hidden("opcao", 'Pesquisar');
     echo form_button(array("class" => "btn btn-default", "content" => "Enviar", "type" => "submit"));
     echo "</div>";
     echo "<div class='col-sm-4'>";
@@ -25,33 +26,32 @@ if(isset($turmas)) {
     echo "<br/>";
 
     if ($turmas != null) {
-        echo "<table class='table-striped'>";
+        echo "<div class='table-responsive'>";
+        echo "<table class='table'>";
         echo "<thead>";
         echo "<tr>";
-        echo "<th>Ano de Ingresso</th>";
         echo "<th>Matricula da Turma</th>";
-        echo "<th>Semestre</th>";
-        echo "<th>Modalidade</th>";
-        echo "<th>Turno</th>";
-        echo "<th>Ciclo</th>";
+        echo "<th>Turma</th>";
+        echo "<th>Turno/Modalidade</th>";
         echo "</tr>";
         echo "</thead>";
         foreach ($turmas as $turma) {
             echo "<tr>";
-            echo "<td>".$turma['aa_ingresso']."</td>";
             echo "<td>".$turma['cd_mat_turma']."</td>";
-            echo "<td>".$turma['dt_semestre']."</td>";
-            echo "<td>".$turma['nm_modalidade']."</td>";
-            echo "<td>".$turma['nm_turno']."</td>";
-            echo "<td>".$turma['qt_ciclo']."</td>";
-
+            echo "<td>{$turma['aa_ingresso']}/{$turma['dt_semestre']} - {$turma['qt_ciclo']}º Ciclo</td>";
+            if($turma['nm_turno']!=null) {
+                echo "<td>" . $turma['nm_turno'] . "</td>";
+            }else{
+                echo "<td>".$turma['nm_modalidade']."</td>";
+            }
+            echo "</tr>";
         }
         echo "</table>";
+        echo "</div>";
     }else{
         echo "<p class='alert alert-danger'> Nenhuma Turma cadastrada nessa Unidade.</p>";
         echo "<br/>";
         echo anchor("turma/pesquisar_turma/", "Voltar", 'class = "btn btn-default"');
     }
 }
-
 ?>
