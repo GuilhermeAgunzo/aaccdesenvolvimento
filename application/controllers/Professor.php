@@ -236,7 +236,7 @@ class Professor extends CI_Controller{
         $professor = array(
             "dt_desativado" => mdate("%Y-%m-%d %H:%i:%s", time()),
             "status_ativo" => 0,
-            "id_user_adm_desativou" => $usuarioLogado
+            "id_user_adm_desativou" => $usuarioLogado['id_usuario']
         );
 
         if($this->professor_model->desativaProfessor($id_professor,$professor)){
