@@ -8,15 +8,15 @@
     <meta name="keywords" content="AACC Gestão e Controle de Atividades Acadêmico - Científico Cultural" />
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
     <!-- Bootstrap Core CSS -->
-    <link href="<?= base_url("css/bootstrap.css")?>" rel='stylesheet' type='text/css' />
+    <link href="<?= base_url("css/bootstrap.css")?>" rel='stylesheet' type='text/css' media="screen" />
     <!-- Custom CSS -->
-    <link href="<?= base_url("css/style2.css")?>" rel='stylesheet' type='text/css' />
+    <link href="<?= base_url("css/style2.css")?>" rel='stylesheet' type='text/css' media="screen" />
     <!-- font CSS -->
     <!-- font-awesome icons -->
-    <link href="<?= base_url("css/font-awesome.css")?>" rel="stylesheet">
+    <link href="<?= base_url("css/font-awesome.css")?>" rel="stylesheet" media="screen">
     <!-- //font-awesome icons -->
     <!-- CSS para Impressão -->
-    <link href="<?= base_url("css/font-awesome.css")?>" rel="stylesheet" media="print">
+    <link href="<?= base_url("css/imprimir.css")?>" rel="stylesheet" media="print">
 
     <!-- js-->
     <script src="<?= base_url("js/jquery-1.11.1.min.js")?>"></script>
@@ -25,7 +25,7 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
     <!--//webfonts-->
     <!--animate-->
-    <link href="<?= base_url("css/animate2.css")?>" rel="stylesheet" type="text/css" media="all">
+    <link href="<?= base_url("css/animate2.css")?>" rel="stylesheet" type="text/css" media="screen">
     <script src="<?= base_url("js/wow.min.js")?>"></script>
     <script>
         new WOW().init();
@@ -34,7 +34,7 @@
     <!-- Metis Menu -->
     <script src="<?= base_url("js/metisMenu.min.js")?>"></script>
     <script src="<?= base_url("js/custom.js")?>"></script>
-    <link href="<?= base_url("css/custom.css")?>" rel="stylesheet">
+    <link href="<?= base_url("css/custom.css")?>" rel="stylesheet" media="screen">
     <!--//Metis Menu -->
 
 
@@ -306,3 +306,5 @@
                     $_SESSION['danger']
                 );
             ?>
+
+

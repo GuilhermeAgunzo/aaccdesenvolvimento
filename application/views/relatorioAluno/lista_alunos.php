@@ -6,8 +6,13 @@ if(isset($alunos)) {
 
         echo "<div class='form-group'>";
         echo "<div class='col-sm-offset-2 col-sm-10'>";
-        echo form_button(array("class" => "btn btn-default", "content" => "Imprimir", "onClick" => "window.print();"));
-        echo anchor(base_url('index.php/relatorioAluno/pdf/'.$id_turma), ' Gerar PDF', array('class'=>'btn btn-default', 'id'=>'pdf', 'target'=>'_blank'));
+        //echo form_button(array("class" => "btn btn-default", "content" => "Imprimir", "onClick" => "window.print();"));
+        echo anchor(base_url('index.php/relatorioAluno/pdf/'.$id_turma), ' Baixar em PDF', array('class'=>'btn btn-default', 'id'=>'pdf', 'target'=>'_blank'));
+        echo " ";
+        $endecoprint = base_url('index.php/relatorioAluno/imprimir/'.$id_turma);
+        echo form_button(array("class" => "btn btn-default", "content" => "Imprimir", "onClick" => "varWindow = window.open ('{$endecoprint}','imprimir','width=850, height=655, top=10, left=110, scrollbars=no');"));
+        //echo anchor(base_url('index.php/relatorioAluno/imprimir/'.$id_turma), ' Imprimir', array('class'=>'btn btn-default', 'id'=>'imprimir', 'target'=>'_blank'));
+
         echo "</div>";
         echo "</div>";
 

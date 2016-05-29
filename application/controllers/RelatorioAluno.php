@@ -83,6 +83,35 @@ class RelatorioAluno extends CI_Controller{
     }
 
 
+    public function imprimir($id_turma = null){
+        autoriza(2);
+
+        if($id_turma == null || $id_turma == 0){
+            $this->session->set_flashdata("danger", "Você deve selecionar uma turma válida.");
+            redirect('/RelatorioAluno/buscar');
+        }else{
+
+
+            $this->load->model("aluno_model");
+            $this->load->model("turma_model");
+            $alunos = $this->aluno_model->buscaAlunosInTurmas($id_turma);
+            $turma = $this->turma_model->buscarTurmaId($id_turma);
+
+            $titulo = "Relatório de alunos da turma de {$turma['aa_ingresso']} - {$turma['dt_semestre']}º Sem - {$turma['nm_turno']}";
+            $arquivo = "relatorio-de-alunos-da-turma-de-{$turma['aa_ingresso']}-{$turma['dt_semestre']}Sem-{$turma['nm_turno']}";
+
+            $data = array(
+                'titulo' => $titulo,
+                'turma' => $turma,
+                'alunos'=> $alunos,
+                'arquivo' => $arquivo,
+            );
+
+            $this->load->view('relatorioAluno/imprimir', $data);
+        }
+
+    }
+
 
 
 }

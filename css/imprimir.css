@@ -1,18 +1,25 @@
-nav, footer, video, audio, object, embed, button {
-    display:none;
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    width: 100% !important;
+    font-size: 14px;
+}
+
+.sticky-header, .sidebar, button, .btn, br {
+    display: none !important;
+}
+
+fieldset{
+    border: 0;
+    width: 100%
 }
 
 
-.cbp-spmenu, .sticky-header, .footer, .btn, .alert{
-    display: none;
+.main-page{
+    width: 100% !important;
 }
 
-.main-page, #page-wrapper{
-    width: 100%;
-    position: inherit;
-    left: -159px;
-}
 
-.cbp-spmenu-push, #page-wrapper{
-    margin: 0 !important;
-}
