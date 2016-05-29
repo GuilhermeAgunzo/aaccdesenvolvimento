@@ -101,29 +101,35 @@ class Professor extends CI_Controller{
             $data_saida = null;
         }
 
-        $usuarioLogado = $this->session->userdata("usuario_logado");
+
 
         $id_usuario = $this->usuariolb->cadastrarUsuario($email,2);
+        if($id_usuario > 0){
+            $usuarioLogado = $this->session->userdata("usuario_logado");
 
-        $professor = array(
-            "nm_professor" => $this->input->post("nome"),
-            "nm_email" => $email,
-            "cd_tel_residencial" => $telefone,
-            "cd_tel_celular" => $celular,
-            "dt_entrada" => $data_entrada,
-            "id_unidade" => $this->input->post("Unidade"),
-            "dt_saida" => $data_saida,
-            "status_ativo" => 1,
-            "id_user_adm_cadastrou" => $usuarioLogado['id_usuario'],
-            "id_usuario" => $id_usuario
-        );
+            $professor = array(
+                "nm_professor" => $this->input->post("nome"),
+                "nm_email" => $email,
+                "cd_tel_residencial" => $telefone,
+                "cd_tel_celular" => $celular,
+                "dt_entrada" => $data_entrada,
+                "id_unidade" => $this->input->post("Unidade"),
+                "dt_saida" => $data_saida,
+                "status_ativo" => 1,
+                "id_user_adm_cadastrou" => $usuarioLogado['id_usuario'],
+                "id_usuario" => $id_usuario
+            );
 
-        if($this->professor_model->salvaCadastro($professor)){
-            $this->session->set_flashdata("success", "Cadastrado efetuado com sucesso.");
-            redirect('/professor/cadastro_professor');
-        }
-        else{
-            $this->session->set_flashdata("danger", "O cadastro não foi efetuado. Tente novamente mais tarde.");
+            if($this->professor_model->salvaCadastro($professor)){
+                $this->session->set_flashdata("success", "Cadastrado efetuado com sucesso.");
+                redirect('/professor/cadastro_professor');
+            }
+            else{
+                $this->session->set_flashdata("danger", "O cadastro não foi efetuado. Tente novamente mais tarde.");
+                redirect('/professor/cadastro_professor');
+            }
+        }else{
+            $this->session->set_flashdata("danger", "Email já cadastrado com outro usuário.");
             redirect('/professor/cadastro_professor');
         }
     }
