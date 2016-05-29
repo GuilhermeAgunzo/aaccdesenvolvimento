@@ -37,7 +37,7 @@ class Aviso extends CI_Controller{
                 "dt_inicial_aviso"=> dataPtBrParaMysql($this->input->post("dt_inicio")),
                 "dt_vencimento_aviso" => dataPtBrParaMysql($this->input->post("dt_vencimento")),
                 "status_ativo" => 1,
-                "cd_usuario_cadastrou" => $usuarioLogado['id_usuario'],
+                "id_user_adm_cadastrou" => $usuarioLogado['id_usuario'],
                 "dt_cadastro" => mdate("%Y-%m-%d %H:%i:%s", time())
             );
 
@@ -150,7 +150,7 @@ class Aviso extends CI_Controller{
             "dt_inicial_aviso"=> dataPtBrParaMysql($this->input->post("dt_inicio")),
             "dt_vencimento_aviso" => dataPtBrParaMysql($this->input->post("dt_vencimento")),
             "status_ativo" => 1,
-            "cd_usuario_cadastrou" => $usuarioLogado['id_usuario'],
+            "id_user_adm_cadastrou" => $usuarioLogado['id_usuario'],
             "dt_cadastro" => mdate("%Y-%m-%d %H:%i:%s", time())
         );
         $dados = array('aviso' => $aviso);

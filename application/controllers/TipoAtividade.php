@@ -43,7 +43,7 @@ class tipoAtividade extends CI_Controller{
 
             $tipoAtividade = array(
                 'nm_tipo_atividade' => $this->input->post("txt_nm_tipo_atividade"),
-                'cd_usuario_cadastrou' => $usuarioLogado['id_usuario'],
+                'id_user_adm_cadastrou' => $usuarioLogado['id_usuario'],
                 'dt_cadastro' => mdate("%Y-%m-%d %H:%i:%s", time()),
             );
 
@@ -91,7 +91,7 @@ class tipoAtividade extends CI_Controller{
         $tipoAtividade = array(
             'id_tipo_atividade' => $this->input->post("txt_id_tipo_atividade"),
             'nm_tipo_atividade' => $this->input->post("txt_nm_tipo_atividade"),
-            'cd_usuario_cadastrou' => $usuarioLogado['id_usuario'],
+            'id_user_adm_cadastrou' => $usuarioLogado['id_usuario'],
             'dt_cadastro' => mdate("%Y-%m-%d %H:%i:%s", time()),
         );
 
