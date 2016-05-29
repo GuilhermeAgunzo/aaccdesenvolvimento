@@ -1,0 +1,18 @@
+nav, footer, video, audio, object, embed, button {
+    display:none;
+}
+
+
+.cbp-spmenu, .sticky-header, .footer, .btn, .alert{
+    display: none;
+}
+
+.main-page, #page-wrapper{
+    width: 100%;
+    position: inherit;
+    left: -159px;
+}
+
+.cbp-spmenu-push, #page-wrapper{
+    margin: 0 !important;
+}

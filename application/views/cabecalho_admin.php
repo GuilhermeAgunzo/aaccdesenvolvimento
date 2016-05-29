@@ -15,6 +15,9 @@
     <!-- font-awesome icons -->
     <link href="<?= base_url("css/font-awesome.css")?>" rel="stylesheet">
     <!-- //font-awesome icons -->
+    <!-- CSS para Impressão -->
+    <link href="<?= base_url("css/font-awesome.css")?>" rel="stylesheet" media="print">
+
     <!-- js-->
     <script src="<?= base_url("js/jquery-1.11.1.min.js")?>"></script>
     <script src="<?= base_url("js/modernizr.custom.js")?>"></script>

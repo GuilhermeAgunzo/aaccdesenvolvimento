@@ -3,6 +3,14 @@
 if(isset($alunos)) {
     if ($alunos != null) {
 
+
+        echo "<div class='form-group'>";
+        echo "<div class='col-sm-offset-2 col-sm-10'>";
+        echo form_button(array("class" => "btn btn-default", "content" => "Imprimir", "onClick" => "window.print();"));
+        echo anchor(base_url('index.php/relatorioAluno/pdf/'.$id_turma), ' Gerar PDF', array('class'=>'btn btn-default', 'id'=>'pdf', 'target'=>'_blank'));
+        echo "</div>";
+        echo "</div>";
+
         echo "<br/>";
         echo "<table class='table-responsive table-striped'>";
         echo "<thead>";
@@ -33,6 +41,8 @@ if(isset($alunos)) {
         }
         echo "</tbody>";
         echo "</table>";
+
+
     }else{
         echo "<p class='alert alert-danger'>Ainda não foi efetuado cadastro de alunos nesta turma.</p>";
     }
