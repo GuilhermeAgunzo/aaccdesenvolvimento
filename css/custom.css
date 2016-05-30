@@ -102,22 +102,119 @@
     }
 }
 
-.main-page table{
-    border: 0 !important;
+/*--Modificaçoes --*/
+
+.formulario{
+    padding-right: 45px !important; 
 }
-.main-page table tr{
-    border-bottom: 1px solid #A8A8A8 !important;
+
+.formulario .row{
+    margin: 0px !important;
 }
-.main-page input, .main-page select, .main-page textarea{
-    width: 80% !important;
+
+.formulario input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.formulario input, .main-page select, .main-page textarea{
+    width: 100% !important;
     padding: 5px !important;
 }
-
-
-#ano{
-    width: 90% !important;
-}
-.main-page input[disabled], .main-page select[disabled]{
+.formulario input[disabled], .main-page select[disabled]{
     background-color: #c6c6c6 !important;
+}
 
+.formulario label{
+    padding-left: 0px !important;
+}
+
+.formulario table{
+    border: 0 !important;
+}
+
+.formulario .table{
+    margin-left: 0 !important;
+    max-width: 900px !important;
+}
+
+.formulario tbody tr{
+    border-bottom: 1px solid #A8A8A8 !important;
+    line-height: 20px !important;
+}
+
+.formulario tbody tr:nth-child(odd){
+    background-color:#F7F7F7 !important;
+}
+
+.formulario tbody tr:hover{
+    background-color:#e8f8f5 !important;
+}
+
+.formulario table tr td{
+    width: 0!important;
+  
+}
+
+@media(max-width:1025px){
+.logo a {
+    padding: 1.1em 1.3em .7em;
+}
+.logo a h1 {
+    font-size: 1.2em;
+    line-height:1em;
+}
+.logo a span {
+    font-size: .6em;
+}
+li.dropdown.head-dpdn a.dropdown-toggle {
+    padding: 1em 1.4em;
+}
+button#showLeftPush {
+    padding: 0.73em 0;
+}
+.sb-search-input {
+    font-size: 0.8em;
+    padding: 0.5em;
+}
+.search-box {
+    width: 36%;
+    margin: 1em 0 0 2em;
+}
+li.dropdown.head-dpdn {
+    padding: 1.5em 0;
+}
+li.dropdown.head-dpdn a.dropdown-toggle {
+    padding: 1.5em 1.6em 1.5em 1.2em;
+}
+.profile_details_drop a.dropdown-toggle {
+    padding: 0.6em 2em 0 1em;
+}
+.profile_details li a i.fa.lnr {
+    top: 28%;
+}
+.cbp-spmenu-vertical {
+    padding: 1em 0;
+    width: 301px;
+    top: 69px;
+}
+.cbp-spmenu-push div#page-wrapper {
+    margin: 0;
+}
+.cbp-spmenu-left.cbp-spmenu-open {
+    left:0
+}
+.cbp-spmenu-vertical {
+
+    left: -309px;
+}
+.activity-desc-sub:before {
+    left: -3.4%;
+}
+.activity-desc-sub1:after {
+    right: -3.1%;
+}
+.sticky-header .header-section {
+    height: 70px !important;
+}
 }

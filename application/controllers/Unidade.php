@@ -10,14 +10,23 @@ class Unidade extends CI_Controller{
 
     public function pesquisar_unidade(){
         autoriza(2);
-        $this->load->template_admin("unidade/pesquisar_unidade");
+
+        $this->load->model("unidade_model");
+        $unidades = $this->unidade_model->buscaUnidades();
+        $dados = array("unidades" => $unidades);
+
+        $this->load->template_admin("unidade/pesquisar_unidade",$dados);
     }
 
     public function alterar_unidade(){
         autoriza(2);
-        $this->load->template_admin("unidade/alterar_unidade");
-    }
 
+        $this->load->model("unidade_model");
+        $unidades = $this->unidade_model->buscaUnidades();
+        $dados = array("unidades" => $unidades);
+
+        $this->load->template_admin("unidade/alterar_unidade", $dados);
+    }
 
     /*  Metodos principais  */
 
@@ -43,22 +52,17 @@ class Unidade extends CI_Controller{
                 "dt_cadastro" => mdate("%Y-%m-%d %H:%i:%s", time())
             );
 
-
-
             $this->load->model("unidade_model");
-
             $this->unidade_model->salva($unidade);
 
-
-
             $this->session->set_flashdata("success", "Cadastro efetuado com sucesso!");
-
-            //$this->load->template_admin("unidade/cadastrar_unidade");
             redirect('/unidade/cadastrar_unidade');
-        }else{
+        }
+        /*else{
             $this->session->set_flashdata("danger", "Erro ao cadastrar!");
             $this->load->template_admin("unidade/cadastrar_unidade");
-        }
+        }*/
+        $this->load->template_admin("unidade/cadastrar_unidade");
     }
 
     public function alteraUnidade(){
@@ -66,6 +70,7 @@ class Unidade extends CI_Controller{
 
         if($this->_validaFormulario(false)) {
             $usuarioLogado = $this->session->userdata("usuario_logado");
+
             $unidade = array(
                 "id_unidade" => $this->input->post("id_unidade"),
                 "cd_cpsouza" => $this->input->post("cd_cpsouza"),
@@ -78,59 +83,36 @@ class Unidade extends CI_Controller{
                 "nm_complemento_endereco" => $this->input->post("complemento"),
                 "cd_cep_endereco" => $this->input->post("cep"),
                 "cd_telefone" => $this->input->post("telefone"),
-                "status_ativo" => $this->input->post("status"),
-                "id_user_adm_cadastrou" => $usuarioLogado['id_usuario']
+                "id_user_adm_cadastrou" => $usuarioLogado['id_usuario'],
+                "dt_cadastro" => mdate("%Y-%m-%d %H:%i:%s", time())
             );
 
-            if($unidade['status_ativo'] == '0'){
-                array_push($unidade['dt_cadastro'],mdate("%Y-%m-%d %H:%i:%s", time()));
-                array_push($unidade['id_user_adm_desativou'],"1");
-            }
             $this->load->model("unidade_model");
             $this->unidade_model->altera($unidade);
             $this->session->set_flashdata("success", "Alteração efetuada com sucesso!");
 
-            //redirect('/unidade/alterar_unidade');
+            redirect('/unidade/alterar_unidade');
 
-            $this->load->template_admin("unidade/alterar_unidade");
-        }else{
-            $this->session->set_flashdata("danger", "Erro ao alterar!");
-
-            $id_unidade = $this->input->post("id_unidade");
-            $this->load->model("unidade_model");
-            $unidade = $this->unidade_model->buscarUnidade($id_unidade);
-
-            $dados = array("unidade" => $unidade,"id_unidade" => $this->input->post("id_unidade"), "erro" => "Errado");
-            $this->load->template_admin("unidade/alterar_unidade", $dados);
         }
+        else{
+            $this->session->set_flashdata("danger", "Erro ao alterar. Verifique os dados");
+            redirect('/unidade/alterar_unidade');
+        }
+        //$this->load->template_admin("unidade/alterar_unidade");
     }
 
-    public function buscarAlteraUnidade(){
+    public function buscarAlteraUnidade($cd_cpsouza){
         autoriza(2);
 
-        $this->load->library("form_validation");
-        $this->form_validation->set_rules("cd_cpsouza", "cd_cpsouza", "required|is_natural",
-            array(
-                'required' => 'Você precisa preencher o código do CPS.',
-                'is_natural' => 'O código deve conter somente números.'
-            )
-        );
+        $this->load->model("unidade_model");
+        $unidade = $this->unidade_model->buscarUnidade($cd_cpsouza);
 
-        $this->form_validation->set_error_delimiters('<p class="alert alert-danger">', '</p>');
-
-        if($this->form_validation->run()){
-
-            $cd_cpsouza = $this->input->post("cd_cpsouza");
-            $this->load->model("unidade_model");
-            $unidade = $this->unidade_model->buscarUnidade($cd_cpsouza);
-
-            if($unidade!=null) {
-                $dados = array("unidade" => $unidade, "id_unidade" => $unidade['id_unidade']);
-                $this->load->template_admin("unidade/alterar_unidade", $dados);
-            }else{
-                $this->session->set_flashdata("danger", "Unidade não Encontrada. Verifique os dados.");
-                redirect('/unidade/alterar_unidade');
-            }
+        if($unidade!=null) {
+            $dados = array("unidade" => $unidade);
+            $this->load->template_admin("unidade/alterar_unidade", $dados);
+        }else{
+            $this->session->set_flashdata("danger", "Unidade não Encontrada. Verifique os dados.");
+            redirect('/unidade/alterar_unidade');
         }
     }
 
@@ -150,7 +132,6 @@ class Unidade extends CI_Controller{
         }
     }
 
-
     /*  Metodos auxiliares  */
 
     public function _validaFormulario($cd_cpsouza_unique){
@@ -159,6 +140,7 @@ class Unidade extends CI_Controller{
         $mensagem = array(
             'is_unique' => 'Já existe uma unidade cadastrada com este código.'
         );
+
         if($cd_cpsouza_unique){
             $this->form_validation->set_rules("cd_cpsouza", "cd_cpsouza", "required|min_length[1]|max_length[5]|is_unique[tb_unidade.cd_cpsouza]", $mensagem);
         }else{
@@ -173,8 +155,10 @@ class Unidade extends CI_Controller{
         $this->form_validation->set_rules("numero", "numero", "required|min_length[1]|max_length[8]");
         $this->form_validation->set_rules("cep", "cep", "required|min_length[1]|max_length[9]");
         $this->form_validation->set_rules("telefone", "telefone", "min_length[14]|max_length[15]");
-        $this->form_validation->set_rules("uf", "uf", "required|min_length[2]|max_length[2]");
+        $this->form_validation->set_rules("uf", "uf", "required");
+
         $this->form_validation->set_error_delimiters('<p class="alert alert-danger">', '</p>');
+        
         return $this->form_validation->run();//roda regra
     }
 }

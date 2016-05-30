@@ -1,6 +1,6 @@
-
-</div>
-</div>
+        </div> <!--//container formulario -->
+    </div><!--//main-page -->
+</div><!--//page-wrapper -->
 
 <!--footer-->
 <div class="footer">

@@ -10,16 +10,20 @@ class Turma extends CI_Controller{
         $this->load->model("unidade_model");
         $dropDownUnidade = $this->unidade_model->dropDownUnidade();
 
-        $dados = array(
-            'dropDownUnidade' => $dropDownUnidade
-        );
+        $dados = array('dropDownUnidade' => $dropDownUnidade);
 
         $this->load->template_admin("turma/cadastrar_turma", $dados);
     }
 
     public function alterar_turma(){
         autoriza(2);
-        $this->load->template_admin("turma/alterar_turma");
+
+        $this->load->model("unidade_model");
+        $unidades = $this->unidade_model->dropDownUnidade();
+
+        $dados = array("unidades" => $unidades);
+
+        $this->load->template_admin("turma/alterar_turma", $dados);
     }
 
     public function pesquisar_turma(){
@@ -39,7 +43,9 @@ class Turma extends CI_Controller{
 
         $dados = array();
 
-        if($this->_validaForm(true)){
+        $modalidade = $this->input->post("modalidade");
+
+        if($this->_validaForm(true, $modalidade)){
 
             $turma = array(
                 "cd_mat_turma" => $this->input->post("cd_mat_turma"),
@@ -55,13 +61,13 @@ class Turma extends CI_Controller{
 
             $this->load->model("turma_model");
             $this->turma_model->cadastrarTurma($turma);
-
             $this->session->set_flashdata("success", "Cadastro efetuado com sucesso");
             redirect("/turma/cadastrar_turma");
 
-        }else{
-            $this->session->set_flashdata("danger", "Erro ao cadastrar");
         }
+        /*else{
+            $this->session->set_flashdata("danger", "Erro ao cadastrar");
+        }*/
 
         $this->load->model("unidade_model");
         $dropDownUnidade = $this->unidade_model->dropDownUnidade();
@@ -91,7 +97,8 @@ class Turma extends CI_Controller{
             "dt_cadastro" => mdate("%Y-%m-%d %H:%i:%s", time()),
         );
 
-        if($this->_validaForm(false)){
+        $modalidade = $this->input->post("modalidade");
+        if($this->_validaForm(false,$modalidade )){
 
             $this->load->model("turma_model");
             $this->turma_model->alteraTurma($turma);
@@ -109,39 +116,21 @@ class Turma extends CI_Controller{
         $this->load->template_admin("turma/alterar_turma", $dados);
     }
 
-    public function buscarAlterarTurma(){
+    public function buscarAlterarTurma($cd_mat_turma){
         autoriza(2);
-        $this->load->library("form_validation");
+        $this->load->model("turma_model");
+        $turma = $this->turma_model->buscarTurma($cd_mat_turma);
 
-        $this->form_validation->set_rules("cd_mat_turma", "cd_mat_turma", "required|is_natural",
-            array(
-                'required' => 'Você precisa preencher o código da turma.',
-                'is_natural' => 'O código deve conter somente números.'
-            )
-        );
+        $this->load->model("unidade_model");
+        $dropDownUnidade = $this->unidade_model->dropDownUnidade();
 
-        $this->form_validation->set_error_delimiters('<p class="alert alert-danger">', '</p>');
-
-        $dados = array();
-
-        if($this->form_validation->run()){
-
-            $cd_mat_turma = $this->input->post("cd_mat_turma");
-
-            $this->load->model("turma_model");
-            $turma = $this->turma_model->buscarTurma($cd_mat_turma);
-
-            $this->load->model("unidade_model");
-            $dropDownUnidade = $this->unidade_model->dropDownUnidade();
-
-            if($turma!=null){
-            $dados = array("turma" => $turma,"dropDownUnidade" => $dropDownUnidade, "id_turma" => $turma['id_turma']);
-            }else{
-                $this->session->set_flashdata("danger", "Turma não encotrada. Verifique os dados");
-                redirect('/turma/alterar_turma');
-            }
+        if($turma!=null){
+            $dados = array("turma" => $turma,"dropDownUnidade" => $dropDownUnidade);
+            $this->load->template_admin("turma/alterar_turma", $dados);
+        }else{
+            $this->session->set_flashdata("danger", "Turma não encotrada. Verifique os dados");
+            redirect('/turma/alterar_turma');
         }
-        $this->load->template_admin("turma/alterar_turma", $dados);
     }
 
     public function pesquisarTurma($cd_mat_turma){
@@ -163,7 +152,7 @@ class Turma extends CI_Controller{
     public function pesquisarTurmaInUnidade(){
         autoriza(2);
         $idUnidade = $this->input->post("Unidade");
-
+        $opcao = $this->input->post("opcao");
         $this->load->model("turma_model");
         $this->load->model("unidade_model");
 
@@ -172,21 +161,24 @@ class Turma extends CI_Controller{
         $dados = array("turmas" => $turmas, "unidade" => $unidade);
 
         if ($turmas) {
-            $this->load->template_admin("turma/pesquisar_turma.php", $dados);
+            if($opcao=='Alterar'){
+                $this->load->template_admin("turma/alterar_turma.php", $dados);
+            }elseif($opcao=='Pesquisar'){
+                $this->load->template_admin("turma/pesquisar_turma.php", $dados);
+            }
         } else {
             $this->session->set_flashdata("danger", "Não há Turmas cadastradas nessa Unidade.");
             redirect("/turma/pesquisar_turma");
         }
 
     }
-
         /*  Métodos auxiliares  */
 
     /**
      * @param $unidade
      * @return mixed - retorna true caso tudo esteja correto
      */
-    public function _validaForm($cadastrar){
+    public function _validaForm($cadastrar, $modalidade){
 
         $this->load->library("form_validation");
 
@@ -201,7 +193,12 @@ class Turma extends CI_Controller{
             $this->form_validation->set_rules("cd_mat_turma", "cd_mat_turma", "required|is_natural", $mensagem);
         }
 
-        //$this->form_validation->set_rules("turno", "turno", "required", $mensagem);
+        $this->form_validation->set_rules("modalidade", "modalidade", "required", $mensagem);
+
+        if($modalidade=='Presencial'){
+            $this->form_validation->set_rules("turno", "turno", "required", $mensagem);
+        }
+
         $this->form_validation->set_rules("ano", "ano", "required|is_natural|greater_than[1968]|exact_length[4]", $mensagem);
         $this->form_validation->set_rules("semestre", "semestre", "required|is_natural", $mensagem);
         $this->form_validation->set_rules("ciclo", "ciclo", "required", $mensagem);
@@ -210,5 +207,4 @@ class Turma extends CI_Controller{
         return $this->form_validation->run();
 
     }
-
 }

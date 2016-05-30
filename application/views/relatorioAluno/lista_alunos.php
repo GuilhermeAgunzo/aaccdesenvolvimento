@@ -17,7 +17,9 @@ if(isset($alunos)) {
         echo "</div>";
 
         echo "<br/>";
-        echo "<table class='table-responsive table-striped'>";
+
+        echo "<div class='table-responsive'> ";
+        echo "<table class='table'>";
         echo "<thead>";
         echo "<tr>";
         echo "<th>Matricula</th>";
@@ -46,7 +48,7 @@ if(isset($alunos)) {
         }
         echo "</tbody>";
         echo "</table>";
-
+        echo "</div>";
 
     }else{
         echo "<p class='alert alert-danger'>Ainda não foi efetuado cadastro de alunos nesta turma.</p>";

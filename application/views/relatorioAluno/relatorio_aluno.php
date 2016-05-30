@@ -1,4 +1,4 @@
-<div id="relatorioaluno">
+
 
 <?php
 
@@ -7,9 +7,9 @@ echo form_fieldset("<h1>Relatório de Aluno</h1>");
 $atributos = array('class' => 'form-horizontal');
 echo form_open('', $atributos);
 
-echo "<div class='form-group'>";
+echo "<div class='row'>";
 echo form_label("Unidade", "id_unidade", array("class" => "col-sm-2 control-label"));
-echo "<div class='col-sm-10'>";
+echo "<div class='form-group col-md-3'>";
 array_unshift($dropDownUnidade, "Selecione");
 echo form_dropdown('id_unidade',$dropDownUnidade, "", array("class" => "form-control", "onchange" => "turma(this.value)"));
 echo form_error("id_unidade");
@@ -22,10 +22,6 @@ echo form_close();
 
 ?>
 
-
-
-
-</div>
 
 <script>
     //função ajax

@@ -41,13 +41,7 @@ class Aluno_model extends CI_Model{
         $this->db->where("cd_mat_aluno",$matricula);
         return $this->db->update("tb_aluno",$aluno);
     }
-
-
-
-
-
-
-
+    
     //sobrou do adilson
     public function buascaTurmas2(){
         return $this->db->get("tb_turma")->result_array();
