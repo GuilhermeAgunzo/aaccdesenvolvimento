@@ -5,15 +5,15 @@
         $atributos = array('class' => 'form-horizontal');
         echo form_open('professor/pesquisaProfessores',$atributos);
         echo "<div class='form-group'>";
-        echo form_label("Unidade", "unidade", array("class" => "col-sm-2 control-label"));
-        echo "<div class='col-sm-3'>";
+        echo form_label("Unidade", "unidade", array("class" => "col-md-2 control-label"));
+        echo "<div class='col-md-3'>";
         echo form_dropdown('Unidade', $unidades, "", array("class" => "form-control"));
         echo "</div>";
-        echo "<div class='col-sm-2'>";
+        echo "<div class='col-md-2'>";
         echo form_hidden("opcao", 'Alterar');
         echo form_button(array("class" => "btn btn-default", "content" => "Buscar", "type" => "submit"));
         echo "</div>";
-        echo "<div class='col-sm-6'>";
+        echo "<div class='col-md-6'>";
         echo "</div>";
         echo "</div>";
         echo form_close();
@@ -23,8 +23,8 @@
         if ($professores != null) {
             $atributos = array('class' => 'form-horizontal');
             echo form_open('professor/pesquisaNomeProfessor', $atributos);
-            echo form_label("Nome do Professor", "nm_professor", array("class" => "col-sm-2 control-label"));
-            echo "<div class='col-sm-4'>";
+            echo form_label("Nome do Professor", "nm_professor", array("class" => "col-md-2 control-label"));
+            echo "<div class='col-md-4'>";
             echo "<div class='input-group'>";
             if (isset($termo)) {
                 echo form_input(array("name" => "nm_professor", "value" => "{$termo}", "required" => "required", "id" => "nm_professor", "class" => "form-control", "maxlength" => "70"));
@@ -42,14 +42,14 @@
 
             echo "<div class='form-group'>";
             echo form_open('professor/pesquisaProfessores', 'class=form-horizontal');
-            echo "<div class='col-sm-2'>";
+            echo "<div class='col-md-2'>";
             echo form_button(array("class" => "btn btn-default", "content" => "Mostrar Todos", "type" => "submit"));
             echo form_hidden("Unidade", $unidade["id_unidade"]);
             echo form_hidden("opcao", 'Alterar');
             echo "</div>";
             echo form_close();
 
-            echo "<div class='col-sm-2'>";
+            echo "<div class='col-md-2'>";
             echo anchor("professor/alterar_professor/", "Voltar", 'class = "btn btn-default"');
             echo "</div>";
             echo "</div>";
@@ -102,54 +102,54 @@
         echo form_input(array("name" => "cd_professor", "id" => "cd_professor", "type" => "hidden", "value" => $professor["id_professor"]));
 
         echo "<div class='row'>";
-        echo form_label("Unidade", "unidade", array("class" => "col-sm-2 control-label"));
-        echo "<div class='form-group col-sm-3'>";
+        echo form_label("Unidade", "unidade", array("class" => "col-md-2 control-label"));
+        echo "<div class='form-group col-md-3'>";
         echo form_dropdown('Unidade', $unidades, $professor['id_unidade'], array("class" => "form-control"));
         echo "</div>";
         echo "</div>";
 
         echo "<div class='row'>";
-        echo form_label("Nome Completo", "nomeCompleto", array("class" => "col-sm-2 control-label"));
-        echo "<div class='form-group col-sm-3'>";
+        echo form_label("Nome Completo", "nomeCompleto", array("class" => "col-md-2 control-label"));
+        echo "<div class='form-group col-md-3'>";
         echo form_input(array("name" => "nome", "required" => "required", "id" => "nomeCompleto", "class" => "form-control", "maxlength" => "70", "value" => $professor["nm_professor"]));
         echo "</div>";
-        echo "<div class='col-sm-1'>";
+        echo "<div class='col-md-1'>";
         echo "</div>";
-        echo form_label("Email", "email", array("class" => "col-sm-1 control-label"));
-        echo "<div class='form-group col-sm-3'>";
+        echo form_label("Email", "email", array("class" => "col-md-1 control-label"));
+        echo "<div class='form-group col-md-3'>";
         echo form_input(array("name" => "email", "required" => "required", "type" => "email", "id" => "email", "class" => "form-control", "maxlength" => "70", "value" => $professor["nm_email"]));
         echo "</div>";
         echo "</div>";
 
         echo "<div class='row'>";
-        echo form_label("Telefone Residencial", "tel", array("class" => "col-sm-2 control-label"));
-        echo "<div class='form-group col-sm-2'>";
+        echo form_label("Telefone Residencial", "tel", array("class" => "col-md-2 control-label"));
+        echo "<div class='form-group col-md-2'>";
         echo form_input(array("name" => "telefone", "id" => "tel", "class" => "form-control phone-mask", "maxlength" => "15", "value" => $professor["cd_tel_residencial"]));
         echo "</div>";
-        echo "<div class='col-sm-1'>";
+        echo "<div class='col-md-1'>";
         echo "</div>";
-        echo form_label("Data de entrada", "data_entrada", array("class" => "col-sm-2 control-label"));
-        echo "<div class='form-group col-sm-2'>";
+        echo form_label("Data de entrada", "data_entrada", array("class" => "col-md-2 control-label"));
+        echo "<div class='form-group col-md-2'>";
         echo form_input(array("name" => "data_entrada", "type" => "text", "id" => "data_entrada", "class" => "form-control datepicker", "maxlength" => "10", "placeholder" => "dd/mm/yyyy", "value" => dataMysqlParaPtBr($professor["dt_entrada"])));
         echo "</div>";
         echo "</div>";
 
         echo "<div class='row'>";
-        echo form_label("Telefone Celular", "celular", array("class" => "col-sm-2 control-label"));
-        echo "<div class='form-group col-sm-2'>";
+        echo form_label("Telefone Celular", "celular", array("class" => "col-md-2 control-label"));
+        echo "<div class='form-group col-md-2'>";
         echo form_input(array("name" => "celular", "id" => "celular", "class" => "form-control phone-mask", "maxlength" => "15", "value" => $professor["cd_tel_celular"]));
         echo "</div>";
-        echo "<div class='col-sm-1'>";
+        echo "<div class='col-md-1'>";
         echo "</div>";
-        echo form_label("Data de saída", "data_saida", array("class" => "col-sm-2 control-label"));
-        echo "<div class='form-group col-sm-2'>";
+        echo form_label("Data de saída", "data_saida", array("class" => "col-md-2 control-label"));
+        echo "<div class='form-group col-md-2'>";
         echo form_input(array("name" => "data_saida", "type" => "text", "id" => "data_saida", "class" => "form-control datepicker", "maxlength" => "10", "placeholder" => "dd/mm/yyyy", "value" => dataMysqlParaPtBr($professor["dt_saida"])));
         echo "</div>";
         echo "</div>";
 
         echo "<div class='row'>";
         echo "<div class='form-group'>";
-        echo "<div class='col-sm-offset-2 col-sm-10'>";
+        echo "<div class='col-md-offset-2 col-md-10'>";
         echo form_button(array("class" => "btn btn-default", "content" => "Salvar", "type" => "submit"));
         echo "</div>";
         echo "</div>";

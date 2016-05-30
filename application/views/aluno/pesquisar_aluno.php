@@ -4,14 +4,14 @@
     if(!isset($turmas) && !isset($alunos)){
         echo form_open('aluno/pesquisaTurmasUnidade', 'class = form-horizontal');
         echo "<div class='form-group'>";
-        echo form_label("Unidade", "unidade", array("class" => "col-sm-2 control-label"));
-        echo "<div class='col-sm-3'>";
+        echo form_label("Unidade", "unidade", array("class" => "col-md-2 control-label"));
+        echo "<div class='col-md-3'>";
         echo form_dropdown('Unidade', $unidades, "", array("class" => "form-control"));
         echo "</div>";
-        echo "<div class='col-sm-2'>";
+        echo "<div class='col-md-2'>";
         echo form_button(array("class" => "btn btn-default", "content" => "Buscar", "type" => "submit"));
         echo "</div>";
-        echo "<div class='col-sm-4'>";
+        echo "<div class='col-md-4'>";
         echo "</div>";
         echo "</div>";
         echo form_close();
@@ -21,7 +21,7 @@
         echo "<h3>" . $unidade["nm_unidade"] . "</h3>";
         echo "<br/>";
         if ($turmas != null) {
-            echo "<div class='col-sm-3'>";
+            echo "<div class='col-md-3'>";
             echo "<table class='table table-striped'>";
             foreach ($turmas as $turmas) {
                 echo "<tr>";
@@ -46,8 +46,8 @@ if(isset($alunos)) {
     if ($alunos != null) {
         $atributos = array('class' => 'form-horizontal');
         echo form_open('aluno/pesquisaNomeAluno', $atributos);
-        echo form_label("Nome do Aluno", "nm_aluno", array("class" => "col-sm-2 control-label"));
-        echo "<div class='col-sm-4'>";
+        echo form_label("Nome do Aluno", "nm_aluno", array("class" => "col-md-2 control-label"));
+        echo "<div class='col-md-4'>";
         echo "<div class='input-group'>";
         if (isset($termo)){echo form_input(array("name" => "nm_aluno", "value" => "{$termo}" ,"required" => "required", "id" => "nm_aluno", "class" => "form-control", "maxlength" => "70"));
         }else{echo form_input(array("name" => "nm_aluno", "required" => "required", "id" => "nm_aluno", "class" => "form-control", "maxlength" => "70"));}
@@ -60,19 +60,19 @@ if(isset($alunos)) {
         echo "</div>";
 
         echo "<div class='form-group'>";
-        echo "<div class='col-sm-2'>";
+        echo "<div class='col-md-2'>";
         echo "<td>". anchor("aluno/pesquisarAluno/{$turma['cd_mat_turma']}", "Mostrar Todos", 'class = "btn btn-default"')."</td>";
         echo "</div>";
 
         echo form_open('aluno/pesquisaTurmasUnidade', 'class=form-horizontal');
-        echo "<div class='col-sm-2'>";
+        echo "<div class='col-md-2'>";
         echo form_button(array("class" => "btn btn-default", "content" => "Voltar", "type" => "submit"));
         echo form_hidden("Unidade", $turma["id_unidade"]);
         echo "</div>";
         echo form_close();
         echo "</div>";
 
-//        echo "<div class='col-sm-2'>";
+//        echo "<div class='col-md-2'>";
 //        echo anchor("aluno/pesquisar_aluno/", "Voltar", 'class = "btn btn-default"');
 //        echo "</div>";
 //        echo "</div>";
@@ -83,7 +83,7 @@ if(isset($alunos)) {
         }else{
             echo "<h3>Turma: {$turma['aa_ingresso']} - {$turma['dt_semestre']} ºSem - {$turma['nm_modalidade']}</h3>";
         }
-        echo "<div class='table-responsive'>";
+        echo "<div class='table-responsive tabela-listagem'>";
         echo "<table class='table'>";
         echo "<thead>";
         echo "<tr>";
@@ -119,7 +119,7 @@ if(isset($alunos)) {
         echo "</br>";
 
         echo form_open('aluno/pesquisaTurmasUnidade', 'class=form-horizontal');
-        echo "<div class='col-sm-2'>";
+        echo "<div class='col-md-2'>";
         echo form_button(array("class" => "btn btn-default", "content" => "Voltar", "type" => "submit"));
         echo form_hidden("Unidade", $turma["id_unidade"]);
         echo "</div>";

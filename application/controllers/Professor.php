@@ -119,9 +119,6 @@ class Professor extends CI_Controller{
         $this->load->template_admin("professor/cadastrar_professor", $dados);
     }
 
-
-
-
     public function pesquisaProfessores(){
         autoriza(2);
 

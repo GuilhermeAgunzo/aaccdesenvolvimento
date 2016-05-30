@@ -1,14 +1,15 @@
 <?php
 	echo form_fieldset("<h1>Cadastro de Aluno</h1>");
 
-	echo form_open('aluno/cadastro_aluno', 'class = form-horizontal');
+	echo form_open('aluno/cadastro_aluno', array('class' => 'form-horizontal', 'id' => 'unidadeform'));
 	echo "<div class='row'>";
 	echo form_label("Unidade", "unidade", array("class" => "col-md-2 control-label"));
 	echo "<div class='form-group col-md-3'>";
+	array_unshift($unidades, "Selecione");
 	if (!isset($unidade)) {
-		echo form_dropdown('Unidade', $unidades, "", array("class" => "form-control"));
+		echo form_dropdown('Unidade', $unidades, "", array("class" => "form-control", 'id' => 'unidade', 'onchange' => 'autoSubimit()'));
 	} else {
-		echo form_dropdown('Unidade', $unidades, $unidade, array("class" => "form-control"));
+		echo form_dropdown('Unidade', $unidades, $unidade, array("class" => "form-control", 'id' => 'unidade', 'onchange' => 'autoSubimit()'));
 	}
 	echo "</div>";
 	echo "<div class='col-md-1'>";
@@ -18,7 +19,6 @@
 	echo "</div>";
 	echo "</div>";
 	echo form_close();
-
 
 	echo "<br/><br/>";
 	

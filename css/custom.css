@@ -108,13 +108,25 @@
     padding-right: 45px !important; 
 }
 
+.formulario .row{
+    margin: 0px !important;
+}
+
 .formulario input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
 
-.formulario .row{
-    margin: 0px !important;
+.formulario input, .main-page select, .main-page textarea{
+    width: 100% !important;
+    padding: 5px !important;
+}
+.formulario input[disabled], .main-page select[disabled]{
+    background-color: #c6c6c6 !important;
+}
+
+.formulario label{
+    padding-left: 0px !important;
 }
 
 .formulario table{
@@ -144,15 +156,65 @@
   
 }
 
-.formulario input, .main-page select, .main-page textarea{
-    width: 100% !important;
-    padding: 5px !important;
+@media(max-width:1025px){
+.logo a {
+    padding: 1.1em 1.3em .7em;
 }
-.formulario input[disabled], .main-page select[disabled]{
-    background-color: #c6c6c6 !important;
+.logo a h1 {
+    font-size: 1.2em;
+    line-height:1em;
 }
+.logo a span {
+    font-size: .6em;
+}
+li.dropdown.head-dpdn a.dropdown-toggle {
+    padding: 1em 1.4em;
+}
+button#showLeftPush {
+    padding: 0.73em 0;
+}
+.sb-search-input {
+    font-size: 0.8em;
+    padding: 0.5em;
+}
+.search-box {
+    width: 36%;
+    margin: 1em 0 0 2em;
+}
+li.dropdown.head-dpdn {
+    padding: 1.5em 0;
+}
+li.dropdown.head-dpdn a.dropdown-toggle {
+    padding: 1.5em 1.6em 1.5em 1.2em;
+}
+.profile_details_drop a.dropdown-toggle {
+    padding: 0.6em 2em 0 1em;
+}
+.profile_details li a i.fa.lnr {
+    top: 28%;
+}
+.cbp-spmenu-vertical {
+    padding: 1em 0;
+    width: 301px;
+    top: 69px;
+}
+.cbp-spmenu-push div#page-wrapper {
+    margin: 0;
+}
+.cbp-spmenu-left.cbp-spmenu-open {
+    left:0
+}
+.cbp-spmenu-vertical {
 
-.formulario label{
-    padding-left: 0px !important;
+    left: -309px;
 }
-
+.activity-desc-sub:before {
+    left: -3.4%;
+}
+.activity-desc-sub1:after {
+    right: -3.1%;
+}
+.sticky-header .header-section {
+    height: 70px !important;
+}
+}

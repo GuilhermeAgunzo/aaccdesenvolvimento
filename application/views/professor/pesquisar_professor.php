@@ -3,15 +3,15 @@
     if(isset($unidades) && !isset($professores)){
         echo form_open('professor/pesquisaProfessores','class = form-horizontal');
         echo "<div class='form-group'>";
-        echo form_label("Unidade", "unidade", array("class" => "col-sm-2 control-label"));
-        echo "<div class='col-sm-3'>";
+        echo form_label("Unidade", "unidade", array("class" => "col-md-2 control-label"));
+        echo "<div class='col-md-3'>";
         echo form_dropdown('Unidade', $unidades, "", array("class" => "form-control"));
         echo "</div>";
-        echo "<div class='col-sm-1'>";
+        echo "<div class='col-md-1'>";
         echo form_hidden("opcao", 'Pesquisar');
         echo form_button(array("class" => "btn btn-default", "content" => "Buscar", "type" => "submit"));
         echo "</div>";
-        echo "<div class='col-sm-6'>";
+        echo "<div class='col-md-6'>";
         echo "</div>";
         echo "</div>";
         echo form_close();
@@ -20,8 +20,8 @@
     if(isset($professores)){
         if($professores !=null){
             echo form_open('professor/pesquisaNomeProfessor', 'class = form-horizontal');
-            echo form_label("Nome do Professor", "nm_professor", array("class" => "col-sm-2 control-label"));
-            echo "<div class='col-sm-4'>";
+            echo form_label("Nome do Professor", "nm_professor", array("class" => "col-md-2 control-label"));
+            echo "<div class='col-md-4'>";
             echo "<div class='input-group'>";
             if (isset($termo)) {
                 echo form_input(array("name" => "nm_professor", "value" => "{$termo}", "required" => "required", "id" => "nm_professor", "class" => "form-control", "maxlength" => "70"));
@@ -39,14 +39,14 @@
 
             echo "<div class='form-group'>";
             echo form_open('professor/pesquisaProfessores', 'class=form-horizontal');
-            echo "<div class='col-sm-2'>";
+            echo "<div class='col-md-2'>";
             echo form_button(array("class" => "btn btn-default", "content" => "Mostrar Todos", "type" => "submit"));
             echo form_hidden("Unidade", $unidade["id_unidade"]);
             echo form_hidden("opcao", 'Pesquisar');
             echo "</div>";
             echo form_close();
         
-            echo "<div class='col-sm-2'>";
+            echo "<div class='col-md-2'>";
             echo anchor("professor/pesquisar_professor/", "Voltar", 'class = "btn btn-default"');
             echo "</div>";
             echo "</div>";

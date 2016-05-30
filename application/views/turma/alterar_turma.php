@@ -4,15 +4,15 @@ echo form_fieldset("<h1>Alteração de Turma</h1>");
 if(!isset($unidade) && isset($unidades)){
     echo form_open('turma/pesquisarTurmaInUnidade', 'class = form-horizontal');
     echo "<div class='form-group'>";
-    echo form_label("Unidade", "unidade", array("class" => "col-sm-2 control-label"));
-    echo "<div class='col-sm-3'>";
+    echo form_label("Unidade", "unidade", array("class" => "col-md-2 control-label"));
+    echo "<div class='col-md-3'>";
     echo form_dropdown('Unidade', $unidades, "", array("class" => "form-control"));
     echo "</div>";
-    echo "<div class='col-sm-2'>";
+    echo "<div class='col-md-2'>";
     echo form_hidden("opcao", 'Alterar');
     echo form_button(array("class" => "btn btn-default", "content" => "Enviar", "type" => "submit"));
     echo "</div>";
-    echo "<div class='col-sm-4'>";
+    echo "<div class='col-md-4'>";
     echo "</div>";
     echo "</div>";
     echo form_close();
@@ -62,18 +62,18 @@ if(isset($turma) || isset($erro)){
     echo form_open("turma/alterarTurma",$atributos);
     echo form_hidden('id_turma', $turma['id_turma']);
     echo "<div class='row'>";
-    echo form_label("Código da Turma", "matricula", array("class" => "col-sm-2 control-label"));
-    echo "<div class='form-group col-sm-2'>";
+    echo form_label("Código da Turma", "matricula", array("class" => "col-md-2 control-label"));
+    echo "<div class='form-group col-md-2'>";
     echo form_input(array("name" => "cd_mat_turma", "type" => "number", "value" => set_value("cd_mat_turma",$turma['cd_mat_turma']), "id" => "cd_mat_turma" ,"class" => "form-control", "max" => "9999", "required" => "required"));
     echo form_error("cd_mat_turma");
     echo "</div>";
-    echo form_label("Ano de Ingresso", "ano", array("class" => "col-sm-2 control-label"));
-    echo "<div class='form-group col-sm-1'>";
+    echo form_label("Ano de Ingresso", "ano", array("class" => "col-md-2 control-label"));
+    echo "<div class='form-group col-md-1'>";
     echo form_input(array("name" => "ano", "type" => "number", "value" => set_value("ano",$turma['aa_ingresso']), "id" => "ano" ,"class" => "form-control", "pattern" => "{4,4}", "required" => "required", "min" => "1970"));
     echo form_error("ano");
     echo "</div>";
-    echo form_label("Semestre","semestre", array("class" => "col-sm-1 control-label"));
-    echo "<div class='form-group col-sm-1'>";
+    echo form_label("Semestre","semestre", array("class" => "col-md-1 control-label"));
+    echo "<div class='form-group col-md-1'>";
     $semestre = array('' => '','1' => '1','2' => '2');
     echo form_dropdown('semestre',$semestre, $turma['dt_semestre'], array("class" => "form-control"));
     echo form_error("semestre");
@@ -81,14 +81,14 @@ if(isset($turma) || isset($erro)){
     echo "</div>";
 
     echo "<div class='row'>";
-    echo form_label("Ciclo", "ciclo", array("class" => "col-sm-2 control-label"));
-    echo "<div class='form-group col-sm-2'>";
+    echo form_label("Ciclo", "ciclo", array("class" => "col-md-2 control-label"));
+    echo "<div class='form-group col-md-2'>";
     $ciclo = array('' => 'Selecione', '1' => '1º Ciclo', '2' => '2º Ciclo', '3' => '3º Ciclo', '4' => '4º Ciclo', '5' => '5º Ciclo', '6' => '6º Ciclo');
     echo form_dropdown('ciclo', $ciclo, $turma['qt_ciclo'], array("class" => "form-control"));
     echo form_error("ciclo");
     echo "</div>";
-    echo form_label("Modalidade", "modalidade", array("class" => "col-sm-2 control-label"));
-    echo "<div class='form-group col-sm-2'>";
+    echo form_label("Modalidade", "modalidade", array("class" => "col-md-2 control-label"));
+    echo "<div class='form-group col-md-2'>";
     $modalidade = array('' => 'Selecione', 'Presencial' => 'Presencial', 'EAD' => 'EAD');
     echo form_dropdown('modalidade', $modalidade, $turma['nm_modalidade'], array("class" => "form-control", "id" => "modalidade", "onchange" => "opcaoModalidade()"));
     echo form_error("modalidade");
@@ -96,8 +96,8 @@ if(isset($turma) || isset($erro)){
     echo "</div>";
 
     echo "<div class='row'>";
-    echo form_label("Turno", "turno", array("class" => "col-sm-2 control-label"));
-    echo "<div class='form-group col-sm-2'>";
+    echo form_label("Turno", "turno", array("class" => "col-md-2 control-label"));
+    echo "<div class='form-group col-md-2'>";
     $turno = array('' => 'Selecione','Manhã' => 'Manhã', 'Tarde' => 'Tarde', 'Noite' => 'Noite');
     echo form_dropdown('turno', $turno, $turma['nm_turno'], array("class" => "form-control", "id" => "turno", "required" =>"required", "onchange" => "opcaoModalidade()"));
     echo form_error("turno");
@@ -105,7 +105,7 @@ if(isset($turma) || isset($erro)){
     echo "</div>";
 
     echo "<div class='form-group'>";
-    echo "<div class='col-sm-offset-2 col-sm-10'>";
+    echo "<div class='col-md-offset-2 col-md-10'>";
     echo form_button(array("class" => "btn btn-default", "content" => "Salvar", "type" => "submit"));
     echo "</div>";
     echo "</div>";
