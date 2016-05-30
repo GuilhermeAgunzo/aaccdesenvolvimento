@@ -112,12 +112,15 @@
         echo form_label("Nome Completo", "nomeCompleto", array("class" => "col-md-2 control-label"));
         echo "<div class='form-group col-md-3'>";
         echo form_input(array("name" => "nome", "required" => "required", "id" => "nomeCompleto", "class" => "form-control", "maxlength" => "70", "value" => $professor["nm_professor"]));
+        echo form_error("nome");
         echo "</div>";
+
         echo "<div class='col-md-1'>";
         echo "</div>";
         echo form_label("Email", "email", array("class" => "col-md-1 control-label"));
         echo "<div class='form-group col-md-3'>";
         echo form_input(array("name" => "email", "required" => "required", "type" => "email", "id" => "email", "class" => "form-control", "maxlength" => "70", "value" => $professor["nm_email"]));
+        echo form_error("email");
         echo "</div>";
         echo "</div>";
 

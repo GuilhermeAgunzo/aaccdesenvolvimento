@@ -84,37 +84,6 @@ class Professor extends CI_Controller{
             if ($celular == "") {$celular = null;}
             if ($data_saida == "") {$data_saida = null;}
 
-<<<<<<< HEAD
-
-
-        $id_usuario = $this->usuariolb->cadastrarUsuario($email,2);
-        if($id_usuario > 0){
-            $usuarioLogado = $this->session->userdata("usuario_logado");
-
-            $professor = array(
-                "nm_professor" => $this->input->post("nome"),
-                "nm_email" => $email,
-                "cd_tel_residencial" => $telefone,
-                "cd_tel_celular" => $celular,
-                "dt_entrada" => $data_entrada,
-                "id_unidade" => $this->input->post("Unidade"),
-                "dt_saida" => $data_saida,
-                "status_ativo" => 1,
-                "id_user_adm_cadastrou" => $usuarioLogado['id_usuario'],
-                "id_usuario" => $id_usuario
-            );
-
-            if($this->professor_model->salvaCadastro($professor)){
-                $this->session->set_flashdata("success", "Cadastrado efetuado com sucesso.");
-                redirect('/professor/cadastro_professor');
-            }
-            else{
-                $this->session->set_flashdata("danger", "O cadastro não foi efetuado. Tente novamente mais tarde.");
-                redirect('/professor/cadastro_professor');
-            }
-        }else{
-            $this->session->set_flashdata("danger", "Email já cadastrado com outro usuário.");
-=======
             $usuarioLogado = $this->session->userdata("usuario_logado");
 
             $id_usuario = $this->usuariolb->cadastrarUsuario($email, 2);
@@ -136,11 +105,6 @@ class Professor extends CI_Controller{
             $this->session->set_flashdata("success", "Cadastrado efetuado com sucesso.");
             redirect('/professor/cadastro_professor');
         }
-        /*else{
-            $this->session->set_flashdata("danger", "O cadastro não foi efetuado. Verifique os dados ou tente mais tarde.");
->>>>>>> refs/remotes/origin/julio
-            redirect('/professor/cadastro_professor');
-        }*/
 
         $this->load->model("unidade_model");
         $unidades = $this->unidade_model->dropDownUnidade();
@@ -247,14 +211,27 @@ class Professor extends CI_Controller{
             "dt_saida" => $data_saida
         );
 
-        if($this->professor_model->alteraProfessor($id_professor,$professor)){
-            $this->session->set_flashdata("success", "Cadastrado efetuado com sucesso.");
-            redirect('/professor/alterar_professor');
+
+        if($this->_validaFormulario(false)){
+            if($this->professor_model->alteraProfessor($id_professor,$professor)){
+                $this->session->set_flashdata("success", "Alteração efetuada com sucesso.");
+                redirect('/professor/alterar_professor');
+            }
+            else{
+                $this->session->set_flashdata("danger", "A alteração não foi efetuada. Tente novamente mais tarde.");
+                redirect('/professor/alterar_professor');
+            }
+        }else{
+            $this->load->model("unidade_model");
+            $unidades = $this->unidade_model->dropDownUnidade();
+            $professor['id_professor'] = $id_professor;
+
+            $dados = array("professor" => $professor, "unidades" => $unidades);
+            $this->load->template_admin("professor/alterar_professor", $dados);
         }
-        else{
-            $this->session->set_flashdata("danger", "O cadastro não foi efetuado. Tente novamente mais tarde.");
-            redirect('/professor/alterar_professor');
-        }
+
+
+
 
     }
 
@@ -341,6 +318,10 @@ class Professor extends CI_Controller{
         }
     }
 
+    /**
+     * @param $emailUnique
+     * @return mixed
+     */
     public function _validaFormulario($emailUnique){
 
         $this->load->library("form_validation");
