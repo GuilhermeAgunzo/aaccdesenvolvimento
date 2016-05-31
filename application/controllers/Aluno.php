@@ -16,7 +16,7 @@ class Aluno extends CI_Controller{
         $this->load->model("turma_model");
         $unidades = $this->unidade_model->dropDownUnidade();
 
-        if($unidade){
+        if($unidade!=null){
             $turmasUnidade = $this->turma_model->dropDownTurmaUnidade($unidade);
             $dados = array("unidades" => $unidades, "unidade" => $unidade, "turmasUnidade" => $turmasUnidade);
         }else {
@@ -49,6 +49,7 @@ class Aluno extends CI_Controller{
 
     public function cadastrarAluno(){
         autoriza(2);
+
 
         $this->load->model("aluno_model");
         $this->load->library("usuariolb");
@@ -85,10 +86,6 @@ class Aluno extends CI_Controller{
                 redirect('/aluno/cadastro_aluno');
             }
         }
-        /*else {
-            $this->session->set_flashdata("danger", "Usuario já cadastrado Verifique os dados.");
-            redirect('/aluno/cadastro_aluno');
-        }*/
 
         $unidade = $this->input->post("unidade");
         $this->load->model("unidade_model");
@@ -188,15 +185,22 @@ class Aluno extends CI_Controller{
         }
     }
 
-    public function pesquisaTurmasUnidade(){
+    public function pesquisaTurmasUnidade()
+    {
         autoriza(2);
         $unidade = $this->input->post("Unidade");
+        if ($unidade != null) {
+
         $this->load->model("turma_model");
         $this->load->model("unidade_model");
         $turmas = $this->turma_model->buscarTurmasUnidade($unidade);
         $unidade = $this->unidade_model->buscarUnidadeId($unidade);
 
-        $dados = array("turmas"=>$turmas, "unidade" => $unidade);
+        $dados = array("turmas" => $turmas, "unidade" => $unidade);
+        }else{
+            $this->session->set_flashdata("danger", "Selecione uma Unidade.");
+            redirect('/aluno/pesquisar_aluno');
+        }
         $this->load->template_admin("aluno/pesquisar_aluno.php",$dados);
     }
 

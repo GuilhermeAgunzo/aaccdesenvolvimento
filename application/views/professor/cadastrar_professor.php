@@ -1,4 +1,5 @@
 <?php
+echo form_fieldset("<h1>Cadastro de Professor</h1>");
 
     $atributos = array('class' => 'form-horizontal');
     echo form_open('professor/cadastroProfessor', $atributos);
@@ -6,7 +7,8 @@
     echo "<div class='row'>";
     echo form_label("Unidade", "unidade", array("class" => "col-md-2 control-label"));
     echo "<div class='form-group col-md-3'>";
-    echo form_dropdown('Unidade', $unidades, "", array("class" => "form-control"));
+    $unidades = array('' =>  "Selecione")+$unidades;
+    echo form_dropdown('Unidade', $unidades, set_value("Unidade", ""), array("class" => "form-control"));
     echo form_error("Unidade");
     echo "</div>";
     echo "</div>";
@@ -14,11 +16,12 @@
     echo "<div class='row'>";
     echo form_label("Nome Completo", "nomeCompleto", array("class" => "col-md-2 control-label"));
     echo "<div class='form-group col-md-3'>";
-    echo form_input(array("name" => "nome","required" => "required","value" => set_value("nome", ""), "id" => "nomeCompleto" ,"class" => "form-control", "maxlength" => "70"));
+    echo form_input(array("name" => "nome","value" => set_value("nome", ""), "id" => "nomeCompleto" ,"class" => "form-control", "maxlength" => "70"));
+    echo form_error("nome");
     echo "</div>";
     echo form_label("Email", "email", array("class" => "col-md-1 control-label"));
     echo "<div class='form-group col-md-3'>";
-    echo form_input(array("name" => "email", "required" => "required","value" => set_value("email", ""),"type" => "email", "id" => "email" ,"class" => "form-control", "maxlength" => "70"));
+    echo form_input(array("name" => "email","value" => set_value("email", ""),"type" => "email", "id" => "email" ,"class" => "form-control", "maxlength" => "70"));
     echo form_error("email");
     echo "</div>";
     echo "</div>";

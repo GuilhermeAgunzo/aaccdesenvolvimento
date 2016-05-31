@@ -3,9 +3,9 @@ echo form_fieldset("<h1>Desativação de Aluno</h1>");
 
 $atributos = array('class' => 'form-horizontal');
 echo form_open('aluno/buscadesativaraluno', $atributos);
-echo "<div class='form-group'>";
+echo "<div class='row '>";
 echo form_label("Número de matrícula", "matricula", array("class" => "col-md-2 control-label"));
-echo "<div class='col-md-3'>";
+echo "<div class='form-group col-md-3'>";
 echo "<div class='input-group'>";
 echo form_input(array("name" => "matricula", "value" => set_value("matricula",""),"required" => "required", "id" => "matricula" ,"class" => "form-control", "maxlength" => "13", "minlength" => "13", "min" => "0"));
 echo form_error("matricula");

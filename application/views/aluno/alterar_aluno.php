@@ -3,9 +3,9 @@
 
     $atributos = array('class' => 'form-horizontal');
     echo form_open('aluno/buscarAlteraAluno', $atributos);
-    echo "<div class='form-group'>";
+    echo "<div class='row'>";
     echo form_label("Número de matrícula", "matricula", array("class" => "col-sm-2 control-label"));
-    echo "<div class='col-sm-3'>";
+    echo "<div class='form-group col-sm-3'>";
     echo "<div class='input-group'>";
     echo form_input(array("name" => "matricula", "value" => set_value("matricula",""),"required" => "required", "id" => "matricula" ,"class" => "form-control", "maxlength" => "13", "minlength" => "13", "min" => "0"));
     echo form_error("matricula");

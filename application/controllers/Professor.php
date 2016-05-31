@@ -119,6 +119,7 @@ class Professor extends CI_Controller{
         autoriza(2);
 
         $idUnidade = $this->input->post("Unidade");
+        
         $opcao = $this->input->post("opcao");
 
         $this->load->model("professor_model");
@@ -130,7 +131,6 @@ class Professor extends CI_Controller{
 
         if($opcao=='Pesquisar'){
             $this->load->template_admin("professor/pesquisar_professor.php",$dados);
-
         }elseif($opcao=='Alterar'){
             $this->load->template_admin("professor/alterar_professor.php",$dados);
         }elseif($opcao=='Desativar'){
@@ -337,6 +337,8 @@ class Professor extends CI_Controller{
             $this->form_validation->set_rules("email", "email", "required|valid_email", $mensagemEmail);
         }
 
+        $this->form_validation->set_rules("Unidade", "Unidade", "required", "required = 'Você deve selecionar %s.'");
+        
         $this->form_validation->set_rules("nome", "nome", "required", "required = 'Você precisa preencher %s.'");
 
         $this->form_validation->set_error_delimiters('<p class="alert alert-danger">', '</p>');

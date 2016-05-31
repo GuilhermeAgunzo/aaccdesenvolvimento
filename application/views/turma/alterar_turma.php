@@ -3,16 +3,15 @@ echo form_fieldset("<h1>Alteração de Turma</h1>");
 
 if(!isset($unidade) && isset($unidades)){
     echo form_open('turma/pesquisarTurmaInUnidade', 'class = form-horizontal');
-    echo "<div class='form-group'>";
+    echo "<div class='row'>";
     echo form_label("Unidade", "unidade", array("class" => "col-md-2 control-label"));
-    echo "<div class='col-md-3'>";
-    echo form_dropdown('Unidade', $unidades, "", array("class" => "form-control"));
+    echo "<div class='form-group col-md-3'>";
+    $unidades = array('' =>  "Selecione")+$unidades;
+    echo form_dropdown('Unidade', $unidades, "", array("class" => "form-control", 'required' => 'required'));
     echo "</div>";
     echo "<div class='col-md-2'>";
     echo form_hidden("opcao", 'Alterar');
     echo form_button(array("class" => "btn btn-default", "content" => "Enviar", "type" => "submit"));
-    echo "</div>";
-    echo "<div class='col-md-4'>";
     echo "</div>";
     echo "</div>";
     echo form_close();
@@ -20,10 +19,6 @@ if(!isset($unidade) && isset($unidades)){
 //opcoes de escolher as turmas da unidade escolhida na opcao anterior
 if(isset($turmas)) {
     echo "<h3>" . $unidade["nm_unidade"] . "</h3>";
-    echo "<br/>";
-    echo anchor("turma/alterar_turma/", "Voltar", 'class = "btn btn-default"');
-    echo "<br/>";
-    echo "<br/>";
 
     if ($turmas != null) {
         echo "<div class='table-responsive'>";
@@ -33,20 +28,28 @@ if(isset($turmas)) {
         echo "<th>Matricula da Turma</th>";
         echo "<th>Turma</th>";
         echo "<th>Turno/Modalidade</th>";
+        echo "<th></th>";
         echo "</tr>";
         echo "</thead>";
         foreach ($turmas as $turmas) {
             echo "<tr>";
-            echo "<td>".anchor("turma/buscarAlterarTurma/{$turmas['cd_mat_turma']}",$turmas['cd_mat_turma'])."</td>";
+            echo "<td>".$turmas['cd_mat_turma']."</td>";
             echo "<td>{$turmas['aa_ingresso']}/{$turmas['dt_semestre']} - {$turmas['qt_ciclo']}º Ciclo</td>";
             if($turmas['nm_turno']!=null) {
                 echo "<td>" . $turmas['nm_turno'] . "</td>";
             }else{
                 echo "<td>".$turmas['nm_modalidade']."</td>";
             }
+            echo "<td>" .anchor("turma/buscarAlterarTurma/{$turmas['cd_mat_turma']}", "Alterar","class = 'btn btn-default btn-alterar btn-xs'") ."</td></td>";
             echo "</tr>";
         }
         echo "</table>";
+        echo "</div>";
+
+        echo "<div class='row'>";
+        echo "<div class='col-md-2'>";
+        echo anchor("turma/alterar_turma/", "Voltar", 'class = "btn btn-default"');
+        echo "</div>";
         echo "</div>";
     }else{
         echo "<p class='alert alert-danger'> Nenhuma Turma cadastrada nessa Unidade.</p>";
