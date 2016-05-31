@@ -58,10 +58,6 @@ class Unidade extends CI_Controller{
             $this->session->set_flashdata("success", "Cadastro efetuado com sucesso!");
             redirect('/unidade/cadastrar_unidade');
         }
-        /*else{
-            $this->session->set_flashdata("danger", "Erro ao cadastrar!");
-            $this->load->template_admin("unidade/cadastrar_unidade");
-        }*/
         $this->load->template_admin("unidade/cadastrar_unidade");
     }
 
@@ -95,10 +91,14 @@ class Unidade extends CI_Controller{
 
         }
         else{
+
             $this->session->set_flashdata("danger", "Erro ao alterar. Verifique os dados");
-            redirect('/unidade/alterar_unidade');
+            $this->load->model("unidade_model");
+            $unidade = $this->unidade_model->buscarUnidadeId($this->input->post("id_unidade"));
+            $dados = array("unidade" => $unidade);
+            $this->load->template_admin("unidade/alterar_unidade.php", $dados);
+
         }
-        //$this->load->template_admin("unidade/alterar_unidade");
     }
 
     public function buscarAlteraUnidade($cd_cpsouza){
