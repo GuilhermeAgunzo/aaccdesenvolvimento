@@ -8,9 +8,9 @@ class Turma extends CI_Controller{
         autoriza(2);
 
         $this->load->model("unidade_model");
-        $dropDownUnidade = $this->unidade_model->dropDownUnidade();
+        $unidades = $this->unidade_model->dropDownUnidade();
 
-        $dados = array('dropDownUnidade' => $dropDownUnidade);
+        $dados = array('unidades' => $unidades);
 
         $this->load->template_admin("turma/cadastrar_turma", $dados);
     }
@@ -65,16 +65,11 @@ class Turma extends CI_Controller{
             redirect("/turma/cadastrar_turma");
 
         }
-        /*else{
-            $this->session->set_flashdata("danger", "Erro ao cadastrar");
-        }*/
 
         $this->load->model("unidade_model");
-        $dropDownUnidade = $this->unidade_model->dropDownUnidade();
+        $unidades = $this->unidade_model->dropDownUnidade();
 
-        $dados = array(
-            'dropDownUnidade' => $dropDownUnidade
-        );
+        $dados = array('unidades' => $unidades);
 
         $this->load->template_admin("turma/cadastrar_turma", $dados);
     }
@@ -183,11 +178,12 @@ class Turma extends CI_Controller{
         $this->load->library("form_validation");
 
         $mensagem = array(
-            "is_unique" => "Já existe uma turma cadastrada com este código"
+            "is_unique" => "Já existe uma turma cadastrada com este código",
+            'required' => 'Você precisa preencher %s.'
         );
 
         if($cadastrar){
-            $this->form_validation->set_rules("unidade", "unidade", "required|is_natural", $mensagem);
+            $this->form_validation->set_rules("unidade", "unidade", "required", $mensagem);
             $this->form_validation->set_rules("cd_mat_turma", "cd_mat_turma", "required|is_natural|is_unique[tb_turma.cd_mat_turma]", $mensagem);
         }else{
             $this->form_validation->set_rules("cd_mat_turma", "cd_mat_turma", "required|is_natural", $mensagem);

@@ -14,12 +14,13 @@ if(isset($unidades)) { ?>
         <th>CEP</th>
         <th>Cidade</th>
         <th>Telefone da Unidade</th>
+        <th></th>
     </tr>
     </thead>
     <?php
     foreach ($unidades as $unidades) {
         echo "<tr>";
-        echo "<td>".anchor("unidade/buscarAlteraUnidade/{$unidades['cd_cpsouza']}",$unidades['nm_unidade'])."</td>";
+        echo "<td>{$unidades['nm_unidade']}</td>";
         echo "<td>{$unidades['cd_cpsouza']}</td>";
         echo "<td>{$unidades['nm_endereco']}, {$unidades['cd_num_endereco']}</td>";
         echo "<td>{$unidades['nm_complemento_endereco']}</td>";
@@ -27,6 +28,7 @@ if(isset($unidades)) { ?>
         echo "<td>{$unidades['cd_cep_endereco']}</td>";
         echo "<td>{$unidades['nm_cidade']}</td>";
         echo "<td>{$unidades['cd_telefone']}</td>";
+        echo "<td>".anchor("unidade/buscarAlteraUnidade/{$unidades['cd_cpsouza']}","Alterar", "class = 'btn btn-default btn-alterar btn-xs'")."</td>";
         echo "</tr>";
     }
         ?>
