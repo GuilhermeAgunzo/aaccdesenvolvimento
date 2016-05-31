@@ -13,14 +13,14 @@ if(!isset($linhaEvento)){
     echo "<div class='form-group'>";
     echo form_label("Data do Evento", "dataDoEvento", array("class" => "col-sm-2 control-label"));
     echo "<div class='col-sm-4'>";
-    echo form_input(array("name" => "dtEvento","required" => "required","type" => "date", "id" => "dtEvento" ,"class" => "form-control", "maxlength" => "10"));
+    echo form_input(array("name" => "dtEvento","required" => "required","type" => "text", "id" => "dtEvento" ,"class" => "form-control datepicker", "maxlength" => "10", "placeholder" => "dd/mm/aaaa"));
     echo "</div>";
     echo "</div>";
 
     echo "<div class='form-group'>";
     echo form_label("Data Final do Evento", "dataFinalDoEvento", array("class" => "col-sm-2 control-label"));
     echo "<div class='col-sm-4'>";
-    echo form_input(array("name" => "dtFinalEvento","required" => "required","type" => "date", "id" => "dtFinalEvento" ,"class" => "form-control", "maxlength" => "10"));
+    echo form_input(array("name" => "dtFinalEvento","required" => "required","type" => "text", "id" => "dtFinalEvento" ,"class" => "form-control datepicker", "maxlength" => "10", "placeholder" => "dd/mm/aaaa"));
     echo "</div>";
     echo "</div>";
 
@@ -33,7 +33,7 @@ if(!isset($linhaEvento)){
     echo "</br>";
 }
 if(isset($eventos)){
-    echo "<table>";
+    echo "<table class='table'>";
     echo "<tr>";
     echo "<th> Evento </th>";
     echo "<th> Local </th>";
@@ -47,7 +47,7 @@ if(isset($eventos)){
 
     foreach ($eventos as $evento){
         echo "<tr>";
-        echo "<td>". anchor("evento/{$evento['id_evento']}", $evento['nm_evento']) . "</td>";
+        echo "<td>".  $evento['nm_evento'] . "</td>";
         echo "<td>". $evento['local_evento'] ."</td>";
         echo "<td>". dataMysqlParaPtBr($evento['dt_inicio_evento']) ."</td>";
         echo "<td>". dataMysqlParaPtBr($evento['dt_final_evento']) ."</td>";
@@ -79,14 +79,14 @@ if(isset($linhaEvento)){
 echo "<div class='form-group'>";
 echo form_label("Data do Evento", "dataDoEvento", array("class" => "col-sm-2 control-label"));
 echo "<div class='col-sm-4'>";
-echo form_input(array("name" => "dtEvento","required" => "required","type" => "date", "id" => "dtEvento" , "value" => $linhaEvento['dt_inicio_evento'],"class" => "form-control", "maxlength" => "10"));
+echo form_input(array("name" => "dtEvento","required" => "required","type" => "text", "id" => "dtEvento" , "value" => dataMysqlParaPtBr($linhaEvento['dt_inicio_evento']),"class" => "form-control datepicker", "maxlength" => "10", "placeholder" => "dd/mm/aaaa"));
 echo "</div>";
 echo "</div>";
 
 echo "<div class='form-group'>";
 echo form_label("Data Final do Evento", "dataFinalDoEvento", array("class" => "col-sm-2 control-label"));
 echo "<div class='col-sm-4'>";
-echo form_input(array("name" => "dtFinalEvento","required" => "required","type" => "date", "id" => "dtFinalEvento" , "value" => $linhaEvento['dt_final_evento'],"class" => "form-control", "maxlength" => "10"));
+echo form_input(array("name" => "dtFinalEvento","required" => "required","type" => "text", "id" => "dtFinalEvento" , "value" => dataMysqlParaPtBr($linhaEvento['dt_final_evento']),"class" => "form-control datepicker", "maxlength" => "10", "placeholder" => "dd/mm/aaaa"));
 echo "</div>";
 echo "</div>";
 

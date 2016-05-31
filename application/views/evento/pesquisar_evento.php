@@ -7,14 +7,14 @@ echo form_open('evento/pesquisaEventos', $atributos);
 echo "<div class='form-group'>";
 echo form_label("Data do Evento", "dataDoEvento", array("class" => "col-sm-2 control-label"));
 echo "<div class='col-sm-4'>";
-echo form_input(array("name" => "dtEvento","required" => "required","type" => "date", "id" => "dtEvento" ,"class" => "form-control", "maxlength" => "10"));
+echo form_input(array("name" => "dtEvento","required" => "required","type" => "text", "id" => "dtEvento" ,"class" => "form-control datepicker", "maxlength" => "10", "placeholder" => "dd/mm/aaaa"));
 echo "</div>";
 echo "</div>";
 
 echo "<div class='form-group'>";
 echo form_label("Data Final do Evento", "dataFinalDoEvento", array("class" => "col-sm-2 control-label"));
 echo "<div class='col-sm-4'>";
-echo form_input(array("name" => "dtFinalEvento","required" => "required","type" => "date", "id" => "dtFinalEvento" ,"class" => "form-control", "maxlength" => "10"));
+echo form_input(array("name" => "dtFinalEvento","required" => "required","type" => "text", "id" => "dtFinalEvento" ,"class" => "form-control datepicker", "maxlength" => "10", "placeholder" => "dd/mm/aaaa"));
 echo "</div>";
 echo "</div>";
 
@@ -28,7 +28,7 @@ if($this->session->flashdata("danger")){
     echo "<p class='alert alert-danger'>". $this->session->flashdata("danger") ."</p>";
 }
 if(isset($eventos)){
-    echo "<table>";
+    echo "<table class='table'>";
         echo "<tr>";
             echo "<th> Evento </th>";
             echo "<th> Local </th>";

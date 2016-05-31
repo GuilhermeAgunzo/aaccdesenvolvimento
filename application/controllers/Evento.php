@@ -16,11 +16,7 @@ class Evento extends CI_Controller
     }
 
     public function pesquisar_evento(){
-
-        /*$this->load->model("evento_model");
-        $eventos = $this->evento_model->buscaEventosEntreDatas();
-        $dados = array("eventos" => $eventos);
-        */
+        
         $this->load->template_admin("evento/pesquisar_evento.php");
 
     }
@@ -44,8 +40,8 @@ class Evento extends CI_Controller
         $evento = array(
             "nm_evento" => $this->input->post("nmEvento"),
             "local_evento" => $this->input->post("nmLocalEvento"),
-            "dt_inicio_evento" => $this->input->post("dtEvento"),
-            "dt_final_evento" => $this->input->post("dtFinalEvento"),
+            "dt_inicio_evento" => dataPtBrParaMysql($this->input->post("dtEvento")),
+            "dt_final_evento" => dataPtBrParaMysql($this->input->post("dtFinalEvento")),
             "hr_evento" => $this->input->post("hrEvento"),
             "qt_horas_evento" => $this->input->post("qtHorasEvento"),
             "ds_evento" => $this->input->post("dsEvento"),
@@ -65,8 +61,8 @@ class Evento extends CI_Controller
 
         $this->load->model("evento_model");
 
-        $dataInicial = $this->input->post("dtEvento");
-        $dataFinal = $this->input->post("dtFinalEvento");
+        $dataInicial = dataPtBrParaMysql($this->input->post("dtEvento"));
+        $dataFinal = dataPtBrParaMysql($this->input->post("dtFinalEvento"));
 
         $eventos = $this->evento_model->buscaEventosEntreDatas($dataInicial,$dataFinal);
         if($eventos != null){
@@ -83,8 +79,8 @@ class Evento extends CI_Controller
 
         $this->load->model("evento_model");
 
-        $dataInicial = $this->input->post("dtEvento");
-        $dataFinal = $this->input->post("dtFinalEvento");
+        $dataInicial = dataPtBrParaMysql($this->input->post("dtEvento"));
+        $dataFinal = dataPtBrParaMysql($this->input->post("dtFinalEvento"));
 
         $eventos = $this->evento_model->buscaEventosEntreDatas($dataInicial,$dataFinal);
         if($eventos != null){
@@ -111,8 +107,8 @@ class Evento extends CI_Controller
         $this->load->model("evento_model");
 
         $eventoId = $this->input->post("eventoId");
-        $dataInicial = $this->input->post("dtEvento");
-        $dataFinal = $this->input->post("dtFinalEvento");
+        $dataInicial = dataPtBrParaMysql($this->input->post("dtEvento"));
+        $dataFinal = dataPtBrParaMysql($this->input->post("dtFinalEvento"));
         $horaEvento = $this->input->post("hrEvento");
         $usuarioLogado = $this->session->userdata("usuario_logado");
         $horaAtual = date('Y-m-d H:i:s');
