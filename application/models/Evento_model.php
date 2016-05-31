@@ -12,6 +12,7 @@ class Evento_model extends CI_Model{
     public function buscaEventosEntreDatas($dataInicial,$dataFinal){
         $this->db->where("dt_inicio_evento >= ",$dataInicial);
         $this->db->where("dt_final_evento <= ",$dataFinal);
+        $this->db->order_by("dt_inicio_evento");
         return $this->db->get("tb_evento")->result_array();
     }
     public function buscaEventoPorId($id){
