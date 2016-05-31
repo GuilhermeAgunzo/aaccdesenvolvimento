@@ -102,7 +102,11 @@ if(isset($turma) || isset($erro)){
     echo form_label("Turno", "turno", array("class" => "col-md-2 control-label"));
     echo "<div class='form-group col-md-2'>";
     $turno = array('' => 'Selecione','Manhã' => 'Manhã', 'Tarde' => 'Tarde', 'Noite' => 'Noite');
-    echo form_dropdown('turno', $turno, $turma['nm_turno'], array("class" => "form-control", "id" => "turno", "required" =>"required", "onchange" => "opcaoModalidade()"));
+    if($turma['nm_modalidade']=='Presencial'){
+        echo form_dropdown('turno', $turno, $turma['nm_turno'], array("class" => "form-control", "id" => "turno", "required" =>"required", "onchange" => "opcaoModalidade()"));
+    }elseif($turma['nm_modalidade']=='EAD'){
+        echo form_dropdown('turno', $turno, $turma['nm_turno'], array("class" => "form-control", "id" => "turno", 'disabled' => 'disabled', "required" =>"required", "onchange" => "opcaoModalidade()"));
+    }
     echo form_error("turno");
     echo "</div>";
     echo "</div>";
