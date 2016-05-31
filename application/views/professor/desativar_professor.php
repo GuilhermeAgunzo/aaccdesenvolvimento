@@ -3,16 +3,15 @@
 
     if(isset($unidades) && !isset($professores) && !isset($professor)){
         echo form_open('professor/pesquisaProfessores','class = form-horizontal');
-        echo "<div class='form-group'>";
+        echo "<div class='row'>";
         echo form_label("Unidade", "unidade", array("class" => "col-md-2 control-label"));
-        echo "<div class='col-md-3'>";
-        echo form_dropdown('Unidade', $unidades, "", array("class" => "form-control"));
+        echo "<div class='form-group col-md-3'>";
+        $unidades = array('' =>  "Selecione")+$unidades;
+        echo form_dropdown('Unidade', $unidades, "", array("class" => "form-control", "required" => "required" ));
         echo "</div>";
         echo "<div class='col-md-2'>";
         echo form_hidden("opcao", 'Desativar');
         echo form_button(array("class" => "btn btn-default", "content" => "Buscar", "type" => "submit"));
-        echo "</div>";
-        echo "<div class='col-md-6'>";
         echo "</div>";
         echo "</div>";
         echo form_close();
@@ -67,11 +66,12 @@
             echo "<th>Saída</th>";
             echo "<th>Data de cadastro</th>";
             echo "<th>Status</th>";
+            echo "<th></th>";
             echo "</tr>";
             echo "</thead>";
             foreach ($professores as $professores){
                 echo "<tr>";
-                echo "<td>" . anchor("professor/buscaDesativaProfessor/{$professores['id_professor']}",$professores["nm_professor"]) . "</td>";
+                echo "<td>" . $professores["nm_professor"] . "</td>";
                 echo "<td>" . $professores["nm_email"] . "</td>";
                 echo "<td>" . $professores["cd_tel_residencial"] . "</td>";
                 echo "<td>" . $professores["cd_tel_celular"] . "</td>";
@@ -84,6 +84,7 @@
                 }else{
                     echo "<td>Inativo</td>";
                 }
+                echo "<td>" . anchor("professor/buscaDesativaProfessor/{$professores['id_professor']}", "Desativar", "class = 'btn btn-default btn-desativar btn-xs'") . "</td>";
                 echo "</tr>";
             }
             echo "</table>";
@@ -142,3 +143,20 @@
         echo form_close();
     }
     ?>
+        <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="modalLabel">Excluir Item</h4>
+                    </div>
+                    <div class="modal-body">
+                        Deseja realmente excluir este item?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Sim</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">N&atilde;o</button>
+                    </div>
+                </div>
+            </div>
+        </div>

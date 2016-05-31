@@ -1,17 +1,17 @@
  <?php
     echo form_fieldset("<h1>Pesquisa de Professor</h1>");
+
     if(isset($unidades) && !isset($professores)){
         echo form_open('professor/pesquisaProfessores','class = form-horizontal');
-        echo "<div class='form-group'>";
+        echo "<div class='row'>";
         echo form_label("Unidade", "unidade", array("class" => "col-md-2 control-label"));
-        echo "<div class='col-md-3'>";
-        echo form_dropdown('Unidade', $unidades, "", array("class" => "form-control"));
+        echo "<div class='form-group col-md-3'>";
+        $unidades = array('' =>  "Selecione")+$unidades;
+        echo form_dropdown('Unidade', $unidades, "", array("class" => "form-control", "required" => "required"));
         echo "</div>";
-        echo "<div class='col-md-1'>";
+        echo "<div class='col-md-2'>";
         echo form_hidden("opcao", 'Pesquisar');
         echo form_button(array("class" => "btn btn-default", "content" => "Buscar", "type" => "submit"));
-        echo "</div>";
-        echo "<div class='col-md-6'>";
         echo "</div>";
         echo "</div>";
         echo form_close();

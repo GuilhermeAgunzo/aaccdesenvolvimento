@@ -2,18 +2,16 @@
     echo form_fieldset("<h1>Alteração de Professor</h1>");
 
     if(isset($unidades) && !isset($professores) && !isset($professor)){
-        $atributos = array('class' => 'form-horizontal');
-        echo form_open('professor/pesquisaProfessores',$atributos);
-        echo "<div class='form-group'>";
+        echo form_open('professor/pesquisaProfessores','class = form-horizontal');
+        echo "<div class='row'>";
         echo form_label("Unidade", "unidade", array("class" => "col-md-2 control-label"));
-        echo "<div class='col-md-3'>";
-        echo form_dropdown('Unidade', $unidades, "", array("class" => "form-control"));
+        echo "<div class='form-group col-md-3'>";
+        $unidades = array('' =>  "Selecione")+$unidades;
+        echo form_dropdown('Unidade', $unidades, "", array("class" => "form-control", "required" => "required" ));
         echo "</div>";
         echo "<div class='col-md-2'>";
         echo form_hidden("opcao", 'Alterar');
         echo form_button(array("class" => "btn btn-default", "content" => "Buscar", "type" => "submit"));
-        echo "</div>";
-        echo "<div class='col-md-6'>";
         echo "</div>";
         echo "</div>";
         echo form_close();
@@ -69,11 +67,13 @@
             echo "<th>Saída</th>";
             echo "<th>Data de cadastro</th>";
             echo "<th>Status</th>";
+            echo "<th></th>";
+
             echo "</tr>";
             echo "</thead>";
             foreach ($professores as $professores){
                 echo "<tr>";
-                echo "<td>" . anchor("professor/buscaAlteraProfessor/{$professores['id_professor']}",$professores["nm_professor"]) . "</td>";
+                echo "<td>" . $professores["nm_professor"] . "</td>";
                 echo "<td>" . $professores["nm_email"] . "</td>";
                 echo "<td>" . $professores["cd_tel_residencial"] . "</td>";
                 echo "<td>" . $professores["cd_tel_celular"] . "</td>";
@@ -86,6 +86,7 @@
                 }else{
                     echo "<td>Inativo</td>";
                 }
+                echo "<td>" .anchor("professor/buscaAlteraProfessor/{$professores['id_professor']}","Alterar", "class = 'btn btn-default btn-alterar btn-xs'"). "</td>";
                 echo "</tr>";
             }
             echo "</table>";

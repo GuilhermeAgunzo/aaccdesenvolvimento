@@ -5,23 +5,21 @@
 	echo "<div class='row'>";
 	echo form_label("Unidade", "unidade", array("class" => "col-md-2 control-label"));
 	echo "<div class='form-group col-md-3'>";
-	array_unshift($unidades, "Selecione");
+	$unidades = array('' =>  "Selecione")+$unidades;
 	if (!isset($unidade)) {
-		echo form_dropdown('Unidade', $unidades, "", array("class" => "form-control", 'id' => 'unidade', 'onchange' => 'autoSubimit()'));
+		echo form_dropdown('Unidade', $unidades, "", array("class" => "form-control", 'id' => 'unidade', 'required' => 'required'));
 	} else {
-		echo form_dropdown('Unidade', $unidades, $unidade, array("class" => "form-control", 'id' => 'unidade', 'onchange' => 'autoSubimit()'));
+		echo form_dropdown('Unidade', $unidades, $unidade, array("class" => "form-control", 'id' => 'unidade', 'required' => 'required'));
 	}
 	echo "</div>";
-	echo "<div class='col-md-1'>";
-	echo "</div>";
-	echo "<div class='form-group col-md-2'>";
+	echo "<div class='col-md-2'>";
 	echo form_button(array("class" => "btn btn-default", "content" => "Enviar", "type" => "submit"));
 	echo "</div>";
 	echo "</div>";
 	echo form_close();
 
 	echo "<br/><br/>";
-	
+
 	if(isset($unidade)) {
 		$atributos = array('class' => 'form-horizontal');
 		echo form_open('aluno/cadastraraluno', $atributos);

@@ -3,15 +3,14 @@
     //opcçoes de escolher a unidade
     if(!isset($turmas) && !isset($alunos)){
         echo form_open('aluno/pesquisaTurmasUnidade', 'class = form-horizontal');
-        echo "<div class='form-group'>";
+        echo "<div class='row'>";
         echo form_label("Unidade", "unidade", array("class" => "col-md-2 control-label"));
-        echo "<div class='col-md-3'>";
+        echo "<div class='form-group col-md-3'>";
+        $unidades = array('' =>  "Selecione")+$unidades;
         echo form_dropdown('Unidade', $unidades, "", array("class" => "form-control"));
         echo "</div>";
         echo "<div class='col-md-2'>";
         echo form_button(array("class" => "btn btn-default", "content" => "Buscar", "type" => "submit"));
-        echo "</div>";
-        echo "<div class='col-md-4'>";
         echo "</div>";
         echo "</div>";
         echo form_close();
@@ -19,7 +18,6 @@
     //opcoes de escolher as turmas da unidade escolhida na opcao anterior
     if(!isset($alunos) && isset($turmas)) {
         echo "<h3>" . $unidade["nm_unidade"] . "</h3>";
-        echo "<br/>";
         if ($turmas != null) {
             echo "<div class='col-md-3'>";
             echo "<table class='table table-striped'>";
