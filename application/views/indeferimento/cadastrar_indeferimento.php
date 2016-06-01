@@ -4,7 +4,7 @@
 
 
             $atributos = array('class' => 'form-horizontal');
-            echo form_open('email/send', $atributos);
+            echo form_open('indeferimento/cadastraMotivo', $atributos);
             echo "<div class='form-group'>";
             echo form_label("Motivo do Indeferimento", "motivoInd", array("class" => "col-sm-2 control-label"));
             echo "<div class='col-sm-6'>";

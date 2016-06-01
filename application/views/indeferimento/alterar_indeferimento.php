@@ -3,28 +3,14 @@ echo form_fieldset("<h1>Alteração do Motivo de Indeferimento</h1>");
 
 
 $atributos = array('class' => 'form-horizontal');
-echo form_open('email/send', $atributos);
+echo form_open('Indeferimento/alteraIndeferimento', $atributos);
 
 echo "<div class='form-group'>";
 echo form_label("Selecione o Motivo do Indeferimento:", "motivoInd", array("class" => "col-sm-2 control-label"));
 echo "<div class='col-sm-10'>";
-echo "<table border='1'>";
-echo "<tr>";
-echo "<td>Motivo do Indeferimento 1</td>";
-echo "</tr>";
-echo "<tr>";
-echo "<td>Motivo do Indeferimento 2</td>";
-echo "</tr>";
-echo "<tr>";
-echo "<td>Motivo do Indeferimento 3</td>";
-echo "</tr>";
-echo "<tr>";
-echo "<td>Motivo do Indeferimento 4</td>";
-echo "</tr>";
-echo "<tr>";
-echo "<td>Motivo do Indeferimento 5</td>";
-echo "</tr>";
-echo "</table>";
+$motivos = array('' =>  "Selecione")+$motivos;
+echo form_dropdown('Motivo', $motivos, "", array("class" => "form-control", "required" => "required"));
+
 echo "</br>";
 echo "</div>";
 echo "</div>";

@@ -51,7 +51,7 @@ class Evento extends CI_Controller
             "status_ativo" => 1
         );
         if($this->evento_model->salvaCadastro($evento)){
-            $this->session->set_flashdata("success", "Cadastrado efetuado com sucesso.");
+            $this->session->set_flashdata("success", "Cadastro efetuado com sucesso.");
             redirect('/evento/cadastrar_evento');
         }
     }
