@@ -1,10 +1,6 @@
 <?php
 echo form_fieldset("<h1>Cadastro de Evento</h1>");
 
-if($this->session->flashdata("success"))
-    echo "<p class='alert alert-success'>" . $this->session->flashdata("success") . "</p>";
-if($this->session->flashdata("danger"))
-    echo "<p class='alert alert-danger'>" . $this->session->flashdata("danger") . "</p>";
 
 $atributos = array('class' => 'form-horizontal');
 echo form_open('Evento/cadastroEvento', $atributos);

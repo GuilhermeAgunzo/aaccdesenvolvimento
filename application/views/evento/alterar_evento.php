@@ -1,11 +1,6 @@
 <?php
 echo form_fieldset("<h1>Alteração de Evento</h1>");
-if($this->session->flashdata("success")){
-    echo "<p class='alert alert-success'>". $this->session->flashdata("success") ."</p>";
-}
-if($this->session->flashdata("danger")){
-    echo "<p class='alert alert-success'>". $this->session->flashdata("danger") ."</p>";
-}
+
 $atributos = array('class' => 'form-horizontal');
 if(!isset($linhaEvento)){
     echo form_open('evento/pesquisaAlteraEventos', $atributos);

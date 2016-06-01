@@ -70,16 +70,12 @@ if(isset($alunos)) {
         echo form_close();
         echo "</div>";
 
-//        echo "<div class='col-md-2'>";
-//        echo anchor("aluno/pesquisar_aluno/", "Voltar", 'class = "btn btn-default"');
-//        echo "</div>";
-//        echo "</div>";
 
         echo "<br/><br/>";
         if($turma['nm_turno']!=null){
-            echo "<h3>Turma: {$turma['aa_ingresso']} - {$turma['dt_semestre']} ºSem - {$turma['nm_turno']}</h3>";
+            echo "<h3>Turma: {$turma['aa_ingresso']} - {$turma['dt_semestre']}º Sem - {$turma['nm_turno']}</h3>";
         }else{
-            echo "<h3>Turma: {$turma['aa_ingresso']} - {$turma['dt_semestre']} ºSem - {$turma['nm_modalidade']}</h3>";
+            echo "<h3>Turma: {$turma['aa_ingresso']} - {$turma['dt_semestre']}º Sem - {$turma['nm_modalidade']}</h3>";
         }
         echo "<div class='table-responsive tabela-listagem'>";
         echo "<table class='table'>";

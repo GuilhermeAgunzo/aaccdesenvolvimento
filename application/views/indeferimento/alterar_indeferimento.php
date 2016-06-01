@@ -3,10 +3,6 @@ echo form_fieldset("<h1>Alteração do Motivo de Indeferimento</h1>");
 
 
 $atributos = array('class' => 'form-horizontal');
-if($this->session->flashdata("success"))
-    echo "<p class='alert alert-success'>". $this->session->flashdata("success") ."</p>";
-if($this->session->flashdata("danger"))
-    echo "<p class='alert alert-danger'>". $this->session->flashdata("danger") ."</p>";
 
 echo form_open('Indeferimento/alteraIndeferimento', $atributos);
 
