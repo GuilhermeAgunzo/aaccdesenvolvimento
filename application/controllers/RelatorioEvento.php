@@ -22,7 +22,7 @@ class RelatorioEvento extends CI_Controller{
             $this->load->template_admin("aluno/relatorio_evento.php",$dados);
         }else{
             $this->session->set_flashdata("danger", "Não há eventos no período informado");
-            redirect('aluno/relatorio_evento');
+            redirect('RelatorioEvento/');
         }
     }
 

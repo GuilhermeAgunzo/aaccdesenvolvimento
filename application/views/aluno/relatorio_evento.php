@@ -2,18 +2,19 @@
 echo form_fieldset("<h1>Relatório de Eventos</h1>");
 
 $atributos = array('class' => 'form-horizontal');
+
 echo form_open('RelatorioEvento/buscar', $atributos);
 echo "<div class='form-group'>";
 echo form_label("Data Inicial", "dataInicial", array("class" => "col-sm-2 control-label"));
 echo "<div class='col-sm-3'>";
-echo form_input(array('name' => 'dtEvento', 'id' => 'dataInicial', 'type' => 'text', 'class' => 'form-control datepicker', "maxlength" => "8", "placeholder" => "dd/mm/aaaa"));
+echo form_input(array('name' => 'dtEvento', 'id' => 'dataInicial',"required" => "required", 'type' => 'text', 'class' => 'form-control datepicker', "maxlength" => "8", "placeholder" => "dd/mm/aaaa"));
 echo "</div>";
 echo "</div>";
 
 echo "<div class='form-group'>";
 echo form_label("Data Final", "dataFinal", array("class" => "col-sm-2 control-label"));
 echo "<div class='col-sm-3'>";
-echo form_input(array('name' => 'dtFinalEvento', 'id' => 'dataInicial', 'type' => 'text', 'class' => 'form-control datepicker', "maxlength" => "8", "placeholder" => "dd/mm/aaaa"));
+echo form_input(array('name' => 'dtFinalEvento', 'id' => 'dataInicial', "required" => "required", 'type' => 'text', 'class' => 'form-control datepicker', "maxlength" => "8", "placeholder" => "dd/mm/aaaa"));
 echo "</div>";
 echo "</div>";
 
@@ -23,6 +24,7 @@ echo form_button(array("class" => "btn btn-default", "content" => "Enviar", "typ
 echo "</div>";
 echo "</div>";
 echo form_close();
+
 
 if($this->session->flashdata("danger")){
     echo "<p class='alert alert-danger'>". $this->session->flashdata("danger") ."</p>";
@@ -36,6 +38,7 @@ if(isset($eventos)){
     echo "<th> Data de inicio </th>";
     echo "<th> Data de termino </th>";
     echo "<th> Horário </th>";
+    echo "<th> Duração </th>";
     echo "<th> Descrição </th>";
     echo "<th> Responsável </th>";
     echo "</tr>";
@@ -47,6 +50,11 @@ if(isset($eventos)){
         echo "<td>". dataMysqlParaPtBr($evento['dt_inicio_evento']) ."</td>";
         echo "<td>". dataMysqlParaPtBr($evento['dt_final_evento']) ."</td>";
         echo "<td>". $evento['hr_evento'] ."</td>";
+        if($evento['qt_horas_evento'] == 1){
+            echo "<td>". $evento['qt_horas_evento'] ." hora</td>";
+        }else{
+            echo "<td>". $evento['qt_horas_evento'] ." horas</td>";
+        }
         echo "<td>". $evento['ds_evento'] ."</td>";
         echo "<td>". $evento['nm_responsavel_evento'] ."</td>";
         echo "</tr>";

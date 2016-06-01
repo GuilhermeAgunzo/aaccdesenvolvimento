@@ -35,6 +35,7 @@ if(isset($eventos)){
             echo "<th> Data de inicio </th>";
             echo "<th> Data de termino </th>";
             echo "<th> Horário </th>";
+            echo "<th> Duração </th>";
             echo "<th> Descrição </th>";
             echo "<th> Responsável </th>";
         echo "</tr>";
@@ -46,6 +47,11 @@ if(isset($eventos)){
                 echo "<td>". dataMysqlParaPtBr($evento['dt_inicio_evento']) ."</td>";
                 echo "<td>". dataMysqlParaPtBr($evento['dt_final_evento']) ."</td>";
                 echo "<td>". $evento['hr_evento'] ."</td>";
+                if($evento['qt_horas_evento'] == 1){
+                    echo "<td>". $evento['qt_horas_evento'] ." hora</td>";
+                }else{
+                    echo "<td>". $evento['qt_horas_evento'] ." horas</td>";
+                }
                 echo "<td>". $evento['ds_evento'] ."</td>";
                 echo "<td>". $evento['nm_responsavel_evento'] ."</td>";
             echo "</tr>";
