@@ -31,7 +31,6 @@ class Evento extends CI_Controller
         autoriza(2);
 
         $this->load->helper("date");
-        $this->load->library("form_validation");
         $this->load->model("evento_model");
 
         $horaAtual = date('Y-m-d H:i:s');
@@ -52,6 +51,9 @@ class Evento extends CI_Controller
         );
         if($this->evento_model->salvaCadastro($evento)){
             $this->session->set_flashdata("success", "Cadastro efetuado com sucesso.");
+            redirect('/evento/cadastrar_evento');
+        }else{
+            $this->session->set_flashdata("danger", "O cadastro não foi efetuado. Tente novamente mais tarde.");
             redirect('/evento/cadastrar_evento');
         }
     }

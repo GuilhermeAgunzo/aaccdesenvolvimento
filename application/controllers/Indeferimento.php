@@ -32,8 +32,7 @@ class Indeferimento extends CI_Controller
     }
 
     public function cadastraMotivo(){
-
-        $this->load->library("form_validation");
+        
         $this->load->model("Indeferimento_model");
 
         $horaAtual = date('Y-m-d H:i:s');
