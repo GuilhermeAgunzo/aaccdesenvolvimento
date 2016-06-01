@@ -14,6 +14,7 @@ if(!isset($linhaEvento)){
     echo form_label("Data do Evento", "dataDoEvento", array("class" => "col-sm-2 control-label"));
     echo "<div class='col-sm-4'>";
     echo form_input(array("name" => "dtEvento","required" => "required","type" => "text", "id" => "dtEvento" ,"class" => "form-control datepicker", "maxlength" => "10", "placeholder" => "dd/mm/aaaa"));
+    echo form_error("dtEvento");
     echo "</div>";
     echo "</div>";
 
@@ -21,6 +22,7 @@ if(!isset($linhaEvento)){
     echo form_label("Data Final do Evento", "dataFinalDoEvento", array("class" => "col-sm-2 control-label"));
     echo "<div class='col-sm-4'>";
     echo form_input(array("name" => "dtFinalEvento","required" => "required","type" => "text", "id" => "dtFinalEvento" ,"class" => "form-control datepicker", "maxlength" => "10", "placeholder" => "dd/mm/aaaa"));
+    echo form_error("dtFinalEvento");
     echo "</div>";
     echo "</div>";
 
@@ -72,6 +74,7 @@ if(isset($linhaEvento)){
     echo form_label("Título do Evento", "tituloDoEvento", array("class" => "col-sm-2 control-label"));
     echo "<div class='col-sm-8'>";
     echo form_input(array("name" => "nmEvento","required" => "required","value" => $linhaEvento['nm_evento'], "id" => "nmEvento" ,"class" => "form-control", "maxlength" => "100"));
+    echo form_error("nmEvento");
     echo "</div>";
     echo "</div>";
 
@@ -79,27 +82,31 @@ if(isset($linhaEvento)){
     echo form_label("Local do Evento", "localDoEvento", array("class" => "col-sm-2 control-label"));
     echo "<div class='col-sm-6'>";
     echo form_input(array("name" => "nmLocalEvento","required" => "required","id" => "nmLocalEvento" , "value" => $linhaEvento['local_evento'],"class" => "form-control", "maxlength" => "80"));
+    echo form_error("nmLocalEvento");
     echo "</div>";
     echo "</div>";
 
-echo "<div class='form-group'>";
-echo form_label("Data do Evento", "dataDoEvento", array("class" => "col-sm-2 control-label"));
-echo "<div class='col-sm-4'>";
-echo form_input(array("name" => "dtEvento","required" => "required","type" => "text", "id" => "dtEvento" , "value" => dataMysqlParaPtBr($linhaEvento['dt_inicio_evento']),"class" => "form-control datepicker", "maxlength" => "10", "placeholder" => "dd/mm/aaaa"));
-echo "</div>";
-echo "</div>";
+    echo "<div class='form-group'>";
+    echo form_label("Data do Evento", "dataDoEvento", array("class" => "col-sm-2 control-label"));
+    echo "<div class='col-sm-4'>";
+    echo form_input(array("name" => "dtEvento","required" => "required","type" => "text", "id" => "dtEvento" , "value" => dataMysqlParaPtBr($linhaEvento['dt_inicio_evento']),"class" => "form-control datepicker", "maxlength" => "10", "placeholder" => "dd/mm/aaaa"));
+    echo form_error("dtEvento");
+    echo "</div>";
+    echo "</div>";
 
-echo "<div class='form-group'>";
-echo form_label("Data Final do Evento", "dataFinalDoEvento", array("class" => "col-sm-2 control-label"));
-echo "<div class='col-sm-4'>";
-echo form_input(array("name" => "dtFinalEvento","required" => "required","type" => "text", "id" => "dtFinalEvento" , "value" => dataMysqlParaPtBr($linhaEvento['dt_final_evento']),"class" => "form-control datepicker", "maxlength" => "10", "placeholder" => "dd/mm/aaaa"));
-echo "</div>";
-echo "</div>";
+    echo "<div class='form-group'>";
+    echo form_label("Data Final do Evento", "dataFinalDoEvento", array("class" => "col-sm-2 control-label"));
+    echo "<div class='col-sm-4'>";
+    echo form_input(array("name" => "dtFinalEvento","required" => "required","type" => "text", "id" => "dtFinalEvento" , "value" => dataMysqlParaPtBr($linhaEvento['dt_final_evento']),"class" => "form-control datepicker", "maxlength" => "10", "placeholder" => "dd/mm/aaaa"));
+    echo form_error("dtFinalEvento");
+    echo "</div>";
+    echo "</div>";
 
     echo "<div class='form-group'>";
     echo form_label("Hora do Evento", "horaDoEvento", array("class" => "col-sm-2 control-label"));
     echo "<div class='col-sm-3'>";
     echo form_input(array("name" => "hrEvento","required" => "required","type" => "time", "id" => "hrEvento" , "value" => $linhaEvento['hr_evento'],"class" => "form-control", "maxlength" => "10"));
+    echo form_error("hrEvento");
     echo "</div>";
     echo "</div>";
 
@@ -107,6 +114,7 @@ echo "</div>";
     echo form_label("Duração do Evento (em horas)", "duracaoDoEvento", array("class" => "col-sm-2 control-label"));
     echo "<div class='col-sm-3'>";
     echo form_input(array("name" => "qtHorasEvento","required" => "required","type" => "number", "id" => "qtHorasEvento" , "value" => $linhaEvento['qt_horas_evento'],"class" => "form-control", "maxlength" => "3", "min" => "1", "max" => "999"));
+    echo form_error("qtHorasEvento");
     echo "</div>";
     echo "</div>";
 
@@ -114,6 +122,7 @@ echo "</div>";
     echo form_label("Descrição", "descricaoEvento", array("class" => "col-sm-2 control-label"));
     echo "<div class='col-sm-10'>";
     echo form_textarea(array('name' => 'dsEvento',"required" => "required", 'id' => 'dsEvento', "value" => $linhaEvento['ds_evento'],'class' => 'form-control', 'rows' => 3));
+    echo form_error("dsEvento");
     echo "</div>";
     echo "</div>";
 
@@ -121,6 +130,7 @@ echo "</div>";
     echo form_label("Responsável do Evento", "responsavelDoEvento", array("class" => "col-sm-2 control-label"));
     echo "<div class='col-sm-8'>";
     echo form_input(array("name" => "nmResponsavelEvento","required" => "required", "id" => "nmResponsavelEvento" , "value" => $linhaEvento['nm_responsavel_evento'],"class" => "form-control", "maxlength" => "100"));
+    echo form_error("nmResponsavelEvento");
     echo "</div>";
     echo "</div>";
 

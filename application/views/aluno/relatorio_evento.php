@@ -8,6 +8,7 @@ echo "<div class='form-group'>";
 echo form_label("Data Inicial", "dataInicial", array("class" => "col-sm-2 control-label"));
 echo "<div class='col-sm-3'>";
 echo form_input(array('name' => 'dtEvento', 'id' => 'dataInicial',"required" => "required", 'type' => 'text', 'class' => 'form-control datepicker', "maxlength" => "8", "placeholder" => "dd/mm/aaaa"));
+echo form_error("dtEvento");
 echo "</div>";
 echo "</div>";
 
@@ -15,6 +16,7 @@ echo "<div class='form-group'>";
 echo form_label("Data Final", "dataFinal", array("class" => "col-sm-2 control-label"));
 echo "<div class='col-sm-3'>";
 echo form_input(array('name' => 'dtFinalEvento', 'id' => 'dataInicial', "required" => "required", 'type' => 'text', 'class' => 'form-control datepicker', "maxlength" => "8", "placeholder" => "dd/mm/aaaa"));
+echo form_error("dtFinalEvento");
 echo "</div>";
 echo "</div>";
 

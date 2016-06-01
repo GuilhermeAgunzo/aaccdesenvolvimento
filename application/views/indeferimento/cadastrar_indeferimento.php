@@ -13,6 +13,7 @@
             echo form_label("Motivo do Indeferimento", "motivoInd", array("class" => "col-sm-2 control-label"));
             echo "<div class='col-sm-6'>";
             echo form_input(array("name" => "motivoInd", "required" => "required","id" => "motivoInd" ,"class" => "form-control", "maxlength" => "40"));
+            echo form_error("motivoInd");
             echo "</div>";
             echo "</div>";
             echo "<div class='form-group'>";

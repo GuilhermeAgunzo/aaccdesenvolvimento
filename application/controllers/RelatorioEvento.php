@@ -11,6 +11,21 @@ class RelatorioEvento extends CI_Controller{
         autoriza(2);
 
         $this->load->model("evento_model");
+        $this->load->library("form_validation");
+
+        $this->form_validation->set_rules("dtEvento","dtEvento","required",
+            array(
+                'required' => "Você precisa preencher a Data de inicio do evento"
+            ));
+        $this->form_validation->set_rules("dtFinalEvento","dtFinalEvento","required",
+            array(
+                'required' => "Você precisa preencher a Data Final do evento"
+            ));
+
+        $this->form_validation->set_error_delimiters("<p class='alert alert-danger'>", "</p>");
+
+        $this->form_validation->run();
+
 
         $dataInicial = dataPtBrParaMysql($this->input->post("dtEvento"));
         $dataFinal = dataPtBrParaMysql($this->input->post("dtFinalEvento"));

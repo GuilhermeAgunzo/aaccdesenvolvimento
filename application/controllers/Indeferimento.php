@@ -34,6 +34,16 @@ class Indeferimento extends CI_Controller
     public function cadastraMotivo(){
         
         $this->load->model("Indeferimento_model");
+        $this->load->library("form_validation");
+
+        $this->form_validation->set_rules("motivoInd","motivoInd","required",
+            array(
+                'required' => "Você precisa preencher o Motivo"
+            ));
+
+        $this->form_validation->set_error_delimiters("<p class='alert alert-danger'>", "</p>");
+
+        $this->form_validation->run();
 
         $horaAtual = date('Y-m-d H:i:s');
         $usuarioLogado = $this->session->userdata("usuario_logado");
@@ -56,6 +66,23 @@ class Indeferimento extends CI_Controller
     public function alteraIndeferimento(){
 
         $this->load->model("Indeferimento_model");
+
+        $this->load->library("form_validation");
+
+        $this->form_validation->set_rules("Motivo","Motivo","required",
+            array(
+                'required' => "Você precisa selecionar o Motivo a ser alterado"
+            ));
+
+        $this->form_validation->set_rules("motivoInd","motivoInd","required",
+            array(
+                'required' => "Você precisa preencher o Motivo"
+            ));
+
+        $this->form_validation->set_error_delimiters("<p class='alert alert-danger'>", "</p>");
+
+        $this->form_validation->run();
+
 
         $idMotivo = $this->input->post("Motivo");
 

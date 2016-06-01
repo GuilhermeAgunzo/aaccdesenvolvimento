@@ -31,7 +31,45 @@ class Evento extends CI_Controller
         autoriza(2);
 
         $this->load->helper("date");
+        $this->load->library("form_validation");
         $this->load->model("evento_model");
+
+        $this->form_validation->set_rules("nmEvento","nmEvento","required",
+            array(
+                'required' => "Você precisa preencher o Nome do Evento"
+            ));
+        $this->form_validation->set_rules("nmLocalEvento","nmLocalEvento","required",
+            array(
+                'required' => "Você precisa preencher o Local do Evento"
+            ));
+        $this->form_validation->set_rules("dtEvento","dtEvento","required",
+            array(
+                'required' => "Você precisa preencher a Data de inicio do evento"
+            ));
+        $this->form_validation->set_rules("dtFinalEvento","dtFinalEvento","required",
+            array(
+                'required' => "Você precisa preencher a Data Final do evento"
+            ));
+        $this->form_validation->set_rules("hrEvento","hrEvento","required",
+            array(
+                'required' => "Você precisa preencher o Horário do evento"
+            ));
+        $this->form_validation->set_rules("qtHorasEvento","qtHorasEvento","required",
+            array(
+                'required' => "Você precisa preencher a Duração do evento"
+            ));
+        $this->form_validation->set_rules("dsEvento","dsEvento","required",
+            array(
+                'required' => "Você precisa preencher a Descrição do evento"
+            ));
+        $this->form_validation->set_rules("nmResponsavelEvento","nmResponsavelEvento","required",
+            array(
+                'required' => "Você precisa preencher o Responsável pelo evento"
+            ));
+
+        $this->form_validation->set_error_delimiters("<p class='alert alert-danger'>", "</p>");
+
+        $this->form_validation->run();
 
         $horaAtual = date('Y-m-d H:i:s');
         $usuarioLogado = $this->session->userdata("usuario_logado");
@@ -62,7 +100,21 @@ class Evento extends CI_Controller
         autoriza(2);
 
         $this->load->model("evento_model");
+        $this->load->library("form_validation");
 
+        $this->form_validation->set_rules("dtEvento","dtEvento","required",
+            array(
+                'required' => "Você precisa preencher a Data de inicio do evento"
+            ));
+        $this->form_validation->set_rules("dtFinalEvento","dtFinalEvento","required",
+            array(
+                'required' => "Você precisa preencher a Data Final do evento"
+            ));
+
+        $this->form_validation->set_error_delimiters("<p class='alert alert-danger'>", "</p>");
+
+        $this->form_validation->run();
+        
         $dataInicial = dataPtBrParaMysql($this->input->post("dtEvento"));
         $dataFinal = dataPtBrParaMysql($this->input->post("dtFinalEvento"));
 
@@ -80,6 +132,20 @@ class Evento extends CI_Controller
         autoriza(2);
 
         $this->load->model("evento_model");
+        $this->load->library("form_validation");
+
+        $this->form_validation->set_rules("dtEvento","dtEvento","required",
+            array(
+                'required' => "Você precisa preencher a Data de inicio do evento"
+            ));
+        $this->form_validation->set_rules("dtFinalEvento","dtFinalEvento","required",
+            array(
+                'required' => "Você precisa preencher a Data Final do evento"
+            ));
+
+        $this->form_validation->set_error_delimiters("<p class='alert alert-danger'>", "</p>");
+
+        $this->form_validation->run();
 
         $dataInicial = dataPtBrParaMysql($this->input->post("dtEvento"));
         $dataFinal = dataPtBrParaMysql($this->input->post("dtFinalEvento"));
@@ -107,6 +173,45 @@ class Evento extends CI_Controller
     public function alteraEvento(){
         autoriza(2);
         $this->load->model("evento_model");
+        $this->load->library("form_validation");
+
+
+        $this->form_validation->set_rules("nmEvento","nmEvento","required",
+            array(
+                'required' => "Você precisa preencher o Nome do Evento"
+            ));
+        $this->form_validation->set_rules("nmLocalEvento","nmLocalEvento","required",
+            array(
+                'required' => "Você precisa preencher o Local do Evento"
+            ));
+        $this->form_validation->set_rules("dtEvento","dtEvento","required",
+            array(
+                'required' => "Você precisa preencher a Data de inicio do evento"
+            ));
+        $this->form_validation->set_rules("dtFinalEvento","dtFinalEvento","required",
+            array(
+                'required' => "Você precisa preencher a Data Final do evento"
+            ));
+        $this->form_validation->set_rules("hrEvento","hrEvento","required",
+            array(
+                'required' => "Você precisa preencher o Horário do evento"
+            ));
+        $this->form_validation->set_rules("qtHorasEvento","qtHorasEvento","required",
+            array(
+                'required' => "Você precisa preencher a Duração do evento"
+            ));
+        $this->form_validation->set_rules("dsEvento","dsEvento","required",
+            array(
+                'required' => "Você precisa preencher a Descrição do evento"
+            ));
+        $this->form_validation->set_rules("nmResponsavelEvento","nmResponsavelEvento","required",
+            array(
+                'required' => "Você precisa preencher o Responsável pelo evento"
+            ));
+
+        $this->form_validation->set_error_delimiters("<p class='alert alert-danger'>", "</p>");
+
+        $this->form_validation->run();
 
         $eventoId = $this->input->post("eventoId");
         $dataInicial = dataPtBrParaMysql($this->input->post("dtEvento"));
