@@ -245,3 +245,7 @@ li.dropdown.head-dpdn a.dropdown-toggle {
     border-color: #d43f3a;
     padding: 1px 5px;
 }
+
+#cidades{
+    text-transform: uppercase;
+}

@@ -25,7 +25,7 @@ if(isset($unidades)){ ?>
                 echo "<td>{$unidade['nm_complemento_endereco']}</td>";
                 echo "<td>{$unidade['nm_bairro']}</td>";
                 echo "<td>{$unidade['cd_cep_endereco']}</td>";
-                echo "<td>{$unidade['nm_cidade']}</td>";
+                echo "<td id='cidades'>{$unidade['nm_cidade']}</td>";
                 echo "<td>{$unidade['cd_telefone']}</td>";
             echo "</tr>";
         }
