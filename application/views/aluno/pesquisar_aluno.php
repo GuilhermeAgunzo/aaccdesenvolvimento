@@ -25,9 +25,9 @@
                 echo "<tr>";
                 echo "<td>";
                 if ($turmas['nm_turno'] != null) {
-                    echo anchor("aluno/pesquisarAluno/{$turmas['cd_mat_turma']}", "{$turmas['aa_ingresso']} - {$turmas['dt_semestre']} ºSem - {$turmas['nm_turno']}");
+                    echo anchor("aluno/pesquisarAluno/{$turmas['cd_mat_turma']}", "{$turmas['aa_ingresso']} - {$turmas['dt_semestre']}º Sem - {$turmas['nm_turno']}");
                 } else {
-                    echo anchor("aluno/pesquisarAluno/{$turmas['cd_mat_turma']}", "{$turmas['aa_ingresso']} - {$turmas['dt_semestre']} ºSem - {$turmas['nm_modalidade']}");
+                    echo anchor("aluno/pesquisarAluno/{$turmas['cd_mat_turma']}", "{$turmas['aa_ingresso']} - {$turmas['dt_semestre']}º Sem - {$turmas['nm_modalidade']}");
                 }
                 echo "</td>";
                 echo "</tr>";
