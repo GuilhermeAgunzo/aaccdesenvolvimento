@@ -12,7 +12,7 @@ echo form_open('Indeferimento/alteraIndeferimento', $atributos);
 
 echo "<div class='form-group'>";
 echo form_label("Selecione o Motivo do Indeferimento:", "motivoInd", array("class" => "col-sm-2 control-label"));
-echo "<div class='col-sm-10'>";
+echo "<div class='col-sm-6'>";
 $motivos = array('' =>  "Selecione")+$motivos;
 echo form_dropdown('Motivo', $motivos, "", array("class" => "form-control", "required" => "required"));
 echo form_error("Motivo");
