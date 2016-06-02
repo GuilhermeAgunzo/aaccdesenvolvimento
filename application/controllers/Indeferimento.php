@@ -5,12 +5,14 @@ class Indeferimento extends CI_Controller
 {
 
     public function cadastrar_indeferimento(){
+        autoriza(2);
 
         $this->load->template_admin("indeferimento/cadastrar_indeferimento.php");
     }
 
 
     public function pesquisar_indeferimento(){
+        autoriza(2);
 
         $this->load->model("Indeferimento_model");
 
@@ -22,6 +24,7 @@ class Indeferimento extends CI_Controller
     }
 
     public function alterar_indeferimento(){
+        autoriza(2);
         $this->load->model("Indeferimento_model");
 
         $motivos = $this->Indeferimento_model->dropDownMotivo();
@@ -32,6 +35,7 @@ class Indeferimento extends CI_Controller
     }
 
     public function cadastraMotivo(){
+        autoriza(2);
         
         $this->load->model("Indeferimento_model");
         $this->load->library("form_validation");
@@ -64,6 +68,7 @@ class Indeferimento extends CI_Controller
     }
 
     public function alteraIndeferimento(){
+        autoriza(2);
 
         $this->load->model("Indeferimento_model");
 
