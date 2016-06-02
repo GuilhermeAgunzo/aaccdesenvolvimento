@@ -390,7 +390,7 @@ class Aluno extends CI_Controller{
 
     /*  RELATORIO    */
 
-    public function buscar(){
+    public function buscarRelatorio(){
         autoriza(2);
 
         $this->load->model("unidade_model");
