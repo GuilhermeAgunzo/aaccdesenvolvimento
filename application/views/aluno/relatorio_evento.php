@@ -6,7 +6,7 @@ $atributos = array('class' => 'form-horizontal');
 echo form_open('RelatorioEvento/buscar', $atributos);
 echo "<div class='form-group'>";
 echo form_label("Data Inicial", "dataInicial", array("class" => "col-sm-2 control-label"));
-echo "<div class='col-sm-3'>";
+echo "<div class='col-sm-2'>";
 echo form_input(array('name' => 'dtEvento', 'id' => 'dataInicial',"required" => "required", 'type' => 'text', 'class' => 'form-control datepicker', "maxlength" => "8", "placeholder" => "dd/mm/aaaa"));
 echo form_error("dtEvento");
 echo "</div>";
@@ -14,7 +14,7 @@ echo "</div>";
 
 echo "<div class='form-group'>";
 echo form_label("Data Final", "dataFinal", array("class" => "col-sm-2 control-label"));
-echo "<div class='col-sm-3'>";
+echo "<div class='col-sm-2'>";
 echo form_input(array('name' => 'dtFinalEvento', 'id' => 'dataInicial', "required" => "required", 'type' => 'text', 'class' => 'form-control datepicker', "maxlength" => "8", "placeholder" => "dd/mm/aaaa"));
 echo form_error("dtFinalEvento");
 echo "</div>";
@@ -33,6 +33,7 @@ if($this->session->flashdata("danger")){
 }
 
 if(isset($eventos)){
+    echo "<div class='table-responsive'>";
     echo "<table class='table'>";
     echo "<tr>";
     echo "<th> Evento </th>";
@@ -57,10 +58,11 @@ if(isset($eventos)){
         }else{
             echo "<td>". $evento['qt_horas_evento'] ." horas</td>";
         }
-        echo "<td>". $evento['ds_evento'] ."</td>";
+        echo "<td class='texto_descricao'>". $evento['ds_evento'] ."</td>";
         echo "<td>". $evento['nm_responsavel_evento'] ."</td>";
         echo "</tr>";
     }
     echo "</table>";
+    echo "</div>";
 }
 ?>

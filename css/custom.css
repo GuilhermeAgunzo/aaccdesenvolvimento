@@ -250,3 +250,8 @@ li.dropdown.head-dpdn a.dropdown-toggle {
 #cidades{
     text-transform: uppercase;
 }
+
+.texto_descricao{
+    text-align: justify !important;
+    max-width: 500px !important;
+}

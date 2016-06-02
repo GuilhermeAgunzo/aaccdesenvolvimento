@@ -1,5 +1,3 @@
-
-
 <?php
 
 echo form_fieldset("<h1>Relatório de Aluno</h1>");
@@ -21,8 +19,6 @@ echo '<div id="turma"></div>';
 echo form_close();
 
 ?>
-
-
 <script>
     //função ajax
     function GetXMLHttp() {
