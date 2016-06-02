@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="AACC Gestão e Controle de Atividades Acadêmico - Científico Cultural" />
+    <link rel="icon" type="image/ico" href="<?= base_url("images/favicon.ico")?>"/>
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
     <!-- Bootstrap Core CSS -->
     <link href="<?= base_url("css/bootstrap.css")?>" rel='stylesheet' type='text/css' />
