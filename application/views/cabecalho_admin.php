@@ -187,7 +187,7 @@
                                 <?=anchor(base_url('index.php/aluno/emissao_declaracao/'), 'Emissão de Declaração de Alunos', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
                             </li>
                             <li>
-                                <?=anchor(base_url('index.php/relatorioAluno/buscar/'), 'Relatório de Alunos', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                                <?=anchor(base_url('index.php/aluno/buscar/'), 'Relatório de Alunos', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
                             </li>
                             <li>
                                 <?=anchor(base_url('index.php/RelatorioEvento/'), 'Relatório de Eventos', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
