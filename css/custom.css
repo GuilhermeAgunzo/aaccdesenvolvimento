@@ -173,7 +173,8 @@ li.dropdown.head-dpdn a.dropdown-toggle {
 
 /*--Modificaçoes nos formularios e tabelas de pesquisas--*/
 .formulario{
-    padding-right: 45px !important; 
+    padding-right: 45px !important;
+    max-width: 1170px;
 }
 
 .formulario h3{

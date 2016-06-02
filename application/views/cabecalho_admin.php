@@ -306,4 +306,4 @@
                     $_SESSION['danger']
                 );
             ?>
-            <div class="container formulario">
+            <div class="container-fluid formulario">
