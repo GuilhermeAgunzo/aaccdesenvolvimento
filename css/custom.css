@@ -228,8 +228,7 @@ li.dropdown.head-dpdn a.dropdown-toggle {
 
 .formulario table tr td{
     width: auto!important;
-    text-align: center;
-  
+    text-align: center;  
 }
 
 .formulario .btn-alterar:hover{
@@ -253,4 +252,8 @@ li.dropdown.head-dpdn a.dropdown-toggle {
 .texto_descricao{
     text-align: justify !important;
     max-width: 500px !important;
+}
+
+.texto-esquerda{
+    text-align: left !important;
 }

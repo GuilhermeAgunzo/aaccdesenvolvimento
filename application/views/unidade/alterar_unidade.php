@@ -1,33 +1,57 @@
 <?php
 echo form_fieldset("<h1>Alteração de Unidade</h1>");
 
+if(!isset($unidade)){
+echo form_open('unidade/pesquisaFiltroUnidade', 'class = form-horizontal');
+echo form_label("Pesquisar Unidade", "termo", array("class" => "col-md-2 control-label"));
+echo "<div class='col-md-4'>";
+echo "<div class='input-group'>";
+if (isset($termo)){echo form_input(array("name" => "termo", "value" => "{$termo}" ,"required" => "required", "class" => "form-control", "maxlength" => "70"));
+}else{echo form_input(array("name" => "termo", "required" => "required", "class" => "form-control", "maxlength" => "70"));}
+echo "<span class='input-group-btn'>";
+echo form_button(array("class" => "btn btn-default", "content" => "Buscar", "type" => "submit"));
+echo "</span>";
+echo "</div>";
+echo form_hidden("opcao", 'Alterar');
+echo form_close();
+echo "</div>";
+
+echo "<div class='form-group'>";
+echo "<div class='col-md-2'>";
+echo "<td>". anchor("unidade/alterar_unidade/", "Mostrar Todos", 'class = "btn btn-default"')."</td>";
+echo "</div>";
+echo "</div>";
+
+echo "<br/><br/>";
+
+}
+
+
 if(isset($unidades)) { ?>
     <div class="table-responsive">
     <table class="table">
     <thead>
     <tr>
-        <th>Nome da Unidade</th>
-        <th>Código da Unidade</th>
+        <th>Unidade</th>
+        <th>Cidade</th>
+        <th>Telefone</th>
         <th>Endereço</th>
         <th>Complemento</th>
         <th>Bairro</th>
         <th>CEP</th>
-        <th>Cidade</th>
-        <th>Telefone da Unidade</th>
         <th></th>
     </tr>
     </thead>
     <?php
     foreach ($unidades as $unidades) {
         echo "<tr>";
-        echo "<td>{$unidades['nm_unidade']}</td>";
-        echo "<td>{$unidades['cd_cpsouza']}</td>";
+        echo "<td class='texto-esquerda'>{$unidades['cd_cpsouza']} - {$unidades['nm_unidade']}</td>";
+        echo "<td class='texto-esquerda' id='cidades'>{$unidades['nm_cidade']}</td>";
+        echo "<td>{$unidades['cd_telefone']}</td>";
         echo "<td>{$unidades['nm_endereco']}, {$unidades['cd_num_endereco']}</td>";
         echo "<td>{$unidades['nm_complemento_endereco']}</td>";
         echo "<td>{$unidades['nm_bairro']}</td>";
         echo "<td>{$unidades['cd_cep_endereco']}</td>";
-        echo "<td id='cidades'>{$unidades['nm_cidade']}</td>";
-        echo "<td>{$unidades['cd_telefone']}</td>";
         echo "<td>".anchor("unidade/buscarAlteraUnidade/{$unidades['cd_cpsouza']}","Alterar", "class = 'btn btn-default btn-alterar btn-xs'")."</td>";
         echo "</tr>";
     }

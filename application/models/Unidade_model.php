@@ -19,7 +19,15 @@ class Unidade_model extends CI_Model{
     }
 
     public function buscaUnidades(){
-        $this->db->order_by("cd_cpsouza asc");
+        $this->db->order_by("nm_cidade asc");
+        return $this->db->get("tb_unidade")->result_array();
+    }
+
+    public function filtrarUnidades($termo){
+        $this->db->select("*");
+        $this->db->order_by("nm_cidade asc");
+        $this->db->like("nm_unidade",$termo);
+        $this->db->or_like("nm_cidade",$termo);
         return $this->db->get("tb_unidade")->result_array();
     }
 

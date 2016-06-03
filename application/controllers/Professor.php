@@ -166,7 +166,6 @@ class Professor extends CI_Controller{
 
         if($opcao=='Pesquisar'){
             $this->load->template_admin("professor/pesquisar_professor.php",$dados);
-
         }elseif($opcao=='Alterar'){
             $this->load->template_admin("professor/alterar_professor.php",$dados);
         }elseif($opcao=="Desativar"){
@@ -229,10 +228,6 @@ class Professor extends CI_Controller{
             $dados = array("professor" => $professor, "unidades" => $unidades);
             $this->load->template_admin("professor/alterar_professor", $dados);
         }
-
-
-
-
     }
 
     public function desativaProfessor(){

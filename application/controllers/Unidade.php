@@ -132,6 +132,28 @@ class Unidade extends CI_Controller{
         }
     }
 
+    public function pesquisaFiltroUnidade(){
+        autoriza(2);
+        $termo = $this->input->post("termo");
+        $opcao = $this->input->post("opcao");
+
+        $this->load->model("unidade_model");
+
+        $unidades = $this->unidade_model->filtrarUnidades($termo);
+
+        if(!$unidades){
+            $this->session->set_flashdata("danger", "A Unidade não foi localizado. Verifique os dados ou tente novamente mais tarde");
+            $unidades = $this->unidade_model->buscaUnidades();
+        }
+        $dados = array("unidades" => $unidades, "termo" => $termo);
+
+        if($opcao=='Pesquisar'){
+            $this->load->template_admin("unidade/pesquisar_unidade.php", $dados);
+        }elseif($opcao=='Alterar'){
+            $this->load->template_admin("unidade/alterar_unidade.php", $dados);
+        }
+    }
+
     /*  Metodos auxiliares  */
 
     public function _validaFormulario($cd_cpsouza_unique){

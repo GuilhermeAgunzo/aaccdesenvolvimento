@@ -44,7 +44,6 @@ class Aluno extends CI_Controller{
         $this->load->template_admin("aluno/desativar_aluno");
     }
 
-
     /*  METODOS PRINCIPAIS    */
 
     public function cadastrarAluno(){
