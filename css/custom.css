@@ -227,8 +227,7 @@ li.dropdown.head-dpdn a.dropdown-toggle {
 }
 
 .formulario table tr td{
-    width: auto!important;
-    text-align: center;  
+    width: auto!important;    
 }
 
 .formulario .btn-alterar:hover{

@@ -33,12 +33,12 @@ if(isset($turmas)) {
         echo "</thead>";
         foreach ($turmas as $turmas) {
             echo "<tr>";
-            echo "<td>".$turmas['cd_mat_turma']."</td>";
-            echo "<td>{$turmas['aa_ingresso']}/{$turmas['dt_semestre']} - {$turmas['qt_ciclo']}º Ciclo</td>";
+            echo "<td class='text-center'>".$turmas['cd_mat_turma']."</td>";
+            echo "<td>{$turmas['aa_ingresso']}/{$turmas['dt_semestre']} - {$cursos[$turmas['id_curso']]} - {$turmas['qt_ciclo']}º Ciclo</td>";
             if($turmas['nm_turno']!=null) {
-                echo "<td>" . $turmas['nm_turno'] . "</td>";
+                echo "<td class='text-center'>" . $turmas['nm_turno'] . "</td>";
             }else{
-                echo "<td>".$turmas['nm_modalidade']."</td>";
+                echo "<td class='text-center'>".$turmas['nm_modalidade']."</td>";
             }
             echo "<td>" .anchor("turma/buscarAlterarTurma/{$turmas['cd_mat_turma']}", "Alterar","class = 'btn btn-default btn-alterar btn-xs'") ."</td></td>";
             echo "</tr>";
@@ -64,6 +64,14 @@ if(isset($turma) || isset($erro)){
     $atributos = array('class' => 'form-horizontal');
     echo form_open("turma/alterarTurma",$atributos);
     echo form_hidden('id_turma', $turma['id_turma']);
+    echo "<div class='row'>";
+    echo form_label("Curso", "curso", array("class" => "col-md-2 control-label"));
+    echo "<div class='form-group col-md-2'>";
+    $cursos = array('' =>  "Selecione")+$cursos;
+    echo form_dropdown('curso',$cursos, $turma['id_curso'], array("class" => "form-control"));
+    echo form_error("curso");
+    echo "</div>";
+    echo "</div>";
     echo "<div class='row'>";
     echo form_label("Código da Turma", "matricula", array("class" => "col-md-2 control-label"));
     echo "<div class='form-group col-md-2'>";

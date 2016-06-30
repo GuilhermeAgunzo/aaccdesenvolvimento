@@ -10,7 +10,10 @@ class Turma extends CI_Controller{
         $this->load->model("unidade_model");
         $unidades = $this->unidade_model->dropDownUnidade();
 
-        $dados = array('unidades' => $unidades);
+        $this->load->model("curso_model");
+        $cursos = $this->curso_model->dropDownCurso();
+
+        $dados = array('unidades' => $unidades, 'cursos'=>$cursos);
 
         $this->load->template_admin("turma/cadastrar_turma", $dados);
     }
@@ -21,7 +24,10 @@ class Turma extends CI_Controller{
         $this->load->model("unidade_model");
         $unidades = $this->unidade_model->dropDownUnidade();
 
-        $dados = array("unidades" => $unidades);
+        $this->load->model("curso_model");
+        $cursos = $this->curso_model->dropDownCurso();
+
+        $dados = array('unidades' => $unidades, 'cursos' => $cursos);
 
         $this->load->template_admin("turma/alterar_turma", $dados);
     }
@@ -57,6 +63,7 @@ class Turma extends CI_Controller{
                 "qt_ciclo" => $this->input->post("ciclo"),
                 "id_user_adm_cadastrou" => $usuarioLogado['id_usuario'],
                 "dt_cadastro" => mdate("%Y-%m-%d %H:%i:%s", time()),
+                "id_curso" => $this->input->post("curso"),
             );
 
             $this->load->model("turma_model");
@@ -69,7 +76,10 @@ class Turma extends CI_Controller{
         $this->load->model("unidade_model");
         $unidades = $this->unidade_model->dropDownUnidade();
 
-        $dados = array('unidades' => $unidades);
+        $this->load->model("curso_model");
+        $cursos = $this->curso_model->dropDownCurso();
+
+        $dados = array('unidades' => $unidades, 'cursos'=>$cursos);
 
         $this->load->template_admin("turma/cadastrar_turma", $dados);
     }
@@ -77,8 +87,6 @@ class Turma extends CI_Controller{
     public function alterarTurma(){
         autoriza(2);
         $usuarioLogado = $this->session->userdata("usuario_logado");
-
-        $this->output->enable_profiler(TRUE);
 
         $turma = array(
             "id_turma" => $this->input->post("id_turma"),
@@ -90,6 +98,7 @@ class Turma extends CI_Controller{
             "qt_ciclo" => $this->input->post("ciclo"),
             "id_user_adm_cadastrou" => $usuarioLogado['id_usuario'],
             "dt_cadastro" => mdate("%Y-%m-%d %H:%i:%s", time()),
+            "id_curso" => $this->input->post("curso"),
         );
 
         $modalidade = $this->input->post("modalidade");
@@ -116,11 +125,11 @@ class Turma extends CI_Controller{
         $this->load->model("turma_model");
         $turma = $this->turma_model->buscarTurma($cd_mat_turma);
 
-        $this->load->model("unidade_model");
-        $dropDownUnidade = $this->unidade_model->dropDownUnidade();
+        $this->load->model("curso_model");
+        $cursos = $this->curso_model->dropDownCurso();
 
         if($turma!=null){
-            $dados = array("turma" => $turma,"dropDownUnidade" => $dropDownUnidade);
+            $dados = array("turma" => $turma, 'cursos'=>$cursos);
             $this->load->template_admin("turma/alterar_turma", $dados);
         }else{
             $this->session->set_flashdata("danger", "Turma não encotrada. Verifique os dados");
@@ -135,6 +144,7 @@ class Turma extends CI_Controller{
 
         $turma = $this->turma_model->buscarTurma($cd_mat_turma);
         $unidade = $this->unidade_model->buscarUnidadeId($turma["id_unidade"]);
+
         $dados = array("turma" => $turma, "unidade" => $unidade);
 
         if($turma){
@@ -153,7 +163,11 @@ class Turma extends CI_Controller{
 
         $unidade = $this->unidade_model->buscarUnidadeId($idUnidade);
         $turmas = $this->turma_model->buscarTurmasUnidade($idUnidade);
-        $dados = array("turmas" => $turmas, "unidade" => $unidade);
+
+        $this->load->model("curso_model");
+        $cursos = $this->curso_model->dropDownCurso();
+
+        $dados = array("turmas" => $turmas, "unidade" => $unidade, 'cursos' => $cursos);
 
         if ($turmas) {
             if($opcao=='Alterar'){

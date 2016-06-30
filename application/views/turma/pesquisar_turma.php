@@ -32,12 +32,12 @@ if(isset($turmas)) {
         echo "</thead>";
         foreach ($turmas as $turma) {
             echo "<tr>";
-            echo "<td>".$turma['cd_mat_turma']."</td>";
-            echo "<td>{$turma['aa_ingresso']}/{$turma['dt_semestre']} - {$turma['qt_ciclo']}º Ciclo</td>";
+            echo "<td class='text-center'>".$turma['cd_mat_turma']."</td>";
+            echo "<td>{$turma['aa_ingresso']}/{$turma['dt_semestre']} - {$cursos[$turma['id_curso']]} - {$turma['qt_ciclo']}º Ciclo</td>";
             if($turma['nm_turno']!=null) {
-                echo "<td>" . $turma['nm_turno'] . "</td>";
+                echo "<td class='text-center'>" . $turma['nm_turno'] . "</td>";
             }else{
-                echo "<td>".$turma['nm_modalidade']."</td>";
+                echo "<td class='text-center'>".$turma['nm_modalidade']."</td>";
             }
             echo "</tr>";
         }
