@@ -42,4 +42,27 @@ class Usuario_aluno extends CI_Controller
         $this->load->template_usuario_aluno("usuario_aluno/cadastrar_relatorio.php");
 
     }
+
+    public function anexarArquivo($anexo, $aluno, $unidade, $id_declaracao){
+
+        $filename = explode('.', $anexo['name']);
+        $path = './uploads/' . $unidade['cd_cpsouza'].'_'.$unidade['nm_unidade'].'/'.$aluno['cd_mat_aluno'];
+
+        if (!is_dir($path)) {
+            mkdir($path, 0777, $recursive = true);
+        }
+
+        $config['upload_path'] = $path;
+        $config['allowed_types'] = 'pdf|jpg|png|doc|docx';
+        $config['file_name'] = $aluno['cd_mat_aluno'] . "_" . $id_declaracao. "." . $filename[count($filename) - 1];
+
+        $this->load->library('upload', $config);
+
+        if ($this->upload->do_upload('anexo')) {
+            $data = $this->upload->data();
+            return $data['file_name'];
+        }else{
+            return false;
+        }
+    }
 }
