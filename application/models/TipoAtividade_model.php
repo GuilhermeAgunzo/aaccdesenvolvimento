@@ -20,4 +20,15 @@ class TipoAtividade_model extends CI_Model{
         $this->db->where('id_tipo_atividade', $tipoAtividade['id_tipo_atividade']);
         $this->db->update('tb_tipos_atividade', $tipoAtividade);
     }
+
+    public function dropDownAtividade(){
+        $result = $this->db->query("select nm_tipo_atividade as atividade, id_tipo_atividade from tb_tipos_atividade ORDER BY nm_tipo_atividade;");
+        $retorno = array();
+        if($result->num_rows() > 0) {
+            foreach($result->result_array() as $row) {
+                $retorno[$row['id_tipo_atividade']] = $row['atividade'];
+            }
+        }
+        return $retorno;
+    }
 }

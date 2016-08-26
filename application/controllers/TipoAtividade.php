@@ -43,6 +43,7 @@ class tipoAtividade extends CI_Controller{
 
             $tipoAtividade = array(
                 'nm_tipo_atividade' => $this->input->post("txt_nm_tipo_atividade"),
+                'qt_estimada_horas_atividade' => $this->input->post("qtEstimadaHoras"),
                 'id_user_adm_cadastrou' => $usuarioLogado['id_usuario'],
                 'dt_cadastro' => mdate("%Y-%m-%d %H:%i:%s", time()),
             );

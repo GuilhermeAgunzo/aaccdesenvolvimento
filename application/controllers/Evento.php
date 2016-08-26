@@ -13,7 +13,12 @@ class Evento extends CI_Controller
     public function cadastrar_evento(){
 
         autoriza(2);
-        $this->load->template_admin("evento/cadastrar_evento.php");
+
+        $this->load->model("TipoAtividade_model");
+
+        $atividades = $this->TipoAtividade_model->dropDownAtividade();
+        $dados = array("atividades" => $atividades);
+        $this->load->template_admin("evento/cadastrar_evento.php", $dados);
 
     }
 
@@ -79,6 +84,7 @@ class Evento extends CI_Controller
         $usuarioLogado = $this->session->userdata("usuario_logado");
 
         $evento = array(
+            "id_tipo_atividade" => $this->input->post("Atividade"),
             "nm_evento" => $this->input->post("nmEvento"),
             "local_evento" => $this->input->post("nmLocalEvento"),
             "dt_inicio_evento" => dataPtBrParaMysql($this->input->post("dtEvento")),

@@ -4,6 +4,17 @@ echo form_fieldset("<h1>Cadastro de Evento</h1>");
 
 $atributos = array('class' => 'form-horizontal');
 echo form_open('Evento/cadastroEvento', $atributos);
+
+echo "<div class='form-group'>";
+echo form_label("Selecione o Tipo de Atividade:", "atividade", array("class" => "col-sm-2 control-label"));
+echo "<div class='col-sm-6'>";
+$atividades = array('' =>  "Selecione")+$atividades;
+echo form_dropdown('Atividade', $atividades, "", array("class" => "form-control", "required" => "required"));
+echo "</br>";
+echo "</div>";
+echo "</div>";
+
+
 echo "<div class='row'>";
 echo form_label("Título do Evento", "tituloDoEvento", array("class" => "col-sm-2 control-label"));
 echo "<div class='form-group col-sm-4'>";
