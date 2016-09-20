@@ -221,8 +221,6 @@ class Evento extends CI_Controller
 
         $this->form_validation->set_error_delimiters("<p class='alert alert-danger'>", "</p>");
 
-        $this->form_validation->run();
-
         $eventoId = $this->input->post("eventoId");
         $dataInicial = dataPtBrParaMysql($this->input->post("dtEvento"));
         $dataFinal = dataPtBrParaMysql($this->input->post("dtFinalEvento"));

@@ -6,13 +6,15 @@
             echo "<div class='form-group'>";
             echo form_label("Nome do Aluno:", "nm_aluno", array("class" => "col-sm-2 control-label"));
             echo "</div>";
+            echo "<div class='col-sm-10'>";
+            echo form_label("Nome do Aluno:", "nm_aluno", array("class" => "col-sm-2 control-label")); 
+            echo "</div>";
             echo "<div class='form-group'>";
             echo form_label("Turma:", "nm_turma", array("class" => "col-sm-2 control-label"));
             echo "</div>";
             echo "<div class='form-group'>";
             echo form_label("Professor(a):", "nm_professor", array("class" => "col-sm-2 control-label"));
-            echo "</div>";
-            echo "<div class='form-group'>";
+            echo "</div>";            echo "<div class='form-group'>";
             echo form_label("Email:", "email", array("class" => "col-sm-2 control-label"));
             echo "</div>";
             echo "<div class='form-group'>";

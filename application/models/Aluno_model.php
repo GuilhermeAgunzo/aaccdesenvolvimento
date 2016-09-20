@@ -68,5 +68,12 @@ class Aluno_model extends CI_Model{
         }
 
     }
+    public function buscaUnidadeAlunoId($id){
+       return $this->db->query("SELECT u.nm_unidade, u.cd_cpsouza from tb_unidade u inner join tb_turma t on t.id_unidade = u.id_unidade inner join tb_aluno a on a.id_turma = t.id_turma where a.id_usuario = $id")->row_array();
+    }
+     public function buscarAlunoUsuario($id_usuario){
+        $this->db->where("id_usuario", $id_usuario);
+        return $this->db->get("tb_aluno")->row_array();
+    }
 
 }

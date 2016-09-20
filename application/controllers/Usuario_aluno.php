@@ -42,4 +42,16 @@ class Usuario_aluno extends CI_Controller
         $this->load->template_usuario_aluno("usuario_aluno/cadastrar_relatorio.php");
 
     }
+     public function alterar_relatorio()
+    {
+
+        $this->load->template_usuario_aluno("usuario_aluno/alterar_relatorio.php");
+
+    }
+     public function visualizar_relatorio()
+    {
+
+        $this->load->template_usuario_aluno("usuario_aluno/visualizar_relatorio.php");
+
+    }
 }
