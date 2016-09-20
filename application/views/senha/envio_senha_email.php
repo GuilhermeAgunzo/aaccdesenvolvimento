@@ -26,7 +26,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <div class="in-form">
             <?php
             $atributos = array('class' => 'form-horizontal');
-            echo form_open('email/send', $atributos);
+            echo form_open('usuario/resetarsenha', $atributos);
             echo "<div class='centralizarForm'>";
             echo form_input(array("name" => "nmEmail","required" => "required","type" => "email", "id" => "nmEmail" ,"class" => "", "maxlength" => "80", "placeholder" => "Digite seu Email de Login"));
             echo "<br>"."<br>"."<br>";
