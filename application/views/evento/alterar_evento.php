@@ -67,6 +67,15 @@ if(isset($eventos)){
 if(isset($linhaEvento)){
     echo form_open("evento/alteraEvento",$atributos);
     echo form_hidden("eventoId",$linhaEvento['id_evento']);
+
+    echo "<div class='row'>";
+    echo form_label("Tipo de Atividade", "tipoDeAtividade", array("class" => "col-sm-2 control-label"));
+    echo "<div class='form-group col-sm-4'>";
+    echo form_dropdown('Atividade', $atividades, set_value("atividade",$linhaEvento['id_tipo_atividade']), array("class" => "form-control", "required" => "required"));
+    
+    echo "</div>";
+    echo "</div>";
+    
     echo "<div class='row'>";
     echo form_label("Título do Evento", "tituloDoEvento", array("class" => "col-sm-2 control-label"));
     echo "<div class='form-group col-sm-4'>";

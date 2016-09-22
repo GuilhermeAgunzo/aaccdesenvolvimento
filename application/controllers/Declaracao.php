@@ -19,14 +19,8 @@
                 $this->load->model("Evento_model");
                 $evento = $this->Evento_model->buscaEventoDcl();
 
-                //montando informaçoes no array de eventos internos
-                foreach($evento as $e){
-                    if($e['dt_final_evento'] <= time()-(24*3600)){
-                        $dropdownEvento[$e['id_evento']]= $e['nm_evento'].' ('.$e['dt_final_evento'].' / '.$e['hr_evento'].' /'.$e['nm_responsavel_evento'].' )';
-                    }
-                }
                 //montando matriz de informações que aparecerão na view cadastro_view
-                $dados = array("tipoAtividade" => $tipoAtividade,"eventos" => $evento,"dropdownEvento" => $dropdownEvento, "dadosUsuario" => $dadosUsuario);
+                $dados = array("tipoAtividade" => $tipoAtividade,"eventos" => $evento, "dadosUsuario" => $dadosUsuario);
                 //carregando view e enviando os dados
                 $this->load->template_usuario_aluno("declaracao/cadastrar_declaracao_view", $dados);
             }

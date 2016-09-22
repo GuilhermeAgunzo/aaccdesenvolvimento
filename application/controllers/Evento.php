@@ -174,9 +174,11 @@ class Evento extends CI_Controller
     public function pesquisaEventoId($id){
         autoriza(2);
         $this->load->model("evento_model");
+        $this->load->model("TipoAtividade_model");
 
+        $atividades = $this->TipoAtividade_model->dropDownAtividade();
         $linhaEvento = $this->evento_model->buscaEventoPorId($id);
-        $dados = array("linhaEvento" => $linhaEvento);
+        $dados = array("linhaEvento" => $linhaEvento, "atividades" => $atividades);
 
         $this->load->template_admin("evento/alterar_evento.php",$dados);
     }
@@ -229,6 +231,7 @@ class Evento extends CI_Controller
         $horaAtual = date('Y-m-d H:i:s');
 
         $evento = array(
+            "id_tipo_atividade" => $this->input->post("Atividade"),
           "nm_evento" => $this->input->post("nmEvento"),
           "local_evento" => $this->input->post("nmLocalEvento"),
           "dt_inicio_evento" => $dataInicial,

@@ -64,6 +64,7 @@
             echo "<div class='form-group' id='interno'>";
             echo form_label("Eventos Internos", "eventoInterno", array("class" => "col-sm-2 control-label"));
                 echo "<div class='col-sm-10'>";
+                    $dropdownEvento = array('' =>  "Selecione") + $eventos;
                     echo form_dropdown('eventoInterno', $dropdownEvento, array("class" => "form-control"));
                     echo form_error("eventoInterno");
                 echo "</div>";

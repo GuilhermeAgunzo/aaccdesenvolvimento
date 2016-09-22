@@ -35,10 +35,17 @@ class Evento_model extends CI_Model{
     }
 
     public function buscaEventoDcl(){
-        $this->db->select("*");
+
         //pegar data de ontem pra menos
-        //SELECT * FROM tb_evento WHERE dt_final_evento <= CURDATE() - INTERVAL 1 DAY AND CURDATE()
-        $this->db->where('dt_final_evento <= CURDATE() - INTERVAL 1 DAY AND CURDATE()');
-        return $this->db->get("tb_evento")->result_array();
+        $result = $this->db->query("select nm_evento as evento, id_evento from tb_evento WHERE dt_final_evento <= CURDATE() - INTERVAL 1 DAY AND CURDATE() ORDER BY nm_evento;");
+
+        $retorno = array();
+        if($result->num_rows() > 0) {
+            foreach($result->result_array() as $row) {
+                $retorno[$row['id_evento']] = $row['evento'];
+            }
+        }
+        return $retorno;
+
     }
 }
