@@ -26,7 +26,7 @@
             echo "<div class='row'>";
             echo form_label("Número de matrícula", "matricula", array("class" => "col-sm-2 control-label"));
             echo "<div class='form-group col-sm-2'>";
-            echo form_input(array("name" => "matricula", "value" => set_value("matricula", $aluno['cd_mat_aluno']), "required" => "required", "id" => "matricula", "class" => "form-control", "maxlength" => "13", "minlength" => "13", "min" => "0"));
+            echo form_input(array("name" => "matricula", "value" => set_value("matricula", $aluno['cd_mat_aluno']), "required" => "required", "id" => "matricula", "class" => "form-control", "maxlength" => "13", "minlength" => "13", "min" => "0", "readonly" => "readonly"));
             echo form_error("matricula");
             echo "</div>";
             echo "<div class='col-sm-1'>";
