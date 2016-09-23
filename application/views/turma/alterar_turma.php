@@ -75,7 +75,7 @@ if(isset($turma) || isset($erro)){
     echo "<div class='row'>";
     echo form_label("Código da Turma", "matricula", array("class" => "col-md-2 control-label"));
     echo "<div class='form-group col-md-2'>";
-    echo form_input(array("name" => "cd_mat_turma", "type" => "number", "value" => set_value("cd_mat_turma",$turma['cd_mat_turma']), "id" => "cd_mat_turma" ,"class" => "form-control", "max" => "9999", "required" => "required"));
+    echo form_input(array("name" => "cd_mat_turma", "type" => "number", "value" => set_value("cd_mat_turma",$turma['cd_mat_turma']), "id" => "cd_mat_turma" ,"class" => "form-control", "max" => "9999", "required" => "required", "readonly" => "readonly"));
     echo form_error("cd_mat_turma");
     echo "</div>";
     echo form_label("Ano de Ingresso", "ano", array("class" => "col-md-2 control-label"));

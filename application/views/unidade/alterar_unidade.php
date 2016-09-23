@@ -68,7 +68,7 @@ if(isset($unidades)) { ?>
         echo "<div class='row'>";
         echo form_label("Código da Unidade", "cd_cpsouza", array("class" => "col-md-2 control-label"));
         echo "<div class='form-group col-md-2'>";
-        echo form_input(array("name" => "cd_cpsouza", "value" => set_value("cd_cpsouza",$unidade['cd_cpsouza']), "id" => "cd_cpsouza" ,"class" => "form-control", "maxlength" => "10"));
+        echo form_input(array("name" => "cd_cpsouza", "value" => set_value("cd_cpsouza",$unidade['cd_cpsouza']), "id" => "cd_cpsouza" ,"class" => "form-control", "maxlength" => "10", "readonly" => "readonly"));
         echo form_error("cd_cpsouza");
         echo "</div>";
         echo form_label("Nome da Unidade", "nm_unidade", array("class" => "col-md-2 control-label"));
