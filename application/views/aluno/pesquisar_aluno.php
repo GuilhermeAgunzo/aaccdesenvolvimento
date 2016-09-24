@@ -17,7 +17,6 @@
     }
     //opcoes de escolher as turmas da unidade escolhida na opcao anterior
     if(!isset($alunos) && isset($turmas)) {
-        echo anchor("aluno/pesquisar_aluno","Voltar", array("class" => "btn btn-default"));
         echo "<h3>" . $unidade["nm_unidade"] . "</h3>";
         if ($turmas != null) {
             echo "<div class='col-md-3'>";
@@ -34,6 +33,7 @@
                 echo "</tr>";
             }
             echo "</table>";
+            echo anchor("aluno/pesquisar_aluno","Voltar", array("class" => "btn btn-default"));
             echo "</div>";
         } else {
             echo "<p class='alert alert-danger'> Nenhuma Turma cadastrada nessa Unidade.</p>";
