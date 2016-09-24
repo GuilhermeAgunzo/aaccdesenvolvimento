@@ -133,7 +133,7 @@
             echo "<div class='row'>";
             echo form_label("Telefone Residencial", "tel", array("class" => "col-md-2 control-label"));
             echo "<div class='form-group col-md-2'>";
-            echo form_input(array("name" => "telefone", "id" => "tel", "class" => "form-control phone-mask", "maxlength" => "15", "value" => $professor["cd_tel_residencial"]));
+            echo form_input(array("name" => "telefone", "id" => "tel", "class" => "form-control phone-mask", "pattern" => ".{10}|.{11,}", "required title" => "O número de telefone deve conter entre 10 e 11 digitos" ,"maxlength" => "15", "value" => $professor["cd_tel_residencial"]));
             echo "</div>";
             echo "<div class='col-md-1'>";
             echo "</div>";
@@ -146,7 +146,7 @@
             echo "<div class='row'>";
             echo form_label("Telefone Celular", "celular", array("class" => "col-md-2 control-label"));
             echo "<div class='form-group col-md-2'>";
-            echo form_input(array("name" => "celular", "id" => "celular", "class" => "form-control phone-mask", "maxlength" => "15", "value" => $professor["cd_tel_celular"]));
+            echo form_input(array("name" => "celular", "id" => "celular", "class" => "form-control phone-mask", "pattern" => ".{10}|.{11,}", "required title" => "O número de celular deve conter entre 10 e 11 digitos" ,"maxlength" => "15", "value" => $professor["cd_tel_celular"]));
             echo "</div>";
             echo "<div class='col-md-1'>";
             echo "</div>";
