@@ -13,6 +13,8 @@
             echo "</div>";
             echo "<div class='form-group'>";
             echo "<div class='col-sm-offset-2 col-sm-10'>";
+            echo anchor("temporario/administrador","Cancelar", array("class" => "btn btn-default"));
+            echo "        ";
             echo form_button(array("class" => "btn btn-default", "content" => "Salvar", "type" => "submit"));
             echo "</div>";
             echo "</div>";

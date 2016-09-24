@@ -21,7 +21,7 @@
 
     if(isset($aluno)) {
         if ($aluno != null) {
-<<<<<<< HEAD
+
 
             if ($aluno['status_ativo']==1) {
 
@@ -131,7 +131,7 @@
             }
 
         }else{echo "ERRO";}
-=======
+
             echo form_open("aluno/alteraraluno", $atributos);
             echo form_hidden('id_aluno', $aluno['id_aluno']);
             echo "<div class='row'>";
@@ -179,6 +179,8 @@
             echo "<div class='row'>";
             echo "<div class='form-group'>";
             echo "<div class='col-sm-offset-2 col-sm-10'>";
+            echo anchor("temporario/administrador","Cancelar", array("class" => "btn btn-default"));
+            echo "        ";
             echo form_button(array("class" => "btn btn-default", "content" => "Salvar", "type" => "submit"));
             echo "</div>";
             echo "</div>";
@@ -189,6 +191,6 @@
 
         echo "ERRO";
         }
->>>>>>> origin/master
-    }
+
+
 ?>
