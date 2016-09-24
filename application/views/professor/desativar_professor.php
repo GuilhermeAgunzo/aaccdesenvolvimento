@@ -102,33 +102,33 @@
         echo "<div class='row'>";
         echo form_label("Unidade", "unidade", array("class" => "col-md-2 control-label"));
         echo "<div class='form-group col-md-3'>";
-        echo form_dropdown('Unidade', $unidades, $professor['id_unidade'] , array("class" => "form-control"));
+        echo form_dropdown('Unidade', $unidades, $professor['id_unidade'] , array("class" => "form-control", "disabled" => "disabled"));
         echo "</div>";
         echo "</div>";
 
         echo "<div class='row'>";
         echo form_label("Nome Completo", "nomeCompleto", array("class" => "col-md-2 control-label"));
         echo "<div class='form-group col-md-3'>";
-        echo form_input(array("name" => "nome", "id" => "nomeCompleto" ,"class" => "form-control", "maxlength" => "70", "value" => $professor["nm_professor"]));
+        echo form_input(array("name" => "nome", "id" => "nomeCompleto" ,"class" => "form-control", "maxlength" => "70", "value" => $professor["nm_professor"], "disabled" => "disabled"));
         echo "</div>";
         echo "<div class='col-md-1'>";
         echo "</div>";
         echo form_label("Telefone Residencial", "telefone", array("class" => "col-md-2 control-label"));
         echo "<div class='form-group col-md-2'>";
-        echo form_input(array("name" => "telefone", "id" => "telefone" ,"class" => "form-control", "maxlength" => "15", "value" => $professor["cd_tel_residencial"]));
+        echo form_input(array("name" => "telefone", "id" => "telefone" ,"class" => "form-control", "maxlength" => "15", "value" => $professor["cd_tel_residencial"], "disabled" => "disabled"));
         echo "</div>";
         echo "</div>";
 
         echo "<div class='row'>";
         echo form_label("Email", "email", array("class" => "col-md-2 control-label"));
         echo "<div class='form-group col-md-3'>";
-        echo form_input(array("name" => "email", "id" => "email" ,"class" => "form-control", "maxlength" => "70", "value" => $professor["nm_email"]));
+        echo form_input(array("name" => "email", "id" => "email" ,"class" => "form-control", "maxlength" => "70", "value" => $professor["nm_email"], "disabled" => "disabled"));
         echo "</div>";
         echo "<div class='col-md-1'>";
         echo "</div>";
         echo form_label("Telefone Celular", "celular", array("class" => "col-md-2 control-label"));
         echo "<div class='form-group col-md-2'>";
-        echo form_input(array("name" => "celular", "id" => "celular" ,"class" => "form-control", "maxlength" => "15", "value" => $professor["cd_tel_celular"]));
+        echo form_input(array("name" => "celular", "id" => "celular" ,"class" => "form-control", "maxlength" => "15", "value" => $professor["cd_tel_celular"], "disabled" => "disabled"));
         echo "</div>";
         echo "</div>";
 
