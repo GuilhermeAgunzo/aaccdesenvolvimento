@@ -121,7 +121,7 @@ if(isset($linhaEvento)){
     echo "<div class='row'>";
     echo form_label("Descrição", "descricaoEvento", array("class" => "col-sm-2 control-label"));
     echo "<div class='form-group col-sm-6'>";
-    echo form_textarea(array('name' => 'dsEvento',"required" => "required", 'id' => 'dsEvento', "value" => $linhaEvento['ds_evento'],'class' => 'form-control', 'rows' => 3));
+    echo form_textarea(array('name' => 'dsEvento',"required" => "required", 'id' => 'dsEvento', "value" => $linhaEvento['ds_evento'],'class' => 'form-control', 'rows' => 3, "maxlength" => "500"));
     echo form_error("dsEvento");
     echo "</div>";
     echo "</div>";
