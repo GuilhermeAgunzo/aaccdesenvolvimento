@@ -21,7 +21,7 @@ echo "</br></br>";
 
 if(isset($aluno)) {
 
-    echo form_open("aluno/desativaraluno",$atributos);
+    echo form_open("aluno/desativaraluno",array('class' => 'form-horizontal',"onsubmit" => "return confirma()"));
     echo "<div class='row'>";
     echo form_label("Número de matrícula", "matricula", array("class" => "col-md-2 control-label"));
     echo "<div class='form-group col-md-2'>";
@@ -73,3 +73,9 @@ if(isset($aluno)) {
     echo form_close();
 }
 ?>
+
+<script type="text/javascript">
+    function confirma(){
+        return confirm("Deseja mesmo desativar o aluno?");
+    }
+</script>

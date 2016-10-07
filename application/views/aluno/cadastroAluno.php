@@ -22,7 +22,7 @@
 
 	if(isset($unidade)) {
 		$atributos = array('class' => 'form-horizontal');
-		echo form_open('aluno/cadastraraluno', $atributos);
+		echo form_open('aluno/cadastraraluno', array('class' => 'form-horizontal',"onsubmit" => "return confirma()"));
 		echo "<div class='row'>";
 		echo form_label("Número de matrícula", "matricula", array("class" => "col-md-2 control-label"));
 		echo "<div class='form-group col-md-2'>";
@@ -76,3 +76,10 @@
 		echo form_close();
 	}
 ?>
+
+<script type="text/javascript">
+    function confirma(){
+        return confirm("Confirmar informações e enviar?");
+    }
+</script>
+

@@ -97,7 +97,7 @@
     }
     //------------Formulario de Deativação----------------
     if(isset($professor)){
-        echo form_open("professor/desativaProfessor", 'class = form-horizontal');
+        echo form_open("professor/desativaProfessor", array('class' => 'form-horizontal', 'onsubmit' => 'return confirma();'));
         echo form_input(array("name" => "cd_professor", "id" => "cd_professor", "type" => "hidden", "value" => $professor["id_professor"]));
         echo "<div class='row'>";
         echo form_label("Unidade", "unidade", array("class" => "col-md-2 control-label"));
@@ -145,7 +145,13 @@
         echo form_close();
     }
     ?>
-        <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+<script type="text/javascript">
+    function confirma(){
+        return confirm("Deseja mesmo desativar o professor?");
+    }
+</script>
+
+<div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
