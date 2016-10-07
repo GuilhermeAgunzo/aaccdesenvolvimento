@@ -30,15 +30,29 @@ class RelatorioEvento extends CI_Controller{
         $dataInicial = dataPtBrParaMysql($this->input->post("dtEvento"));
         $dataFinal = dataPtBrParaMysql($this->input->post("dtFinalEvento"));
 
-        $eventos = $this->evento_model->buscaEventosEntreDatas($dataInicial,$dataFinal);
-        if($eventos != null){
+        if ($this->_periodoValido($dataInicial, $dataFinal)) {
+            $eventos = $this->evento_model->buscaEventosEntreDatas($dataInicial, $dataFinal);
+            if ($eventos != null) {
 
-            $dados = array("eventos" => $eventos);
-            $this->load->template_admin("aluno/relatorio_evento.php",$dados);
-        }else{
-            $this->session->set_flashdata("danger", "Não há eventos no período informado");
+                $dados = array("eventos" => $eventos);
+                $this->load->template_admin("aluno/relatorio_evento.php", $dados);
+            } else {
+                $this->session->set_flashdata("danger", "Não há eventos no período informado");
+                redirect('RelatorioEvento/');
+            }
+        }
+        else
+        {
+            $this->session->set_flashdata("danger", "A data do término do evento não pode ser anterior a data do início");
             redirect('RelatorioEvento/');
         }
+    }
+
+    public function _periodoValido($dt_inicio, $dt_vencimento){
+        if($dt_inicio <= $dt_vencimento)
+            return true;
+        else
+            return false;
     }
 
 }
