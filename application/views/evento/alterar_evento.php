@@ -56,7 +56,7 @@ if(isset($eventos)){
         }else{
             echo "<td>". $evento['qt_horas_evento'] ." horas</td>";
         }
-        echo "<td class='texto_descricao'>". character_limiter($evento['ds_evento'],20) ."</td>";
+        echo "<td class='texto_descricao'>". ellipsize($evento['ds_evento'],45) ."</td>";
         echo "<td>". $evento['nm_responsavel_evento'] ."</td>";
         echo "<td>". anchor("evento/pesquisaEventoId/{$evento['id_evento']}","Alterar",array("class" => "btn btn-default btn-alterar btn-xs")) ."</td>";
         echo "</tr>";

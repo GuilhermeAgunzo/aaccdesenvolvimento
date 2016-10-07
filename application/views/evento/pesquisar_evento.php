@@ -57,7 +57,7 @@ if(isset($eventos)){
                 }else{
                     echo "<td>". $evento['qt_horas_evento'] ." horas</td>";
                 }
-                echo "<td class='texto_descricao'>". $evento['ds_evento'] ."</td>";
+                echo "<td class='texto_descricao'>". ellipsize($evento['ds_evento'],45) ."</td>";
                 echo "<td>". $evento['nm_responsavel_evento'] ."</td>";
             echo "</tr>";
         }
