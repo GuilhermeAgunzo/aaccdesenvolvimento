@@ -101,9 +101,17 @@ class Professor extends CI_Controller{
                 "id_usuario" => $id_usuario
             );
 
-            $this->professor_model->salvaCadastro($professor);
-            $this->session->set_flashdata("success", "Cadastrado efetuado com sucesso.");
-            redirect('/professor/cadastro_professor');
+            if ($this->_periodoValido($data_entrada, $data_saida)) {
+                $this->professor_model->salvaCadastro($professor);
+                $this->session->set_flashdata("success", "Cadastrado efetuado com sucesso.");
+                redirect('/professor/cadastro_professor');
+            }
+            else
+            {
+                $this->session->set_flashdata("danger", "A data do término do evento não pode ser anterior a data do início");
+                redirect('/professor/cadastro_professor');
+            }
+
         }
 
         $this->load->model("unidade_model");
@@ -119,7 +127,7 @@ class Professor extends CI_Controller{
         autoriza(2);
 
         $idUnidade = $this->input->post("Unidade");
-        
+
         $opcao = $this->input->post("opcao");
 
         $this->load->model("professor_model");
@@ -210,23 +218,27 @@ class Professor extends CI_Controller{
             "dt_saida" => $data_saida
         );
 
+        if ($this->_periodoValido($data_entrada, $data_saida)) {
+            if ($this->_validaFormulario(false)) {
+                if ($this->professor_model->alteraProfessor($id_professor, $professor)) {
+                    $this->session->set_flashdata("success", "Alteração efetuada com sucesso.");
+                    redirect('/professor/alterar_professor');
+                } else {
+                    $this->session->set_flashdata("danger", "A alteração não foi efetuada. Tente novamente mais tarde.");
+                    redirect('/professor/alterar_professor');
+                }
+            } else {
+                $this->load->model("unidade_model");
+                $unidades = $this->unidade_model->dropDownUnidade();
+                $professor['id_professor'] = $id_professor;
 
-        if($this->_validaFormulario(false)){
-            if($this->professor_model->alteraProfessor($id_professor,$professor)){
-                $this->session->set_flashdata("success", "Alteração efetuada com sucesso.");
-                redirect('/professor/alterar_professor');
+                $dados = array("professor" => $professor, "unidades" => $unidades);
+                $this->load->template_admin("professor/alterar_professor", $dados);
             }
-            else{
-                $this->session->set_flashdata("danger", "A alteração não foi efetuada. Tente novamente mais tarde.");
-                redirect('/professor/alterar_professor');
-            }
-        }else{
-            $this->load->model("unidade_model");
-            $unidades = $this->unidade_model->dropDownUnidade();
-            $professor['id_professor'] = $id_professor;
-
-            $dados = array("professor" => $professor, "unidades" => $unidades);
-            $this->load->template_admin("professor/alterar_professor", $dados);
+        }
+        else{
+            $this->session->set_flashdata("danger", "A data do término do evento não pode ser anterior a data do início");
+            redirect('/professor/buscaAlteraProfessor/'.$id_professor);
         }
     }
 
@@ -333,13 +345,20 @@ class Professor extends CI_Controller{
         }
 
         $this->form_validation->set_rules("Unidade", "Unidade", "required", "required = 'Você deve selecionar %s.'");
-        
+
         $this->form_validation->set_rules("nome", "nome", "required", "required = 'Você precisa preencher %s.'");
 
         $this->form_validation->set_error_delimiters('<p class="alert alert-danger">', '</p>');
 
         return $this->form_validation->run();
 
+    }
+
+    public function _periodoValido($dt_inicio, $dt_vencimento){
+        if($dt_inicio <= $dt_vencimento)
+            return true;
+        else
+            return false;
     }
 }
 
