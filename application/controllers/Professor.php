@@ -86,22 +86,23 @@ class Professor extends CI_Controller{
 
             $usuarioLogado = $this->session->userdata("usuario_logado");
 
-            $id_usuario = $this->usuariolb->cadastrarUsuario($email, 2);
-
-            $professor = array(
-                "nm_professor" => $this->input->post("nome"),
-                "nm_email" => $email,
-                "cd_tel_residencial" => $telefone,
-                "cd_tel_celular" => $celular,
-                "dt_entrada" => $data_entrada,
-                "id_unidade" => $this->input->post("Unidade"),
-                "dt_saida" => $data_saida,
-                "status_ativo" => 1,
-                "id_user_adm_cadastrou" => $usuarioLogado['id_usuario'],
-                "id_usuario" => $id_usuario
-            );
-
             if ($this->_periodoValido($data_entrada, $data_saida)) {
+                $id_usuario = $this->usuariolb->cadastrarUsuario($email, 2);
+
+                $professor = array(
+                    "nm_professor" => $this->input->post("nome"),
+                    "nm_email" => $email,
+                    "cd_tel_residencial" => $telefone,
+                    "cd_tel_celular" => $celular,
+                    "dt_entrada" => $data_entrada,
+                    "id_unidade" => $this->input->post("Unidade"),
+                    "dt_saida" => $data_saida,
+                    "status_ativo" => 1,
+                    "id_user_adm_cadastrou" => $usuarioLogado['id_usuario'],
+                    "id_usuario" => $id_usuario
+                );
+
+
                 $this->professor_model->salvaCadastro($professor);
                 $this->session->set_flashdata("success", "Cadastrado efetuado com sucesso.");
                 redirect('/professor/cadastro_professor');
