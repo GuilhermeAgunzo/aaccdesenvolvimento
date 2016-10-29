@@ -105,7 +105,7 @@
                 }
         
                 $config['upload_path'] = $path;
-                $config['allowed_types'] = 'pdf|jpg|png|doc|docx';
+                $config['allowed_types'] = 'pdf|jpg|png';
                 $config['file_name'] = $aluno['cd_mat_aluno'] . "_" . $id_declaracao. "." . $filename[count($filename) - 1];
         
                 $this->load->library('upload', $config);
