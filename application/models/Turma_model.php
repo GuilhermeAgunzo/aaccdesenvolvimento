@@ -54,4 +54,15 @@ class Turma_model extends CI_Model{
         }
         return $retorno;
     }
+
+    public function dropDownTurmaByCurso(){
+        $id_curso = $this->input->post("id_curso");
+        $this->db->where("id_curso", $id_curso);
+
+        $this->db->order_by("id_turma");
+
+        $consulta = $this->db->get("tb_turma");
+
+        return $consulta;
+    }
 }

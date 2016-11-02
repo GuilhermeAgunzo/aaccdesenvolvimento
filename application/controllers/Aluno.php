@@ -68,7 +68,7 @@ class Aluno extends CI_Controller{
                     "cd_mat_aluno" => $this->input->post("matricula"),
                     "nm_aluno" => $this->input->post("nome"),
                     "nm_email" => $this->input->post("email"),
-                    "id_turma" => $this->input->post("turma"),
+                    "id_turma" => $this->input->post("turmas"),
                     "id_usuario" => $id_usuario,
                     "dt_cadastro" => mdate("%Y-%m-%d %H:%i:%s", time()),
                     "id_user_adm_cadastrou" => $usuarioLogado['id_usuario'],
@@ -90,10 +90,10 @@ class Aluno extends CI_Controller{
         $this->load->model("unidade_model");
         $this->load->model("turma_model");
 
-        $turmasUnidade = $this->turma_model->dropDownTurmaUnidade($unidade);
+        //$turmasUnidade = $this->turma_model->dropDownTurmaUnidade($unidade);
         $unidades = $this->unidade_model->dropDownUnidade();
 
-        $dados = array('unidade' => $unidade, 'unidades' => $unidades, 'turmasUnidade' => $turmasUnidade);
+        $dados = array('unidade' => $unidade, 'unidades' => $unidades);
 
         $this->load->template_admin("aluno/cadastroAluno", $dados);
     }
@@ -361,11 +361,11 @@ class Aluno extends CI_Controller{
 
         $this->form_validation->set_rules("nome", "nome", "required", $mensagem);
 
-        $this->form_validation->set_rules("turma", "turma", "required|is_natural",
+        /*$this->form_validation->set_rules("turma", "turma", "required|is_natural",
             array(
                 'is_natural' => 'Selecione uma turma válida.'
             )
-        );
+        );*/
 
         $this->form_validation->set_error_delimiters('<p class="alert alert-danger">', '</p>');
 

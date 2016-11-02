@@ -17,5 +17,15 @@ class Curso_model extends CI_Model{
         return $retorno;
     }
 
+    public function dropDownCursoByUnidade(){
 
+        $id_unidade = $this->input->post("id_unidade");
+        $this->db->where("id_unidade", $id_unidade);
+
+        $this->db->order_by("id_curso");
+
+        $consulta = $this->db->get("tb_curso");
+
+        return $consulta;
+    }
 }
