@@ -28,4 +28,19 @@ class Curso_model extends CI_Model{
 
         return $consulta;
     }
+        /*
+    função da validacao_relatorio_aacc, precisa da referencia da tabela de unidade para de curso que tem nessa unidade
+*/
+    public function dropDownCursoUnidade($unidade){
+        $result = $this->db->query("select nm_curso ,id_curso from tb_curso WHERE id_unidade={$unidade} ORDER BY nm_curso;");
+
+        $retorno = array();
+        if($result->num_rows() > 0) {
+            foreach($result->result_array() as $row) {
+
+                $retorno[$row['id_curso']] = $row['nm_curso'];
+            }
+        }
+        return $retorno;
+    }
 }
