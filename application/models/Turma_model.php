@@ -65,4 +65,19 @@ class Turma_model extends CI_Model{
 
         return $consulta;
     }
+        /*
+        função da validacao_relatorio_aacc.
+    */
+    public function dropDownTurmaCurso($id_curso){
+        $result = $this->db->query("select IF (nm_modalidade='EAD' ,concat(aa_ingresso, ' - ',dt_semestre, 'º sem - ',nm_modalidade),concat(aa_ingresso, ' - ',dt_semestre, 'º sem - ',nm_turno)) as turma, id_turma from tb_turma WHERE id_curso={$id_curso} ORDER BY `tb_turma`.`aa_ingresso` DESC;");
+
+        $retorno = array();
+        if($result->num_rows() > 0) {
+            foreach($result->result_array() as $row) {
+
+                $retorno[$row['id_turma']] = $row['turma'];
+            }
+        }
+        return $retorno;
+    }
 }
