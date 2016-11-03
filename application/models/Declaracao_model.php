@@ -50,7 +50,7 @@ class Declaracao_model extends CI_Model{
 
     public function validaDeclaracao($status,$id_declaracao){
         $this->db->where('id_declaracao', $id_declaracao);
-        return $this->db->update('tb_declaracao',$status);
+        return $this->db->update('tb_declaracao',array('status_declaracao' => $status));
     }
 
 }
