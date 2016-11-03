@@ -1,40 +1,157 @@
             <?php
 
             echo form_fieldset("<h1>Validação de AACC's</h1>");
-
             $atributos = array('class' => 'form-horizontal');
-            echo form_open('email/send', $atributos);
-            echo "<div class='form-group'>";
-            echo form_label("Turma", "turma", array("class" => "col-sm-2 control-label"));
-            echo "<div class='col-sm-10'>";
-            $turma = array('turma' => 'Selecione a turma','turma1' => '1º semestre, 1º Ciclo, ADS, 2012','turma2' => '1º semestre, 2º Ciclo, ADS, 2012', 'turma3' => '1º semestre, 3º Ciclo, ADS, 2012');
-            echo form_dropdown('Turma', $turma, array("class" => "form-control"));
+            echo form_open('', $atributos);
+
+            echo "<div class='row'>";
+            echo form_label("Unidade", "id_unidade", array("class" => "col-sm-2 control-label"));
+            echo "<div class='form-group col-md-3'>";
+            array_unshift($dropDownUnidade, "Selecione");
+            echo form_dropdown('id_unidade',$dropDownUnidade, "", array("class" => "form-control", "onchange" => "curso(this.value)"));
+            echo form_error("id_unidade");
+
             echo "</div>";
             echo "</div>";
-            echo "<div class='form-group'>";
-            echo "<div class='col-sm-offset-2 col-sm-10'>";
-            echo form_button(array("class" => "btn btn-default", "content" => "Enviar", "type" => "submit"));
-            echo "</div>";
-            echo "</div>";
+
+            echo '<div id="curso"></div>';
+
             echo form_close();
 
-            echo "</br>"."</br>"."</br>"."</br>";
-            echo "<h3>Lista de Alunos</h3>";
-            echo "</br>";
-            echo "<table border '1'>";
-            echo "<tr>";
-            echo "<td>Alyne Alice Vieira</td>";
-            echo "<td class='tabelaBotao'>";
-            echo form_button(array("class" => "botaoValidacao", "content" => "", "type" => "submit"));
-            echo "</td>";
-            echo "</tr>";
-            echo "<tr>";
-            echo "<td>Karina Lima Datore</td>";
-            echo "<td class='tabelaBotao'>";
-            echo form_button(array("class" => "botaoValidacao", "content" => "", "type" => "submit"));
-            echo "</td>";
-            echo "</tr>";
-            echo "<tr>";
-            echo "</table>";
-            echo "</div>";
             ?>
+
+
+
+            <script>
+                //função ajax
+                function GetXMLHttp() {
+                    if(navigator.appName == "Microsoft Internet Explorer") {
+                        xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    else {
+                        xmlHttp = new XMLHttpRequest();
+                    }
+                    return xmlHttp;
+                } var xmlRequest = GetXMLHttp();
+            </script>
+
+
+            <script>
+                function curso(valor){
+
+                    var url = "curso/"+valor+"/?"+Math.random();
+                    xmlRequest.open("GET",url,true);
+                    xmlRequest.onreadystatechange = mudancaEstadoCurso;
+                    xmlRequest.send(null);
+                    if (xmlRequest.readyState == 1) {
+                        document.getElementById("curso").innerHTML = "<div style='text-align:center; margin-top:20px;'><img src='<?= base_url("images/carregando.gif")?>'></div>";
+                    }
+                    return url;
+                }
+
+                function mudancaEstadoCurso(){
+                    if (xmlRequest.readyState == 4){
+                        document.getElementById("curso").innerHTML = xmlRequest.responseText;
+                    }
+                }
+            </script>
+
+
+            <script>
+                function turma2(valor){
+
+                    var url = "turma2/"+valor+"/?"+Math.random();
+                    xmlRequest.open("GET",url,true);
+                    xmlRequest.onreadystatechange = mudancaEstadoTurma;
+                    xmlRequest.send(null);
+                    if (xmlRequest.readyState == 1) {
+                        document.getElementById("turma2").innerHTML = "<div style='text-align:center; margin-top:20px;'><img src='<?= base_url("images/carregando.gif")?>'></div>";
+                    }
+                    return url;
+                }
+
+                function mudancaEstadoTurma(){
+                    if (xmlRequest.readyState == 4){
+                        document.getElementById("turma2").innerHTML = xmlRequest.responseText;
+                    }
+                }
+            </script>
+
+            <script>
+                function statusDeclaracao(valor){
+
+                    var url = "statusDeclaracao/"+valor+"/?"+Math.random();
+                    xmlRequest.open("GET",url,true);
+                    xmlRequest.onreadystatechange = mudancaEstadoStatusDeclaracao;
+                    xmlRequest.send(null);
+                    if (xmlRequest.readyState == 1) {
+                        document.getElementById("statusDeclaracao").innerHTML = "<div style='text-align:center; margin-top:20px;'><img src='<?= base_url("images/carregando.gif")?>'></div>";
+                    }
+                    return url;
+                }
+
+                function mudancaEstadoStatusDeclaracao(){
+                    if (xmlRequest.readyState == 4){
+                        document.getElementById("statusDeclaracao").innerHTML = xmlRequest.responseText;
+                    }
+                }
+            </script>
+
+            <script>
+                function alunos2(valor){
+                    var url = "alunos2/"+valor+"/?"+Math.random();
+                    xmlRequest.open("GET",url,true);
+                    xmlRequest.onreadystatechange = mudancaEstadoAluno;
+                    xmlRequest.send(null);
+                    if (xmlRequest.readyState == 1) {
+                        document.getElementById("alunos2").innerHTML = "<div style='text-align:center; margin-top:20px;'><img src='<?= base_url("images/carregando.gif")?>'></div>";
+                    }
+                    return url;
+                }
+
+                function mudancaEstadoAluno(){
+                    if (xmlRequest.readyState == 4){
+                        document.getElementById("alunos2").innerHTML = xmlRequest.responseText;
+                    }
+                }
+            </script>
+
+            <script>
+                function lista_declaracao_alunos(valor){
+
+                    var url = "lista_declaracao_alunos/"+valor+"/?"+Math.random();
+                    xmlRequest.open("GET",url,true);
+                    xmlRequest.onreadystatechange = mudancaEstadoLista;
+                    xmlRequest.send(null);
+                    if (xmlRequest.readyState == 1) {
+                        document.getElementById("lista_declaracao_alunos").innerHTML = "<div style='text-align:center; margin-top:20px;'><img src='<?= base_url("images/carregando.gif")?>'></div>";
+                    }
+                    return url;
+                }
+
+                function mudancaEstadoLista(){
+                    if (xmlRequest.readyState == 4){
+                        document.getElementById("lista_declaracao_alunos").innerHTML = xmlRequest.responseText;
+                    }
+                }
+            </script>
+
+            <script>
+                function lista_declaracao_alunos_selecionados(valor){
+
+                    var url = "lista_declaracao_alunos_selecionados/"+valor+"/?"+Math.random();
+                    xmlRequest.open("GET",url,true);
+                    xmlRequest.onreadystatechange = mudancaEstadoListaSel;
+                    xmlRequest.send(null);
+                    if (xmlRequest.readyState == 1) {
+                        document.getElementById("lista_declaracao_alunos_selecionados").innerHTML = "<div style='text-align:center; margin-top:20px;'><img src='<?= base_url("images/carregando.gif")?>'></div>";
+                    }
+                    return url;
+                }
+
+                function mudancaEstadoListaSel(){
+                    if (xmlRequest.readyState == 4){
+                        document.getElementById("lista_declaracao_alunos_selecionados").innerHTML = xmlRequest.responseText;
+                    }
+                }
+            </script>
