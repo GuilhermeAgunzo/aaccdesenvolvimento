@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Aluno extends CI_Controller{
 
-    /*    MÉTODOS QUE CHAMAM SOMENTE VIEWS    */
+    /*    MÃ‰TODOS QUE CHAMAM SOMENTE VIEWS    */
 
     public function cadastro_aluno(){
         autoriza(2);
@@ -68,7 +68,7 @@ class Aluno extends CI_Controller{
                     "cd_mat_aluno" => $this->input->post("matricula"),
                     "nm_aluno" => $this->input->post("nome"),
                     "nm_email" => $this->input->post("email"),
-                    "id_turma" => $this->input->post("turma"),
+                    "id_turma" => $this->input->post("turmas"),
                     "id_usuario" => $id_usuario,
                     "dt_cadastro" => mdate("%Y-%m-%d %H:%i:%s", time()),
                     "id_user_adm_cadastrou" => $usuarioLogado['id_usuario'],
@@ -81,7 +81,7 @@ class Aluno extends CI_Controller{
                 redirect('/aluno/cadastro_aluno');
 
             }else{
-                $this->session->set_flashdata("danger", "O cadastro não foi efetuado. Tente novamente mais tarde.");
+                $this->session->set_flashdata("danger", "O cadastro nÃ£o foi efetuado. Tente novamente mais tarde.");
                 redirect('/aluno/cadastro_aluno');
             }
         }
@@ -90,10 +90,10 @@ class Aluno extends CI_Controller{
         $this->load->model("unidade_model");
         $this->load->model("turma_model");
 
-        $turmasUnidade = $this->turma_model->dropDownTurmaUnidade($unidade);
+        //$turmasUnidade = $this->turma_model->dropDownTurmaUnidade($unidade);
         $unidades = $this->unidade_model->dropDownUnidade();
 
-        $dados = array('unidade' => $unidade, 'unidades' => $unidades, 'turmasUnidade' => $turmasUnidade);
+        $dados = array('unidade' => $unidade, 'unidades' => $unidades);
 
         $this->load->template_admin("aluno/cadastroAluno", $dados);
     }
@@ -137,7 +137,7 @@ class Aluno extends CI_Controller{
 
         if($this->_validaFormulario($emailUnique, $matriculaUnique)){
             $this->aluno_model->alterarAluno($dados);
-            $this->session->set_flashdata("success", "Alteração efetuada com sucesso!");
+            $this->session->set_flashdata("success", "AlteraÃ§Ã£o efetuada com sucesso!");
             redirect('/aluno/alterar_aluno');
         }
 
@@ -150,8 +150,8 @@ class Aluno extends CI_Controller{
         $this->load->library("form_validation");
         $this->form_validation->set_rules("matricula", "matricula", "required|is_natural|exact_length[13]",
             array(
-                'required' => 'Você precisa preencher a matricula.',
-                'is_natural' => 'A matricula deve conter somente números.'
+                'required' => 'VocÃª precisa preencher a matricula.',
+                'is_natural' => 'A matricula deve conter somente nÃºmeros.'
             )
         );
         $this->form_validation->set_error_delimiters('<p class="alert alert-danger">', '</p>');
@@ -175,7 +175,7 @@ class Aluno extends CI_Controller{
                 $this->load->template_admin("aluno/alterar_aluno", $dados);
 
             } else {
-                $this->session->set_flashdata("danger", "Aluno não encontrado, Verifique os dados.");
+                $this->session->set_flashdata("danger", "Aluno nÃ£o encontrado, Verifique os dados.");
                 redirect('/aluno/alterar_aluno');
             }
         } else {
@@ -227,7 +227,7 @@ class Aluno extends CI_Controller{
         $this->load->library("form_validation");
         $this->form_validation->set_rules("nm_aluno","nm_aluno","required",
             array(
-                'required' => "Você precisa preencher o nome do aluno"
+                'required' => "VocÃª precisa preencher o nome do aluno"
             ));
         $this->form_validation->set_error_delimiters("<p class='alert alert-danger'>", "</p>");
         $this->form_validation->run();
@@ -237,7 +237,7 @@ class Aluno extends CI_Controller{
 
 
         if(!$alunos){
-            $this->session->set_flashdata("danger", "Aluno  não foi localizado. Verifique os dados ou tente novamente mais tarde");
+            $this->session->set_flashdata("danger", "Aluno  nÃ£o foi localizado. Verifique os dados ou tente novamente mais tarde");
             $alunos = $this->aluno_model->buscaAlunosInTurmas($turma["id_turma"]);
 
         }
@@ -252,8 +252,8 @@ class Aluno extends CI_Controller{
 
             $this->form_validation->set_rules("matricula", "matricula", "required|numeric",
                 array(
-                    'required' => 'Você precisa preencher %s.',
-                    'numeric' => 'A matricula deve conter somente números.'
+                    'required' => 'VocÃª precisa preencher %s.',
+                    'numeric' => 'A matricula deve conter somente nÃºmeros.'
                 )
             );
 
@@ -295,7 +295,7 @@ class Aluno extends CI_Controller{
         $this->load->library("form_validation");
         $this->form_validation->set_rules("matricula","matricula","required|is_natural|exact_length[13]",
             array(
-                'is_natural' => "A matricula deve conter apenas números"
+                'is_natural' => "A matricula deve conter apenas nÃºmeros"
             ));
 
         $this->form_validation->set_error_delimiters("<p class='alert alert-danger'>", "</p>");
@@ -310,7 +310,7 @@ class Aluno extends CI_Controller{
 
             if ($aluno != null) {
                 if($aluno['status_ativo']!=1){
-                    $this->session->set_flashdata("danger", "Esse Aluno está desativado.");
+                    $this->session->set_flashdata("danger", "Esse Aluno estÃ¡ desativado.");
                     redirect('/aluno/desativar_cadastro');
                 }
 
@@ -321,30 +321,30 @@ class Aluno extends CI_Controller{
                 $this->load->template_admin("aluno/desativar_aluno", $dados);
 
             }else{
-                $this->session->set_flashdata("danger", "Aluno não encontrado, Verifique os dados.");
+                $this->session->set_flashdata("danger", "Aluno nÃ£o encontrado, Verifique os dados.");
                 redirect('/aluno/desativar_cadastro');
             }
         }else{
-            $this->session->set_flashdata("danger", "Aluno não encontrado, Verifique os dados.");
+            $this->session->set_flashdata("danger", "Aluno nÃ£o encontrado, Verifique os dados.");
             redirect('/aluno/desativar_cadastro');
         }
     }
 
-    /*  MÉTODOS AUXILIARES  */
+    /*  MÃ‰TODOS AUXILIARES  */
 
     public function _validaFormulario($emailUnique, $matriculaUnique){
 
         $this->load->library("form_validation");
 
         $mensagem = array(
-            'required' => 'Você precisa preencher %s.',
-            'is_natural' => 'A matricula deve conter somente números.',
-            'is_unique' => 'Já existe um aluno cadastrado com esta matricula.'
+            'required' => 'VocÃª precisa preencher %s.',
+            'is_natural' => 'A matricula deve conter somente nÃºmeros.',
+            'is_unique' => 'JÃ¡ existe um aluno cadastrado com esta matricula.'
         );
 
         $mensagemEmail = array(
-            'valid_email' => 'Você precisa preencher um email válido.',
-            'is_unique' => 'Já existe um usuário cadastrado com este email.'
+            'valid_email' => 'VocÃª precisa preencher um email vÃ¡lido.',
+            'is_unique' => 'JÃ¡ existe um usuÃ¡rio cadastrado com este email.'
         );
 
         if($emailUnique){
@@ -361,11 +361,11 @@ class Aluno extends CI_Controller{
 
         $this->form_validation->set_rules("nome", "nome", "required", $mensagem);
 
-        $this->form_validation->set_rules("turma", "turma", "required|is_natural",
+        /*$this->form_validation->set_rules("turma", "turma", "required|is_natural",
             array(
-                'is_natural' => 'Selecione uma turma válida.'
+                'is_natural' => 'Selecione uma turma vÃ¡lida.'
             )
-        );
+        );*/
 
         $this->form_validation->set_error_delimiters('<p class="alert alert-danger">', '</p>');
 
@@ -438,7 +438,7 @@ class Aluno extends CI_Controller{
         autoriza(2);
 
         if($id_turma == null || $id_turma == 0){
-            $this->session->set_flashdata("danger", "Você deve selecionar uma turma válida.");
+            $this->session->set_flashdata("danger", "VocÃª deve selecionar uma turma vÃ¡lida.");
             redirect('/aluno/buscar');
         }else{
 
@@ -449,7 +449,7 @@ class Aluno extends CI_Controller{
             $alunos = $this->aluno_model->buscaAlunosInTurmas($id_turma);
             $turma = $this->turma_model->buscarTurmaId($id_turma);
 
-            $titulo = "Relatório de alunos da turma de {$turma['aa_ingresso']} - {$turma['dt_semestre']}º Sem - {$turma['nm_turno']}";
+            $titulo = "RelatÃ³rio de alunos da turma de {$turma['aa_ingresso']} - {$turma['dt_semestre']}Âº Sem - {$turma['nm_turno']}";
             $arquivo = "relatorio-de-alunos-da-turma-de-{$turma['aa_ingresso']}-{$turma['dt_semestre']}Sem-{$turma['nm_turno']}";
 
             $data = array(
@@ -472,7 +472,7 @@ class Aluno extends CI_Controller{
         autoriza(2);
 
         if($id_turma == null || $id_turma == 0){
-            $this->session->set_flashdata("danger", "Você deve selecionar uma turma válida.");
+            $this->session->set_flashdata("danger", "VocÃª deve selecionar uma turma vÃ¡lida.");
             redirect('/aluno/buscar');
         }else{
 
@@ -482,7 +482,7 @@ class Aluno extends CI_Controller{
             $alunos = $this->aluno_model->buscaAlunosInTurmas($id_turma);
             $turma = $this->turma_model->buscarTurmaId($id_turma);
 
-            $titulo = "Relatório de alunos da turma de {$turma['aa_ingresso']} - {$turma['dt_semestre']}º Sem - {$turma['nm_turno']}";
+            $titulo = "RelatÃ³rio de alunos da turma de {$turma['aa_ingresso']} - {$turma['dt_semestre']}Âº Sem - {$turma['nm_turno']}";
             $arquivo = "relatorio-de-alunos-da-turma-de-{$turma['aa_ingresso']}-{$turma['dt_semestre']}Sem-{$turma['nm_turno']}";
 
             $data = array(

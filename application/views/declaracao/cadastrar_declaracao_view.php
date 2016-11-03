@@ -127,6 +127,7 @@
                     echo "<input type='file' name='anexo' required />";
                     echo form_error("anexo");
                 echo "</div>";
+                echo "<div class='col-sm-10'><p style='font-size: 20px'>Obs.: Formatos de arquivo aceitos: PDF, JPG e PNG</p></div>";
             echo "</div>";
 
             echo "<div class='form-group'>";
