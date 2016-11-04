@@ -58,8 +58,20 @@ if(isset($eventos)){
         }
         echo "<td class='texto_descricao'>". ellipsize($evento['ds_evento'],45) ."</td>";
         echo "<td>". $evento['nm_responsavel_evento'] ."</td>";
-        echo "<td>". anchor("evento/pesquisaEventoId/{$evento['id_evento']}","Alterar",array("class" => "btn btn-default btn-alterar btn-xs")) ."</td>";
-        echo "</tr>";
+
+        //Validação da data futura, para permitir alteração no evento
+        $data1 = $evento['dt_inicio_evento'];
+        $data2 = date('Y-m-d');
+
+        if(strtotime($data1) > strtotime($data2))
+        {
+            echo "<td>". anchor("evento/pesquisaEventoId/{$evento['id_evento']}","Alterar",array("class" => "btn btn-default btn-alterar btn-xs")) ."</td>";
+            echo "</tr>";
+        }
+        else{
+            echo "<td> Expirado </td>";
+            echo "</tr>";
+        }
     }
     echo "</table>";
     echo "</div>";
