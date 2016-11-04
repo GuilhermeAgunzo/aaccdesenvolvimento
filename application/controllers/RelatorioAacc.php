@@ -280,11 +280,11 @@ class RelatorioAacc extends CI_Controller{
             }
         $this->form_validation->set_rules("dt_aprovacao", "dt_aprovacao", "required",
             array(
-                'required' => "Você precisa preencher a Data da Aprovação"
+                'required' => "VocÃª precisa preencher a Data da AprovaÃ§Ã£o"
             ));
         $this->form_validation->set_rules("totalHorasAprovada", "totalHorasAprovada", "required",
             array(
-                'required' => "Você precisa preencher a Quantidade de Horas Aprovada"
+                'required' => "VocÃª precisa preencher a Quantidade de Horas Aprovada"
             ));
 
         $this->form_validation->set_error_delimiters("<p class='alert alert-danger'>", "</p>");
@@ -305,8 +305,9 @@ class RelatorioAacc extends CI_Controller{
         $status = $this->input->post("aprovacao");
         $this->declaracao_model->salvaDeclaracaoValidada($declaracaoValidada);
         $this->declaracao_model->validaDeclaracao($status,$id_declaracao);
-        $this->session->set_flashdata("success", "Validação Efetuada com Sucesso!");
-        redirect('/aluno/lista_declaracao_alunos_selecionados');
+        $this->session->set_flashdata("success", "ValidaÃ§Ã£o Efetuada com Sucesso!");
+        $this->load->template_admin('aluno/lista_declaracao_alunos',$id_aluno);
     }
+
 
 }
