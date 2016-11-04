@@ -203,17 +203,24 @@ class Aluno extends CI_Controller{
         $this->load->template_admin("aluno/pesquisar_aluno.php",$dados);
     }
 
-    public function pesquisarAluno($cd_mat_turma){
+    public function pesquisarAluno(){
         autoriza(2);
         $this->load->model("aluno_model");
         $this->load->model("turma_model");
         $this->load->model("unidade_model");
-        $turma = $this->turma_model->buscarTurma($cd_mat_turma);
-        $idturma = $turma["id_turma"];
+        $this->load->model("curso_model");
+
+        $idCurso = $this->input->post("cursos");
+        $curso = $this->curso_model->buscaCurso($idCurso);
+        //$turma = $this->turma_model->buscarTurma($cd_mat_turma = 1312);
+        //$idturma = $turma["id_turma"];
+
+        $idturma = $this->input->post("turmas");
+        $turma = $this->turma_model-> buscarTurmaId($idturma);
         $alunos = $this->aluno_model->buscaAlunosInTurmas($idturma);
         $unidade = $this->unidade_model->buscarUnidadeId($turma["id_unidade"]);
 
-        $dados = array("alunos" => $alunos, "turma" => $turma, "unidade" => $unidade);
+        $dados = array("alunos" => $alunos, "turma" => $turma, "unidade" => $unidade, "curso" => $curso);
         $this->load->template_admin("aluno/pesquisar_aluno.php",$dados);
     }
 
@@ -221,9 +228,14 @@ class Aluno extends CI_Controller{
         autoriza(2);
         $termo = $this->input->post("nm_aluno");
         $cd_mat_turma = $this->input->post("turma");
+        $idUnidade = $this->input->post("unidade");
+        $idCurso = $this->input->post("curso");
 
         $this->load->model("aluno_model");
         $this->load->model("turma_model");
+        $this->load->model("curso_model");
+        $this->load->model("unidade_model");
+
         $this->load->library("form_validation");
         $this->form_validation->set_rules("nm_aluno","nm_aluno","required",
             array(
@@ -234,14 +246,14 @@ class Aluno extends CI_Controller{
 
         $turma = $this->turma_model->buscarTurma($cd_mat_turma);
         $alunos = $this->aluno_model->buscaNomeAluno($termo,$turma["id_turma"]);
-
-
+        $unidade = $this->unidade_model->buscarUnidadeId($idUnidade);
+        $curso = $this->curso_model->buscaCurso($idCurso);
         if(!$alunos){
             $this->session->set_flashdata("danger", "Aluno  nÃ£o foi localizado. Verifique os dados ou tente novamente mais tarde");
             $alunos = $this->aluno_model->buscaAlunosInTurmas($turma["id_turma"]);
 
         }
-        $dados = array("alunos" => $alunos, "turma" => $turma, "termo" => $termo);
+        $dados = array("alunos" => $alunos, "turma" => $turma, "termo" => $termo, "unidade" => $unidade, "curso" => $curso);
         $this->load->template_admin("aluno/pesquisar_aluno.php", $dados);
 
     }

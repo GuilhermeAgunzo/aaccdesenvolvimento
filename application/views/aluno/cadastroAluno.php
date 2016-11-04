@@ -6,6 +6,7 @@
 	var url = "<?= base_url() ?>" + "index.php/Curso/buscaCursosByUnidade";
 	function busca_cursos(id_unidade){
 
+		$('#turmas').empty().append('<option selected="selected" value="">---</option>');
 		$.post(url, {
 			id_unidade : id_unidade
 		}, function(data){
