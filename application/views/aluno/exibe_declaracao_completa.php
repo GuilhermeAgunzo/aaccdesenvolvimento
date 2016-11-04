@@ -44,11 +44,11 @@ if(isset($declaracaoCompleta)) {
         }
         echo "<div class='row'>";
         echo "<div class='form-group' id='aprovacao'>";
-        echo form_label("Não Aprovado", "naoAprovado", array("class" => "col-sm-2 control-label"));
+        echo form_label("Não Aprovado", "aprovacao", array("class" => "col-sm-2 control-label"));
         echo "<div class='form-group col-md-2'>";
         echo form_radio('aprovacao', '3', @$nchecked, array( "value" => set_value("aprovacao", "3") ,"name" => 'aprovacao', "type" => 'radio', "class" => "col-sm-2 control-label"));
         echo "</div>";
-        echo form_label("Aprovado", "aprovado", array("class" => "col-sm-2 control-label"));
+        echo form_label("Aprovado", "aprovacao", array("class" => "col-sm-2 control-label"));
         echo "<div class='form-group col-md-2'>";
         echo form_radio('aprovacao', '2', @$nchecked, array("value" => set_value("aprovacao", "2"), "name" => 'aprovacao', "type" => 'radio', "class" => "col-sm-2 control-label"));
         echo "</div>";
@@ -90,10 +90,13 @@ if(isset($declaracaoCompleta)) {
         echo form_textarea(array('name' => 'observacao', "value" => set_value("observacao", ""), 'id' => 'observacao', 'class' => 'form-control', 'rows' => 5, "maxlength" => "500"));
         echo form_error("observacao");
         echo "</div>";
+        echo "</div>";
+        echo "<div class='row'>";
+        echo "<div class='form-group col-md-3'>";
         echo form_button(array("class" => "btn btn-default", "content" => "Salvar", "type" => "submit"));
         echo "</div>";
         echo "</div>";
-
+        echo "</div>";
         echo form_close();
 
 ?>
@@ -136,5 +139,3 @@ if(isset($declaracaoCompleta)) {
                 }
         });
 </script>
-
-
