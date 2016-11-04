@@ -52,7 +52,7 @@ echo form_error("hrEvento");
 echo "</div>";
 echo form_label("Duração do Evento (em horas)", "duracaoDoEvento", array("class" => "col-sm-3 control-label"));
 echo "<div class='form-group col-sm-1'>";
-echo form_input(array("name" => "qtHorasEvento","value" => set_value("qtHorasEvento",""), "required" => "required","type" => "number", "id" => "qtHorasEvento" ,"class" => "form-control", "maxlength" => "3", "min" => "1", "max" => "999"));
+echo form_input(array("name" => "qtHorasEvento","value" => set_value("qtHorasEvento",""), "required" => "required","type" => "time", "id" => "qtHorasEvento" ,"class" => "form-control"));
 echo form_error("qtHorasEvento");
 echo "</div>";
 echo "</div>";
