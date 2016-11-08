@@ -55,7 +55,7 @@
                             "arquivo_declaracao" => $anexo['name'],
                             "status_declaracao" => 0,
                             "dt_declaracao" => mdate("%Y-%m-%d %H:%i:%s", time()),
-                            "id_usuario" => $usuarioLogado['id_usuario']);
+                            "id_aluno" => $usuarioLogado['id_usuario']);
                        // }else{
                          //    redirect("/declaracao/cadastra_declaracao");
                        // }
@@ -69,7 +69,7 @@
                             "arquivo_declaracao" => $anexo['name'],
                             "status_declaracao" => 0,
                             "dt_declaracao" => mdate("%Y-%m-%d %H:%i:%s", time()),
-                            "id_usuario" => $usuarioLogado['id_usuario']);
+                            "id_aluno" => $usuarioLogado['id_usuario']);
                     }else{
                        // redirect("/declaracao/cadastra_declaracao");
                     }
@@ -87,11 +87,11 @@
                         $filename = $this->anexarArquivo($anexo,$aluno,$unidade,$id_declaracao);
                         if(isset($filename)){
                             $this->session->set_flashdata("success", "Cadastro de declaração efetuado com Sucesso.");
-                           // redirect("/declaracao/cadastra_declaracao");
+                            redirect("/declaracao/cadastra_declaracao");
                         }
                     }else{
                         $this->session->set_flashdata("danger", "Não foi possivel efetuar o cadastro. Por favor, tente novamente mais tarde.");
-                      //  redirect("/declaracao/cadastra_declaracao");
+                        redirect("/declaracao/cadastra_declaracao");
                     }
                 //redirect("/declaracao/cadastra_declaracao");
             }
@@ -101,7 +101,7 @@
                 $path = './uploads/' . $unidade['cd_cpsouza'].'_'.$unidade['nm_unidade'].'/'.$aluno['cd_mat_aluno'];
         
                 if (!is_dir($path)) {
-                    mkdir($path, 0777, $recursive = true);
+                    mkdir($path, 0777,true);
                 }
         
                 $config['upload_path'] = $path;
@@ -109,7 +109,7 @@
                 $config['file_name'] = $aluno['cd_mat_aluno'] . "_" . $id_declaracao. "." . $filename[count($filename) - 1];
         
                 $this->load->library('upload', $config);
-        
+                $this->upload->initialize($config);
                 if ($this->upload->do_upload('anexo')) {
                     $data = $this->upload->data();
                     return $data['file_name'];
