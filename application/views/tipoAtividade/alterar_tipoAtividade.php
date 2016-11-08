@@ -15,6 +15,14 @@ echo "</div>";
 echo "</div>";
 
 echo "<div class='form-group'>";
+echo form_label("Quantidade estimada de horas", "qtEstimadaHoras", array("class" => "col-sm-2 control-label"));
+echo "<div class='col-sm-10'>";
+echo form_input(array('name' => 'qtEstimadaHoras', "value" => set_value("qtEstimadaHoras", $tipoAtividade['qt_estimada_horas_atividade']), 'id' => 'qtEstimadaHoras','class' => 'form-control', "maxlength" => "3"));
+echo form_error("qtEstimadaHoras");
+echo "</div>";
+echo "</div>";
+
+echo "<div class='form-group'>";
 echo "<div class='col-sm-offset-2 col-sm-10'>";
 echo anchor("temporario/administrador","Cancelar", array("class" => "btn btn-default"));
 echo "        ";
