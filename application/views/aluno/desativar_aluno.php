@@ -65,9 +65,9 @@ if(isset($aluno)) {
 
     echo "<div class='form-group'>";
     echo "<div class='col-md-offset-2 col-md-10'>";
-    echo anchor("temporario/administrador","Cancelar", array("class" => "btn btn-default"));
-    echo "        ";
     echo form_button(array("class" => "btn btn-danger", "content" => "Desativar", "type" => "submit"));
+    echo "        ";
+    echo anchor("temporario/administrador","Cancelar", array("class" => "btn btn-default"));
     echo "</div>";
     echo "</div>";
     echo form_close();
