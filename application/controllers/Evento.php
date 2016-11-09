@@ -15,24 +15,35 @@ class Evento extends CI_Controller
         autoriza(2);
 
         $this->load->model("TipoAtividade_model");
-
         $atividades = $this->TipoAtividade_model->dropDownAtividade();
-        $dados = array("atividades" => $atividades);
-        $this->load->template_admin("evento/cadastrar_evento.php", $dados);
+        $dadosAtividade = array("atividades" => $atividades);
 
+        $this->load->model("unidade_model");
+        $unidades = $this->unidade_model->dropDownUnidade();
+        $dadosUnidade = array("unidades" => $unidades);
+
+        $this->load->template_admin("evento/cadastrar_evento.php", $dadosAtividade + $dadosUnidade);
     }
 
     public function pesquisar_evento(){
-
         autoriza(2);
-        $this->load->template_admin("evento/pesquisar_evento.php");
+
+        $this->load->model("unidade_model");
+        $unidades = $this->unidade_model->dropDownUnidade();
+
+        $dados = array("unidades" => $unidades);
+        $this->load->template_admin("evento/pesquisar_evento.php",$dados);
 
     }
 
     public function alterar_evento(){
         autoriza(2);
 
-        $this->load->template_admin("evento/alterar_evento.php");
+        $this->load->model("unidade_model");
+        $unidades = $this->unidade_model->dropDownUnidade();
+
+        $dados = array("unidades" => $unidades);
+        $this->load->template_admin("evento/alterar_evento.php", $dados);
 
     }
 
@@ -75,6 +86,10 @@ class Evento extends CI_Controller
             array(
                 'required' => "Você precisa preencher o Responsável pelo evento"
             ));
+        $this->form_validation->set_rules("Unidade","Unidade","required",
+            array(
+                'required' => "Você precisa escolher a Unidade do evento"
+            ));
 
         $this->form_validation->set_error_delimiters("<p class='alert alert-danger'>", "</p>");
 
@@ -95,7 +110,8 @@ class Evento extends CI_Controller
             "nm_responsavel_evento" => $this->input->post("nmResponsavelEvento"),
             "id_user_adm_cadastrou" => $usuarioLogado['id_usuario'],
             "dt_cadastro" => $horaAtual,
-            "status_ativo" => 1
+            "status_ativo" => 1,
+            "id_unidade" => $this->input->post("Unidade")
         );
 
         if($this->_periodoValido($evento['dt_inicio_evento'], $evento['dt_final_evento']))
@@ -118,80 +134,38 @@ class Evento extends CI_Controller
     {
         autoriza(2);
 
+        $idUnidade = $this->input->post("Unidade");
+        $opcao = $this->input->post("opcao");
+
         $this->load->model("evento_model");
-        $this->load->library("form_validation");
+        $this->load->model("unidade_model");
+        $eventos = $this->evento_model->buscaEventosUnidade($idUnidade);
+        $unidades = $this->unidade_model->buscaUnidades();
+        $unidade = $this->unidade_model->buscarUnidadeId($idUnidade);
+        $dados = array("eventos" => $eventos,"unidades"=>$unidades, "unidade" => $unidade);
 
-        $this->form_validation->set_rules("dtEvento", "dtEvento", "required",
-            array(
-                'required' => "Você precisa preencher a Data de inicio do evento"
-            ));
-        $this->form_validation->set_rules("dtFinalEvento", "dtFinalEvento", "required",
-            array(
-                'required' => "Você precisa preencher a Data Final do evento"
-            ));
-
-        $this->form_validation->set_error_delimiters("<p class='alert alert-danger'>", "</p>");
-
-        $this->form_validation->run();
-
-        $dataInicial = dataPtBrParaMysql($this->input->post("dtEvento"));
-        $dataFinal = dataPtBrParaMysql($this->input->post("dtFinalEvento"));
-
-        if ($this->_periodoValido($dataInicial, $dataFinal)) {
-
-            $eventos = $this->evento_model->buscaEventosEntreDatas($dataInicial, $dataFinal);
-
-            if ($eventos != null) {
-                $dados = array("eventos" => $eventos);
-                $this->load->template_admin("evento/pesquisar_evento.php", $dados);
-            } else {
-                $this->session->set_flashdata("danger", "Não há eventos no período informado");
-                redirect('evento/pesquisar_evento');
-            }
-        }
-        else {
-            $this->session->set_flashdata("danger", "A data do término do evento não pode ser anterior a data do início");
-            redirect('evento/pesquisar_evento');
-        }
+        $this->load->template_admin("evento/pesquisar_evento.php",$dados);
     }
-
-
 
     public function pesquisaAlteraEventos(){
         autoriza(2);
 
+        $idUnidade = $this->input->post("Unidade");
+        $opcao = $this->input->post("opcao");
+
         $this->load->model("evento_model");
-        $this->load->library("form_validation");
+        $this->load->model("unidade_model");
+        $eventos = $this->evento_model->buscaEventosUnidade($idUnidade);
+        $unidades = $this->unidade_model->buscaUnidades();
+        $unidade = $this->unidade_model->buscarUnidadeId($idUnidade);
+        $dados = array("eventos" => $eventos,"unidades"=>$unidades, "unidade" => $unidade);
 
-        $this->form_validation->set_rules("dtEvento","dtEvento","required",
-            array(
-                'required' => "Você precisa preencher a Data de inicio do evento"
-            ));
-        $this->form_validation->set_rules("dtFinalEvento","dtFinalEvento","required",
-            array(
-                'required' => "Você precisa preencher a Data Final do evento"
-            ));
-
-        $this->form_validation->set_error_delimiters("<p class='alert alert-danger'>", "</p>");
-
-        $this->form_validation->run();
-
-        $dataInicial = dataPtBrParaMysql($this->input->post("dtEvento"));
-        $dataFinal = dataPtBrParaMysql($this->input->post("dtFinalEvento"));
-
-        if ($this->_periodoValido($dataInicial, $dataFinal)) {
-            $eventos = $this->evento_model->buscaEventosEntreDatas($dataInicial, $dataFinal);
-            if ($eventos != null) {
-
-                $dados = array("eventos" => $eventos);
-                $this->load->template_admin("evento/alterar_evento.php", $dados);
-            } else {
-                $this->session->set_flashdata("danger", "Não há eventos no período informado");
-                redirect('evento/alterar_evento');
-            }
+        if ($eventos != null) {
+            $dados = array("eventos" => $eventos);
+            $this->load->template_admin("evento/alterar_evento.php", $dados);
         }
         else {
-            $this->session->set_flashdata("danger", "A data do término do evento não pode ser anterior a data do início");
+            $this->session->set_flashdata("danger", "Não há eventos na unidade informada");
             redirect('evento/alterar_evento');
         }
     }

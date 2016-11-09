@@ -1,9 +1,17 @@
 <?php
 class Evento_model extends CI_Model{
     public function salvaCadastro($evento){
-            return $this->db->insert("tb_evento",$evento);
-
+        return $this->db->insert("tb_evento",$evento);
     }
+
+    public function buscaEventosUnidade($idUnidade){
+        $this->db->select("*");
+        //$this->db->order_by('status_ativo desc');
+        return $this->db->get_where("tb_evento",array(
+            "id_unidade" => $idUnidade
+        ))->result_array();
+    }
+
     public function buscaEventos(){
         $this->db->select("*");
         $this->db->order_by('status_ativo desc');
