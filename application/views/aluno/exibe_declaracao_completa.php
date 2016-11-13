@@ -1,3 +1,38 @@
+<script src="<?= base_url("js/jquery-1.11.1.min.js")?>"></script>
+<script src="<?= base_url("js/scripts.js")?>"></script>
+<script src="<?= base_url("text/javascript")?>"></script>
+<script>
+
+
+
+        $(document).ready(function () {
+                $("#motivoIndeferimento").hide();
+                $(".radio3").change(function () {
+                        if (this.select) {
+                                $("#motivoIndeferimento").show();
+                                $("#totalHorasAprovada").hide();
+                        } else {
+                                $("#motivoIndeferimento").hide();
+                                $("#totalHorasAprovada").show();
+                        }
+                });
+        });
+
+        $(document).ready(function () {
+                $("#totalHorasAprovada").hide();
+                $(".radio2").change(function () {
+                        if (this.select) {
+                                $("#totalHorasAprovada").show();
+                                $("#motivoIndeferimento").hide();
+                        } else {
+                                $("#totalHorasAprovada").hide();
+                                $("#motivoIndeferimento").show();
+                        }
+                });
+        });
+
+</script>
+
 <?php
 
 if(isset($declaracaoCompleta)) {
@@ -46,11 +81,11 @@ if(isset($declaracaoCompleta)) {
         echo "<div class='form-group' id='aprovacao'>";
         echo form_label("Não Aprovado", "aprovacao", array("class" => "col-sm-2 control-label"));
         echo "<div class='form-group col-md-2'>";
-        echo form_radio('aprovacao', '3', @$nchecked, array( "value" => set_value("aprovacao", "3") ,"name" => 'aprovacao', "type" => 'radio', "class" => "col-sm-2 control-label"));
+        echo form_radio('aprovacao', '3', @$nchecked, array( "value" => set_value("aprovacao", "3") ,"name" => 'aprovacao', "type" => 'radio', "class" => "radio3"));
         echo "</div>";
         echo form_label("Aprovado", "aprovacao", array("class" => "col-sm-2 control-label"));
         echo "<div class='form-group col-md-2'>";
-        echo form_radio('aprovacao', '2', @$nchecked, array("value" => set_value("aprovacao", "2"), "name" => 'aprovacao', "type" => 'radio', "class" => "col-sm-2 control-label"));
+        echo form_radio('aprovacao', '2', @$nchecked, array("value" => set_value("aprovacao", "2"), "name" => 'aprovacao', "type" => 'radio', "class" => "radio2"));
         echo "</div>";
         echo "</div>";
         echo "</div>";
@@ -70,7 +105,7 @@ if(isset($declaracaoCompleta)) {
         echo "<div class='form-group' id='totalHorasAprovada'>";
         echo form_label("Total de Horas Aprovadas", "HorasAprovadas", array("class" => "col-sm-3 control-label"));
         echo "<div class='form-group col-md-3'>";
-        echo form_input(array("name" => "totalHorasAprovada", "value" => set_value("totalHorasAprovada", ""), "required" => 'require', "type" => "number", "id" => "totalHorasAprovada", "class" => "form-control", "maxlength" => "3", "minlength" => "1", "min" => "0", "max" => "999"));
+        echo form_input(array("name" => "totalHorasAprovada", "value" => set_value("totalHorasAprovada", ""), "type" => "number", "id" => "totalHorasAprovada", "class" => "form-control", "maxlength" => "3", "minlength" => "1", "min" => "0", "max" => "999"));
         echo form_error("totalHorasAprovada");
         echo "</div>";
         echo "</div>";
@@ -101,41 +136,3 @@ if(isset($declaracaoCompleta)) {
 
 ?>
 
-<script>
-        $('#aprovacao').click(function (){
-                var current = $('#aprovacao :selected').val();
-
-                if(current == 2){
-                        $('#motivoIndeferimento').hide();
-                }else{
-                        $('#motivoIndeferimento').show();
-                }
-        });
-        $('#aprovacao').ready(function (){
-                var current = $('#aprovacao :selected').val();
-
-                if(current == 2){
-                        $('#motivoIndeferimento').hide();
-                }else{
-                        $('#motivoIndeferimento').show();
-                }
-        });
-        $('#aprovacao').click(function (){
-                var current = $('#aprovacao :selected').val();
-
-                if(current == 3){
-                        $('#totalHorasAprovada').hide();
-                }else{
-                        $('#totalHorasAprovada').show();
-                }
-        });
-        $('#aprovacao').ready(function (){
-                var current = $('#aprovacao :selected').val();
-
-                if(current == 3){
-                        $('#totalHorasAprovada').hide();
-                }else{
-                        $('#totalHorasAprovada').show();
-                }
-        });
-</script>
