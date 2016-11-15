@@ -14,6 +14,15 @@ echo "</br>";
 echo "</div>";
 echo "</div>";
 
+echo "<div class='row'>";
+echo form_label("Unidade", "unidade", array("class" => "col-md-2 control-label"));
+echo "<div class='form-group col-md-3'>";
+$unidades = array('' =>  "Selecione")+$unidades;
+echo form_dropdown('Unidade', $unidades, set_value("Unidade", ""), array("class" => "form-control", "required" => "required"));
+echo form_error("Unidade");
+echo "</br>";
+echo "</div>";
+echo "</div>";
 
 echo "<div class='row'>";
 echo form_label("Título do Evento", "tituloDoEvento", array("class" => "col-sm-2 control-label"));
@@ -52,7 +61,7 @@ echo form_error("hrEvento");
 echo "</div>";
 echo form_label("Duração do Evento (em horas)", "duracaoDoEvento", array("class" => "col-sm-3 control-label"));
 echo "<div class='form-group col-sm-1'>";
-echo form_input(array("name" => "qtHorasEvento","value" => set_value("qtHorasEvento",""), "required" => "required","type" => "number", "id" => "qtHorasEvento" ,"class" => "form-control", "maxlength" => "3", "min" => "1", "max" => "999"));
+echo form_input(array("name" => "qtHorasEvento","value" => set_value("qtHorasEvento",""), "required" => "required","type" => "time", "id" => "qtHorasEvento" ,"class" => "form-control"));
 echo form_error("qtHorasEvento");
 echo "</div>";
 echo "</div>";

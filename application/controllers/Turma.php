@@ -181,6 +181,21 @@ class Turma extends CI_Controller{
         }
 
     }
+
+    public function buscaTurmasByCurso(){
+        $this->load->model("turma_model");
+
+
+        $turmas = $this->turma_model->dropDownTurmaByCurso();
+
+        $option = "<option value=''>---</option>";
+        foreach($turmas->result() as $linha) {
+            $option .= "<option value='$linha->id_turma'>$linha->aa_ingresso - $linha->dt_semestre ºsem - $linha->nm_turno</option>";
+        }
+
+        echo $option;
+    }
+
         /*  Métodos auxiliares  */
 
     /**

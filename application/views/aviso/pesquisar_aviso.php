@@ -4,8 +4,10 @@ echo form_fieldset("<h1>Pesquisa de Avisos</h1>");
 $atributos = array('class' => 'form-horizontal');
 echo form_open('aviso/pesquisarAviso', $atributos);
 
+echo "<p> Este período informará todos os  avisos cadastrados neste espaço de tempo. </p> </br> ";
+
 echo "<div class='row'>";
-echo form_label("Data Inicial do Aviso", "dt_inicio", array("class" => "col-sm-2 control-label"));
+echo form_label("Período Inicial do Aviso", "dt_inicio", array("class" => "col-sm-2 control-label"));
 echo "<div class='form-group col-sm-2'>";
 echo form_input(array("name" => "dt_inicio", "value" => set_value("dt_inicio",""),"required" => "required","type" => "text", "id" => "dtInicialAviso" ,"class" => "form-control datepicker", "maxlength" => "10"));
 echo form_error("dt_inicio");
@@ -13,7 +15,7 @@ echo "</div>";
 echo "</div>";
 
 echo "<div class='row'>";
-echo form_label("Data Final do Aviso", "dt_vencimento", array("class" => "col-sm-2 control-label"));
+echo form_label("Período Final do Aviso", "dt_vencimento", array("class" => "col-sm-2 control-label"));
 echo "<div class='form-group col-sm-2'>";
 echo form_input(array("name" => "dt_vencimento", "value" => set_value("dt_vencimento",""),"required" => "required","type" => "text", "id" => "dtFinalAviso" ,"class" => "form-control datepicker", "maxlength" => "10"));
 echo form_error("dt_vencimento");

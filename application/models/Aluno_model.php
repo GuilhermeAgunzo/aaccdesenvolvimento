@@ -75,5 +75,10 @@ class Aluno_model extends CI_Model{
         $this->db->where("id_usuario", $id_usuario);
         return $this->db->get("tb_aluno")->row_array();
     }
+    
+    public function buscaAlunosStatusDeclaracao($escolhaStatusDeclaracao,$id_turma){
+        return $this->db->query("SELECT a.nm_aluno, d.id_aluno, d.id_declaracao from tb_aluno a inner join tb_declaracao d on a.id_aluno = d.id_aluno where d.id_turma = $id_turma and d.status_declaracao = $escolhaStatusDeclaracao")->result_array();
+    }
+
 
 }

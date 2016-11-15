@@ -36,6 +36,20 @@ class curso extends CI_Controller
         $this->load->template_admin("curso/cadastro_curso");
     }
 
+    public function buscaCursosByUnidade(){
+        $this->load->model("curso_model");
+
+
+        $cursos = $this->curso_model->dropDownCursoByUnidade();
+
+        $option = "<option value=''>---</option>";
+        foreach($cursos->result() as $linha) {
+            $option .= "<option value='$linha->id_curso'>$linha->nm_abreviacao</option>";
+        }
+
+        echo $option;
+    }
+
     public function _validaFormulario(){
         $this->load->library("form_validation");
 

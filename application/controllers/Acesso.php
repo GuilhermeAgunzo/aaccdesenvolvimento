@@ -65,11 +65,14 @@ class Acesso extends CI_Controller{
             }else{
                 redirect('/');
             }
-
-
-
-
         }
+
+        else {
+            $this->session->unset_userdata("usuario_logado");
+            $this->session->set_flashdata("danger", "Usuário ou senha inválida");
+            redirect('/');
+        }
+
 
         $this->load->view("acesso/index.php");
     }
