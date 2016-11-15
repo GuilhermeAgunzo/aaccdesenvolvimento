@@ -342,6 +342,34 @@ class Aluno extends CI_Controller{
         }
     }
 
+    public function buscaAlunosHorasConcluidas(){
+        $this->load->model("curso_model");
+        $this->load->model("aluno_model");
+        $this->load->model("turma_model");
+        $this->load->model("unidade_model");
+
+        $turmaId = $this->input->post("turmas");
+        $cursoId = $this->input->post("cursos");
+
+        try{
+            $curso = $this->curso_model->buscaCurso($cursoId);
+            $unidade = $this->unidade_model->buscarUnidadeId($curso['id_unidade']);
+            $turma = $this->turma_model->buscarTurmaId($turmaId);
+            $alunos = $this->aluno_model->buscaAlunosInTurmas($turmaId);
+
+            $dados = array(
+                "curso" => $curso,
+                "turma" => $turma,
+                "unidade" => $unidade,
+                "alunos" => $alunos
+            );
+            $this->load->template_admin("aluno/controle_entrega_declaracao_aluno",$dados);
+
+        }catch (Exception $ex){
+            $this->session->set_flashdata("danger", "Sistema indisponível no momento. Por favor tente novamente mais tarde.");
+            redirect("aluno/controle_entrega_declaracao_aluno");
+        }
+    }
     /*  MÃ‰TODOS AUXILIARES  */
 
     public function _validaFormulario($emailUnique, $matriculaUnique){
