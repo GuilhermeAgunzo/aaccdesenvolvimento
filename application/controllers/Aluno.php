@@ -44,6 +44,16 @@ class Aluno extends CI_Controller{
         $this->load->template_admin("aluno/desativar_aluno");
     }
 
+    public function controle_entrega_declaracao_aluno(){
+        autoriza(2);
+
+        $this->load->model("unidade_model");
+        $unidades = $this->unidade_model->dropDownUnidade();
+
+        $dados = array("unidades" => $unidades);
+        $this->load->template_admin("aluno/controle_entrega_declaracao_aluno",$dados);
+    }
+
     /*  METODOS PRINCIPAIS    */
 
     public function cadastrarAluno(){
