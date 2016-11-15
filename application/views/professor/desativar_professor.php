@@ -168,3 +168,8 @@
                 </div>
             </div>
         </div>
+<script type="text/javascript">
+    function confirma(){
+        return confirm("Deseja mesmo desativar o professor?");
+    }
+</script>

@@ -1,4 +1,4 @@
-        <?php
+﻿        <?php
         class Declaracao extends CI_Controller{
 
             /*  Metodos que apenas chamam views    */

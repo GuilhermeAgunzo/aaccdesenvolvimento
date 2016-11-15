@@ -76,6 +76,6 @@ if(isset($aluno)) {
 
 <script type="text/javascript">
     function confirma(){
-        return confirm("Deseja mesmo desativar o aluno?");
+        return confirm("Deseja mesmo desativar o aluno");
     }
 </script>

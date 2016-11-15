@@ -46,7 +46,7 @@
 		echo "</div>";
 		echo form_label("Telefone Residencial", "tel", array("class" => "col-md-2 control-label"));
 		echo "<div class='form-group col-md-2'>";
-		echo form_input(array("name" => "telefone", "value" => set_value("telefone", ""), "id" => "tel", "class" => "form-control phone-mask", "pattern" => ".{10}|.{11,}", "required title" => "O número de telefone deve conter entre 10 e 11 digitos" ,"maxlength" => "15"));
+		echo form_input(array("name" => "telefone", "value" => set_value("telefone", ""), "id" => "tel", "class" => "form-control phone-mask", "maxlength" => "15"));
 		echo form_error("telefone");
 		echo "</div>";
 		echo "</div>";
@@ -59,7 +59,7 @@
 		echo "</div>";
 		echo form_label("Telefone Celular", "celular", array("class" => "col-md-2 control-label"));
 		echo "<div class='form-group col-md-2'>";
-		echo form_input(array("name" => "celular", "value" => set_value("celular", ""), "id" => "celular", "class" => "form-control phone-mask", "pattern" => ".{10}|.{11,}", "required title" => "O número de celular deve conter entre 10 e 11 digitos" ,"maxlength" => "15"));
+		echo form_input(array("name" => "celular", "value" => set_value("celular", ""), "id" => "celular", "class" => "form-control phone-mask", "maxlength" => "15"));
 		echo form_error("celular");
 		echo "</div>";
 		echo "</div>";
@@ -82,4 +82,3 @@
         return confirm("Confirmar informações e enviar?");
     }
 </script>
-
