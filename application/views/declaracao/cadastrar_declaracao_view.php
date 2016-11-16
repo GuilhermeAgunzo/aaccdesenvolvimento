@@ -8,7 +8,7 @@
 
            echo "<div class='form-group'>";
                 echo form_label("Nome", "nome", array("class" => "col-sm-2 control-label"));
-                echo "<div class='col-sm-4'>";
+                echo "<div class='col-sm-10'>";
                 echo form_input(array("name" => "txtNome", "id" => "txtNome" ,"class" => "form-control","value" => set_value("txtNome", $usuario['dadosUsuario']['nm_aluno']), "Disabled" => "Disabled"));
                 
             echo "</div>";
@@ -16,7 +16,7 @@
 
             echo "<div class='form-group'>";
                 echo form_label("Semestre", "semestre", array("class" => "col-sm-2 control-label"));
-                echo "<div class='col-sm-4'>";
+                echo "<div class='col-sm-6'>";
                 echo form_input(array("name" => "txtSemestre", "id" => "txtSemestre" ,"class" => "form-control","value" => set_value("txtSemestre", $usuario['dadosUsuario']['dt_semestre']."º Semestre"),"Disabled" => "Disabled"));
             echo "</div>";
             echo "</div>";
@@ -30,14 +30,14 @@
 
             echo "<div class='form-group'>";
                 echo form_label("Professor", "professor", array("class" => "col-sm-2 control-label"));
-                echo "<div class='col-sm-4'>";
+                echo "<div class='col-sm-10'>";
                 echo form_input(array("name" => "txtProfessor", "id" => "txtProfessor" ,"class" => "form-control","Disabled" => "Disabled"));
             echo "</div>";
             echo "</div>";
 
             echo "<div class='form-group'>";
                 echo form_label("Email:", "email", array("class" => "col-sm-2 control-label"));
-                echo "<div class='col-sm-4'>";
+                echo "<div class='col-sm-8'>";
                 echo form_input(array("name" => "txtEmail", "id" => "txtEmail" ,"class" => "form-control" ,"value" => set_value("txtEmail", $usuario['dadosUsuario']['nm_email']),"Disabled" => "Disabled"));
             echo "</div>";
             echo "</div>";
@@ -46,7 +46,7 @@
 
             echo "<div class='form-group'>";
                 echo form_label("Identifique a Atividade", "atividade", array("class" => "col-sm-2 control-label"));
-                echo "<div class='col-sm-10'>";
+                echo "<div class='col-sm-6'>";
                     echo form_dropdown("atividade", $tipoAtividade, array("class" => "form-control"));
                     echo form_error("atividade");
                 echo "</div>";
@@ -54,7 +54,7 @@
 
             echo "<div class='form-group' id='tipoEvento'>";
             echo form_label("Tipo de Evento", "tipoEvento", array("class" => "col-sm-2 control-label"));
-                echo "<div class='col-sm-10'>";
+                echo "<div class='col-sm-4'>";
                     $opcoes = array('0'=>'Interno','1'=>'Externo');
                     echo form_dropdown('evento', $opcoes, array("class" => "form-control"));
                     echo form_error("evento");
@@ -63,7 +63,7 @@
             
             echo "<div class='form-group' id='interno'>";
             echo form_label("Eventos Internos", "eventoInterno", array("class" => "col-sm-2 control-label"));
-                echo "<div class='col-sm-10'>";
+                echo "<div class='col-sm-8'>";
                     $dropdownEvento = array('' =>  "Selecione") + $eventos;
                     echo form_dropdown('eventoInterno', $dropdownEvento, array("class" => "form-control"));
                     echo form_error("eventoInterno");
@@ -81,7 +81,7 @@
 
              echo "<div class='form-group'>";
             echo form_label("Local do Evento", "localEvento", array("class" => "col-sm-2 control-label"));
-            echo "<div class='col-sm-4'>";
+            echo "<div class='col-sm-10'>";
             echo form_input(array("name" => "txtLocalEvento", "id" => "txtLocalEvento" ,"class" => "form-control"));
             echo form_error("txtLocalEvento");
             echo "</div>";
@@ -89,7 +89,7 @@
 
             echo "<div class='form-group'>";
             echo form_label("Nome do Evento", "nomeEvento", array("class" => "col-sm-2 control-label"));
-            echo "<div class='col-sm-4'>";
+            echo "<div class='col-sm-8'>";
             echo form_input(array("name" => "txtNomeEvento", "id" => "txtNomeEvento" ,"class" => "form-control"));
             echo form_error("txtNomeEvento");
             echo "</div>";
@@ -97,7 +97,7 @@
 
             echo "<div class='form-group'>";
             echo form_label("Descrição do Evento", "descricaoEvento", array("class" => "col-sm-2 control-label"));
-            echo "<div class='col-sm-4'>";
+            echo "<div class='col-sm-10'>";
             echo form_input(array("name" => "txtDescricaoEvento", "id" => "txtDescricaoEvento" ,"class" => "form-control"));
             echo form_error("txtDescricaoEvento");
             echo "</div>";
@@ -115,7 +115,7 @@
 
             echo "<div class='form-group'>";
                 echo form_label('Faça um resumo da atividade.','tituloResumo', array("class" => "col-sm-2 control-label"));
-                echo "<div class='col-sm-10'>";
+                echo "<div class='col-sm-8'>";
                     echo form_textarea(array('name' => 'resumo', 'class' => 'form-control', 'id' => 'tituloResumo', 'row' => 2, 'placeholder' => 'Identifique  a  relevância e contribuição desta atividade para a sua formação profissional.', 'required' => 'required'));
                     echo form_error("resumo");
                 echo "</div>";
@@ -123,7 +123,7 @@
 
             echo "<div class='form-group'>";
                 echo form_label("Anexar Documento comprobatório", "anexarDocumento",  array("class" => "col-sm-2 control-label"));
-                echo "<div class='col-sm-10'>";
+                echo "<div class='col-sm-8'>";
                     echo "<input type='file' name='anexo' required />";
                     echo form_error("anexo");
                 echo "</div>";

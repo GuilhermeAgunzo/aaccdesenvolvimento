@@ -48,4 +48,11 @@ class Curso_model extends CI_Model{
         }
         return $retorno;
     }
+
+    public function buscaHorasCurso($id_aluno){
+        return $this->db->query("SELECT c.qt_horas_aacc 
+        from tb_curso c, tb_aluno a, tb_turma t 
+        WHERE a.id_turma = t.id_turma 
+        and t.id_curso = c.id_curso and a.id_aluno = $id_aluno")->row_array();
+    }
 }

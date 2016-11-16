@@ -26,24 +26,83 @@
             }
              public function visualiza_declaracao(){
                 autoriza(1);
+
                 $usuarioLogado = $this->session->userdata("usuario_logado");
-                $this->load->model("Declaracao_model");
-                $dados = $this->Declaracao_model->getDeclaracoes($usuarioLogado['id_usuario']);
-                $declaracao = array("declaracoes" => $dados);
-                $this->load->template_usuario_aluno("declaracao/visualizar_declaracao_view",$declaracao);
+
+                 //Buscando aluno pelo id do usuario logado
+                 $this->load->model("Aluno_model");
+                 $aluno = $this->Aluno_model-> buscarAlunoUsuario($usuarioLogado['id_usuario']);
+
+                 //Buscando todas as decarações do usuario atual
+                 $this->load->model("Declaracao_model");
+                 $declaracoes = $this->Declaracao_model->getDeclaracoes($aluno['id_aluno']);
+
+                 //buscando dados do usuario
+                 $usuario = $this->Declaracao_model->getUsuario($usuarioLogado['id_usuario']);
+                 $dadosUsuario = array("dadosUsuario" => $usuario);
+
+                 //Buscando horas por tipo de atividade
+                 $horasTipoAtividade = $this->Declaracao_model->buscaTotaldeHoras($aluno['id_aluno']);
+
+                 //Buscando quantidade de horas exigidas por cada curso referente ao aluno logado
+                 $this->load->model("Curso_model");
+                 $horasNecessarias= $this->Curso_model->buscaHorasCurso($aluno['id_aluno']);
+
+                 //Somando as horas
+                 $total= 0;
+                 foreach ($horasTipoAtividade as $hora){
+                     $total += $hora['soma_por_atividade'];
+                 }
+
+                 //montando matriz de informações que aparecerão na view cadastro_view
+                 $dados = array("dadosUsuario" => $dadosUsuario, "declaracoes" => $declaracoes, "aluno" => $aluno, "horas" => $horasTipoAtividade, "total" => $total, "horasNecessarias" => $horasNecessarias);
+                 //carregando view e enviando os dados
+                 $this->load->template_usuario_aluno("declaracao/visualizar_declaracao_view", $dados);
                }
+
+            public function visualizarDetalhes(){
+                    $id_declaracao = $this->input->post("id_dec");
+                    echo  "O id é: ".$id_declaracao;
+                $id_declaracao = 2;
+                //carregando as models
+                $this->load->model("Declaracao_model");
+                $this->load->model("TipoAtividade_model");
+                $this->load->model("Evento_model");
+
+
+               // $id_declaracao = 24;
+                    //buscando dados do usuario
+                    $usuarioLogado = $this->session->userdata("usuario_logado");
+                    $usuario = $this->Declaracao_model->getUsuario($usuarioLogado['id_usuario']);
+                    $dadosUsuario = array("dadosUsuario" => $usuario);
+
+                    //buscando detalhes da declaracao por id
+                    $declaracao = $this->Declaracao_model->buscaDeclaracaoCompleta($id_declaracao);
+
+                    //buscando evento pelo id da declaraca
+                    $evento = $this->Evento_model->buscaEventoIdDeclaracao($id_declaracao);
+
+                    //buscar nome do tipo de atividade
+                    $tipoAtividade = $this->TipoAtividade_model->buscarTipoAtividade($declaracao['id_tipo_atividade']);
+                    $tipoAtividade = $tipoAtividade['nm_tipo_atividade'];
+
+                    //montando matriz de informações que aparecerão na view cadastro_view
+                    $dados = array("dadosUsuario" => $dadosUsuario, "declaracao" => $declaracao, "tipoAtividade" => $tipoAtividade, "evento" => $evento);
+                    //carregando view e enviando os dados
+                    $this->load->template_usuario_aluno("declaracao/detalhes", $dados);
+            }
 
             //Metodos com operações em Banco de Dados
             public function cadastrar_declaracao(){
             
                 $anexo = $_FILES['anexo'];
-                echo "<pre>";
-                var_dump($anexo);
-                echo "</pre>";
+                $this->load->model("Aluno_model");
 
                     if($this->input->post("evento") == "1"){
                         //if($this->validaExterno()){
                             $usuarioLogado = $this->session->userdata("usuario_logado");
+                            $aluno = $this->Aluno_model-> buscarAlunoUsuario($usuarioLogado['id_usuario']);
+
                             $declaracao = array(
                             "id_tipo_atividade" => $this->input->post("atividade"),
                             "dt_evento_externo" => $this->input->post("data"),
@@ -55,10 +114,8 @@
                             "arquivo_declaracao" => $anexo['name'],
                             "status_declaracao" => 0,
                             "dt_declaracao" => mdate("%Y-%m-%d %H:%i:%s", time()),
-                            "id_aluno" => $usuarioLogado['id_usuario']);
-                       // }else{
-                         //    redirect("/declaracao/cadastra_declaracao");
-                       // }
+                            "id_aluno" => $aluno['id_aluno']);
+
                 }else if($this->input->post("evento") == "0"){
                     if($this->validaInterno()){
                     $usuarioLogado = $this->session->userdata("usuario_logado");
@@ -176,14 +233,6 @@
             }
             //Retorno Ajax
             public function carregarCampos(){
-                /*
-                $tipoEveno =  $this->input->post('tipoEvento');
-                if($tipoEveno == '1'){
-                   echo "<script type='javascript'>alert('Ajax externo');";
-                }else{
-                   echo "<script type='javascript'>alert('Ajax Interno');";
-                }
-                */
                 echo "Ok";
                  echo "<script type='javascript'>alert('Funcionou');";
             }
