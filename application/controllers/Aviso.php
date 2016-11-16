@@ -49,14 +49,13 @@ class Aviso extends CI_Controller{
                 $this->session->set_flashdata("danger", "A data de vencimento não pode ser anterior ao início.");
                 $this->load->template_admin("aviso/cadastrar_aviso");
             }
-
-
         }
 
-        $this->session->set_flashdata("danger", "O cadastro não foi efetuado.");
-
-        $this->load->template_admin("aviso/cadastrar_aviso");
-
+        else{
+            $this->session->set_flashdata("danger", "O cadastro não foi efetuado.");
+            $this->load->template_admin("aviso/cadastrar_aviso");
+        }
+        
     }
 
     public function pesquisarAviso(){

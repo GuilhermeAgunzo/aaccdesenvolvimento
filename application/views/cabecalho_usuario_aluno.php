@@ -73,10 +73,10 @@
                         <a href="#"><i class="fa fa-pencil-square nav_icon"></i>Cadastro de AACC's<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
                             <li>
-                                <?=anchor(base_url('index.php/declaracao/cadastra_declaracao/'), 'Cadastrar Declaração', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                                <?=anchor(base_url('index.php/declaracao/cadastra_declaracao/'), 'Cadastrar Relatório de Atividade', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
                             </li>
                             <li>
-                                <?=anchor(base_url('index.php/declaracao/visualiza_declaracao/'), 'Visualizar Declaracao', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                                <?=anchor(base_url('index.php/declaracao/visualiza_declaracao/'), 'Visualizar Relatório de Atividade', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
                             </li>
                         </ul>
                         <!-- /nav-second-level -->
@@ -182,8 +182,8 @@
             <?php endif; ?>
 
             <?php
-                unset(
-                    $_SESSION['success'],
-                    $_SESSION['danger']
-                );
+            unset(
+                $_SESSION['success'],
+                $_SESSION['danger']
+            );
             ?>
