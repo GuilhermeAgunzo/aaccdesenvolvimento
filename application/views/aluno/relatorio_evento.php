@@ -28,11 +28,18 @@ echo "</div>";
 echo form_close();
 
 
+$atributos2 = array('class' => 'form-horizontal', 'Target' => '_blank');
+
 if($this->session->flashdata("danger")){
     echo "<p class='alert alert-danger'>". $this->session->flashdata("danger") ."</p>";
 }
 
 if(isset($eventos)){
+    echo form_open('RelatorioEvento/pdf', $atributos2);
+    echo form_hidden('data_inicio',$data_inicio);
+    echo form_hidden('data_final',$data_final);
+    echo form_button(array("class" => "btn btn-default", "content" => "PDF", "type" => "submit"));
+    echo form_close();
     echo "<div class='table-responsive'>";
     echo "<table class='table'>";
     echo "<tr>";
