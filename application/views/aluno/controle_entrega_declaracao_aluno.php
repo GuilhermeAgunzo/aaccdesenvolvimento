@@ -1,6 +1,6 @@
- <?php
+<?php
 
- echo form_fieldset("<h1>Controle de Entrega de Declaração de Aluno</h1>");
+echo form_fieldset("<h1>Controle de Entrega de Declaração de Aluno</h1>");
 if(isset($unidades)){
 
 
@@ -48,12 +48,14 @@ if(isset($curso) && isset($alunos)){
     echo "<th></th>";
     echo "</tr>";
     echo "</thead>";
+
     foreach($alunos as $aluno){
         if($aluno['total_geral_hora'] >= $curso['qt_horas_aacc']){
+            $endecoprint = base_url('index.php/aluno/declaracaoFinal/'.$aluno['id_aluno']);
             echo "<tr>";
             echo "<td>".$aluno['nm_aluno']."</td>";
-            echo "<td style='text-align: right'>".$aluno['total_geral_hora']."</td>";
-            echo "<td>".anchor("aluno/imprimirDeclaracao","Imprimir declaração",array("class" => "btn btn-default"));
+            echo "<td style='text-align: center'>".$aluno['total_geral_hora']."</td>";
+            echo "<td>".form_button(array("class" => "btn btn-default", "content" => "Imprimir declaração", "onClick" => "varWindow = window.open ('{$endecoprint}','imprimir','width=1024, height=655, top=10, left=110, scrollbars=no');"))."</td>";
             echo "</tr>";
         }
     }
@@ -61,26 +63,26 @@ if(isset($curso) && isset($alunos)){
     echo "</div>";
 }
 
- ?>
- <script type="text/javascript">
+?>
+<script type="text/javascript">
 
-     var url = "<?= base_url() ?>" + "index.php/Curso/buscaCursosByUnidade";
-     function busca_cursos(id_unidade){
+    var url = "<?= base_url() ?>" + "index.php/Curso/buscaCursosByUnidade";
+    function busca_cursos(id_unidade){
 
-         $('#turmas').empty().append('<option selected="selected" value="">---</option>');
-         $.post(url, {
-             id_unidade : id_unidade
-         }, function(data){
-             $('#cursos').html(data);
-         })
-     }
+        $('#turmas').empty().append('<option selected="selected" value="">---</option>');
+        $.post(url, {
+            id_unidade : id_unidade
+        }, function(data){
+            $('#cursos').html(data);
+        })
+    }
 
-     var urlTurma = "<?= base_url()?>" + "index.php/Turma/buscaTurmasByCurso"
-     function busca_turmas(id_curso){
-         $.post(urlTurma, {
-             id_curso : id_curso
-         }, function(data){
-             $('#turmas').html(data);
-         })
-     }
- </script>
+    var urlTurma = "<?= base_url()?>" + "index.php/Turma/buscaTurmasByCurso"
+    function busca_turmas(id_curso){
+        $.post(urlTurma, {
+            id_curso : id_curso
+        }, function(data){
+            $('#turmas').html(data);
+        })
+    }
+</script>
