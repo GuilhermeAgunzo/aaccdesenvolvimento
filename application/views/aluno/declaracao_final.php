@@ -20,11 +20,46 @@ date_default_timezone_set('America/Sao_Paulo');
             line-height: 35px;
         }
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 
 </head>
 <body>
-<div class="container">
-    <h3 class="text-right"><button class="btn btn-success" onclick="window.print();">IMPRIMIR</button></h3>
+<div class="container" ng-app="">
+    <div>
+        <p class="sticky-header">Data Oficial da Emissão:</p>
+        <label class="sticky-header">Dia:</label>
+
+        <select class="btn btn-default" ng-model="dia" ng-init="dia='01'">
+            <?php
+
+                for($i = 01;$i <= 31; $i++){
+                    if($i < 10){
+                        echo "<option value='0".$i."'>0".$i."</option>";
+                    }else{
+                        echo "<option value='".$i."'>".$i."</option>";
+                    }
+
+                }
+            ?>
+        </select>
+        <label class="sticky-header">Mês:</label>
+        <select class="btn btn-default" ng-model="mes" ng-init="mes='janeiro'">
+            <option value="janeiro">janeiro</option>
+            <option value="fevereiro">fevereiro</option>
+            <option value="março">março</option>
+            <option value="abril">abril</option>
+            <option value="maio">maio</option>
+            <option value="junho">junho</option>
+            <option value="julho">julho</option>
+            <option value="agosto">agosto</option>
+            <option value="setembro">setembro</option>
+            <option value="outubro">outubro</option>
+            <option value="novembro">novembro</option>
+            <option value="dezembro">dezembro</option>
+        </select>
+        <p class="text-right"><button class="btn btn-success" onclick="window.print();">IMPRIMIR</button></p>
+    </div>
+
     <h3>
         <img src="<?=base_url('images/FatecLogo1.jpg')?>" align="left">
         <img src="<?=base_url('images/CPSLogo1.png')?>" align="right">
@@ -54,7 +89,9 @@ date_default_timezone_set('America/Sao_Paulo');
     ?>
     <p>&#160;</p>
     <p class="text-center" style="line-height: normal;">Sem mais, firmamos a presente declaração.</p>
-    <p class="text-center" style="line-height: normal;">Praia Grande, <?=strftime('%d de %B de %Y', strtotime('today'));?></p>
+    <div >
+    <p class="text-center" style="line-height: normal;">Praia Grande, {{dia}} de {{mes}} de <?=strftime('%Y', strtotime('today'));?></p>
+    </div>
     <p>&#160;</p>
     <p>&#160;</p>
     <p class="text-left" style="line-height: normal;">____________________________________</p>
