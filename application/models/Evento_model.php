@@ -56,4 +56,21 @@ class Evento_model extends CI_Model{
         return $retorno;
 
     }
+    public function buscaEventoIdDeclaracao($id_declaracao){
+        return $this->db->query("SELECT e.id_evento,
+            e.id_tipo_atividade,
+            e.nm_evento,
+            e.local_evento,
+            e.dt_inicio_evento,
+            e.dt_final_evento,
+            e.hr_evento,
+            e.qt_horas_evento,
+            e.ds_evento,
+            e.nm_responsavel_evento,
+            e.id_user_adm_cadastrou,
+            e.dt_cadastro,
+            e.status_ativo,
+            e.id_unidade FROM tb_evento e, tb_declaracao d 
+            WHERE e.id_evento = d.id_evento and d.id_declaracao = $id_declaracao")->row_array();
+    }
 }

@@ -547,6 +547,37 @@ class Aluno extends CI_Controller{
 
     }
 
+    /* DECLARACAO */
+
+    public function declaracaoFinal($id_aluno){
+        autoriza(2);
+
+        $this->load->model("aluno_model");
+        $this->load->model("turma_model");
+        $this->load->model("unidade_model");
+        $this->load->model("tipoAtividade_model");
+        $this->load->model("totalDeHoras_model");
+        $this->load->model("curso_model");
+
+        $aluno = $this->aluno_model->buscarAlunoId($id_aluno);
+        $turma = $this->turma_model->buscarTurmaId($aluno['id_turma']);
+        $curso = $this->curso_model->buscaCurso($turma['id_curso']);
+        $unidade = $this->unidade_model->buscarUnidadeId($turma['id_unidade']);
+        $tiposAtividade = $this->tipoAtividade_model->pesquisarTipoAtividade();
+        $totalHoras = $this->totalDeHoras_model->buscaHorasAluno($id_aluno);
+
+        $dados = array(
+            'aluno' => $aluno,
+            'turma' => $turma,
+            'curso' => $curso,
+            'unidade' => $unidade,
+            'tiposAtividade' => $tiposAtividade,
+            'totalHoras' => $totalHoras
+        );
+
+        $this->load->view("aluno/declaracao_final",$dados);
+    }
+
 
 
 }

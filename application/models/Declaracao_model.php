@@ -11,8 +11,8 @@ class Declaracao_model extends CI_Model{
         $this->db->insert("tb_declaracao",$declaracao);
         return $this->db->insert_id();
     }
-    public function getDeclaracoes($id_usuario){
-        $this->db->where("id_usuario",$id_usuario);
+    public function getDeclaracoes($id_aluno){
+        $this->db->where("id_aluno",$id_aluno);
         return $this->db->get("tb_declaracao")->result_array();
     }
      public function getDeclaracaoId($id_declaracao){
@@ -33,7 +33,7 @@ class Declaracao_model extends CI_Model{
     }
 
     public function buscaDeclaracaoCompleta($id_declaracao){
-        return $this->db->query("SELECT * from tb_declaracao where id_declaracao = $id_declaracao")->result_array();
+        return $this->db->query("SELECT * from tb_declaracao where id_declaracao = $id_declaracao")->row_array();
     }
 
     public function buscaNomeMotivoIndeferimento(){
@@ -51,6 +51,14 @@ class Declaracao_model extends CI_Model{
     public function validaDeclaracao($status,$id_declaracao){
         $this->db->where('id_declaracao', $id_declaracao);
         return $this->db->update('tb_declaracao',array('status_declaracao' => $status));
+    }
+
+    public function buscaTotaldeHoras($id_aluno){
+        return $this->db->query("
+          select t.nm_tipo_atividade, sum(d.qt_horas_atividade) as soma_por_atividade 
+          from tb_declaracao d, tb_tipos_atividade t 
+          where d.id_tipo_atividade = t.id_tipo_atividade and  id_aluno = $id_aluno  and d.status_declaracao = 1
+          group by t.nm_tipo_atividade")->result_array();
     }
 
 }

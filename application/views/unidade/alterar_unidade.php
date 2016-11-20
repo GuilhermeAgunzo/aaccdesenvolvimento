@@ -139,9 +139,9 @@ if(isset($unidades)) { ?>
         echo "<div class='row'>";
         echo "<div class='form-group'>";
         echo "<div class='col-md-offset-2 col-md-10'>";
-        echo anchor("temporario/administrador","Cancelar", array("class" => "btn btn-default"));
-        echo "        ";
         echo form_button(array("class" => "btn btn-default", "content" => "Salvar", "type" => "submit"));
+        echo "        ";
+        echo anchor("temporario/administrador","Cancelar", array("class" => "btn btn-default"));
         echo "</div>";
         echo "</div>";
         echo "</div>";
