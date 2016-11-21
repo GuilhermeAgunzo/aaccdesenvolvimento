@@ -238,6 +238,7 @@ class Professor extends CI_Controller{
             "nm_professor" => $this->input->post("nome"),
             "nm_email" => $email,
             "id_unidade" => $this->input->post("Unidade"),
+            "id_curso" => $this->input->post("cursos"),
             "cd_tel_residencial" => $telefone,
             "cd_tel_celular" => $celular,
             "dt_entrada" => $data_entrada,

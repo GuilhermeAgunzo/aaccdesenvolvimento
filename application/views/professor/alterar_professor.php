@@ -112,6 +112,10 @@
             echo "<div class='form-group col-md-3'>";
             echo form_dropdown('Unidade', $unidades, $professor['id_unidade'], array("class" => "form-control"));
             echo "</div>";
+            echo form_label("Curso", "curso", array("class" => "col-md-2 control-label"));
+            echo "<div class='form-group col-md-3'>";
+            echo "<select name='cursos' id='cursos' class='form-control' required='required'></select>";
+            echo "</div>";
             echo "</div>";
 
             echo "<div class='row'>";
@@ -229,3 +233,19 @@
         }
     }
 ?>
+
+<script type="text/javascript">
+    var url = "<?= base_url() ?>" + "index.php/Curso/buscaCursosByUnidade";
+    $(document).ready(busca_cursos($("#unidades").val()));
+
+    function busca_cursos(id_unidade){
+
+        $.post(url, {
+            id_unidade : id_unidade
+        }, function(data){
+            $('#cursos').html(data);
+            $('#cursos').val('<?=$professor['id_curso']?>');
+        })
+    }
+
+</script>
