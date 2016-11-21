@@ -8,8 +8,12 @@ echo form_fieldset("<h1>Cadastro de Professor</h1>");
     echo form_label("Unidade", "unidade", array("class" => "col-md-2 control-label"));
     echo "<div class='form-group col-md-3'>";
     $unidades = array('' =>  "Selecione")+$unidades;
-    echo form_dropdown('Unidade', $unidades, set_value("Unidade", ""), array("class" => "form-control"));
+    echo form_dropdown('Unidade', $unidades, set_value("Unidade", ""), array("class" => "form-control", 'onchange' => 'busca_cursos($(this).val())'));
     echo form_error("Unidade");
+    echo "</div>";
+    echo form_label("Curso", "curso", array("class" => "col-md-1 control-label"));
+    echo "<div class='form-group col-md-3'>";
+    echo "<select name='cursos' id='cursos' class='form-control' required='required' onchange='busca_turmas($(this).val())'></select>";
     echo "</div>";
     echo "</div>";
 
