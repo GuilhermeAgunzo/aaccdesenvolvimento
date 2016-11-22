@@ -23,27 +23,30 @@ class Declaracao extends CI_Controller{
     public function visualiza_declaracao(){
         autoriza(1);
         $usuarioLogado = $this->session->userdata("usuario_logado");
+
         //Buscando aluno pelo id do usuario logado
         $this->load->model("Aluno_model");
-        $aluno = $this->Aluno_model-> buscarAlunoUsuario($usuarioLogado['id_usuario']);
+        $aluno = $this->Aluno_model->buscarAlunoUsuario($usuarioLogado['id_usuario']);
+
         //Buscando todas as decarações do usuario atual
         $this->load->model("Declaracao_model");
-        $declaracoes = $this->Declaracao_model->getDeclaracoes($aluno['id_aluno']);
+        $declaracoes = $this->Declaracao_model->buscaDeclaracoesAprovadas($aluno['id_aluno']);
+
         //buscando dados do usuario
         $usuario = $this->Declaracao_model->getUsuario($usuarioLogado['id_usuario']);
         $dadosUsuario = array("dadosUsuario" => $usuario);
+
         //Buscando horas por tipo de atividade
-        $horasTipoAtividade = $this->Declaracao_model->buscaTotaldeHoras($aluno['id_aluno']);
+        $this->load->model("TotalDeHoras_model");
+        $horasTipoAtividade = $this->TotalDeHoras_model->buscaHorasTipoAtividade($aluno['id_aluno']);
+
         //Buscando quantidade de horas exigidas por cada curso referente ao aluno logado
         $this->load->model("Curso_model");
         $horasNecessarias= $this->Curso_model->buscaHorasCurso($aluno['id_aluno']);
-        //Somando as horas
-        $total= 0;
-        foreach ($horasTipoAtividade as $hora){
-            $total += $hora['soma_por_atividade'];
-        }
+
         //montando matriz de informações que aparecerão na view cadastro_view
-        $dados = array("dadosUsuario" => $dadosUsuario, "declaracoes" => $declaracoes, "aluno" => $aluno, "horas" => $horasTipoAtividade, "total" => $total, "horasNecessarias" => $horasNecessarias);
+        $dados = array("dadosUsuario" => $dadosUsuario, "declaracoes" => $declaracoes, "aluno" => $aluno, "horas" => $horasTipoAtividade, "horasNecessarias" => $horasNecessarias);
+
         //carregando view e enviando os dados
         $this->load->template_usuario_aluno("declaracao/visualizar_declaracao_view", $dados);
     }

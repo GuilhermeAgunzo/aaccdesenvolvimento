@@ -27,8 +27,14 @@ class TotalDeHoras_model extends CI_Model{
     public function buscaHorasAluno($id_aluno){
         //$query = $this->db->query("SELECT * FROM tb_total_horas WHERE id_aluno = {$id_aluno}");
         $this->db->where('id_aluno',$id_aluno);
-
         return $this->db->get('tb_total_horas')->result_array();
+    }
+
+    public function buscaHorasTipoAtividade($id_aluno){
+        return $this->db->query("SELECT tt.total_hora_atividade, ta.nm_tipo_atividade 
+            FROM tb_total_horas tt,
+            tb_tipos_atividade ta WHERE ta.id_tipo_atividade = tt.id_tipo_atividade 
+            and tt.id_aluno = {$id_aluno}")->result_array();
     }
 
 }

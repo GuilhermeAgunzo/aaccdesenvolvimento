@@ -1,7 +1,7 @@
  <h1 class="text-center"">Detalhes</h1>
     <?php
     $usuario = $dadosUsuario;
-    echo "<div class='row'>";
+    echo "<div class='row' >";
     $atributos = array('class' => 'form-horizontal');
     echo "<div class='form-horizontal'>";
     echo "<div class='form-group'>";
