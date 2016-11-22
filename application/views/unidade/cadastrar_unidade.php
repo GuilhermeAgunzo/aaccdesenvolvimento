@@ -73,6 +73,17 @@ echo "</div>";
 echo "</div>";
 
 echo "<div class='row'>";
+echo form_label("Nome do Diretor", "nmDiretor", array("class" => "col-md-2 control-label"));
+echo "<div class='form-group col-md-3'>";
+echo form_input(array("name" => "nmDiretor", "value" => set_value("nmDiretor",""), "id" => "diretor", "maxlength" => "50", "required" => "required"));
+echo "</div>";
+echo form_label("CPF Diretor", "cpfDiretor", array("class" => "col-md-2 control-label"));
+echo "<div class='form-group col-md-2'>";
+echo form_input(array("name" => "cpfDiretor", "value" => set_value("cpfDiretor", ""), "id" => "cpfDiretor", "maxlength" => "11", "onkeypress" => 'return event.charCode >= 48 && event.charCode <= 57', "onpaste" => "return false"));
+echo "</div>";
+echo "</div>";
+
+echo "<div class='row'>";
 echo "<div class='form-group'>";
 echo "<div class='col-md-offset-2 col-md-10'>";
 echo form_button(array("class" => "btn btn-default", "content" => "Salvar", "type" => "submit"));

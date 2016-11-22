@@ -95,15 +95,15 @@ date_default_timezone_set('America/Sao_Paulo');
     <p>&#160;</p>
     <p>&#160;</p>
     <p class="text-left" style="line-height: normal;">____________________________________</p>
-    <p class="text-left" style="line-height: normal;">Profª Esp. Renata Neves Ferreira</p>
+    <p class="text-left" style="line-height: normal;">Prof. Renata Neves Ferreira</p>
     <p class="text-left" style="line-height: normal;">(Responsável coordenação de  AACCI)</p>
     <p>&#160;</p>
     <p class="text-left" style="line-height: normal;">____________________________________</p>
-    <p class="text-left" style="line-height: normal;"><?=$curso['nm_coordenador_curso']?></p>
+    <p class="text-left" style="line-height: normal;">Prof. <?=$curso['nm_coordenador_curso']?></p>
     <p class="text-left" style="line-height: normal;">(Coordenador do Curso de Gestão Empresarial)</p>
     <p>&#160;</p>
     <p class="text-left" style="line-height: normal;">____________________________________</p>
-    <p class="text-left" style="line-height: normal;"><?=$unidade['nm_diretor']?></p>
+    <p class="text-left" style="line-height: normal;">Prof. <?=$unidade['nm_diretor']?></p>
     <p class="text-left" style="line-height: normal;">(Diretora da unidade)</p>
 </div>
 </body>

@@ -36,6 +36,11 @@ class Unidade extends CI_Controller{
         if($this->_validaFormulario(true)) {
 
             $usuarioLogado = $this->session->userdata("usuario_logado");
+            $cpf = $this->input->post("cpfDiretor");
+
+            if($cpf == 0 || $cpf == "0"){
+                $cpf = null;
+            }
 
             $unidade = array(
                 "cd_cpsouza" => $this->input->post("cd_cpsouza"),
@@ -48,6 +53,8 @@ class Unidade extends CI_Controller{
                 "nm_complemento_endereco" => $this->input->post("complemento"),
                 "cd_cep_endereco" => $this->input->post("cep"),
                 "cd_telefone" => $this->input->post("telefone"),
+                "nm_diretor" => $this->input->post("nmDiretor"),
+                "cd_cpf_diretor" => $cpf,
                 "id_user_adm_cadastrou" => $usuarioLogado['id_usuario'],
                 "dt_cadastro" => mdate("%Y-%m-%d %H:%i:%s", time())
             );
@@ -66,6 +73,11 @@ class Unidade extends CI_Controller{
 
         if($this->_validaFormulario(false)) {
             $usuarioLogado = $this->session->userdata("usuario_logado");
+            $cpf = $this->input->post("cpfDiretor");
+
+            if($cpf == 0 || $cpf == "0"){
+                $cpf = null;
+            }
 
             $unidade = array(
                 "id_unidade" => $this->input->post("id_unidade"),
@@ -79,6 +91,8 @@ class Unidade extends CI_Controller{
                 "nm_complemento_endereco" => $this->input->post("complemento"),
                 "cd_cep_endereco" => $this->input->post("cep"),
                 "cd_telefone" => $this->input->post("telefone"),
+                "nm_diretor" => $this->input->post("nmDiretor"),
+                "cd_cpf_diretor" => $cpf,
                 "id_user_adm_cadastrou" => $usuarioLogado['id_usuario'],
                 "dt_cadastro" => mdate("%Y-%m-%d %H:%i:%s", time())
             );
