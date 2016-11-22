@@ -37,7 +37,7 @@ class curso extends CI_Controller
             $this->session->set_flashdata("success", "Cadastro efetuado com sucesso!");
             redirect('/curso/cadastro_curso');
         }else{
-            redirect("/curso/cadastro_curso");
+            $this->cadastro_curso();
         }
             $this->load->template_admin("curso/cadastro_curso");
     }

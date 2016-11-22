@@ -110,7 +110,7 @@
             echo "<div class='row'>";
             echo form_label("Unidade", "unidade", array("class" => "col-md-2 control-label"));
             echo "<div class='form-group col-md-3'>";
-            echo form_dropdown('Unidade', $unidades, $professor['id_unidade'], array("class" => "form-control"));
+            echo form_dropdown('Unidade', $unidades, $professor['id_unidade'], array("id" => "unidades", "class" => "form-control", 'onchange' => 'busca_cursos($(this).val())'));
             echo "</div>";
             echo form_label("Curso", "curso", array("class" => "col-md-2 control-label"));
             echo "<div class='form-group col-md-3'>";
