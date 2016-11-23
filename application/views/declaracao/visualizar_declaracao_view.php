@@ -37,8 +37,8 @@ if(!empty($declaracoes)){ ?>
     <p style="margin-bottom: 30px; margin-top: 30px">Selecione a declaracao para ver os detalhes:</p>
     <?php
     foreach ($declaracoes as $declaracao) {
-        $declaracao['dt_declaracao'] = date('d/m/Y',  strtotime($declaracao['dt_declaracao']));
-        $declaracao['dt_aprovacao_doc'] = date('d/m/Y',  strtotime($declaracao['dt_aprovacao_doc']));
+         $declaracao['dt_declaracao'] = dataMysqlParaPtBr($declaracao['dt_declaracao']);
+         $declaracao['dt_aprovacao_doc'] = dataMysqlParaPtBr($declaracao['dt_aprovacao_doc']);
         if($declaracao['status_declaracao'] == "1"){
             $declaracao['status_declaracao'] = "Deferido";
             $mensagem = "Data da Aprovação: ".$declaracao['dt_aprovacao_doc'];

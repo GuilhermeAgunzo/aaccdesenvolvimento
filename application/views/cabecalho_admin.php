@@ -86,6 +86,12 @@
                             <li>
                                 <?=anchor(base_url('index.php/curso/cadastro_curso'), ' Cadastrar Curso', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
                             </li>
+                            <li>
+                                <?=anchor(base_url('index.php/curso/pesquisa_curso'), ' Pesquisar Curso', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                            </li>
+                            <li>
+                                <?=anchor(base_url('index.php/curso/altera_curso'), ' Alterar Curso', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                            </li>
                         </ul>
                     </li>
                     <li class="">

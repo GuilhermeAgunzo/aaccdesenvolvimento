@@ -1,3 +1,8 @@
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#cpf_coordenador").mask("999.999.999-99");
+    });
+</script>
 <?php
 echo form_fieldset("<h1>Cadastro de Curso</h1>");
 
@@ -21,7 +26,7 @@ echo "</div>";
 echo "<div class='row'>";
 echo form_label("Nome do Curso", "nome_curso", array("class" => "col-md-2 control-label"));
 echo "<div class='form-group col-md-6'>";
-echo form_input(array("name" => "nome_curso", "value" => set_value("nome_curso",""), "id" => "nome_curso" ,"class" => "form-control", "maxlength" => "70"));
+echo form_input(array("name" => "nome_curso", "value" => set_value("nome_curso",""), "id" => "nome_curso" ,"class" => "form-control", "maxlength" => "70", 'required' => 'required'));
 echo form_error("nome_curso");
 echo "</div>";
 echo "</div>";
@@ -29,7 +34,7 @@ echo "</div>";
 echo "<div class='row'>";
 echo form_label("Abreviação do Curso", "abreviacao_curso", array("class" => "col-md-2 control-label"));
 echo "<div class='form-group col-md-2'>";
-echo form_input(array("name" => "abreviacao_curso", "value" => set_value("abreviacao_curso",""), "id" => "abreviacao_curso" ,"class" => "form-control", "maxlength" => "10"));
+echo form_input(array("name" => "abreviacao_curso", "value" => set_value("abreviacao_curso",""), "id" => "abreviacao_curso" ,"class" => "form-control", "maxlength" => "10", 'required' => 'required'));
 echo form_error("abreviacao_curso");
 echo "</div>";
 echo "</div>";
@@ -37,7 +42,7 @@ echo "</div>";
 echo "<div class='row'>";
 echo form_label("Nome do Coordenador", "nome_coordenador", array("class" => "col-md-2 control-label"));
 echo "<div class='form-group col-md-6'>";
-echo form_input(array("name" => "nome_coordenador", "value" => set_value("nome_coordenador",""), "id" => "nome_coordenador" ,"class" => "form-control", "maxlength" => "100"));
+echo form_input(array("name" => "nome_coordenador", "value" => set_value("nome_coordenador",""), "id" => "nome_coordenador" ,"class" => "form-control", "maxlength" => "100", 'required' => 'required'));
 echo form_error("nome_coordenador");
 echo "</div>";
 echo "</div>";
@@ -53,7 +58,7 @@ echo "</div>";
 echo "<div class='row'>";
 echo form_label("Quantidade de horas do curso de AACC", "qtd_horas_aacc", array("class" => "col-md-2 control-label"));
 echo "<div class='form-group col-md-2'>";
-echo form_input(array("name" => "qtd_horas_aacc", "value" => set_value("qtd_horas_aacc",""), "id" => "qtd_horas_aacc" ,"class" => "form-control","type" => "number"));
+echo form_input(array("name" => "qtd_horas_aacc", "value" => set_value("qtd_horas_aacc",""), "id" => "qtd_horas_aacc" ,"class" => "form-control","type" => "number", 'required' => 'required'));
 echo form_error("qtd_horas_aacc");
 echo "</div>";
 echo "</div>";
@@ -64,5 +69,7 @@ echo form_button(array("class" => "btn btn-default", "content" => "Salvar", "typ
 echo "</div>";
 echo "</div>";
 echo "</div>";
+
+echo form_close();
 
 ?>

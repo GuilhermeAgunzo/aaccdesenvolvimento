@@ -2,8 +2,12 @@
 
 class Curso_model extends CI_Model{
 
-    public function salva($curso){
-        $this->db->insert("tb_curso", $curso);
+    public function salvaCurso($curso){
+       return $this->db->insert("tb_curso", $curso);
+    }
+    public function alteraCurso($curso){
+        $this->db->where('id_curso', $curso['id_curso']);
+       return $this->db->update('tb_curso', $curso);
     }
 
     public function buscaCurso($id){
@@ -55,4 +59,9 @@ class Curso_model extends CI_Model{
         WHERE a.id_turma = t.id_turma 
         and t.id_curso = c.id_curso and a.id_aluno = $id_aluno")->row_array();
     }
+
+    public function buscaCursoByInidade($id_unidade, $id_curso){
+        return $this->db->query("select * from tb_curso WHERE id_unidade = {$id_unidade} and id_curso = {$id_curso}")->row_array();
+    }
+
 }

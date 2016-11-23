@@ -67,3 +67,5 @@ $lang['form_validation_greater_than_equal_to']	= 'O campo {field} deve conter um
 $lang['form_validation_error_message_not_set']	= 'Não é possível acessar uma mensagem de erro correspondente ao nome do seu campo {field}.';
 $lang['form_validation_in_list']		= 'O campo {field} deve ser um dos: {param}.';
 
+$lang['valid_cpf'] = "O campo %s não é um CPF válido. Use o formato 000.000.000-00";
+
