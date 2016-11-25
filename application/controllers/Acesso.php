@@ -4,7 +4,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Acesso extends CI_Controller{
 
     public function index(){
-        $this->load->view("login/index.php");
+
+        $usuarioLogado = $this->session->userdata("usuario_logado");
+
+        //Adicionada variável de sessão
+        $_SESSION['acesso'] = $usuarioLogado['cd_nivel'];
+
+
+        if( $usuarioLogado['cd_nivel'] == 1 ){
+            redirect('/temporario/aluno');
+        }elseif( $usuarioLogado['cd_nivel'] == 2 ){
+            redirect('/temporario/administrador');
+        }else{
+            $this->load->view("login/index.php");
+        }
     }
 
     public function login(){
@@ -56,6 +69,9 @@ class Acesso extends CI_Controller{
 
 
             $usuarioLogado = $this->session->userdata("usuario_logado");
+
+            //Adicionada variável de sessão
+            $_SESSION['acesso'] = $usuarioLogado['cd_nivel'];
 
 
             if( $usuarioLogado['cd_nivel'] == 1 ){
