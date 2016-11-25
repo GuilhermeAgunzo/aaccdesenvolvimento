@@ -44,6 +44,7 @@ class curso extends CI_Controller{
             $curso = array(
                 "id_unidade" => $this->input->post("Unidade"),
                 "nm_curso" => $this->input->post("nome_curso"),
+                "cd_curso" => $this->input->post("codigo_curso"),
                 "nm_abreviacao" => $this->input->post("abreviacao_curso"),
                 "nm_coordenador_curso" => $this->input->post("nome_coordenador"),
                 "cd_cpf_coordenador_curso" => $this->input->post("cpf_coordenador"),
@@ -77,6 +78,7 @@ class curso extends CI_Controller{
             $curso = array(
                 "id_curso" => $this->input->post("id_curso"),
                 "nm_curso" => $this->input->post("nome_curso"),
+                "cd_curso" => $this->input->post("codigo_curso"),
                 "nm_abreviacao" => $this->input->post("abreviacao_curso"),
                 "nm_coordenador_curso" => $this->input->post("nome_coordenador"),
                 "cd_cpf_coordenador_curso" => $this->input->post("cpf_coordenador"),
@@ -156,12 +158,16 @@ class curso extends CI_Controller{
         $mensagem_cpf = array(
             'is_unique' => 'Já existe um coordenador cadastrado com este Cpf.'
         );
+        $mensagem_codigo_curso = array(
+            'is_unique' => 'Já existe um curso cadastrado com este Código.'
+        );
         $this->form_validation->set_rules('cpf', 'CPF', 'valid_cpf');
         $this->form_validation->set_rules("abreviacao_curso", "Abreviação", "required|max_length[10]|is_unique[tb_curso.nm_abreviacao]", $mensagem_abreviacao);
         $this->form_validation->set_rules("nome_curso", "Nome do curso", "required|max_length[70]|is_unique[tb_curso.nm_curso]", $mensagem_nome_curso);
+        $this->form_validation->set_rules("codigo_curso", "Código do curso", "required|max_length[20]|numeric|is_natural|is_unique[tb_curso.cd_curso]", $mensagem_codigo_curso);
         $this->form_validation->set_rules("nome_coordenador", "Nome do coordenador", "required|max_length[100]");
-        $this->form_validation->set_rules("cpf_coordenador", "CPF", "required|max_length[50]|exact_length[15]|numeric|valid_cpf|is_unique[tb_curso.cd_cpf_coordenador_curso]", $mensagem_cpf);
-        $this->form_validation->set_rules("qtd_horas_aacc", "Quantidade de horas AACC", "required|numeric");
+        $this->form_validation->set_rules("cpf_coordenador", "CPF", "required|max_length[50]|exact_length[14]|valid_cpf|is_unique[tb_curso.cd_cpf_coordenador_curso]", $mensagem_cpf);
+        $this->form_validation->set_rules("qtd_horas_aacc", "Quantidade de horas AACC", "required|numeric|is_natural");
         $this->form_validation->set_error_delimiters('<p class=" alert alert-danger">', '</p>');
         return $this->form_validation->run();//roda regra
     }
@@ -169,9 +175,10 @@ class curso extends CI_Controller{
         $this->load->library("form_validation");
         $this->form_validation->set_rules("abreviacao_curso", "Abreviação", "required|max_length[10]");
         $this->form_validation->set_rules("nome_curso", "nome do curso", "required|max_length[70]");
+        $this->form_validation->set_rules("codigo_curso", "Código do curso", "required|max_length[20]|numeric|is_natural");
         $this->form_validation->set_rules("nome_coordenador", "nome do coordenador", "required|max_length[100]");
-        $this->form_validation->set_rules("cpf_coordenador", "CPF", "required|max_length[50]|exact_length[15]|numeric|valid_cpf|is_unique[tb_curso.cd_cpf_coordenador_curso]");
-        $this->form_validation->set_rules("qtd_horas_aacc", "Quantidade de horas AACC", "required|numeric");
+        $this->form_validation->set_rules("cpf_coordenador", "CPF", "required|max_length[50]|exact_length[14]|valid_cpf");
+        $this->form_validation->set_rules("qtd_horas_aacc", "Quantidade de horas AACC", "required|numeric|is_natural");
         $this->form_validation->set_error_delimiters('<p class=" alert alert-danger">', '</p>');
         return $this->form_validation->run();//roda regra
     }
