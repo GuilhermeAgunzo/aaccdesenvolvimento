@@ -65,5 +65,9 @@ class Declaracao_model extends CI_Model{
           group by t.nm_tipo_atividade")->result_array();
     }
 
+    public function buscaDetalhesValidacao($id_declaracao){
+        return $this->db->query("SELECT * FROM tb_ctrl_dec WHERE id_declaracao = {$id_declaracao}")->result_array();
+    }
+
 }
 

@@ -154,6 +154,51 @@ class Declaracao extends CI_Controller{
             return false;
         }
     }
+
+    public function imprimirDeclaracao($declaracaoId){
+        $this->load->model('Declaracao_model');
+        $this->load->model('Aluno_model');
+        $this->load->model('Turma_model');
+        $this->load->model('Professor_model');
+        $this->load->model('Curso_model');
+        $this->load->model('TipoAtividade_model');
+        $this->load->model('Evento_model');
+
+        $declaracao = $this->Declaracao_model->buscaDeclaracaoCompleta($declaracaoId);
+        $ctrl_dec = $this->Declaracao_model->buscaDetalhesValidacao($declaracaoId);
+        $aluno = $this->Aluno_model->buscarAlunoId($declaracao['id_aluno']);
+        $professor = $this->Professor_model->buscaProfessor($ctrl_dec[0]['id_professor']);
+        $turma = $this->Turma_model->buscarTurmaId($aluno['id_turma']);
+        $curso = $this->Curso_model->buscaCurso($turma['id_curso']);
+        $tipoAtividade = $this->TipoAtividade_model->buscarTipoAtividade($declaracao['id_tipo_atividade']);
+
+        if($declaracao['id_evento'] != null){
+            $evento = $this->Evento_model->buscaEventoPorId($declaracao['id_evento']);
+
+            $dados = array(
+                "declaracao"=> $declaracao,
+                "ctrl_dec" => $ctrl_dec,
+                "aluno" => $aluno,
+                "professor" => $professor,
+                "turma" => $turma,
+                "curso" => $curso,
+                "tipoAtividade" => $tipoAtividade,
+                "evento" => $evento
+            );
+        }else{
+            $dados = array(
+                "declaracao"=> $declaracao,
+                "ctrl_dec" => $ctrl_dec,
+                "aluno" => $aluno,
+                "professor" => $professor,
+                "turma" => $turma,
+                "curso" => $curso,
+                "tipoAtividade" => $tipoAtividade
+            );
+        }
+
+        $this->load->view('declaracao/imprimir_declaracao',$dados);
+    }
     //Metodos de validação
     public function validaExterno(){
         $this->load->library("form_validation");

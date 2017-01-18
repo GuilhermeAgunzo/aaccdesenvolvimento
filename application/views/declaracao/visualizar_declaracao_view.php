@@ -1,5 +1,5 @@
 <?php
-echo form_fieldset("<h1>Minhas Declarações</h1>");
+echo form_fieldset("<h1>Meus Relatórios</h1>");
 
 if ($aluno['total_geral_hora'] == 0)
     $mensagem = "Você ainda não possui horas aprovadas na disciplina de AACC";
@@ -26,8 +26,8 @@ if(!empty($declaracoes)){ ?>
         <?php
         foreach ($horas as $hora) {
             echo "<tr>";
-                echo "<td class=''>{$hora['nm_tipo_atividade']}</td>";
-                echo "<td class=''>{$hora['total_hora_atividade']}</td>";
+            echo "<td class=''>{$hora['nm_tipo_atividade']}</td>";
+            echo "<td class=''>{$hora['total_hora_atividade']}</td>";
             echo "</tr>";
         }
         echo "<td style='font-weight: bold'>Total Geral</td>";
@@ -35,29 +35,39 @@ if(!empty($declaracoes)){ ?>
         ?>
     </table>
     <p style="margin-bottom: 30px; margin-top: 30px">Selecione a declaracao para ver os detalhes:</p>
+
     <?php
     foreach ($declaracoes as $declaracao) {
-         $declaracao['dt_declaracao'] = dataMysqlParaPtBr($declaracao['dt_declaracao']);
-         $declaracao['dt_aprovacao_doc'] = dataMysqlParaPtBr($declaracao['dt_aprovacao_doc']);
+        $declaracao['dt_declaracao'] = date('d/m/Y',  strtotime($declaracao['dt_declaracao']));
+        $declaracao['dt_aprovacao_doc'] = date('d/m/Y',  strtotime($declaracao['dt_aprovacao_doc']));
         if($declaracao['status_declaracao'] == "1"){
             $declaracao['status_declaracao'] = "Deferido";
             $mensagem = "Data da Aprovação: ".$declaracao['dt_aprovacao_doc'];
         }
         ?>
+
         <div id="resumo_declaracao">
-            <div name="dec" style="cursor: pointer" class="declaracao  alert-success" id="<?= $declaracao['id_declaracao']?>" >
-                <span class="col-md-4"><?= $declaracao['status_declaracao'] ?> </span>
-                <span class="col-md-4">Data de cadastro: <?= $declaracao['dt_declaracao'] ?> </span>
-                <span class="col-md-4"><?= $mensagem ?></span>
+            <div name="dec" style="cursor: pointer" class="declaracao" id="<?= $declaracao['id_declaracao']?>" >
+                <span class="col-md-2">Arquivo: <?= $declaracao['arquivo_declaracao'] ?> </span>
+                <span class="col-md-2">Status: <br/><?= $declaracao['status_declaracao'] ?> </span>
+                <span class="col-md-3">Data de cadastro: <?= $declaracao['dt_declaracao'] ?> </span>
+                <span class="col-md-3"><?= $mensagem ?></span>
+            </div>
+            <div>
+                <?php
+                $endecoprint = base_url('index.php/declaracao/imprimirDeclaracao/'.$declaracao['id_declaracao']);
+                echo form_button(array("class" => "btn btn-default", "content" => "Imprimir Relatório", "onClick" => "varWindow = window.open ('{$endecoprint}','imprimir','width=1024, height=655, top=10, left=110, scrollbars=no');"))
+                ?>
             </div>
         </div>
+
     <?php }
     $atributos = array('id' => 'form_dec');
     echo form_open('declaracao/visualizarDetalhes', $atributos);
     echo form_input(array("name" => "id_dec", "id" => "id_dec" ,"type" => "hidden"));
     echo form_close();
     ?>
-<?php }else echo "<h2 class='text-center'>Não há declarações</h2>" ?>
+<?php }else echo "<h2 class='text-center'>Não há relatórios</h2>" ?>
 </div>
 </div>
 <script>
