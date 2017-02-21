@@ -2,7 +2,7 @@
 
             echo form_fieldset("<h1>Validação de AACC's</h1>");
             $atributos = array('class' => 'form-horizontal');
-            echo form_open('', $atributos);
+            echo form_open('relatorioAacc/alunos2', $atributos);
 
             echo "<div class='row'>";
             echo form_label("Unidade", "id_unidade", array("class" => "col-sm-2 control-label"));

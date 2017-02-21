@@ -80,10 +80,10 @@ class Declaracao extends CI_Controller{
 
         $anexo = $_FILES['anexo'];
         $this->load->model("Aluno_model");
+        $usuarioLogado = $this->session->userdata("usuario_logado");
+        $aluno = $this->Aluno_model-> buscarAlunoUsuario($usuarioLogado['id_usuario']);
         if($this->input->post("evento") == "1"){
             //if($this->validaExterno()){
-            $usuarioLogado = $this->session->userdata("usuario_logado");
-            $aluno = $this->Aluno_model-> buscarAlunoUsuario($usuarioLogado['id_usuario']);
             $declaracao = array(
                 "id_tipo_atividade" => $this->input->post("atividade"),
                 "dt_evento_externo" => $this->input->post("data"),
@@ -106,7 +106,7 @@ class Declaracao extends CI_Controller{
                     "arquivo_declaracao" => $anexo['name'],
                     "status_declaracao" => 0,
                     "dt_declaracao" => mdate("%Y-%m-%d %H:%i:%s", time()),
-                    "id_aluno" => $usuarioLogado['id_usuario']);
+                    "id_aluno" => $aluno['id_aluno']);
             }else{
                 // redirect("/declaracao/cadastra_declaracao");
             }

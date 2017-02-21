@@ -1,6 +1,6 @@
 <?php
-echo form_close();
-echo form_open('relatorioAacc/alunos2', 'class = form-horizontal');
+//echo form_close();
+//echo form_open('relatorioAacc/alunos2', 'class = form-horizontal');
 
     echo "<div class='row'>";
     echo form_label("Status da Declaração", "id_statusDeclaracao", array("class" => "col-sm-2 control-label"));

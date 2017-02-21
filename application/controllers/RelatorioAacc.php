@@ -206,7 +206,7 @@ class RelatorioAacc extends CI_Controller{
             "alunosTodos" => $alunosTodos,
             "id_turma" => $id_turma,
         );
-        $this->load->view("aluno/dropdown_status_declaracao", $dados);
+        $this->load->view("aluno/dropdown_status_declaracao.php", $dados);
     }
 
     /**
@@ -225,8 +225,8 @@ class RelatorioAacc extends CI_Controller{
             );
         }else{
             $this->session->set_flashdata("danger", "Selecione um Status.");
-            $this->load->view("aluno/dropdown_status_declaracao.php");
-           // redirect('/aluno/dropdown_status_declaracao');
+            $this->load->view("aluno/dropdown_status_declaracao.php.php");
+           // redirect('/aluno/dropdown_status_declaracao.php');
         }
         $this->load->template_admin("aluno/lista_declaracao_alunos",$dados);
 
@@ -243,7 +243,7 @@ class RelatorioAacc extends CI_Controller{
         $this->load->template_admin("aluno/lista_declaracao_alunos_selecionados", $dados);
     }
     public function exibeDeclaracaoCompleta($id_declaracao){
-        //autoriza(2);
+        autoriza(2);
         $this->load->model("declaracao_model");
         $declaracaoCompleta = $this->declaracao_model->buscaDeclaracaoCompleta($id_declaracao);
         $motivoIdIndeferimento = $this->declaracao_model->buscaIdMotivoIndeferimento();

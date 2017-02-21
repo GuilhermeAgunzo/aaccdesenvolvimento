@@ -50,33 +50,31 @@ if(isset($declaracaoCompleta)) {
         echo "</tr>";
         echo "</thead>";
         echo "<tbody>";
-        foreach ($declaracaoCompleta as $declaracao) {
+
                 echo "<tr>";
-                echo "<td>" . $declaracao['resumo_atividade'] . "</td>";
-                echo "<td>" . $declaracao['qt_horas_atividade'] . "</td>";
-                echo "<td>" . $declaracao['dt_evento_externo'] . "</td>";
-                echo "<td>" . $declaracao['local_evento_externo'] . "</td>";
-                echo "<td>" . $declaracao['ds_evento_externo'] . "</td>";
-                echo form_hidden("id_aluno", $declaracao["id_aluno"]);
-                echo form_hidden("id_declaracao", $declaracao["id_declaracao"]);
-                echo form_hidden("id_tipo_atividade", $declaracao["id_tipo_atividade"]);
-                if ($declaracao['status_declaracao'] == 1) {
+                echo "<td>" . $declaracaoCompleta['resumo_atividade'] . "</td>";
+                echo "<td>" . $declaracaoCompleta['qt_horas_atividade'] . "</td>";
+                echo "<td>" . $declaracaoCompleta['dt_evento_externo'] . "</td>";
+                echo "<td>" . $declaracaoCompleta['local_evento_externo'] . "</td>";
+                echo "<td>" . $declaracaoCompleta['ds_evento_externo'] . "</td>";
+                echo form_hidden("id_aluno", $declaracaoCompleta["id_aluno"]);
+                echo form_hidden("id_declaracao", $declaracaoCompleta["id_declaracao"]);
+                echo form_hidden("id_tipo_atividade", $declaracaoCompleta["id_tipo_atividade"]);
+                if ($declaracaoCompleta['status_declaracao'] == 1) {
                         echo "<td>" . 'Pendente' . "</td>";
 
                 }
                 echo "</tr>";
-        }
+
         echo "</tbody>";
         echo "</table>";
         echo "</div>";
 }
         echo form_open('relatorioAacc/validarRelatorioAacc', array('class' => 'form-horizontal', 'id' => ''));
+        echo form_hidden("id_aluno", $declaracaoCompleta["id_aluno"]);
+        echo form_hidden("id_declaracao", $declaracaoCompleta["id_declaracao"]);
+        echo form_hidden("id_tipo_atividade", $declaracaoCompleta["id_tipo_atividade"]);
 
-        foreach ($declaracaoCompleta as $declaracao) {
-                echo form_hidden("id_aluno", $declaracao["id_aluno"]);
-                echo form_hidden("id_declaracao", $declaracao["id_declaracao"]);
-                echo form_hidden("id_tipo_atividade", $declaracao["id_tipo_atividade"]);
-        }
         echo "<div class='row'>";
         echo "<div class='form-group' id='aprovacao'>";
         echo form_label("Não Aprovado", "aprovacao", array("class" => "col-sm-2 control-label"));
