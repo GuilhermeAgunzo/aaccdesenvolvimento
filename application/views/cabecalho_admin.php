@@ -50,33 +50,16 @@
             <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
                 <ul class="nav" id="side-menu">
                     <li class="">
-                        <a href="#"><i class="fa fa-book nav_icon"></i>Cadastro de  Aluno<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-book nav_icon"></i>Cadastro de Unidade<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
                             <li>
-                                <?=anchor(base_url('index.php/aluno/cadastro_aluno'), ' Cadastrar Aluno',array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                                <?=anchor(base_url('index.php/unidade/cadastrar_unidade'), ' Cadastrar Unidade', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
                             </li>
                             <li>
-                                <?=anchor(base_url('index.php/aluno/pesquisar_aluno'), ' Pesquisar Aluno',array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                                <?=anchor(base_url('index.php/unidade/pesquisar_unidade'), ' Pesquisar Unidade', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
                             </li>
                             <li>
-                                <?=anchor(base_url('index.php/aluno/alterar_aluno'), ' Alterar Aluno', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
-                            </li>
-                            <li>
-                                <?=anchor(base_url('index.php/aluno/desativar_cadastro'), ' Desativar Aluno', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="">
-                        <a href="#"><i class="fa fa-book nav_icon"></i>Cadastro de Avisos<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li>
-                                <?=anchor(base_url('index.php/aviso/cadastrar_aviso/'), ' Cadastrar Avisos',array('class'=>'', 'id'=>'', 'title'=>'')); ?>
-                            </li>
-                            <li>
-                                <?=anchor(base_url('index.php/aviso/pesquisar_aviso/'), ' Pesquisar Avisos', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
-                            </li>
-                            <li>
-                                <?=anchor(base_url('index.php/aviso/alterar_aviso/'), ' Alterar Avisos',array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                                <?=anchor(base_url('index.php/unidade/alterar_unidade'), ' Alterar Unidade', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
                             </li>
                         </ul>
                     </li>
@@ -95,30 +78,16 @@
                         </ul>
                     </li>
                     <li class="">
-                        <a href="#"><i class="fa fa-book nav_icon"></i>Cadastro de Evento<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-book nav_icon"></i>Cadastro de Turma<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
                             <li>
-                                <?=anchor(base_url('index.php/evento/cadastrar_evento'), ' Cadastrar Evento', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                                <?=anchor(base_url('index.php/turma/cadastrar_turma'), ' Cadastrar Turma', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
                             </li>
                             <li>
-                                <?=anchor(base_url('index.php/evento/pesquisar_evento'), ' Pesquisar Evento', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                                <?=anchor(base_url('index.php/turma/pesquisar_turma'), ' Pesquisar Turma', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
                             </li>
                             <li>
-                                <?=anchor(base_url('index.php/evento/alterar_evento'), ' Alterar Evento',array('class'=>'', 'id'=>'', 'title'=>'')); ?>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="">
-                        <a href="#"><i class="fa fa-book nav_icon"></i>Cadastro Motivo Indeferimento<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li>
-                                <?=anchor(base_url('index.php/indeferimento/cadastrar_indeferimento'), ' Cadastrar Motivo do Indeferimento', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
-                            </li>
-                            <li>
-                                <?=anchor(base_url('index.php/indeferimento/pesquisar_indeferimento'), ' Pesquisar Motivo do Indeferimento', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
-                            </li>
-                            <li>
-                                <?=anchor(base_url('index.php/indeferimento/alterar_indeferimento'), ' Alterar Motivo do Indeferimento', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                                <?=anchor(base_url('index.php/turma/alterar_turma'), ' Alterar Turma', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
                             </li>
                         </ul>
                     </li>
@@ -140,16 +109,19 @@
                         </ul>
                     </li>
                     <li class="">
-                        <a href="#"><i class="fa fa-book nav_icon"></i>Cadastro de Turma<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-book nav_icon"></i>Cadastro de  Aluno<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
                             <li>
-                                <?=anchor(base_url('index.php/turma/cadastrar_turma'), ' Cadastrar Turma', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                                <?=anchor(base_url('index.php/aluno/cadastro_aluno'), ' Cadastrar Aluno',array('class'=>'', 'id'=>'', 'title'=>'')); ?>
                             </li>
                             <li>
-                                <?=anchor(base_url('index.php/turma/pesquisar_turma'), ' Pesquisar Turma', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                                <?=anchor(base_url('index.php/aluno/pesquisar_aluno'), ' Pesquisar Aluno',array('class'=>'', 'id'=>'', 'title'=>'')); ?>
                             </li>
                             <li>
-                                <?=anchor(base_url('index.php/turma/alterar_turma'), ' Alterar Turma', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                                <?=anchor(base_url('index.php/aluno/alterar_aluno'), ' Alterar Aluno', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                            </li>
+                            <li>
+                                <?=anchor(base_url('index.php/aluno/desativar_cadastro'), ' Desativar Aluno', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
                             </li>
                         </ul>
                     </li>
@@ -168,21 +140,49 @@
                         </ul>
                     </li>
                     <li class="">
-                        <a href="#"><i class="fa fa-book nav_icon"></i>Cadastro de Unidade<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-book nav_icon"></i>Cadastro de Eventos<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
                             <li>
-                                <?=anchor(base_url('index.php/unidade/cadastrar_unidade'), ' Cadastrar Unidade', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                                <?=anchor(base_url('index.php/evento/cadastrar_evento'), ' Cadastrar Evento', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
                             </li>
                             <li>
-                                <?=anchor(base_url('index.php/unidade/pesquisar_unidade'), ' Pesquisar Unidade', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                                <?=anchor(base_url('index.php/evento/pesquisar_evento'), ' Pesquisar Evento', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
                             </li>
                             <li>
-                                <?=anchor(base_url('index.php/unidade/alterar_unidade'), ' Alterar Unidade', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                                <?=anchor(base_url('index.php/evento/alterar_evento'), ' Alterar Evento',array('class'=>'', 'id'=>'', 'title'=>'')); ?>
                             </li>
                         </ul>
                     </li>
                     <li class="">
-                        <a href="#"><i class="fa fa-group nav_icon"></i>Assuntos Referentes aos Alunos<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-book nav_icon"></i>Cadastro de Avisos<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li>
+                                <?=anchor(base_url('index.php/aviso/cadastrar_aviso/'), ' Cadastrar Avisos',array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                            </li>
+                            <li>
+                                <?=anchor(base_url('index.php/aviso/pesquisar_aviso/'), ' Pesquisar Avisos', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                            </li>
+                            <li>
+                                <?=anchor(base_url('index.php/aviso/alterar_aviso/'), ' Alterar Avisos',array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="">
+                        <a href="#"><i class="fa fa-book nav_icon"></i>Cadastro Motivo Indeferimento<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li>
+                                <?=anchor(base_url('index.php/indeferimento/cadastrar_indeferimento'), ' Cadastrar Motivo do Indeferimento', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                            </li>
+                            <li>
+                                <?=anchor(base_url('index.php/indeferimento/pesquisar_indeferimento'), ' Pesquisar Motivo do Indeferimento', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                            </li>
+                            <li>
+                                <?=anchor(base_url('index.php/indeferimento/alterar_indeferimento'), ' Alterar Motivo do Indeferimento', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="">
+                        <a href="#"><i class="fa fa-group nav_icon"></i>Gerenciar Horas Alunos<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
                             <li>
                                 <?=anchor(base_url('index.php/aluno/controle_entrega_declaracao_aluno/'), 'Controle de Entrega das Declarações de Alunos', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
@@ -205,7 +205,7 @@
                         </ul>
                     </li>
                     <li class="">
-                        <a href="#"><i class="fa fa-file-text-o nav_icon"></i>Documentos Secretaria<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-file-text-o nav_icon"></i>Gerenciar Documentos da secretaria<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
                             <li>
                                 <?=anchor(base_url('index.php/professor/relatorio_protocolo_entregas/'), 'Relatório de Protocolo de Entregas', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
