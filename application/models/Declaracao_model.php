@@ -33,7 +33,7 @@ class Declaracao_model extends CI_Model{
     }
     public function buscaDeclaracoesAprovadas($id_aluno){
         //return $this->db->query("SELECT * from tb_declaracao where status_declaracao = 1 and id_aluno = $id_aluno")->result_array();
-        return $this->db->query("SELECT d.dt_declaracao,d.status_declaracao, d.id_declaracao, ctrl.dt_aprovacao_doc from tb_declaracao d, tb_ctrl_dec ctrl where d.id_declaracao = ctrl.id_declaracao and status_declaracao = 1 and d.id_aluno = $id_aluno")->result_array();
+        return $this->db->query("SELECT d.dt_declaracao,d.status_declaracao, d.arquivo_declaracao, d.id_declaracao, ctrl.dt_aprovacao_doc from tb_declaracao d, tb_ctrl_dec ctrl where d.id_declaracao = ctrl.id_declaracao and status_declaracao = 1 and d.id_aluno = $id_aluno")->result_array();
     }
 
     public function buscaDeclaracaoCompleta($id_declaracao){

@@ -28,7 +28,7 @@
     echo "<div class='form-group'>";
     echo form_label("Professor", "professor", array("class" => "col-sm-2 control-label"));
     echo "<div class='col-sm-10'>";
-    echo form_input(array("name" => "txtProfessor", "id" => "txtProfessor" ,"class" => "form-control","Disabled" => "Disabled"));
+    echo form_input(array("name" => "txtProfessor", "id" => "txtProfessor" ,"class" => "form-control","value" => set_value("txtProfessor", $professor['nm_professor']), "Disabled" => "Disabled"));
     echo "</div>";
     echo "</div>";
 

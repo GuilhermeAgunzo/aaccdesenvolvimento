@@ -28,6 +28,9 @@ class Professor_model extends CI_Model{
         return $this->db->get("tb_professor")->result_array();
 
     }
+    public function buscaProfessorCurso($idAluno){
+        return $this->db->query("SELECT * FROM tb_professor p, tb_curso c, tb_turma t, tb_aluno a WHERE p.id_curso = c.id_curso and c.id_curso = t.id_curso and t.id_turma = a.id_turma and a.id_aluno = $idAluno")->row_array();
+    }
 
     public function alteraProfessor($id_professor,$professor){
         $this->db->where("id_professor", $id_professor);
