@@ -260,6 +260,7 @@ class RelatorioAacc extends CI_Controller{
         autoriza(2);
         $this->load->helper("date");
         $this->load->model("declaracao_model");
+        $this->load->model("TotalDeHoras_model");
         $this->load->library('usuariolb');
         $this->load->library("form_validation");
         $usuarioLogado = $this->session->userdata("usuario_logado");
@@ -305,7 +306,8 @@ class RelatorioAacc extends CI_Controller{
         $status = $this->input->post("aprovacao");
         $this->declaracao_model->salvaDeclaracaoValidada($declaracaoValidada);
         $this->declaracao_model->validaDeclaracao($status,$id_declaracao);
-        $this->session->set_flashdata("success", "ValidaÃ§Ã£o Efetuada com Sucesso!");
+        $this->TotalDeHoras_model->somaHoras($id_aluno,$id_tipoAtividade);
+        $this->session->set_flashdata("success", "Validação Efetuada com Sucesso!");
         $this->load->template_admin('aluno/lista_declaracao_alunos',$id_aluno);
     }
 
