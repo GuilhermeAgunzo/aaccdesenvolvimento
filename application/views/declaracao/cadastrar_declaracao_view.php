@@ -1,5 +1,4 @@
 <?php
-$usuario = $dadosUsuario;
 echo form_fieldset("<h1>Cadastrar Declaração</h1>");
 echo "<div class='row'>";
 $atributos = array('class' => 'form-horizontal');
@@ -7,14 +6,14 @@ echo form_open_multipart('declaracao/cadastrar_declaracao', $atributos);
 echo "<div class='form-group'>";
 echo form_label("Nome", "nome", array("class" => "col-sm-2 control-label"));
 echo "<div class='col-sm-10'>";
-echo form_input(array("name" => "txtNome", "id" => "txtNome" ,"class" => "form-control","value" => set_value("txtNome", $usuario['dadosUsuario']['nm_aluno']), "Disabled" => "Disabled"));
+echo form_input(array("name" => "txtNome", "id" => "txtNome" ,"class" => "form-control","value" => set_value("txtNome", $aluno['nm_aluno']), "Disabled" => "Disabled"));
 
 echo "</div>";
 echo "</div>";
 echo "<div class='form-group'>";
 echo form_label("Semestre", "semestre", array("class" => "col-sm-2 control-label"));
 echo "<div class='col-sm-6'>";
-echo form_input(array("name" => "txtSemestre", "id" => "txtSemestre" ,"class" => "form-control","value" => set_value("txtSemestre", $usuario['dadosUsuario']['dt_semestre']."º Semestre"),"Disabled" => "Disabled"));
+echo form_input(array("name" => "txtSemestre", "id" => "txtSemestre" ,"class" => "form-control","value" => set_value("txtSemestre", $turma['dt_semestre']."º Semestre"),"Disabled" => "Disabled"));
 echo "</div>";
 echo "</div>";
 echo "<div class='form-group'>";
@@ -26,13 +25,13 @@ echo "</div>";
 echo "<div class='form-group'>";
 echo form_label("Professor", "professor", array("class" => "col-sm-2 control-label"));
 echo "<div class='col-sm-10'>";
-echo form_input(array("name" => "txtProfessor", "id" => "txtProfessor" ,"class" => "form-control","Disabled" => "Disabled"));
+echo form_input(array("name" => "txtProfessor", "id" => "txtProfessor" ,"class" => "form-control", "value" => set_value("txtProfessor", $professor['nm_professor']),"Disabled" => "Disabled"));
 echo "</div>";
 echo "</div>";
 echo "<div class='form-group'>";
 echo form_label("Email:", "email", array("class" => "col-sm-2 control-label"));
 echo "<div class='col-sm-8'>";
-echo form_input(array("name" => "txtEmail", "id" => "txtEmail" ,"class" => "form-control" ,"value" => set_value("txtEmail", $usuario['dadosUsuario']['nm_email']),"Disabled" => "Disabled"));
+echo form_input(array("name" => "txtEmail", "id" => "txtEmail" ,"class" => "form-control" ,"value" => set_value("txtEmail", $aluno['nm_email']),"Disabled" => "Disabled"));
 echo "</div>";
 echo "</div>";
 echo "</br>"."</br>"."</br>";
