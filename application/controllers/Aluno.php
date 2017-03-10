@@ -456,14 +456,31 @@ class Aluno extends CI_Controller{
     /**
      * @param $id_unidade
      */
-    public function turma($id_unidade){
+
+    public function curso($id_unidade){
+        //autoriza(2);
+        $this->load->model("curso_model");
+        $dropDownCurso = $this->curso_model->dropDownCursoUnidade($id_unidade);
+        $dados = array("dropDownCurso" => $dropDownCurso);
+
+        $this->load->view("aluno/dropdown_curso", $dados);
+    }
+
+    public function turma($id_curso){
         autoriza(2);
+        /*
         $this->load->model("turma_model");
-        $dropDownTurma = $this->turma_model->dropDownTurmaUnidade($id_unidade);
+        $dropDownTurma = $this->turma_model->dropDownTurmaCurso($id_curso);
         $dados = array("dropDownTurma" => $dropDownTurma);
 
         $this->load->view("aluno/dropdown_turma", $dados);
+        */
 
+        $this->load->model("turma_model");
+        $dropDownTurma = $this->turma_model->dropDownTurmaCurso($id_curso);
+        $dados = array("dropDownTurma" => $dropDownTurma);
+
+        $this->load->view("aluno/dropdown_turma", $dados);
     }
 
     /**
