@@ -161,7 +161,7 @@ class curso extends CI_Controller{
         $mensagem_codigo_curso = array(
             'is_unique' => 'Já existe um curso cadastrado com este Código.'
         );
-        $this->form_validation->set_rules('cpf', 'CPF', 'valid_cpf');
+        //$this->form_validation->set_rules('cpf', 'CPF', 'valid_cpf');
         $this->form_validation->set_rules("abreviacao_curso", "Abreviação", "required|max_length[10]|is_unique[tb_curso.nm_abreviacao]", $mensagem_abreviacao);
         $this->form_validation->set_rules("nome_curso", "Nome do curso", "required|max_length[70]|is_unique[tb_curso.nm_curso]", $mensagem_nome_curso);
         $this->form_validation->set_rules("codigo_curso", "Código do curso", "required|max_length[20]|numeric|is_natural|is_unique[tb_curso.cd_curso]", $mensagem_codigo_curso);
