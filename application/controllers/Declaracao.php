@@ -112,7 +112,7 @@ class Declaracao extends CI_Controller{
                 "ds_evento_externo" => $this->input->post("txtDescricaoEvento"),
                 "resumo_atividade" => $this->input->post("resumo"),
                 "arquivo_declaracao" => $anexo['name'],
-                "status_declaracao" => 0,
+                "status_declaracao" => 1,
                 "dt_declaracao" => mdate("%Y-%m-%d %H:%i:%s", time()),
                 "id_aluno" => $aluno['id_aluno']);
         }else if($this->input->post("evento") == "0"){
