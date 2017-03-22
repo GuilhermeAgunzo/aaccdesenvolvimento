@@ -64,3 +64,28 @@ echo form_fieldset("<h1>Cadastro de Professor</h1>");
 
     echo form_close();
 ?>
+<script type="text/javascript">
+    function confirma(){
+        return confirm("Confirmar informações e enviar?");
+    }
+
+    var url = "<?= base_url() ?>" + "index.php/Curso/buscaCursosByUnidade";
+    function busca_cursos(id_unidade){
+
+        $('#turmas').empty().append('<option selected="selected" value="">---</option>');
+        $.post(url, {
+            id_unidade : id_unidade
+        }, function(data){
+            $('#cursos').html(data);
+        })
+    }
+
+    var urlTurma = "<?= base_url()?>" + "index.php/Turma/buscaTurmasByCurso"
+    function busca_turmas(id_curso){
+        $.post(urlTurma, {
+            id_curso : id_curso
+        }, function(data){
+            $('#turmas').html(data);
+        })
+    }
+</script>
