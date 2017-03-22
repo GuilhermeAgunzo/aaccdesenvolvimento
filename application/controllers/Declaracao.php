@@ -114,7 +114,8 @@ class Declaracao extends CI_Controller{
                 "arquivo_declaracao" => $anexo['name'],
                 "status_declaracao" => 1,
                 "dt_declaracao" => mdate("%Y-%m-%d %H:%i:%s", time()),
-                "id_aluno" => $aluno['id_aluno']);
+                "id_aluno" => $aluno['id_aluno'],
+                "id_turma" => $aluno['id_turma']);
         }else if($this->input->post("evento") == "0"){
             if($this->validaInterno()){
                 $usuarioLogado = $this->session->userdata("usuario_logado");
@@ -123,9 +124,10 @@ class Declaracao extends CI_Controller{
                     "id_evento" => $this->input->post("eventoInterno"),
                     "resumo_atividade" => $this->input->post("resumo"),
                     "arquivo_declaracao" => $anexo['name'],
-                    "status_declaracao" => 0,
+                    "status_declaracao" => 1,
                     "dt_declaracao" => mdate("%Y-%m-%d %H:%i:%s", time()),
-                    "id_aluno" => $aluno['id_aluno']);
+                    "id_aluno" => $aluno['id_aluno'],
+                    "id_turma" => $aluno['id_turma']);
             }else{
                 // redirect("/declaracao/cadastra_declaracao");
             }
