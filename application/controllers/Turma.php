@@ -213,9 +213,9 @@ class Turma extends CI_Controller{
 
         if($cadastrar){
             $this->form_validation->set_rules("unidade", "unidade", "required", $mensagem);
-            $this->form_validation->set_rules("cd_mat_turma", "cd_mat_turma", "required|is_natural|is_unique[tb_turma.cd_mat_turma]", $mensagem);
+            $this->form_validation->set_rules("cd_mat_turma", "cd_mat_turma", "required|is_unique[tb_turma.cd_mat_turma]", $mensagem);
         }else{
-            $this->form_validation->set_rules("cd_mat_turma", "cd_mat_turma", "required|is_natural", $mensagem);
+            $this->form_validation->set_rules("cd_mat_turma", "cd_mat_turma", "required", $mensagem);
         }
 
         $this->form_validation->set_rules("modalidade", "modalidade", "required", $mensagem);
