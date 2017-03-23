@@ -50,14 +50,14 @@ if(isset($curso) && isset($alunos)){
     echo "</thead>";
 
     foreach($alunos as $aluno){
+        echo "<tr>";
+        echo "<td>".$aluno['nm_aluno']."</td>";
+        echo "<td style='text-align: center'>".$aluno['total_geral_hora']."</td>";
         if($aluno['total_geral_hora'] >= $curso['qt_horas_aacc']){
             $endecoprint = base_url('index.php/aluno/declaracaoFinal/'.$aluno['id_aluno']);
-            echo "<tr>";
-            echo "<td>".$aluno['nm_aluno']."</td>";
-            echo "<td style='text-align: center'>".$aluno['total_geral_hora']."</td>";
             echo "<td>".form_button(array("class" => "btn btn-default", "content" => "Imprimir declaração", "onClick" => "varWindow = window.open ('{$endecoprint}','imprimir','width=1024, height=655, top=10, left=110, scrollbars=no');"))."</td>";
-            echo "</tr>";
         }
+        echo "</tr>";
     }
     echo "</table>";
     echo "</div>";
