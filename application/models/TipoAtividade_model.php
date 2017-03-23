@@ -18,7 +18,7 @@ class TipoAtividade_model extends CI_Model{
 
     public function alterarTipoAtividade($tipoAtividade){
         $this->db->where('id_tipo_atividade', $tipoAtividade['id_tipo_atividade']);
-        $this->db->update('tb_tipos_atividade', $tipoAtividade);
+        return $this->db->update('tb_tipos_atividade', $tipoAtividade);
     }
 
     public function dropDownAtividade(){

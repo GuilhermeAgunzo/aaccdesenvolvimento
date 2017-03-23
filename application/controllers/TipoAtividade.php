@@ -92,6 +92,7 @@ class tipoAtividade extends CI_Controller{
         $tipoAtividade = array(
             'id_tipo_atividade' => $this->input->post("txt_id_tipo_atividade"),
             'nm_tipo_atividade' => $this->input->post("txt_nm_tipo_atividade"),
+            'qt_estimada_horas_atividade' => $this->input->post("qtEstimadaHoras"),
             'id_user_adm_cadastrou' => $usuarioLogado['id_usuario'],
             'dt_cadastro' => mdate("%Y-%m-%d %H:%i:%s", time()),
         );
@@ -100,13 +101,15 @@ class tipoAtividade extends CI_Controller{
 
         if($this->_validaFormulario(true)){
             $this->load->model("TipoAtividade_model");
-            $this->TipoAtividade_model->alterarTipoAtividade($tipoAtividade);
-
-            $this->session->set_flashdata("success", "Alteração efetuada com sucesso.");
-            $this->load->template_admin("tipoAtividade/alterar_tipoAtividade", $dados);
-
+            if ($this->TipoAtividade_model->alterarTipoAtividade($tipoAtividade)){
+                $this->session->set_flashdata("success", "Alteração efetuada com sucesso.");
+                $this->load->template_admin("tipoAtividade/alterar_tipoAtividade", $dados);
+            }else{
+                $this->session->set_flashdata("danger", "O Tipo de Atividade não foi alterado.");
+                $this->load->template_admin("tipoAtividade/alterar_tipoAtividade", $dados);
+            }
         }else{
-            $this->session->set_flashdata("danger", "O Tipo de Atividade não foi alterado.");
+            $this->session->set_flashdata("danger", "Preencha os campos corretamente.");
             $this->load->template_admin("tipoAtividade/alterar_tipoAtividade", $dados);
         }
     }
