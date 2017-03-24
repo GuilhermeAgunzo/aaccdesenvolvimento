@@ -1,4 +1,7 @@
 <?php
+/*echo "<pre>";
+print_r($declaracoes);
+echo "</pre>";*/
 echo form_fieldset("<h1>Meus Relatórios</h1>");
 
 if ($aluno['total_geral_hora'] == 0)
@@ -34,39 +37,52 @@ if(!empty($declaracoes)){ ?>
         echo "<td>{$aluno['total_geral_hora']}</td>"
         ?>
     </table>
-    <p style="margin-bottom: 30px; margin-top: 30px">Selecione a declaracao para ver os detalhes:</p>
+    <p style="margin-bottom: 30px; margin-top: 30px; font-size: 20px">Selecione a declaracao para ver os detalhes:</p>
 
+    <table class="table-responsive table-striped table-bordered">
+        <tr class="info">
+            <th>Arquivo</th>
+            <th>Status</th>
+            <th>Data de Cadastro</th>
+            <th>Detalhes</th>
+            <th>Impressão</th>
+        </tr>
     <?php
     foreach ($declaracoes as $declaracao) {
         $declaracao['dt_declaracao'] = date('d/m/Y',  strtotime($declaracao['dt_declaracao']));
-        $declaracao['dt_aprovacao_doc'] = date('d/m/Y',  strtotime($declaracao['dt_aprovacao_doc']));
+        //$declaracao['dt_aprovacao_doc'] = date('d/m/Y',  strtotime($declaracao['dt_aprovacao_doc']));
         if($declaracao['status_declaracao'] == "1"){
-            $declaracao['status_declaracao'] = "Deferido";
-            $mensagem = "Data da Aprovação: ".$declaracao['dt_aprovacao_doc'];
+            $declaracao['status_declaracao'] = "Pendente";
+        }else if($declaracao['status_declaracao'] == "2") {
+            $declaracao['status_declaracao'] = "Aprovada";
+        }else if ($declaracao['status_declaracao'] == "3") {
+            $declaracao['status_declaracao'] = "Não Aprovada";
         }
         ?>
 
-        <div id="resumo_declaracao">
-            <div name="dec" style="cursor: pointer" class="declaracao" id="<?= $declaracao['id_declaracao']?>" >
-                <span class="col-md-2">Arquivo: <?= $declaracao['arquivo_declaracao'] ?> </span>
-                <span class="col-md-2">Status: <br/><?= $declaracao['status_declaracao'] ?> </span>
-                <span class="col-md-3">Data de cadastro: <?= $declaracao['dt_declaracao'] ?> </span>
-                <span class="col-md-3"><?= $mensagem ?></span>
-            </div>
-            <div>
+        <tr id="resumo_declaracao">
+            <td class=".declaracao"><?= $declaracao['arquivo_declaracao'] ?></td>
+            <td class=".declaracao"><?= $declaracao['status_declaracao'] ?></td>
+            <td class=".declaracao"><?= $declaracao['dt_declaracao'] ?></td>
+            <td>
+                <?php
+                $atributos = array('id' => 'form_dec');
+                echo form_open('declaracao/visualizarDetalhes', $atributos);
+                echo form_button(array("class" => "btn btn-default .declaracao", "content" => "Detalhes", "type" => "submit"));
+                echo form_input(array("name" => "id_dec", "id" => "id_dec" ,"type" => "hidden", "value" => set_value("id_dec", $declaracao['id_declaracao'] )));
+                ?>
+            <td>
                 <?php
                 $endecoprint = base_url('index.php/declaracao/imprimirDeclaracao/'.$declaracao['id_declaracao']);
-                echo form_button(array("class" => "btn btn-default", "content" => "Imprimir Relatório", "onClick" => "varWindow = window.open ('{$endecoprint}','imprimir','width=1024, height=655, top=10, left=110, scrollbars=no');"))
+                echo form_button(array("class" => "btn btn-default", "content" => "Imprimir Relatório", "onClick" => "varWindow = window.open ('{$endecoprint}','imprimir','width=1024, height=655, top=10, left=110, scrollbars=no');"));
+                echo form_close();
                 ?>
-            </div>
-        </div>
+            </td>
+        </tr>
 
     <?php }
-    $atributos = array('id' => 'form_dec');
-    echo form_open('declaracao/visualizarDetalhes', $atributos);
-    echo form_input(array("name" => "id_dec", "id" => "id_dec" ,"type" => "hidden"));
-    echo form_close();
     ?>
+    </table>
 <?php }else echo "<h2 class='text-center'>Não há relatórios</h2>" ?>
 </div>
 </div>

@@ -27,7 +27,7 @@ class Declaracao extends CI_Controller{
         //montando matriz de informações que aparecerão na view cadastro_view
         $dados = array("tipoAtividade" => $tipoAtividade,"eventos" => $evento, "aluno" => $aluno, "professor" => $professor, "turma" => $turma);
         //carregando view e enviando os dados
-        $this->load->template_usuario_aluno("declaracao/cadastrar_declaracao_view", $dados);
+        $this->load->template_usuario_aluno("declaracao/cadastrar_declaracao", $dados);
     }
     public function visualiza_declaracao(){
         autoriza(1);
@@ -37,9 +37,9 @@ class Declaracao extends CI_Controller{
         $this->load->model("Aluno_model");
         $aluno = $this->Aluno_model->buscarAlunoUsuario($usuarioLogado['id_usuario']);
 
-        //Buscando todas as decarações do usuario atual
+        //Buscando todas as declarações do usuario atual
         $this->load->model("Declaracao_model");
-        $declaracoes = $this->Declaracao_model->buscaDeclaracoesAprovadas($aluno['id_aluno']);
+        $declaracoes = $this->Declaracao_model->getDeclaracoes($aluno['id_aluno']);
 
         //buscando dados do usuario
         $usuario = $this->Declaracao_model->getUsuario($usuarioLogado['id_usuario']);
@@ -57,7 +57,7 @@ class Declaracao extends CI_Controller{
         $dados = array("dadosUsuario" => $dadosUsuario, "declaracoes" => $declaracoes, "aluno" => $aluno, "horas" => $horasTipoAtividade, "horasNecessarias" => $horasNecessarias);
 
         //carregando view e enviando os dados
-        $this->load->template_usuario_aluno("declaracao/visualizar_declaracao_view", $dados);
+        $this->load->template_usuario_aluno("declaracao/pesquisar_declaracao", $dados);
     }
     public function visualizarDetalhes(){
 
@@ -92,7 +92,7 @@ class Declaracao extends CI_Controller{
         //montando matriz de informações que aparecerão na view cadastro_view
         $dados = array("dadosUsuario" => $dadosUsuario, "declaracao" => $declaracao, "tipoAtividade" => $tipoAtividade, "evento" => $evento, "professor" => $professor);
         //carregando view e enviando os dados
-        $this->load->template_usuario_aluno("declaracao/detalhes", $dados);
+        $this->load->template_usuario_aluno("declaracao/detalhes_declaracao", $dados);
     }
     //Metodos com operações em Banco de Dados
     public function cadastrar_declaracao(){
