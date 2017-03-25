@@ -58,6 +58,7 @@
             echo "<thead>";
             echo "<tr>";
             echo "<th>Nome</th>";
+            echo "<th>Curso</th>";
             echo "<th>Email</th>";
             echo "<th>Telefone</th>";
             echo "<th>Celular</th>";
@@ -70,6 +71,7 @@
             foreach ($professores as $professor){
                 echo "<tr>";
                 echo "<td>" . $professor["nm_professor"] . "</td>";
+                echo "<td>" . $cursos[$professor['id_curso']] . "</td>";
                 echo "<td>" . $professor["nm_email"] . "</td>";
                 echo "<td>" . $professor["cd_tel_residencial"] . "</td>";
                 echo "<td>" . $professor["cd_tel_celular"] . "</td>";

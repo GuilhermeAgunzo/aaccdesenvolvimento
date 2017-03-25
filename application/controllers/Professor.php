@@ -152,16 +152,24 @@ class Professor extends CI_Controller{
     public function pesquisaProfessores(){
         autoriza(2);
 
+        $cursos = array();
+
         $idUnidade = $this->input->post("Unidade");
 
         $opcao = $this->input->post("opcao");
-
         $this->load->model("professor_model");
         $this->load->model("unidade_model");
+        $this->load->model("curso_model");
         $professores = $this->professor_model->buscaProfessoresUnidade($idUnidade);
         $unidades = $this->unidade_model->buscaUnidades();
         $unidade = $this->unidade_model->buscarUnidadeId($idUnidade);
-        $dados = array("professores" => $professores,"unidades"=>$unidades, "unidade" => $unidade);
+
+        foreach ($professores as $professor){
+            $curso = $this->curso_model->buscaCurso($professor['id_curso']);
+            $cursos[$professor['id_curso']] = $curso['nm_abreviacao'];
+        }
+        array_unique($cursos);
+        $dados = array("professores" => $professores,"unidades"=>$unidades, "unidade" => $unidade, "cursos" => $cursos);
 
         if($opcao=='Pesquisar'){
             $this->load->template_admin("professor/pesquisar_professor.php",$dados);
