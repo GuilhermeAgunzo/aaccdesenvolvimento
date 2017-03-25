@@ -22,7 +22,9 @@ if(isset($declaracoes)) {
         echo "<tbody>";
         foreach ($declaracoes as $declaracao) {
             echo "<tr>";
-            echo "<td>".anchor("relatorioAacc/exibeDeclaracaoCompleta/{$declaracao["id_declaracao"]}",$declaracao["dt_evento_externo"], "class = ''")."</td>";
+                echo "<td>".anchor("relatorioAacc/exibeDeclaracaoCompleta/{$declaracao["id_declaracao"]}",$tiposAtividade[$declaracao['id_tipo_atividade']], "class = ''")."</td>";
+
+
         }
         echo "</tbody>";
         echo "</table>";
