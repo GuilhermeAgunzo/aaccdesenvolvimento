@@ -1,43 +1,66 @@
 <?php
-echo form_fieldset("<h1>Relatório de Eventos</h1>");
+
+echo form_fieldset("<h1> Relatório de Eventos </h1>");
 
 $atributos = array('class' => 'form-horizontal');
 
-echo form_open('RelatorioEvento/buscar', $atributos);
-echo "<div class='form-group'>";
-echo form_label("Data Inicial", "dataInicial", array("class" => "col-sm-2 control-label"));
-echo "<div class='col-sm-2'>";
-echo form_input(array('name' => 'dtEvento', 'id' => 'dataInicial',"required" => "required", 'type' => 'text', 'class' => 'form-control datepicker', "maxlength" => "8", "placeholder" => "dd/mm/aaaa"));
-echo form_error("dtEvento");
-echo "</div>";
-echo "</div>";
 
-echo "<div class='form-group'>";
-echo form_label("Data Final", "dataFinal", array("class" => "col-sm-2 control-label"));
-echo "<div class='col-sm-2'>";
-echo form_input(array('name' => 'dtFinalEvento', 'id' => 'dataInicial', "required" => "required", 'type' => 'text', 'class' => 'form-control datepicker', "maxlength" => "8", "placeholder" => "dd/mm/aaaa"));
-echo form_error("dtFinalEvento");
-echo "</div>";
-echo "</div>";
+//METODO ANTIGO DE BUSCA POR INTERVALO DE DATA
 
-echo "<div class='form-group'>";
-echo "<div class='col-sm-offset-2 col-sm-10'>";
-echo form_button(array("class" => "btn btn-default", "content" => "Enviar", "type" => "submit"));
-echo "</div>";
-echo "</div>";
-echo form_close();
+//echo form_open('RelatorioEvento/buscar', $atributos);
+//echo "<div class='form-group'>";
+//echo form_label("Data Inicial", "dataInicial", array("class" => "col-sm-2 control-label"));
+//echo "<div class='col-sm-2'>";
+//echo form_input(array('name' => 'dtEvento', 'id' => 'dataInicial',"required" => "required", 'type' => 'text', 'class' => 'form-control datepicker', "maxlength" => "8", "placeholder" => "dd/mm/aaaa"));
+//echo form_error("dtEvento");
+//echo "</div>";
+//echo "</div>";
+//
+//echo "<div class='form-group'>";
+//echo form_label("Data Final", "dataFinal", array("class" => "col-sm-2 control-label"));
+//echo "<div class='col-sm-2'>";
+//echo form_input(array('name' => 'dtFinalEvento', 'id' => 'dataInicial', "required" => "required", 'type' => 'text', 'class' => 'form-control datepicker', "maxlength" => "8", "placeholder" => "dd/mm/aaaa"));
+//echo form_error("dtFinalEvento");
+//echo "</div>";
+//echo "</div>";
+//
+//echo "<div class='form-group'>";
+//echo "<div class='col-sm-offset-2 col-sm-10'>";
+//echo form_button(array("class" => "btn btn-default", "content" => "Enviar", "type" => "submit"));
+//echo "</div>";
+//echo "</div>";
+//echo form_close();
 
 
 $atributos2 = array('class' => 'form-horizontal', 'Target' => '_blank');
+
+if(isset($unidades) && !isset($eventos)) {
+    echo form_open('RelatorioEvento/pesquisaEventos', $atributos);
+    echo "<div class='row'>";
+    echo form_label("Unidade", "unidade", array("class" => "col-md-2 control-label"));
+    echo "<div class='form-group col-md-3'>";
+    $unidades = array('' => "Selecione") + $unidades;
+    echo form_dropdown('Unidade', $unidades, "", array("class" => "form-control", "required" => "required"));
+    echo "</div>";
+    echo "<div class='col-md-2'>";
+    echo form_hidden("opcao", 'Pesquisar');
+
+    echo form_button(array("class" => "btn btn-default", "content" => "Buscar", "type" => "submit"));
+    echo anchor("temporario/administrador", "Cancelar", array("class" => "btn btn-default"));
+    echo "</div>";
+    echo "</div>";
+    echo form_close();
+}
 
 if($this->session->flashdata("danger")){
     echo "<p class='alert alert-danger'>". $this->session->flashdata("danger") ."</p>";
 }
 
 if(isset($eventos)){
+    echo form_fieldset("<h1>" . $nmUnidade . " </h1>");
+    echo form_fieldset("<h1>" . $nmEndereco . " - " . $cdNum . "</h1>");
     echo form_open('RelatorioEvento/pdf', $atributos2);
-    echo form_hidden('data_inicio',$data_inicio);
-    echo form_hidden('data_final',$data_final);
+    echo form_hidden("Unidade", $idUnidade);
     echo form_button(array("class" => "btn btn-default", "content" => "PDF", "type" => "submit"));
     echo form_close();
     echo "<div class='table-responsive'>";
