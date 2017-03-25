@@ -176,7 +176,9 @@ class Unidade extends CI_Controller{
         $mensagem = array(
             'is_unique' => 'Já existe uma unidade cadastrada com este código.'
         );
-
+        $mensagem_cpf = array(
+            'is_unique' => 'Já existe um diretor cadastrado com este CPF.'
+        );
         if($cd_cpsouza_unique){
             $this->form_validation->set_rules("cd_cpsouza", "cd_cpsouza", "required|min_length[1]|max_length[5]|is_unique[tb_unidade.cd_cpsouza]", $mensagem);
         }else{
@@ -190,6 +192,7 @@ class Unidade extends CI_Controller{
         $this->form_validation->set_rules("endereco", "endereco", "required|min_length[5]|max_length[50]");
         $this->form_validation->set_rules("numero", "numero", "required|min_length[1]|max_length[8]");
         $this->form_validation->set_rules("cep", "cep", "required|min_length[1]|max_length[9]");
+        $this->form_validation->set_rules("cpfDiretor", "CPF", "max_length[50]|exact_length[14]|valid_cpf|is_unique[tb_unidade.cd_cpf_diretor]", $mensagem_cpf);
         $this->form_validation->set_rules("telefone", "telefone", "min_length[14]|max_length[15]");
         $this->form_validation->set_rules("uf", "uf", "required");
 

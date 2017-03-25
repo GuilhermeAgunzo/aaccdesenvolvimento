@@ -79,7 +79,9 @@ echo form_input(array("name" => "nmDiretor", "value" => set_value("nmDiretor",""
 echo "</div>";
 echo form_label("CPF Diretor", "cpfDiretor", array("class" => "col-md-2 control-label"));
 echo "<div class='form-group col-md-2'>";
-echo form_input(array("name" => "cpfDiretor", "value" => set_value("cpfDiretor", ""), "id" => "cpfDiretor", "maxlength" => "11", "onkeypress" => 'return event.charCode >= 48 && event.charCode <= 57', "onpaste" => "return false"));
+echo form_input(array("name" => "cpfDiretor", "value" => set_value("cpfDiretor", ""), "id" => "cpfDiretor", "maxlength" => "14", "onkeypress" => 'return event.charCode >= 48 && event.charCode <= 57', "onpaste" => "return false"));
+echo form_error("cpfDiretor");
+
 echo "</div>";
 echo "</div>";
 
@@ -94,4 +96,10 @@ echo "</div>";
 echo "</div>";
 
 echo form_close();
+
 ?>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#cpfDiretor").mask("999.999.999-99");
+    });
+</script>
