@@ -15,8 +15,8 @@ function dataPtBrParaMysql($dataPtBr = null){
 
 function dataMysqlParaPtBr($dataMysql = null){
 
-    if(is_null($dataMysql || $dataMysql == 0 )){
-        return "";
+    if(is_null($dataMysql) || $dataMysql == 0 || $dataMysql == ""){
+        return null;
     }
 
     $data = new DateTime($dataMysql);
