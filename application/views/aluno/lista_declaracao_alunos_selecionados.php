@@ -22,7 +22,14 @@ if(isset($declaracoes)) {
         echo "<tbody>";
         foreach ($declaracoes as $declaracao) {
             echo "<tr>";
-                echo "<td>".anchor("relatorioAacc/exibeDeclaracaoCompleta/{$declaracao["id_declaracao"]}",$tiposAtividade[$declaracao['id_tipo_atividade']], "class = ''")."</td>";
+                if($declaracao['id_evento'] != null){
+                    echo "<td>".anchor("relatorioAacc/exibeDeclaracaoCompleta/{$declaracao["id_declaracao"]}",
+                            $tiposAtividade[$declaracao['id_tipo_atividade']]." - ". $eventos[$declaracao['id_evento']].
+                            " - ". $localEventos[$declaracao['id_evento']], "class = ''")."</td>";
+                }else{
+                    echo "<td>".anchor("relatorioAacc/exibeDeclaracaoCompleta/{$declaracao["id_declaracao"]}",
+                            $tiposAtividade[$declaracao['id_tipo_atividade']], "class = ''")."</td>";
+                }
 
 
         }

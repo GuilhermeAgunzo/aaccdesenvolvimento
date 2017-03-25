@@ -237,15 +237,23 @@ class RelatorioAacc extends CI_Controller{
         autoriza(2);
         $this->load->model("declaracao_model");
         $this->load->model("tipoAtividade_model");
+        $this->load->model("evento_model");
         $declaracoes = $this->declaracao_model->buscaDeclaracaoIdAluno($id_aluno);
         $tiposAtividade = array();
         foreach ($declaracoes as $declaracao){
             $tipoAtividade = $this->tipoAtividade_model->buscarTipoAtividade($declaracao['id_tipo_atividade']);
             $tiposAtividade[$declaracao['id_tipo_atividade']] = $tipoAtividade['nm_tipo_atividade'];
+            if($declaracao['id_evento'] != null){
+                $evento = $this->evento_model->buscaEventoPorId($declaracao['id_evento']);
+                $eventos[$declaracao['id_evento']] = $evento['nm_evento'];
+                $localEventos[$declaracao['id_evento']] = $evento['local_evento'];
+            }
         }
         $dados = array(
             "declaracoes" => $declaracoes,
-            "tiposAtividade" => $tiposAtividade
+            "tiposAtividade" => $tiposAtividade,
+            "eventos" => $eventos,
+            "localEventos" => $localEventos
         );
         $this->load->template_admin("aluno/lista_declaracao_alunos_selecionados", $dados);
     }
