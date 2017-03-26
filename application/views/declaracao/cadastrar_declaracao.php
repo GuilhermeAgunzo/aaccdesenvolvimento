@@ -100,7 +100,7 @@ echo "</div>";
 echo "<div class='form-group'>";
 echo form_label('Faça um resumo da atividade.','tituloResumo', array("class" => "col-sm-2 control-label"));
 echo "<div class='col-sm-8'>";
-echo form_textarea(array('name' => 'resumo', 'class' => 'form-control', 'id' => 'tituloResumo', 'row' => 2, 'placeholder' => 'Identifique  a  relevância e contribuição desta atividade para a sua formação profissional.', 'required' => 'required'));
+echo form_textarea(array('name' => 'resumo', 'class' => 'form-control', 'id' => 'tituloResumo', 'row' => 2, 'placeholder' => 'Identifique  a  relevância e contribuição desta atividade para a sua formação profissional.', 'required' => 'required', "maxlength" => "199"));
 echo form_error("resumo");
 echo "</div>";
 echo "</div>";
