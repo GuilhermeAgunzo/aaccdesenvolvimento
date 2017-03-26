@@ -30,7 +30,7 @@ if(isset($unidades)){
     echo "<div class='row'>";
     echo form_label("","", array("class" => "col-md-2 control-label"));
     echo "<div class='form-group col-md-3'>";
-    echo form_button(array("class" => "btn btn-default", "content" => "Buscar", "type" => "submit"));
+    echo form_button(array("class" => "btn btn-default", "content" => "Pesquisar", "type" => "submit"));
     echo "</div>";
     echo "</div>";
     echo form_close();

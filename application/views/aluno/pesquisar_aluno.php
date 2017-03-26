@@ -51,7 +51,7 @@ if(!isset($turmas) && !isset($alunos)){
     echo "<div class='row'>";
     echo form_label("","", array("class" => "col-md-2 control-label"));
     echo "<div class='form-group col-md-3'>";
-    echo form_button(array("class" => "btn btn-default", "content" => "Buscar", "type" => "submit"));
+    echo form_button(array("class" => "btn btn-default", "content" => "Pesquisar", "type" => "submit"));
     echo "</div>";
     echo "</div>";
     echo form_close();
@@ -93,7 +93,7 @@ if(isset($alunos)) {
         if (isset($termo)){echo form_input(array("name" => "nm_aluno", "value" => "{$termo}" ,"required" => "required", "id" => "nm_aluno", "class" => "form-control", "maxlength" => "70"));
         }else{echo form_input(array("name" => "nm_aluno", "required" => "required", "id" => "nm_aluno", "class" => "form-control", "maxlength" => "70"));}
         echo "<span class='input-group-btn'>";
-        echo form_button(array("class" => "btn btn-default", "content" => "Buscar", "type" => "submit"));
+        echo form_button(array("class" => "btn btn-default", "content" => "Pesquisar", "type" => "submit"));
         echo "</span>";
         echo "</div>";
         echo form_hidden("turma", $turma["cd_mat_turma"]);

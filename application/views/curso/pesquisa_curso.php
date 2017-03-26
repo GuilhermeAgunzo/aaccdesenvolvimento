@@ -32,7 +32,7 @@ echo "<select name='cursos' id='cursos' class='form-control' required='required'
 echo "</div>";
 
 echo "<div class='col-md-2'>";
-echo form_button(array("class" => "btn btn-default", "content" => "Buscar", "type" => "submit"));
+echo form_button(array("class" => "btn btn-default", "content" => "Pesquisar", "type" => "submit"));
 echo "</div>";
 
 echo "</div>";

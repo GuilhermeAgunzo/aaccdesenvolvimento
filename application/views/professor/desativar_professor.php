@@ -11,7 +11,7 @@
         echo "</div>";
         echo "<div class='col-md-2'>";
         echo form_hidden("opcao", 'Desativar');
-        echo form_button(array("class" => "btn btn-default", "content" => "Buscar", "type" => "submit"));
+        echo form_button(array("class" => "btn btn-default", "content" => "Pesquisar", "type" => "submit"));
         echo "</div>";
         echo "</div>";
         echo form_close();
@@ -29,7 +29,7 @@
                 echo form_input(array("name" => "nm_professor", "required" => "required", "id" => "nm_professor", "class" => "form-control", "maxlength" => "70"));
             }
             echo "<span class='input-group-btn'>";
-            echo form_button(array("class" => "btn btn-default", "content" => "Buscar", "type" => "submit"));
+            echo form_button(array("class" => "btn btn-default", "content" => "Pesquisar", "type" => "submit"));
             echo "</span>";
             echo "</div>";
             echo form_hidden("idUnidade", $unidade["id_unidade"]);

@@ -14,7 +14,7 @@ if(isset($unidades) && !isset($eventos)){
     echo "<div class='col-md-2'>";
     echo form_hidden("opcao", 'Pesquisar');
 
-    echo form_button(array("class" => "btn btn-default", "content" => "Buscar", "type" => "submit"));
+    echo form_button(array("class" => "btn btn-default", "content" => "Pesquisar", "type" => "submit"));
     echo anchor("temporario/administrador","Cancelar", array("class" => "btn btn-default"));
     echo "</div>";
     echo "</div>";

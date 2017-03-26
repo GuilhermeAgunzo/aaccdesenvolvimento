@@ -10,7 +10,7 @@ echo "<div class='input-group'>";
 echo form_input(array("name" => "matricula", "value" => set_value("matricula",""),"required" => "required", "id" => "matricula" ,"class" => "form-control", "maxlength" => "13", "minlength" => "13", "min" => "0"));
 echo form_error("matricula");
 echo "<span class='input-group-btn'>";
-echo form_button(array("class" => "btn btn-default", "content" => "Buscar", "type" => "submit"));
+echo form_button(array("class" => "btn btn-default", "content" => "Pesquisar", "type" => "submit"));
 echo "</span>";
 echo "</div>";
 echo "</div>";

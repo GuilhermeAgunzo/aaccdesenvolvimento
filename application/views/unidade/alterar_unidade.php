@@ -9,7 +9,7 @@ echo "<div class='input-group'>";
 if (isset($termo)){echo form_input(array("name" => "termo", "value" => "{$termo}" ,"required" => "required", "class" => "form-control", "maxlength" => "70"));
 }else{echo form_input(array("name" => "termo", "required" => "required", "class" => "form-control", "maxlength" => "70"));}
 echo "<span class='input-group-btn'>";
-echo form_button(array("class" => "btn btn-default", "content" => "Buscar", "type" => "submit"));
+echo form_button(array("class" => "btn btn-default", "content" => "Pesquisar", "type" => "submit"));
 echo "</span>";
 echo "</div>";
 echo form_hidden("opcao", 'Alterar');
