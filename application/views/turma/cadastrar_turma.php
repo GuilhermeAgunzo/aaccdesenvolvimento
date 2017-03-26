@@ -1,3 +1,14 @@
+<script language='JavaScript'>
+    function SomenteNumero(e){
+        var tecla=(window.event)?event.keyCode:e.which;
+        if((tecla>47 && tecla<58)) return true;
+        else{
+            if (tecla==8 || tecla==0) return true;
+            else  return false;
+        }
+    }
+</script>
+
 <?php
 echo form_fieldset("<h1>Cadastro da Turma</h1>");
 
@@ -20,12 +31,12 @@ echo "</div>";
 echo "<div class='row'>";
 echo form_label("Código da Turma", "matricula", array("class" => "col-md-2 control-label"));
 echo "<div class='form-group col-md-2'>";
-echo form_input(array("name" => "cd_mat_turma", "value" => set_value("cd_mat_turma",""), "id" => "cd_mat_turma" ,"class" => "form-control", "max" => "9999", "min" => "0", "required" => "required"));
+echo form_input(array("name" => "cd_mat_turma", "value" => set_value("cd_mat_turma",""), "id" => "cd_mat_turma" ,"class" => "form-control", "maxlength" => "10", "required" => "required"));
 echo form_error("cd_mat_turma");
 echo "</div>";
 echo form_label("Ano de Ingresso", "ano", array("class" => "col-md-2 control-label"));
 echo "<div class='form-group col-md-1'>";
-echo form_input(array("name" => "ano", "type" => "number", "value" => set_value("ano",""), "id" => "ano" ,"class" => "form-control", "max" => "2100", "minlength" => "1970", "required" => "required", "min" => "1969"));
+echo form_input(array("name" => "ano", "type" => "text", "size" => "10", "value" => set_value("ano",""), "id" => "ano" ,"class" => "form-control", "min" => "1969", "max" => "2100", "minlength" => "4", "maxlength" => "4", "required" => "required", "onkeypress" => "return SomenteNumero(event)", "onpaste" => "return false", "onselectstart" => "return false", "onCopy" => "return false", "onCut" => "return false", "onDrag" => "return false", "onDrop" => "return false"));
 echo form_error("ano");
 echo "</div>";
 echo form_label("Semestre","semestre", array("class" => "col-md-2 control-label"));
