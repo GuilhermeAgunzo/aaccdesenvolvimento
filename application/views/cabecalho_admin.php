@@ -185,10 +185,7 @@
                         <a href="#"><i class="fa fa-group nav_icon"></i>Gerenciar Horas Alunos<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
                             <li>
-                                <?=anchor(base_url('index.php/aluno/controle_entrega_declaracao_aluno/'), 'Controle de Entrega das Declarações de Alunos', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
-                            </li>
-                            <li>
-                                <?=anchor(base_url('index.php/aluno/controle_transferencia_aluno/'), 'Controle de Transferência de Alunos', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                                <?=anchor(base_url('index.php/RelatorioAacc/buscarRelatorio'), 'Validação de relatórios de AACCs', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
                             </li>
                             <li>
                                 <?=anchor(base_url('index.php/aluno/emissao_declaracao/'), 'Emissão de Declaração de Alunos', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
@@ -200,8 +197,11 @@
                                 <?=anchor(base_url('index.php/RelatorioEvento/'), 'Relatório de Eventos', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
                             </li>
                             <li>
-                                <?=anchor(base_url('index.php/RelatorioAacc/buscarRelatorio'), 'Validação de AACCs', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                                <?=anchor(base_url('index.php/aluno/controle_transferencia_aluno/'), 'Controle de Transferência de Alunos', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
                             </li>
+                            <li>
+                                <?=anchor(base_url('index.php/aluno/controle_entrega_declaracao_aluno/'), 'Controle de Entrega das Declarações de Alunos', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                            </li>                                                                                                                         
                         </ul>
                     </li>
                     <li class="">
