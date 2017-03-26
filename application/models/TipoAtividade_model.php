@@ -22,7 +22,7 @@ class TipoAtividade_model extends CI_Model{
     }
 
     public function dropDownAtividade(){
-        $result = $this->db->query("select nm_tipo_atividade as atividade, id_tipo_atividade from tb_tipos_atividade ORDER BY nm_tipo_atividade;");
+        $result = $this->db->query("SELECT CONCAT(nm_tipo_atividade, ' - ', qt_estimada_horas_atividade, ' hs ') as atividade, id_tipo_atividade FROM tb_tipos_atividade ORDER BY nm_tipo_atividade;");
         $retorno = array();
         if($result->num_rows() > 0) {
             foreach($result->result_array() as $row) {
