@@ -271,9 +271,4 @@ class Declaracao extends CI_Controller{
         $this->form_validation->set_error_delimiters("<p class='alert alert-danger'>", "</p>");
         return $this->form_validation->run();
     }
-    //Retorno Ajax
-    public function carregarCampos(){
-        echo "Ok";
-        echo "<script type='javascript'>alert('Funcionou');";
-    }
 }

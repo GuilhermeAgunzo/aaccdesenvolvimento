@@ -68,6 +68,12 @@ class Declaracao_model extends CI_Model{
     public function buscaDetalhesValidacao($id_declaracao){
         return $this->db->query("SELECT * FROM tb_ctrl_dec WHERE id_declaracao = {$id_declaracao}")->result_array();
     }
+    public function buscaDeclaracoesByStatus($status){
+        if ($status > 0){
+            $this->db->where('status_declaracao', $status);
+        }
+        return $this->db->get("tb_declaracao")->result_array();
+    }
 
 }
 

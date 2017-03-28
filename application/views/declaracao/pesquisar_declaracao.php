@@ -1,7 +1,14 @@
+<script type="text/javascript">
+    var url = "<?= base_url() ?>" + "index.php/Declaracao/buscaDeclaracoesByStatus";
+    function busca_cursos(id_unidade){
+        $.post(url, {
+            id_unidade : id_unidade
+        }, function(data){
+            $('#cursos').html(data);
+        })
+    }
+</script>
 <?php
-/*echo "<pre>";
-print_r($declaracoes);
-echo "</pre>";*/
 echo form_fieldset("<h1>Meus Relatórios</h1>");
 
 if ($aluno['total_geral_hora'] == 0)
@@ -37,7 +44,21 @@ if(!empty($declaracoes)){ ?>
         echo "<td>{$aluno['total_geral_hora']}</td>"
         ?>
     </table>
-    <p style="margin-bottom: 30px; margin-top: 30px; font-size: 20px">Selecione a declaracao para ver os detalhes:</p>
+    <div class="row">
+        <div style="margin-bottom: 30px; margin-top: 30px; font-size: 20px" class="col-md-8">
+            Selecione a declaracao para ver os detalhes:
+        </div>
+       <div class="col-md-4">
+           Filtros:
+        <select name="status" id="">
+            <option value="0">Todos</option>
+            <option value="1">Pendente</option>
+            <option value="2">Aprovada</option>
+            <option value="3">Não aprovada</option>
+        </select>
+       </div>
+    </div>
+
 
     <table class="table-responsive table-striped table-bordered">
         <tr class="info">
@@ -56,7 +77,7 @@ if(!empty($declaracoes)){ ?>
         }else if($declaracao['status_declaracao'] == "2") {
             $declaracao['status_declaracao'] = "Aprovada";
         }else if ($declaracao['status_declaracao'] == "3") {
-            $declaracao['status_declaracao'] = "Não Aprovada";
+            $declaracao['status_declaracao'] = "Não aprovada";
         }
         ?>
 
