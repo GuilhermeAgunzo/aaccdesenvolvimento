@@ -23,7 +23,7 @@ if(isset($alunosTodos)) {
 }
 
 echo "<div class='col-md-2'>";
-echo form_button(array("class" => "btn btn-default", "content" => "Buscar", "type" => "submit" , "onchange" => "alunos2(this.value)"));
+echo form_button(array("class" => "btn btn-default", "content" => "Pesquisar", "type" => "submit" , "onchange" => "alunos2(this.value)"));
 echo "</div>";
 
 echo form_close();
