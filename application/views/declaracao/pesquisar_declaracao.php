@@ -48,19 +48,19 @@ if(!empty($declaracoes)){ ?>
         <div style="margin-bottom: 30px; margin-top: 30px; font-size: 20px" class="col-md-8">
             Selecione a declaracao para ver os detalhes:
         </div>
-       <div class="col-md-4">
+       <div class="col-md-4" id="tabela">
            Filtros:
-        <select name="status" id="">
-            <option value="0">Todos</option>
-            <option value="1">Pendente</option>
-            <option value="2">Aprovada</option>
-            <option value="3">Não aprovada</option>
+        <select name="status" id="txtBusca">
+            <option value="">Todos</option>
+            <option value="Pendente">Pendente</option>
+            <option value="Aprovada">Aprovada</option>
+            <option value="Não aprovada">Não aprovada</option>
         </select>
        </div>
     </div>
 
 
-    <table class="table-responsive table-striped table-bordered">
+    <table class="table-responsive table-striped table-bordered table-declaracao" id="filtro">
         <tr class="info">
             <th>Arquivo</th>
             <th>Status</th>
@@ -81,7 +81,7 @@ if(!empty($declaracoes)){ ?>
         }
         ?>
 
-        <tr id="resumo_declaracao">
+        <tr id="resumo_declaracao" >
             <td class=".declaracao"><?= $declaracao['arquivo_declaracao'] ?></td>
             <td class=".declaracao"><?= $declaracao['status_declaracao'] ?></td>
             <td class=".declaracao"><?= $declaracao['dt_declaracao'] ?></td>
@@ -114,6 +114,23 @@ if(!empty($declaracoes)){ ?>
             var id_declaracao = $(this).attr('id');
             $("#id_dec").val(id_declaracao);
             $("#form_dec").submit();
+        });
+    });
+
+    //Filtrando tabela de declarações
+    $(function(){
+        $("#txtBusca").change(function(){
+            var texto = $(this).val();
+            $("#filtro ").css("display", "block");
+            $("#filtro ").each(function(){
+                if($(this).text().indexOf(texto) < 0){
+                    $(this).css("display", "none");
+                   // $("#table-declaracao").append("<h1 class='col-lg-12' id='msg'>Não há declarações com o status informado</h1>");
+                }
+                else{
+                   // $("#msg").remove();
+                }
+            });
         });
     });
 </script>
