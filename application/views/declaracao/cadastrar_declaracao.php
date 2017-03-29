@@ -1,5 +1,5 @@
 <?php
-echo form_fieldset("<h1>Cadastrar Declaração</h1>");
+echo form_fieldset("<h1>Cadastrar Relatório de Atividades</h1>");
 echo "<div class='row'>";
 $atributos = array('class' => 'form-horizontal');
 echo form_open_multipart('declaracao/cadastrar_declaracao', $atributos);
