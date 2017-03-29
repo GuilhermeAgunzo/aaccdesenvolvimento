@@ -93,7 +93,7 @@ class curso extends CI_Controller{
                 redirect('/curso/altera_curso');
             }else{
                 $this->session->set_flashdata("danger", "A alteração não foi efetuada. Tente novamente mais tarde.");
-                $this->load->template_admin("curso/altera_curso.php",$dados);
+                $this->load->template_admin("curso/altera_curso2.php",$dados);
             }
         }else{
             $this->buscarDetalhesCursoAlteracao();
@@ -128,21 +128,42 @@ class curso extends CI_Controller{
             $this->load->template_admin("curso/pesquisa_curso",$dados);
         }
     }
-    public function buscarDetalhesCursoAlteracao(){
+    public function buscarCursosUnidade(){
         autoriza(2);
+        $unidade = $this->input->post("unidade");
+        //echo $unidade;
+        $this->load->model("curso_model");
+
+        $cursos = $this->curso_model->filtrarCurso($unidade);
+
+        if(!$cursos){
+            $this->session->set_flashdata("danger", "Os cursos não foram localizado. Verifique os dados ou tente novamente mais tarde");
+        }
+        $this->load->model("unidade_model");
+        $unid = $this->unidade_model->dropDownUnidade();
+        $unidade = $this->unidade_model->buscarUnidadeId($unidade);
+
+        $dados = array("cursos" => $cursos, "termo" => $unidade, "unidades" => $unid);
+
+        $this->load->template_admin("curso/altera_curso",$dados);
+    }
+    public function buscarAlteraCurso($id_curso){
+        autoriza(2);
+
+        $this->load->model("curso_model");
+        $curso = $this->curso_model->buscaCurso($id_curso);
+
         $this->load->model("unidade_model");
         $unidades = $this->unidade_model->dropDownUnidade();
+        $unidade = $this->curso_model->buscaUnidadeCurso($curso['id_unidade']);
 
-        $id_unidade = $this->input->post("Unidade");
-        $id_curso =  $this->input->post("cursos");
 
-        if($id_curso == "" or $id_unidade == ""){
-            redirect('/curso/altera_curso');
+        if($curso!=null) {
+            $dados = array("unidades" => $unidades, "cursoDetalhes" => $curso, "unidade" => $unidade);
+            $this->load->template_admin("curso/altera_curso", $dados);
         }else{
-            $this->load->model("curso_model");
-            $detalheCurso = $this-> curso_model->buscaCursoByInidade($id_unidade, $id_curso);
-            $dados = array("curso" => $detalheCurso,"unidades" => $unidades);
-            $this->load->template_admin("curso/altera_curso",$dados);
+            $this->session->set_flashdata("danger", "Curso não Encontrado. Verifique os dados.");
+            redirect('/curso/altera_curso');
         }
     }
 

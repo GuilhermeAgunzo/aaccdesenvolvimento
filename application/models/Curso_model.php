@@ -64,4 +64,15 @@ class Curso_model extends CI_Model{
         return $this->db->query("select * from tb_curso WHERE id_unidade = {$id_unidade} and id_curso = {$id_curso}")->row_array();
     }
 
+    public function filtrarCurso($id_unidade)
+    {
+        $this->db->where("id_unidade", $id_unidade);
+        return $this->db->get("tb_curso")->result_array();
+    }
+
+    public function buscaUnidadeCurso($id_unidade){
+        $this->db->where("id_unidade", $id_unidade);
+        return $this->db->get("tb_unidade")->row_array();
+    }
+
 }
