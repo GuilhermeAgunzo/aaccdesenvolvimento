@@ -125,10 +125,6 @@ if(!empty($declaracoes)){ ?>
             $("#filtro ").each(function(){
                 if($(this).text().indexOf(texto) < 0){
                     $(this).css("display", "none");
-                   // $("#table-declaracao").append("<h1 class='col-lg-12' id='msg'>Não há declarações com o status informado</h1>");
-                }
-                else{
-                   // $("#msg").remove();
                 }
             });
         });
