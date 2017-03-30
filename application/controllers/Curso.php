@@ -54,11 +54,18 @@ class curso extends CI_Controller{
             );
 
             $this->load->model("curso_model");
-            if($this-> curso_model->salvaCurso($curso)){
-                $this->session->set_flashdata("success", "Cadastro efetuado com sucesso!");
-                redirect('/curso/cadastro_curso');
+
+            if (!$this->curso_model->registryExists($curso['nm_curso'],$curso['nm_abreviacao'], $curso['id_unidade'])){
+
+                if($this->curso_model->salvaCurso($curso)){
+                    $this->session->set_flashdata("success", "Cadastro efetuado com sucesso!");
+                    redirect('/curso/cadastro_curso');
+                }else{
+                    $this->session->set_flashdata("danger", "O cadastro não foi efetuado. Tente novamente mais tarde.");
+                    $this->load->template_admin("curso/cadastro_curso.php",$dados);
+                }
             }else{
-                $this->session->set_flashdata("danger", "O cadastro não foi efetuado. Tente novamente mais tarde.");
+                $this->session->set_flashdata("danger", "O cadastro não foi efetuado. Ja existe um curso cadastrado na unidade com esse nome ou essa abreviação");
                 $this->load->template_admin("curso/cadastro_curso.php",$dados);
             }
         }else{
@@ -203,5 +210,14 @@ class curso extends CI_Controller{
         $this->form_validation->set_error_delimiters('<p class=" alert alert-danger">', '</p>');
         return $this->form_validation->run();//roda regra
     }
+
+    public function registryExists($nome_curso,$abreviacao, $id_unidade){
+        $this->load->model("curso_model");
+        if ($this->curso_model->registryExists($nome_curso,$abreviacao, $id_unidade)){
+            $this->session->set_flashdata("danger", "Ja existe este curso cadastrado nesta unidade");
+            redirect('/curso/cadastro_curso');
+        }
+    }
+
 
 }

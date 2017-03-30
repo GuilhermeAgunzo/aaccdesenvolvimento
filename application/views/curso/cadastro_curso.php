@@ -18,7 +18,7 @@ if (!isset($unidade)) {
     echo form_dropdown('Unidade', $unidades, "", array("class" => "form-control", 'id' => 'unidade', 'required' => 'required'));
 
 } else {
-    echo form_dropdown('Unidade', $unidades, $unidade, array("class" => "form-control", 'id' => 'unidade', 'required' => 'required'));
+    echo form_dropdown('Unidade', $unidades, set_value("Unidade",$unidades), array("class" => "form-control", 'id' => 'unidade', 'required' => 'required'));
 
 }
 echo "</div>";

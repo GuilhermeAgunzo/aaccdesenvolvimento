@@ -75,4 +75,14 @@ class Curso_model extends CI_Model{
         return $this->db->get("tb_unidade")->row_array();
     }
 
+    public function registryExists($nome_curso,$abreviacao, $id_unidade){
+        $result =  $this->db->query("SELECT * from tb_curso WHERE nm_curso = '{$nome_curso}' and id_unidade = {$id_unidade} or nm_abreviacao = '{$abreviacao}' and id_unidade = {$id_unidade};");
+
+        if ($result->num_rows() > 0)
+            return true;
+        else
+            return false;
+    }
+
+
 }
