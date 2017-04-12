@@ -36,7 +36,7 @@
 <?php
 
 if(isset($declaracaoCompleta)) {
-        echo form_fieldset("<h1>Validação de Relatório de AACC</h1>");
+        echo form_fieldset("<h1>Validação de AACCS - Atividades Acadêmicas Cientificas e Culturais.</h1>");
         echo "<div class='table-responsive'> ";
         echo "<table class='table'>";
         echo "<thead>";

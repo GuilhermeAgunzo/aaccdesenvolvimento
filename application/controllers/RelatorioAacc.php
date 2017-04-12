@@ -216,30 +216,61 @@ class RelatorioAacc extends CI_Controller{
      */
     public function alunos2(){
         autoriza(2);
-        $statusDeclaracao = $this->input->post("id_statusDeclaracao");
+
+        $id_unidade = $this->input->post("id_unidade");
+        $id_curso = $this->input->post("id_curso");
         $id_turma = $this->input->post("id_turma");
-        if ($statusDeclaracao != null) {
+        $statusDeclaracao = $this->input->post("id_statusDeclaracao");
+
+        // CARREGANDO MODELS
+        $this->load->model("unidade_model");
+        $this->load->model("curso_model");
+        $this->load->model("turma_model");
+
+        // BUSCA INFORMAÇÕES DO BANCO PARA COMPOR O CABEÇALHO
+        $unidade = $this->unidade_model->buscarUnidadeId($id_unidade);
+        $curso = $this->curso_model->buscaCurso($id_curso);
+        $turma = $this->turma_model->buscarTurmaId($id_turma);
+
+        // VERIFICA SE UM STATUS FOI SELECIONADO
+        if ($statusDeclaracao != null && $statusDeclaracao != 0) {
             $this->load->model("aluno_model");
             $alunos = $this->aluno_model->buscaAlunosStatusDeclaracao($statusDeclaracao,$id_turma);
             $dados = array(
+                "unidade" => $unidade,
+                "curso" => $curso,
+                "turma" => $turma,
                 "alunos" => $alunos,
                 "statusDeclaracao" => $statusDeclaracao
             );
         }else{
             $this->session->set_flashdata("danger", "Selecione um Status.");
-            $this->load->view("aluno/dropdown_status_declaracao.php.php");
-           // redirect('/aluno/dropdown_status_declaracao.php');
+            $this->load->view("aluno/dropdown_status_declaracao.php");
+            //redirect('/aluno/dropdown_status_declaracao.php');
         }
         $this->load->template_admin("aluno/lista_declaracao_alunos",$dados);
 
     }
 
 
-    public function lista_declaracao_alunos_selecionados($id_aluno){
+    public function lista_declaracao_alunos_selecionados($id_unidade,$id_curso,$id_turma,$id_aluno,$statusDeclaracao){
         autoriza(2);
+
+        // CARREGANDO MODELS
         $this->load->model("declaracao_model");
         $this->load->model("tipoAtividade_model");
         $this->load->model("evento_model");
+        $this->load->model("unidade_model");
+        $this->load->model("curso_model");
+        $this->load->model("turma_model");
+        $this->load->model("aluno_model");
+
+        // BUSCA INFORMAÇÕES DO BANCO PARA COMPOR O CABEÇALHO
+        $unidade = $this->unidade_model->buscarUnidadeId($id_unidade);
+        $curso = $this->curso_model->buscaCurso($id_curso);
+        $turma = $this->turma_model->buscarTurmaId($id_turma);
+        $aluno = $this->aluno_model->buscarAlunoId($id_aluno);
+
         $declaracoes = $this->declaracao_model->buscaDeclaracaoIdAluno($id_aluno);
         $tiposAtividade = array();
         foreach ($declaracoes as $declaracao){
@@ -252,6 +283,11 @@ class RelatorioAacc extends CI_Controller{
             }
         }
         $dados = array(
+            "unidade" => $unidade,
+            "curso" => $curso,
+            "turma" => $turma,
+            "aluno" => $aluno,
+            "statusDeclaracao" => $statusDeclaracao,
             "declaracoes" => $declaracoes,
             "tiposAtividade" => $tiposAtividade,
             "eventos" => $eventos,
