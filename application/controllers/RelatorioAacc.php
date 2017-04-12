@@ -80,7 +80,9 @@ class RelatorioAacc extends CI_Controller{
     public function curso($id_unidade){
         // autoriza(2);
         $this->load->model("curso_model");
+
         $dropDownCurso = $this->curso_model->dropDownCursoUnidade($id_unidade);
+
         $dados = array("dropDownCurso" => $dropDownCurso);
 
         $this->load->view("aluno/dropdown_curso", $dados);

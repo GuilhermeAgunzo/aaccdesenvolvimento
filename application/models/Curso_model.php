@@ -43,7 +43,7 @@ class Curso_model extends CI_Model{
     public function dropDownCursoUnidade($unidade){
         $result = $this->db->query("select nm_curso ,id_curso from tb_curso WHERE id_unidade={$unidade} ORDER BY nm_curso;");
 
-        $retorno = array();
+        $retorno = array("0" => "Selecione");
         if($result->num_rows() > 0) {
             foreach($result->result_array() as $row) {
 
@@ -62,6 +62,10 @@ class Curso_model extends CI_Model{
 
     public function buscaCursoByInidade($id_unidade, $id_curso){
         return $this->db->query("select * from tb_curso WHERE id_unidade = {$id_unidade} and id_curso = {$id_curso}")->row_array();
+    }
+
+    public function cursoPorUnidade($id_unidade){
+        return $this->db->query("select * from tb_curso WHERE id_unidade = {$id_unidade}")->result_array();
     }
 
     public function filtrarCurso($id_unidade)
