@@ -27,37 +27,52 @@ if($this->session->flashdata("danger")){
     echo "<p class='alert alert-danger'>". $this->session->flashdata("danger") ."</p>";
 }
 
-if(isset($eventos)){
-    echo "<div class='table-responsive'>";
-    echo "<table class='table'>";
-    echo "<tr>";
-    echo "<th> Evento </th>";
-    echo "<th> Local </th>";
-    echo "<th> Data de inicio </th>";
-    echo "<th> Data de termino </th>";
-    echo "<th> Horário </th>";
-    echo "<th> Duração </th>";
-    echo "<th> Descrição </th>";
-    echo "<th> Responsável </th>";
-    echo "</tr>";
-
-    foreach ($eventos as $evento){
+if(isset($eventos)) {
+    echo "<h3>Unidade: {$unidade['nm_unidade']} </h3>";
+    if ($eventos != null) {
+        echo "<div class='table-responsive'>";
+        echo "<table class='table'>";
         echo "<tr>";
-        echo "<td>". $evento['nm_evento'] . "</td>";
-        echo "<td>". $evento['local_evento'] ."</td>";
-        echo "<td>". dataMysqlParaPtBr($evento['dt_inicio_evento']) ."</td>";
-        echo "<td>". dataMysqlParaPtBr($evento['dt_final_evento']) ."</td>";
-        echo "<td>". $evento['hr_evento'] ."</td>";
-        if($evento['qt_horas_evento'] == 1){
-            echo "<td>". $evento['qt_horas_evento'] ." hora</td>";
-        }else{
-            echo "<td>". $evento['qt_horas_evento'] ." horas</td>";
-        }
-        echo "<td class='texto_descricao'>". ellipsize($evento['ds_evento'],45) ."</td>";
-        echo "<td>". $evento['nm_responsavel_evento'] ."</td>";
+        echo "<th> Evento </th>";
+        echo "<th> Local </th>";
+        echo "<th> Data de inicio </th>";
+        echo "<th> Data de termino </th>";
+        echo "<th> Horário </th>";
+        echo "<th> Duração </th>";
+        echo "<th> Descrição </th>";
+        echo "<th> Responsável </th>";
         echo "</tr>";
+
+        foreach ($eventos as $evento) {
+            echo "<tr>";
+            echo "<td>" . $evento['nm_evento'] . "</td>";
+            echo "<td>" . $evento['local_evento'] . "</td>";
+            echo "<td>" . dataMysqlParaPtBr($evento['dt_inicio_evento']) . "</td>";
+            echo "<td>" . dataMysqlParaPtBr($evento['dt_final_evento']) . "</td>";
+            echo "<td>" . $evento['hr_evento'] . "</td>";
+            if ($evento['qt_horas_evento'] == 1) {
+                echo "<td>" . $evento['qt_horas_evento'] . " hora</td>";
+            } else {
+                echo "<td>" . $evento['qt_horas_evento'] . " horas</td>";
+            }
+            echo "<td class='texto_descricao'>" . ellipsize($evento['ds_evento'], 45) . "</td>";
+            echo "<td>" . $evento['nm_responsavel_evento'] . "</td>";
+            echo "</tr>";
+        }
+        echo "</table>";
+        echo anchor("evento/pesquisar_evento", "Voltar", array("class" => "btn btn-default"));
+        echo "</div>";
+
+    }else{
+        echo "<p class='alert alert-danger'> Nenhum evento cadastrado nesta unidade.</p>";
+        echo "</br>";
+
+        echo form_open('evento/pesquisaEventos', 'class=form-horizontal');
+        echo "<div class='col-md-2'>";
+        echo anchor("evento/pesquisar_evento", "Voltar", array("class" => "btn btn-default"));
+        echo "</div>";
+        echo form_close();
     }
-    echo "</table>";
-    echo "</div>";}
+}
 ?>
 
