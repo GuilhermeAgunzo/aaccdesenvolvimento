@@ -100,7 +100,10 @@ class RelatorioEvento extends CI_Controller{
 
         $eventos = $this->evento_model->buscaEventosUnidade($id);
 
-        $titulo = "Relatório de Eventos";
+        $Unidade = $this->unidade_model->buscarUnidadeId($id);
+        $nmUnidade = $Unidade["nm_unidade"];
+
+        $titulo = "Relatório de Eventos da Unidade: " . $nmUnidade;
         $arquivo = "relatorio-de-eventos";
 
         $data = array(
