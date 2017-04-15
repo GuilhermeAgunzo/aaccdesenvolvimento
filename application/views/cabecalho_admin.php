@@ -151,6 +151,9 @@
                             <li>
                                 <?=anchor(base_url('index.php/evento/alterar_evento'), ' Alterar Evento',array('class'=>'', 'id'=>'', 'title'=>'')); ?>
                             </li>
+                            <li>
+                                <?=anchor(base_url('index.php/RelatorioEvento/'), 'Relatório de Eventos', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
+                            </li>
                         </ul>
                     </li>
                     <li class="">
@@ -194,14 +197,11 @@
                                 <?=anchor(base_url('index.php/aluno/buscarRelatorio/'), 'Relatório de Alunos', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
                             </li>
                             <li>
-                                <?=anchor(base_url('index.php/RelatorioEvento/'), 'Relatório de Eventos', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
-                            </li>
-                            <li>
                                 <?=anchor(base_url('index.php/aluno/controle_transferencia_aluno/'), 'Controle de Transferência de Alunos', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
                             </li>
                             <li>
                                 <?=anchor(base_url('index.php/aluno/controle_entrega_declaracao_aluno/'), 'Controle de Entrega das Declarações de Alunos', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
-                            </li>                                                                                                                         
+                            </li>
                         </ul>
                     </li>
                     <li class="">
@@ -262,7 +262,7 @@
                             </div>
                         </a>
                         <ul class="dropdown-menu drp-mnu">
-                             <li>
+                            <li>
                                 <i class="fa fa-desktop">
                                     <?=anchor(base_url('index.php/administrador/tutorial_professor/'), 'Tutorial', array('class'=>'', 'id'=>'', 'title'=>'')); ?>
                                 </i>
@@ -282,7 +282,7 @@
                 </ul>
             </div>
         </div>
-</div>
+    </div>
     <!-- //header-ends -->
 
     <!-- CONTEUDO DA PAGINA -->
@@ -307,9 +307,9 @@
             <?php endif; ?>
 
             <?php
-                unset(
-                    $_SESSION['success'],
-                    $_SESSION['danger']
-                );
+            unset(
+                $_SESSION['success'],
+                $_SESSION['danger']
+            );
             ?>
             <div class="container-fluid formulario">
