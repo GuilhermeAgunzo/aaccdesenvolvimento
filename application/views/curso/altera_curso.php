@@ -50,15 +50,15 @@ if(!isset($cursos)){
             </thead>
             <?php
             foreach ($cursos as $curso) :
-            echo "<tr>";
-            echo "<td class='texto-esquerda'>{$curso['nm_curso']}</td>";
-            echo "<td class='texto-esquerda' id=''>{$curso['cd_curso']}</td>";
-            echo "<td>{$curso['nm_abreviacao']}</td>";
-            echo "<td>{$curso['nm_coordenador_curso']}</td>";
-            echo "<td>{$curso['cd_cpf_coordenador_curso']}</td>";
-            echo "<td>{$curso['qt_horas_aacc']}</td>";
-            echo "<td>".anchor("curso/buscarAlteraCurso/{$curso['id_curso']}","Alterar", "class = 'btn btn-default btn-alterar btn-xs'")."</td>";
-            echo "</tr>";
+                echo "<tr>";
+                echo "<td class='texto-esquerda'>{$curso['nm_curso']}</td>";
+                echo "<td class='texto-esquerda' id=''>{$curso['cd_curso']}</td>";
+                echo "<td>{$curso['nm_abreviacao']}</td>";
+                echo "<td>{$curso['nm_coordenador_curso']}</td>";
+                echo "<td>{$curso['cd_cpf_coordenador_curso']}</td>";
+                echo "<td>{$curso['qt_horas_aacc']}</td>";
+                echo "<td>".anchor("curso/buscarAlteraCurso/{$curso['id_curso']}","Alterar", "class = 'btn btn-default btn-alterar btn-xs'")."</td>";
+                echo "</tr>";
             endforeach;
             ?>
 
@@ -85,7 +85,7 @@ if(!isset($cursoDetalhes)){
     echo "<div class='row'>";
     echo form_label("Codigo do Curso", "codigo_curso", array("class" => "col-md-3 control-label"));
     echo "<div class='form-group col-md-3'>";
-    echo form_input(array("name" => "codigo_curso", "value" => set_value("codigo_curso",$cursoDetalhes['cd_curso']), "id" => "codigo_curso" ,"class" => "form-control", "maxlength" => "20"));
+    echo form_input(array("name" => "codigo_curso", "value" => set_value("codigo_curso",$cursoDetalhes['cd_curso']), "id" => "codigo_curso" ,"class" => "form-control", "maxlength" => "20", "readonly" => "readonly"));
     echo form_error("codigo_curso");
     echo "</div>";
     echo "</div>";

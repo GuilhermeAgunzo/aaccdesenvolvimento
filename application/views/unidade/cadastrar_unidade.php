@@ -1,3 +1,12 @@
+<!--Função java script para input em código-->
+<script type="text/javascript">
+    function upperCaseJS(letra){
+        setTimeout(function(){
+            letra.value = letra.value.toUpperCase();
+        }, 1);
+    }
+</script>
+
 <?php
 echo form_fieldset("<h1>Cadastro de Unidade</h1>");
 
@@ -6,7 +15,7 @@ echo form_open('unidade/cadastrarUnidade', 'class = form-horizontal');
 echo "<div class='row'>";
 echo form_label("Código da Unidade", "cd_cpsouza", array("class" => "col-md-2 control-label"));
 echo "<div class='form-group col-md-2'>";
-echo form_input(array("name" => "cd_cpsouza", "value" => set_value("cd_cpsouza",""), "id" => "cd_cpsouza" ,"class" => "form-control", "maxlength" => "10"));
+echo form_input(array("name" => "cd_cpsouza", "value" => set_value("cd_cpsouza",""), "id" => "cd_cpsouza" ,"class" => "form-control", "maxlength" => "10", "onkeydown" => "upperCaseJS(this)"));
 echo form_error("cd_cpsouza");
 echo "</div>";
 echo form_label("Nome da Unidade", "nm_unidade", array("class" => "col-md-2 control-label"));

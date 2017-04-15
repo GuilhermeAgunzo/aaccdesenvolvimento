@@ -9,6 +9,15 @@
     }
 </script>
 
+<!--Função java script para input em código-->
+<script type="text/javascript">
+    function upperCaseJS(letra){
+        setTimeout(function(){
+            letra.value = letra.value.toUpperCase();
+        }, 1);
+    }
+</script>
+
 <?php
 echo form_fieldset("<h1>Cadastro da Turma</h1>");
 
@@ -31,7 +40,7 @@ echo "</div>";
 echo "<div class='row'>";
 echo form_label("Código da Turma", "matricula", array("class" => "col-md-2 control-label"));
 echo "<div class='form-group col-md-2'>";
-echo form_input(array("name" => "cd_mat_turma", "value" => set_value("cd_mat_turma",""), "id" => "cd_mat_turma" ,"class" => "form-control", "maxlength" => "10", "required" => "required"));
+echo form_input(array("name" => "cd_mat_turma", "value" => set_value("cd_mat_turma",""), "id" => "cd_mat_turma" ,"class" => "form-control", "maxlength" => "10", "required" => "required", "onkeydown" => "upperCaseJS(this)"));
 echo form_error("cd_mat_turma");
 echo "</div>";
 echo form_label("Ano de Ingresso", "ano", array("class" => "col-md-2 control-label"));

@@ -1,8 +1,20 @@
+<!--Função java script para input em código-->
+<script type="text/javascript">
+    function upperCaseJS(letra){
+        setTimeout(function(){
+            letra.value = letra.value.toUpperCase();
+        }, 1);
+    }
+</script>
+
+<!--Função java script para máscara cpf coordenador -->
 <script type="text/javascript">
     $(document).ready(function(){
         $("#cpf_coordenador").mask("999.999.999-99");
     });
 </script>
+
+
 <?php
 echo form_fieldset("<h1>Cadastro de Curso</h1>");
 
@@ -36,7 +48,7 @@ echo "</div>";
 echo "<div class='row'>";
 echo form_label("Codigo do Curso", "codigo_curso", array("class" => "col-md-3 control-label"));
 echo "<div class='form-group col-md-3'>";
-echo form_input(array("name" => "codigo_curso", "value" => set_value("codigo_curso",""), "id" => "codigo_curso" ,"class" => "form-control", "maxlength" => "20",'required' => 'required',"min" => "0"));
+echo form_input(array("name" => "codigo_curso", "value" => set_value("codigo_curso",""), "id" => "codigo_curso" ,"class" => "form-control", "maxlength" => "20",'required' => 'required',"min" => "0", "onkeydown" => "upperCaseJS(this)"));
 echo form_error("codigo_curso");
 echo "</div>";
 echo "</div>";

@@ -59,6 +59,7 @@ if(isset($eventos)){
     echo form_fieldset("<h1>" . $nmUnidade . " </h1>");
     echo form_fieldset("<h1>" . $nmEndereco . " - " . $cdNum . "</h1>");
     echo form_open('RelatorioEvento/pdf', $atributos2);
+    echo form_hidden("nmUnidade", $nmUnidade);
     echo form_hidden("Unidade", $idUnidade);
     echo form_button(array("class" => "btn btn-default", "content" => "PDF", "type" => "submit"));
     echo form_close();
