@@ -37,11 +37,21 @@
 
 if(isset($declaracaoCompleta)) {
         echo form_fieldset("<h1>Validação de AACCS - Atividades Acadêmicas Cientificas e Culturais.</h1>");
+        $textoTurma = "{$turma['aa_ingresso']} - {$turma['dt_semestre']}º sem - {$turma['nm_turno']}";
+        echo "<div class='form-group'>";
+        echo "<div class='col-sm-12'>";
+        echo "<h3>Unidade: {$unidade['nm_unidade']} - Curso: {$curso['nm_curso']}</h3>";
+        echo "<h3>Turma: {$textoTurma}</h3>";
+        echo "<h3>Aluno: {$aluno['nm_aluno']}</h3>";
+        echo "</div>";
+        echo "</div>";
+
         echo "<div class='table-responsive'> ";
         echo "<table class='table'>";
         echo "<thead>";
         echo "<tr>";
         echo "<th>Nome do Evento</th>";
+        echo "<th>Tipo do Evento</th>";
         echo "<th>Qtde de Horas</th>";
         echo "<th>Data do Evento</th>";
         echo "<th>Local do Evento</th>";
@@ -52,10 +62,46 @@ if(isset($declaracaoCompleta)) {
         echo "<tbody>";
 
                 echo "<tr>";
-                echo "<td>" . $declaracaoCompleta['resumo_atividade'] . "</td>";
-                echo "<td>" . $declaracaoCompleta['qt_horas_atividade'] . "</td>";
-                echo "<td>" . $declaracaoCompleta['dt_evento_externo'] . "</td>";
-                echo "<td>" . $declaracaoCompleta['local_evento_externo'] . "</td>";
+                if(isset ($evento)){
+                        echo "<td>" . $evento['nm_evento'] . "</td>";
+                        echo "<td> Interno </td>";
+                        echo "<td>" . $evento['qt_horas_evento'] . "</td>";
+                        echo "<td>" . dataMysqlParaPtBr($evento['dt_inicio_evento']) . "</td>";
+                        echo "<td>" . $evento['local_evento'] . "</td>";
+                        echo "<td>" . $evento['ds_evento'] . "</td>";
+                
+                        switch ($declaracaoCompleta['status_declaracao']){
+                                case 1:
+                                        echo "<td> Pendente </td>";
+                                        break;
+                                case 2:
+                                        echo "<td> Aprovada </td>";
+                                        break;
+                                case 3:
+                                        echo "<td> Não aprovada </td>";
+                                        break;
+                        }
+                }else{
+                        echo "<td>" . $declaracaoCompleta['nm_evento_externo'] . "</td>";
+                        echo "<td> Externo </td>";
+                        echo "<td>" . $declaracaoCompleta['qt_horas_atividade'] . "</td>";
+                        echo "<td>" . dataMysqlParaPtBr($evento['dt_evento_externo']) . "</td>";
+                        echo "<td>" . $declaracaoCompleta['local_evento_externo'] . "</td>";
+                        echo "<td>" . $declaracaoCompleta['ds_evento_externo'] . "</td>";
+                
+                        switch ($declaracaoCompleta['status_declaracao']){
+                                case 1:
+                                        echo "<td> Pendente </td>";
+                                        break;
+                                case 2:
+                                        echo "<td> Aprovada </td>";
+                                        break;
+                                case 3:
+                                        echo "<td> Não aprovada </td>";
+                                        break;
+                        }
+                }
+                
                 echo "<td>" . $declaracaoCompleta['ds_evento_externo'] . "</td>";
                 echo form_hidden("id_aluno", $declaracaoCompleta["id_aluno"]);
                 echo form_hidden("id_declaracao", $declaracaoCompleta["id_declaracao"]);
@@ -78,11 +124,11 @@ if(isset($declaracaoCompleta)) {
         echo "<div class='row'>";
         echo "<div class='form-group' id='aprovacao'>";
         echo form_label("Não Aprovado", "aprovacao", array("class" => "col-sm-2 control-label"));
-        echo "<div class='form-group col-md-2'>";
+        echo "<div class='form-group col-md-1'>";
         echo form_radio('aprovacao', '3', @$nchecked, array( "value" => set_value("aprovacao", "3") ,"name" => 'aprovacao', "type" => 'radio', "class" => "radio3"));
         echo "</div>";
         echo form_label("Aprovado", "aprovacao", array("class" => "col-sm-2 control-label"));
-        echo "<div class='form-group col-md-2'>";
+        echo "<div class='form-group col-md-1'>";
         echo form_radio('aprovacao', '2', @$nchecked, array("value" => set_value("aprovacao", "2"), "name" => 'aprovacao', "type" => 'radio', "class" => "radio2"));
         echo "</div>";
         echo "</div>";
@@ -101,7 +147,7 @@ if(isset($declaracaoCompleta)) {
 
         echo "<div class='row'>";
         echo "<div class='form-group' id='totalHorasAprovada'>";
-        echo form_label("Total de Horas Aprovadas", "HorasAprovadas", array("class" => "col-sm-3 control-label"));
+        echo form_label("Total de Horas Aprovadas", "HorasAprovadas", array("class" => "col-md-2 control-label"));
         echo "<div class='form-group col-md-3'>";
         echo form_input(array("name" => "totalHorasAprovada", "value" => set_value("totalHorasAprovada", ""), "type" => "number", "id" => "totalHorasAprovada", "class" => "form-control", "maxlength" => "3", "minlength" => "1", "min" => "0", "max" => "999"));
         echo form_error("totalHorasAprovada");
@@ -110,13 +156,13 @@ if(isset($declaracaoCompleta)) {
         echo "</div>";
 
         echo "<div class='row'>";
-        echo form_label("Data da Aprovação/Não Aprovação", "dt_aprovacao", array("class" => "col-sm-3 control-label"));
+        echo form_label("Data da Aprovação / Não Aprovação", "dt_aprovacao", array("class" => "col-sm-2 control-label"));
         echo "<div class='form-group col-md-3'>";
         echo form_input(array("name" => "dt_aprovacao", "value" => set_value("dt_aprovacao", ""), "required" => "required", "type" => "text", "id" => "dt_aprovacao", "class" => "form-control datepicker", "maxlength" => "10"));
         echo form_error("dt_aprovacao");
         echo "</div>";
         echo "</div>";
-
+        echo "<br>";
         echo "<div class='row'>";
         echo form_label("Observações", "observacao", array("class" => "col-sm-2 control-label"));
         echo "<div class='form-group col-sm-6'>";
@@ -125,7 +171,8 @@ if(isset($declaracaoCompleta)) {
         echo "</div>";
         echo "</div>";
         echo "<div class='row'>";
-        echo "<div class='form-group col-md-3'>";
+        echo "<br>";
+        echo "<div class='col-md-offset-1 col-md-3'>";
         echo form_button(array("class" => "btn btn-default", "content" => "Salvar", "type" => "submit"));
         echo "</div>";
         echo "</div>";

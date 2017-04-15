@@ -297,15 +297,54 @@ class RelatorioAacc extends CI_Controller{
     }
     public function exibeDeclaracaoCompleta($id_declaracao){
         autoriza(2);
+
+        $this->load->model("unidade_model");
+        $this->load->model("curso_model");
+        $this->load->model("turma_model");
+        $this->load->model("aluno_model");
         $this->load->model("declaracao_model");
+        
         $declaracaoCompleta = $this->declaracao_model->buscaDeclaracaoCompleta($id_declaracao);
         $motivoIdIndeferimento = $this->declaracao_model->buscaIdMotivoIndeferimento();
         $motivoNomeIndeferimento = $this->declaracao_model->buscaNomeMotivoIndeferimento();
-        $dados = array(
+        
+        $aluno = $this->aluno_model->buscarAlunoId($declaracaoCompleta['id_aluno']);
+        $turma = $this->turma_model->buscarTurmaId($aluno['id_turma']);
+        $curso = $this->curso_model->buscaCurso($turma['id_curso']);
+        $unidade = $this->unidade_model->buscarUnidadeId($turma['id_unidade']);
+
+        // Verifica se o evento é externo através do preechimento da coluna nm_evento_externo
+        // Essa coluna deve estar preenchida, se e somente se o evento não for interno da unidade
+        if($declaracaoCompleta['nm_evento_externo'] == null || $declaracaoCompleta['nm_evento_externo'] == ''){
+        
+            $this->load->model('evento_model');
+            $evento = $this->evento_model->buscaEventoPorId($declaracaoCompleta['id_evento']);
+
+            $dados = array(
+                "declaracaoCompleta" => $declaracaoCompleta,
+                "evento" => $evento,
+                "motivoIdIndeferimento" => $motivoIdIndeferimento,
+                "motivoNomeIndeferimento" => $motivoNomeIndeferimento,
+                "aluno" => $aluno,
+                "turma" => $turma,
+                "curso" => $curso,
+                "unidade" => $unidade
+            );
+        
+        }else{
+        
+            $dados = array(
             "declaracaoCompleta" => $declaracaoCompleta,
             "motivoIdIndeferimento" => $motivoIdIndeferimento,
-            "motivoNomeIndeferimento" => $motivoNomeIndeferimento
-        );
+            "motivoNomeIndeferimento" => $motivoNomeIndeferimento,
+            "aluno" => $aluno,
+            "turma" => $turma,
+            "curso" => $curso,
+            "unidade" => $unidade
+            );
+        
+        }
+        
         $this->load->template_admin("aluno/exibe_declaracao_completa", $dados);
     }
 
