@@ -107,7 +107,7 @@ echo "</div>";
 echo "<div class='form-group'>";
 echo form_label("Anexar Documento comprobatório", "anexarDocumento",  array("class" => "col-sm-2 control-label"));
 echo "<div class='col-sm-8'>";
-echo "<input type='file' name='anexo' required />";
+echo "<input type='file' name='anexo' accept='application/pdf, image/png, image/jpg' required />";
 echo form_error("anexo");
 echo "</div>";
 echo "<div class='col-sm-10'><p style='font-size: 20px'>Obs.: Formatos de arquivo aceitos: PDF, JPG e PNG</p></div>";
