@@ -6,7 +6,7 @@ if ($dropDownTurma != null) {
     echo form_label("Turma", "id_turma", array("class" => "col-sm-2 control-label"));
     echo "<div class='form-group col-md-3'>";
 
-    echo form_dropdown('id_turma',$dropDownTurma, "", array("class" => "form-control", "onchange" => "statusDeclaracao(this.value)"));
+    echo form_dropdown('id_turma',$dropDownTurma, "", array("class" => "form-control", "onchange" => "statusDeclaracao(this.value)", "required" => "required"));
     echo form_error("id_turma");
     echo "</div>";
     echo "</div>";

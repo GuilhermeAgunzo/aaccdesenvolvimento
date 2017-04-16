@@ -8,7 +8,7 @@
             echo form_label("Unidade", "id_unidade", array("class" => "col-sm-2 control-label"));
             echo "<div class='form-group col-md-3'>";
 
-            echo form_dropdown('id_unidade',$dropDownUnidade, "", array("class" => "form-control", "onchange" => "curso(this.value)"));
+            echo form_dropdown('id_unidade',$dropDownUnidade, "", array("class" => "form-control", "onchange" => "curso(this.value)", "required" => "required"));
             echo form_error("id_unidade");
 
             echo "</div>";
@@ -38,15 +38,18 @@
 
             <script>
                 function curso(valor){
-
-                    var url = "curso/"+valor+"/?"+Math.random();
-                    xmlRequest.open("GET",url,true);
-                    xmlRequest.onreadystatechange = mudancaEstadoCurso;
-                    xmlRequest.send(null);
-                    if (xmlRequest.readyState == 1) {
-                        document.getElementById("curso").innerHTML = "<div style='text-align:center; margin-top:20px;'><img src='<?= base_url("images/carregando.gif")?>'></div>";
+                    
+                    if(valor != null || valor != "" || valor !== "---" || valor != "0" || valor != 0){
+                            var url = "curso/"+valor+"/?"+Math.random();
+                        xmlRequest.open("GET",url,true);
+                        xmlRequest.onreadystatechange = mudancaEstadoCurso;
+                        xmlRequest.send(null);
+                        if (xmlRequest.readyState == 1) {
+                            document.getElementById("curso").innerHTML = "<div style='text-align:center; margin-top:20px;'><img src='<?= base_url("images/carregando.gif")?>'></div>";
+                        }
+                        return url;
                     }
-                    return url;
+                    
                 }
 
                 function mudancaEstadoCurso(){
@@ -59,15 +62,16 @@
 
             <script>
                 function turma2(valor){
-
-                    var url = "turma2/"+valor+"/?"+Math.random();
-                    xmlRequest.open("GET",url,true);
-                    xmlRequest.onreadystatechange = mudancaEstadoTurma;
-                    xmlRequest.send(null);
-                    if (xmlRequest.readyState == 1) {
-                        document.getElementById("turma2").innerHTML = "<div style='text-align:center; margin-top:20px;'><img src='<?= base_url("images/carregando.gif")?>'></div>";
-                    }
-                    return url;
+                    
+                        var url = "turma2/"+valor+"/?"+Math.random();
+                        xmlRequest.open("GET",url,true);
+                        xmlRequest.onreadystatechange = mudancaEstadoTurma;
+                        xmlRequest.send(null);
+                        if (xmlRequest.readyState == 1) {
+                            document.getElementById("turma2").innerHTML = "<div style='text-align:center; margin-top:20px;'><img src='<?= base_url("images/carregando.gif")?>'></div>";
+                        }
+                        return url;
+                     
                 }
 
                 function mudancaEstadoTurma(){

@@ -71,7 +71,7 @@ class Turma_model extends CI_Model{
     public function dropDownTurmaCurso($id_curso){
         $result = $this->db->query("select IF (nm_modalidade='EAD' ,concat(aa_ingresso, ' - ',dt_semestre, 'º sem - ',nm_modalidade),concat(aa_ingresso, ' - ',dt_semestre, 'º sem - ',nm_turno)) as turma, id_turma from tb_turma WHERE id_curso={$id_curso} ORDER BY `tb_turma`.`id_turma`;");
 
-        $retorno = array("0" => "Selecione");
+        $retorno = array("" => "Selecione");
         if($result->num_rows() > 0) {
             foreach($result->result_array() as $row) {
 

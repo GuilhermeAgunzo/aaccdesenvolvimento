@@ -5,9 +5,9 @@
     echo "<div class='row'>";
     echo form_label("Status da Declaração", "id_statusDeclaracao", array("class" => "col-sm-2 control-label"));
     echo "<div class='form-group col-md-3'>";
-    $escolhaStatusDeclaracao = array('1' => "Pendentes", '2' => "Aprovadas", '3' => "Não Aprovadas");
-    array_unshift($escolhaStatusDeclaracao, "Selecione");
-    echo form_dropdown('id_statusDeclaracao', $escolhaStatusDeclaracao, "", array("class" => "form-control" ));
+    $escolhaStatusDeclaracao = array('' => 'Selecione','1' => "Pendentes", '2' => "Aprovadas", '3' => "Não Aprovadas");
+    
+    echo form_dropdown('id_statusDeclaracao', $escolhaStatusDeclaracao, "", array("class" => "form-control", "required" => "true"));
     echo form_error("id_statusDeclaracao");
 
     echo "</div>";

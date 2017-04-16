@@ -43,7 +43,7 @@ class Curso_model extends CI_Model{
     public function dropDownCursoUnidade($unidade){
         $result = $this->db->query("select nm_curso ,id_curso from tb_curso WHERE id_unidade={$unidade} ORDER BY nm_curso;");
 
-        $retorno = array("0" => "Selecione");
+        $retorno = array("" => "Selecione");
         if($result->num_rows() > 0) {
             foreach($result->result_array() as $row) {
 

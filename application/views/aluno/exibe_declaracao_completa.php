@@ -99,7 +99,7 @@ if(isset($declaracaoCompleta)) {
         echo "<td>" . $declaracaoCompleta['nm_evento_externo'] . "</td>";
         echo "<td> Externo </td>";
         echo "<td>" . $declaracaoCompleta['qt_horas_atividade'] . "</td>";
-        echo "<td>" . dataMysqlParaPtBr($evento['dt_evento_externo']) . "</td>";
+        echo "<td>" . dataMysqlParaPtBr($declaracaoCompleta['dt_evento_externo']) . "</td>";
         echo "<td>" . $declaracaoCompleta['local_evento_externo'] . "</td>";
         echo "<td>" . $declaracaoCompleta['ds_evento_externo'] . "</td>";
 

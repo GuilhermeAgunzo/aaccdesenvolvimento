@@ -105,13 +105,16 @@ class RelatorioAacc extends CI_Controller{
     /**
      * @param  $id_curso
      */
-    public function turma2($id_curso){
+    public function turma2($id_curso = null){
         // autoriza(2);
-        $this->load->model("turma_model");
-        $dropDownTurma = $this->turma_model->dropDownTurmaCurso($id_curso);
-        $dados = array("dropDownTurma" => $dropDownTurma);
-        $this->id_turma_global = $dados;
-        $this->load->view("aluno/dropdown_turma_valid", $dados);
+        if($id_curso != "---" && $id_curso != null && $id_curso != ""){
+            $this->load->model("turma_model");
+            $dropDownTurma = $this->turma_model->dropDownTurmaCurso($id_curso);
+            $dados = array("dropDownTurma" => $dropDownTurma);
+            $this->id_turma_global = $dados;
+            $this->load->view("aluno/dropdown_turma_valid", $dados);
+        }
+        
 
     }
 
@@ -200,15 +203,19 @@ class RelatorioAacc extends CI_Controller{
     /**
      * @param $id_turma
      */
-    public function statusDeclaracao($id_turma){
+    public function statusDeclaracao($id_turma = null){
         autoriza(2);
-        $this->load->model("declaracao_model");
-        $alunosTodos = $this->declaracao_model->dropDownStatusDeclaracao($id_turma);
-        $dados = array(
-            "alunosTodos" => $alunosTodos,
-            "id_turma" => $id_turma,
-        );
-        $this->load->view("aluno/dropdown_status_declaracao.php", $dados);
+
+        if(isset($id_turma) && $id_turma != "---" && $id_turma != null && $id_turma != ""){
+            $this->load->model("declaracao_model");
+            $alunosTodos = $this->declaracao_model->dropDownStatusDeclaracao($id_turma);
+            $dados = array(
+                "alunosTodos" => $alunosTodos,
+                "id_turma" => $id_turma,
+            );
+            $this->load->view("aluno/dropdown_status_declaracao.php", $dados);
+        }
+        
     }
 
     /**
