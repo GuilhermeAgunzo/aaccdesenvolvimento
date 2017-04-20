@@ -21,7 +21,7 @@ echo form_open('curso/buscarDetalhesCursoAlteracao', array('class' => 'form-hori
 echo "<div class='row'>";
 echo form_label("Unidade", "unidade", array("class" => "col-md-2 control-label"));
 echo "<div class='form-group col-md-3'>";
-$unidades = array('' =>  "Selecione")+$unidades;
+$unidades = $unidades;
 if (!isset($unidade)) {
     echo form_dropdown('Unidade', $unidades, "", array("class" => "form-control", 'id' => 'unidade', 'required' => 'required', 'onchange' => 'busca_cursos($(this).val())'));
 

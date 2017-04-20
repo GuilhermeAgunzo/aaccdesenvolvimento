@@ -25,7 +25,7 @@ echo form_open('curso/cadastrarCurso', 'class = form-horizontal');
 echo "<div class='row'>";
 echo form_label("Unidade", "unidade", array("class" => "col-md-3 control-label"));
 echo "<div class='form-group col-md-4'>";
-$unidades = array('' =>  "Selecione")+$unidades;
+$unidades = $unidades;
 if (!isset($unidade)) {
     echo form_dropdown('Unidade', $unidades, "", array("class" => "form-control", 'id' => 'unidade', 'required' => 'required'));
 

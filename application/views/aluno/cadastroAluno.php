@@ -31,7 +31,7 @@ echo form_open('aluno/cadastraraluno', array('class' => 'form-horizontal',"onsub
 echo "<div class='row'>";
 echo form_label("Unidade", "unidade", array("class" => "col-md-2 control-label"));
 echo "<div class='form-group col-md-3'>";
-$unidades = array('' =>  "Selecione")+$unidades;
+//$unidades = array('' =>  "Selecione")+$unidades;
 if (!isset($unidade)) {
 	echo form_dropdown('Unidade', $unidades, "", array("class" => "form-control", 'id' => 'unidade', 'required' => 'required', 'onchange' => 'busca_cursos($(this).val())'));
 

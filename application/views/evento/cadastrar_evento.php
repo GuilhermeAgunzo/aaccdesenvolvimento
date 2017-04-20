@@ -17,7 +17,7 @@ echo "</div>";
 echo "<div class='row'>";
 echo form_label("Unidade", "unidade", array("class" => "col-md-2 control-label"));
 echo "<div class='form-group col-md-3'>";
-$unidades = array('' =>  "Selecione")+$unidades;
+//$unidades = array('' =>  "Selecione")+$unidades;
 echo form_dropdown('Unidade', $unidades, set_value("Unidade", ""), array("class" => "form-control", "required" => "required"));
 echo form_error("Unidade");
 echo "</br>";

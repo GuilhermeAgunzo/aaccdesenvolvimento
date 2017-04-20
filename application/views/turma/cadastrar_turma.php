@@ -25,7 +25,7 @@ echo form_open("turma/cadastrarTurma",'class = form-horizontal');
 echo "<div class='row'>";
 echo form_label("Unidade", "unidade", array("class" => "col-md-2 control-label"));
 echo "<div class='form-group col-md-3'>";
-$unidades = array('' =>  "Selecione")+$unidades;
+$unidades = $unidades;
 echo form_dropdown('unidade',$unidades, "", array("class" => "form-control"));
 echo form_error("unidade");
 echo "</div>";

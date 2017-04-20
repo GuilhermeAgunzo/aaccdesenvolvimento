@@ -8,7 +8,7 @@ if(isset($unidades) && !isset($eventos)){
     echo "<div class='row'>";
     echo form_label("Unidade", "unidade", array("class" => "col-md-2 control-label"));
     echo "<div class='form-group col-md-3'>";
-    $unidades = array('' =>  "Selecione")+$unidades;
+    //$unidades = array('' =>  "Selecione")+$unidades;
     echo form_dropdown('Unidade', $unidades, "", array("class" => "form-control", "required" => "required"));
     echo "</div>";
     echo "<div class='col-md-2'>";
