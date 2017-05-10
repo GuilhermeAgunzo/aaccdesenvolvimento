@@ -364,6 +364,14 @@ class RelatorioAacc extends CI_Controller{
         $this->load->model("TotalDeHoras_model");
         $this->load->library('usuariolb');
         $this->load->library("form_validation");
+
+        $id_unidade = $this->input->post("unidade");
+        $id_curso = $this->input->post("curso");
+        $id_turma = $this->input->post("turma");
+        $status_declaracao = $this->input->post("status_declaracao");
+
+
+
         $usuarioLogado = $this->session->userdata("usuario_logado");
             $dt_aprovacao = dataPtBrParaMysql($this->input->post("dt_aprovacao"));
             $observacao = $this->input->post("observacao");
@@ -409,7 +417,10 @@ class RelatorioAacc extends CI_Controller{
         $this->declaracao_model->validaDeclaracao($status,$id_declaracao);
         $this->TotalDeHoras_model->somaHoras($id_aluno,$id_tipoAtividade);
         $this->session->set_flashdata("success", "Validação Efetuada com Sucesso!");
-        $this->load->template_admin('aluno/lista_declaracao_alunos',$id_aluno);
+
+        $this->lista_declaracao_alunos_selecionados($id_unidade,$id_curso,$id_turma,$id_aluno,$status_declaracao);
+
+
     }
 
 

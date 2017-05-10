@@ -120,6 +120,7 @@ if(isset($declaracaoCompleta)) {
     echo form_hidden("id_aluno", $declaracaoCompleta["id_aluno"]);
     echo form_hidden("id_declaracao", $declaracaoCompleta["id_declaracao"]);
     echo form_hidden("id_tipo_atividade", $declaracaoCompleta["id_tipo_atividade"]);
+
     echo "</tr>";
 
     echo "</tbody>";
@@ -133,6 +134,10 @@ if(isset($declaracaoCompleta)) {
     echo form_hidden("id_aluno", $declaracaoCompleta["id_aluno"]);
     echo form_hidden("id_declaracao", $declaracaoCompleta["id_declaracao"]);
     echo form_hidden("id_tipo_atividade", $declaracaoCompleta["id_tipo_atividade"]);
+    echo form_hidden("status_declaracao",$declaracaoCompleta['status_declaracao']);
+    echo form_hidden("unidade", $unidade['id_unidade']);
+    echo form_hidden("curso", $curso['id_curso']);
+    echo form_hidden("turma",$turma['id_turma']);
 
     echo "<div class='row'>";
     echo "<div class='form-group' id='aprovacao'>";
