@@ -32,7 +32,16 @@ if(isset($alunos)) {
         echo "</div>";
 
     }else{
-        echo "<p class='alert alert-danger'>Não Existem Alunos com declarações para status " . $statusDeclaracao ."</p>";
+
+        $textoStatus = null;
+
+        switch($statusDeclaracao){
+            case 1: $textoStatus = "Pendente";break;
+            case 2: $textoStatus = "Aprovada";break;
+            case 3: $textoStatus = "Não Aprovada";break;
+        }
+
+        echo "<p class='alert alert-danger'>Não Existem Alunos com declarações para status " . $textoStatus ."</p>";
     }
 }
 

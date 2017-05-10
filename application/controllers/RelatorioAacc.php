@@ -286,7 +286,8 @@ class RelatorioAacc extends CI_Controller{
             if($declaracao['id_evento'] != null){
                 $evento = $this->evento_model->buscaEventoPorId($declaracao['id_evento']);
                 $eventos[$declaracao['id_evento']] = $evento['nm_evento'];
-                $localEventos[$declaracao['id_evento']] = $evento['local_evento'];
+                $qtdHorasEventos[$declaracao['id_evento']] = $evento['qt_horas_evento'];
+                $datasEventos[$declaracao['id_evento']] = $evento['dt_inicio_evento'];
             }
         }
         $dados = array(
@@ -298,7 +299,8 @@ class RelatorioAacc extends CI_Controller{
             "declaracoes" => $declaracoes,
             "tiposAtividade" => $tiposAtividade,
             "eventos" => $eventos,
-            "localEventos" => $localEventos
+            "qtdHorasEventos" => $qtdHorasEventos,
+            "datasEventos" => $datasEventos
         );
         $this->load->template_admin("aluno/lista_declaracao_alunos_selecionados", $dados);
     }

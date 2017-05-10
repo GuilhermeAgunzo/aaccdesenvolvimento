@@ -1,7 +1,14 @@
 <?php
 
 if(isset($declaracoes)) {
-    if ($declaracoes != null) {
+    $qtdDeclaracoes = 0;
+    foreach($declaracoes as $declaracao){
+        if($declaracao['status_declaracao'] == $statusDeclaracao) {
+            $qtdDeclaracoes++;
+        }
+    }
+
+    if ($qtdDeclaracoes > 0) {
 
         $textoTurma = "{$turma['aa_ingresso']} - {$turma['dt_semestre']}º sem - {$turma['nm_turno']}";
 
@@ -19,7 +26,7 @@ if(isset($declaracoes)) {
         echo "<table class='table'>";
         echo "<thead>";
         echo "<tr>";
-        echo "<th>Nome</th>";
+        echo "<th>Declarações</th>";
         echo "</tr>";
         echo "</thead>";
         echo "<tbody>";
@@ -29,11 +36,18 @@ if(isset($declaracoes)) {
                 echo "<tr>";
                     if($declaracao['id_evento'] != null){
                         echo "<td>".anchor("relatorioAacc/exibeDeclaracaoCompleta/{$declaracao["id_declaracao"]}",
-                                $tiposAtividade[$declaracao['id_tipo_atividade']]." - ". $eventos[$declaracao['id_evento']].
-                                " - ". $localEventos[$declaracao['id_evento']], "class = ''")."</td>";
+                                dataMysqlParaPtBr($datasEventos[$declaracao['id_evento']]).
+                                " - ". $eventos[$declaracao['id_evento']].
+                                " - ". $qtdHorasEventos[$declaracao['id_evento']].
+                                " - ".dataMysqlParaPtBr($declaracao['dt_declaracao']),
+                                "class = ''")."</td>";
                     }else{
                         echo "<td>".anchor("relatorioAacc/exibeDeclaracaoCompleta/{$declaracao["id_declaracao"]}",
-                                $tiposAtividade[$declaracao['id_tipo_atividade']], "class = ''")."</td>";
+                                dataMysqlParaPtBr($declaracao['dt_evento_externo']).
+                                " - ". $declaracao['nm_evento_externo'].
+                                " - ". $declaracao['qt_horas_atividade'].
+                                " - ". dataMysqlParaPtBr($declaracao['dt_declaracao'])
+                                , "class = ''")."</td>";
                     }
 
                 echo "</tr>";
@@ -44,7 +58,14 @@ if(isset($declaracoes)) {
         echo "</div>";
 
     }else{
-        echo "<p class='alert alert-danger'>Este aluno não possui declarações.</p>";
+        $textoStatus = null;
+
+        switch($statusDeclaracao){
+            case 1: $textoStatus = "Pendente";break;
+            case 2: $textoStatus = "Aprovada";break;
+            case 3: $textoStatus = "Não Aprovada";break;
+        }
+        echo "<p class='alert alert-danger'>Este aluno não possui mais declarações com status {$textoStatus}.</p>";
     }
 }
 
