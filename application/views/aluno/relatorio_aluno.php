@@ -8,7 +8,7 @@ echo form_open('', $atributos);
 echo "<div class='row'>";
 echo form_label("Unidade", "id_unidade", array("class" => "col-sm-2 control-label"));
 echo "<div class='form-group col-md-3'>";
-array_unshift($dropDownUnidade, "Selecione");
+
 echo form_dropdown('id_unidade',$dropDownUnidade, "", array("class" => "form-control", "onchange" => "curso(this.value)"));
 echo form_error("id_unidade");
 echo "</div>";

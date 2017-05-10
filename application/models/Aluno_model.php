@@ -18,7 +18,7 @@ class Aluno_model extends CI_Model{
 
     public function buscaAlunosInTurmas($id_turma){
         $this->db->select("*");
-        $this->db->order_by('nm_aluno asc');
+        $this->db->order_by('nm_aluno');
     //  $this->db->where("status_ativo",'1');
         $this->db->where("id_turma",$id_turma);
         return $this->db->get("tb_aluno")->result_array();
