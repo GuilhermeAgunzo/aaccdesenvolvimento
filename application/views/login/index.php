@@ -65,6 +65,7 @@
 
 <!--content-->
 <div class="content">
+    <?php echo "<div  id='ancora'></div>"; ?>
     <div class="container">
 
         <?php if($this->session->flashdata("success")): ?>
@@ -88,7 +89,6 @@
         <?php endif; ?>
 
         <div class="about" id="about">
-
             <div class="about-left left-about">
 
                 <small>Acesso ao Sistema</small>
@@ -120,7 +120,6 @@
                 echo "<div class='col-sm-offset-2 col-sm-10'>";
                 echo form_button(array("class" => "btn btn-default", "content" => "Entrar", "type" => "submit"));
                 echo "</div>";
-                echo "<div  id='ancora'></div>";
                 echo "</div>";
 
                 echo "<div class='form-group'>";
