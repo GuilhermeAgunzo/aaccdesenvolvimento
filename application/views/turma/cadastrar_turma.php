@@ -26,13 +26,14 @@ echo "<div class='row'>";
 echo form_label("Unidade", "unidade", array("class" => "col-md-2 control-label"));
 echo "<div class='form-group col-md-3'>";
 $unidades = $unidades;
-echo form_dropdown('unidade',$unidades, "", array("class" => "form-control"));
+echo form_dropdown('unidade',$unidades, "", array("class" => "form-control", "id" => "unidade", 'onchange' => 'busca_cursos($(this).val())'));
 echo form_error("unidade");
 echo "</div>";
 echo form_label("Curso", "curso", array("class" => "col-md-1 control-label"));
 echo "<div class='form-group col-md-2'>";
-$cursos = array('' =>  "Selecione")+$cursos;
-echo form_dropdown('curso',$cursos, "", array("class" => "form-control"));
+//$cursos = array('' =>  "Selecione")+$cursos;
+//echo form_dropdown('curso',$cursos, "", array("class" => "form-control"));
+echo "<select name='cursos' id='cursos' class='form-control' required='required' onchange='busca_turmas($(this).val())'></select>";
 echo form_error("curso");
 echo "</div>";
 echo "</div>";
@@ -91,3 +92,16 @@ echo "</div>";
 echo form_close();
 ?>
 </div>
+
+<script type="text/javascript">
+    var url = "<?= base_url() ?>" + "index.php/Curso/buscaCursosByUnidade";
+    function busca_cursos(id_unidade){
+
+        $('#turmas').empty().append('<option selected="selected" value="">---</option>');
+        $.post(url, {
+            id_unidade : id_unidade
+        }, function(data){
+            $('#cursos').html(data);
+        })
+    }
+</script>
