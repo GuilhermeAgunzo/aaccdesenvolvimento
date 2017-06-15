@@ -65,26 +65,30 @@
 
 <!--content-->
 <div class="content">
+    <?php echo "<div  id='ancora'></div>"; ?>
     <div class="container">
 
         <?php if($this->session->flashdata("success")): ?>
+            <script src='<?= base_url("js/scroll.js") ?>' ></script>
             <p class="alert alert-success mensagemavisohome" id="aviso"><?= $this->session->flashdata("success"); ?></p>
         <?php endif; ?>
 
         <?php if($this->session->flashdata("danger")): ?>
+        <script src='<?= base_url("js/scroll.js") ?>' ></script>
             <p class="alert alert-danger mensagemavisohome" id="aviso"><?= $this->session->flashdata("danger"); ?></p>
         <?php endif; ?>
 
-        <?php if(isset($mensagemSucesso)): ?>
+        <?php if(isset($mensagemSucesso)):?>
+            <script src='<?= base_url("js/scroll.js") ?>' ></script>
             <p class="alert alert-success mensagemavisohome" id="aviso"><?= $mensagemSucesso ?></p>
         <?php endif; ?>
 
-        <?php if(isset($mensagemErro)): ?>
+        <?php if(isset($mensagemErro)):?>
+            <script src='<?= base_url("js/scroll.js") ?>' ></script>
             <p class="alert alert-danger mensagemavisohome" id="aviso"><?= $mensagemErro ?></p>
         <?php endif; ?>
 
         <div class="about" id="about">
-
             <div class="about-left left-about">
 
                 <small>Acesso ao Sistema</small>
@@ -128,13 +132,17 @@
             </div>
             <div class="about-left">
 
-                <H1>AVISOS</H1>
-                <P>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum volutpat ultrices arcu vitae molestie.
-                    Quisque eget lacus id eros cursus convallis. Sed sit amet mauris sagittis, elementum tellus quis, pretium augue.
-                    Nulla sodales quis sem a condimentum. Aenean in facilisis metus. Sed rutrum arcu tempor, pretium mauris et, laoreet
-                    ante. Duis aliquet tortor ac dolor auctor porttitor. Integer bibendum elementum odio, in imperdiet felis pretium vel.
-                    Pellentesque malesuada id odio vitae posuere. Nulla porttitor urna et neque finibus fermentum. Donec risus massa, imperdiet quis risus sed, facilisis scelerisque metus.</p>
-
+                <?php
+                if($avisos) :?>
+                    <H1>AVISOS</H1>
+                    <br>
+                    <?php foreach ($avisos as $aviso): ?>
+                            <h4 style="font-weight: bold"><?= $aviso['nm_aviso']; ?></h4>
+                             <p><?= $aviso['ds_aviso']; ?></p>
+                        <br>
+                    <?php endforeach;
+                endif;
+                ?>
             </div>
             <div class="clearfix"> </div>
         </div>

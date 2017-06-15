@@ -16,7 +16,13 @@ class Acesso extends CI_Controller{
         }elseif( $usuarioLogado['cd_nivel'] == 2 ){
             redirect('/temporario/administrador');
         }else{
-            $this->load->view("login/index.php");
+            $this->load->model("aviso_model");
+            $avisos = $this->aviso_model->pesquisarAvisoValido(mdate("%Y-%m-%d", time()));
+
+            $dados = [
+                'avisos' => $avisos
+            ];
+            $this->load->view("login/index.php", $dados);
         }
     }
 

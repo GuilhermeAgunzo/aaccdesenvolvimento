@@ -22,6 +22,9 @@ class Aviso_model extends CI_Model{
         $this->db->where('id_aviso', $aviso['id_aviso']);
         $this->db->update('tb_aviso', $aviso);
     }
-
-
+    public function pesquisarAvisoValido($dataAtual){
+        $selecionado = " dt_inicial_aviso = '{$dataAtual}' and dt_vencimento_aviso >= '{$dataAtual}' order by dt_inicial_aviso ";
+        $this->db->where($selecionado, null, false);
+        return $this->db->get("tb_aviso")->result_array();
+    }
 }
