@@ -252,8 +252,30 @@ class Professor extends CI_Controller{
             "dt_entrada" => $data_entrada,
             "dt_saida" => $data_saida
         );
+        if($data_saida != null){
+            if ($this->_periodoValido($data_entrada, $data_saida)) {
+                if ($this->_validaFormulario(false)) {
+                    if ($this->professor_model->alteraProfessor($id_professor, $professor)) {
+                        $this->session->set_flashdata("success", "Alteração efetuada com sucesso.");
+                        redirect('/professor/alterar_professor');
+                    } else {
+                        $this->session->set_flashdata("danger", "A alteração não foi efetuada. Tente novamente mais tarde.");
+                        redirect('/professor/alterar_professor');
+                    }
+                } else {
+                    $this->load->model("unidade_model");
+                    $unidades = $this->unidade_model->dropDownUnidade();
+                    $professor['id_professor'] = $id_professor;
 
-        if ($this->_periodoValido($data_entrada, $data_saida)) {
+                    $dados = array("professor" => $professor, "unidades" => $unidades);
+                    $this->load->template_admin("professor/alterar_professor", $dados);
+                }
+            }
+            else{
+                $this->session->set_flashdata("danger", "A data do término do evento não pode ser anterior a data do início");
+                redirect('/professor/buscaAlteraProfessor/'.$id_professor);
+            }
+        } else{
             if ($this->_validaFormulario(false)) {
                 if ($this->professor_model->alteraProfessor($id_professor, $professor)) {
                     $this->session->set_flashdata("success", "Alteração efetuada com sucesso.");
@@ -270,10 +292,6 @@ class Professor extends CI_Controller{
                 $dados = array("professor" => $professor, "unidades" => $unidades);
                 $this->load->template_admin("professor/alterar_professor", $dados);
             }
-        }
-        else{
-            $this->session->set_flashdata("danger", "A data do término do evento não pode ser anterior a data do início");
-            redirect('/professor/buscaAlteraProfessor/'.$id_professor);
         }
     }
 
