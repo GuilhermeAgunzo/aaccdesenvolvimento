@@ -52,9 +52,9 @@ if(!empty($declaracoes)){ ?>
            Filtros:
         <select name="status" id="txtBusca">
             <option value="">Todos</option>
-            <option value="Pendente">Pendente</option>
-            <option value="Aprovada">Aprovada</option>
-            <option value="Não aprovada">Não aprovada</option>
+            <option value="1">Pendente</option>
+            <option value="2">Aprovada</option>
+            <option value="3">Não aprovada</option>
         </select>
        </div>
     </div>
@@ -69,19 +69,26 @@ if(!empty($declaracoes)){ ?>
             <th>Impressão</th>
         </tr>
     <?php
+    $impressao = 1;
     foreach ($declaracoes as $declaracao) {
         $declaracao['dt_declaracao'] = date('d/m/Y',  strtotime($declaracao['dt_declaracao']));
         //$declaracao['dt_aprovacao_doc'] = date('d/m/Y',  strtotime($declaracao['dt_aprovacao_doc']));
         if($declaracao['status_declaracao'] == "1"){
+            $impressao = 0;
+            $classeAprovacao = "Pendente";
             $declaracao['status_declaracao'] = "Pendente";
         }else if($declaracao['status_declaracao'] == "2") {
+            $impressao = 1;
+            $classeAprovacao = "Aprovada";
             $declaracao['status_declaracao'] = "Aprovada";
         }else if ($declaracao['status_declaracao'] == "3") {
+            $impressao = 1;
+            $classeAprovacao = "nAprovada";
             $declaracao['status_declaracao'] = "Não aprovada";
         }
         ?>
 
-        <tr id="resumo_declaracao" >
+        <tr id="resumo_declaracao" class="<?=$classeAprovacao?>">
             <td class=".declaracao"><?= $declaracao['arquivo_declaracao'] ?></td>
             <td class=".declaracao"><?= $declaracao['status_declaracao'] ?></td>
             <td class=".declaracao"><?= $declaracao['dt_declaracao'] ?></td>
@@ -95,7 +102,11 @@ if(!empty($declaracoes)){ ?>
             <td>
                 <?php
                 $endecoprint = base_url('index.php/declaracao/imprimirDeclaracao/'.$declaracao['id_declaracao']);
-                echo form_button(array("class" => "btn btn-default", "content" => "Imprimir Relatório", "onClick" => "varWindow = window.open ('{$endecoprint}','imprimir','width=1024, height=655, top=10, left=110, scrollbars=no');"));
+                if($impressao != 0){
+                    echo form_button(array("class" => "btn btn-default", "content" => "Imprimir Relatório", "onClick" => "varWindow = window.open ('{$endecoprint}','imprimir','width=1024, height=655, top=10, left=110, scrollbars=no');"));
+                } else{
+                    echo form_button(array("class" => "btn btn-default", "content" => "Imprimir Relatório", "disabled" => "disabled"));
+                }
                 echo form_close();
                 ?>
             </td>
@@ -122,10 +133,37 @@ if(!empty($declaracoes)){ ?>
         $("#txtBusca").change(function(){
             var texto = $(this).val();
             $("#filtro ").css("display", "block");
+
+            if($('#txtBusca').val() === ''){
+                $('.Aprovada').show();
+                $('.Pendente').show();
+                $('.nAprovada').show();
+            }
+
+            if($('#txtBusca').val() == 1){
+                $('.Aprovada').hide();
+                $('.Pendente').show();
+                $('.nAprovada').hide();
+            }
+
+            if($('#txtBusca').val() == 2){
+                $('.Aprovada').show();
+                $('.Pendente').hide();
+                $('.nAprovada').hide();
+            }
+
+            if($('#txtBusca').val() == 3){
+                $('.Aprovada').hide();
+                $('.Pendente').hide();
+                $('.nAprovada').show();
+            }
+
             $("#filtro ").each(function(){
-                if($(this).text().indexOf(texto) < 0){
-                    $(this).css("display", "none");
-                }
+                //$('#resumo_declaracao').hide();
+
+                //if($(this).text().indexOf(texto) < 0){
+                  //  $(this).css("display", "none");
+                //}
             });
         });
     });
