@@ -1,3 +1,14 @@
+<script type="text/javascript">
+    var url = "<?= base_url() ?>" + "index.php/Curso/buscaCursosByUnidade";
+    function busca_cursos(id_unidade){
+        $.post(url, {
+            id_unidade : id_unidade
+        }, function(data){
+            $('#cursos').html(data);
+        })
+    }
+</script>
+
 <?php
 echo form_fieldset("<h1>Pesquisa de Turma</h1>");
 
@@ -7,8 +18,14 @@ if(!isset($unidade) && isset($unidades)){
     echo form_label("Unidade", "unidade", array("class" => "col-md-2 control-label"));
     echo "<div class='form-group col-md-3'>";
     //$unidades = array('' =>  "Selecione")+$unidades;
-    echo form_dropdown('Unidade', $unidades, "", array("class" => "form-control", 'required' => 'required'));
+    echo form_dropdown('Unidade', $unidades, "", array("class" => "form-control", 'required' => 'required', 'id' => 'unidade', 'onchange' => 'busca_cursos($(this).val())'));
     echo "</div>";
+
+    echo form_label("Curso", "curso", array("class" => "col-md-2 control-label"));
+    echo "<div class='form-group col-md-3'>";
+    echo "<select name='cursos' id='cursos' class='form-control' required='required'></select>";
+    echo "</div>";
+
     echo "<div class='col-md-2'>";
     echo form_hidden("opcao", 'Pesquisar');
     echo form_button(array("class" => "btn btn-default", "content" => "Pesquisar", "type" => "submit"));
@@ -25,7 +42,7 @@ if(isset($turmas)) {
         echo "<table class='table'>";
         echo "<thead>";
         echo "<tr>";
-        echo "<th>Matricula da Turma</th>";
+        echo "<th>Código da Turma</th>";
         echo "<th>Turma</th>";
         echo "<th>Turno/Modalidade</th>";
         echo "</tr>";

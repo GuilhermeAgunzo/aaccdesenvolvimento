@@ -63,7 +63,7 @@ class Turma extends CI_Controller{
                 "qt_ciclo" => $this->input->post("ciclo"),
                 "id_user_adm_cadastrou" => $usuarioLogado['id_usuario'],
                 "dt_cadastro" => mdate("%Y-%m-%d %H:%i:%s", time()),
-                "id_curso" => $this->input->post("curso"),
+                "id_curso" => $this->input->post("cursos"),
             );
 
             $this->load->model("turma_model");
@@ -98,7 +98,7 @@ class Turma extends CI_Controller{
             "qt_ciclo" => $this->input->post("ciclo"),
             "id_user_adm_cadastrou" => $usuarioLogado['id_usuario'],
             "dt_cadastro" => mdate("%Y-%m-%d %H:%i:%s", time()),
-            "id_curso" => $this->input->post("curso"),
+            "id_curso" => $this->input->post("cursos"),
         );
 
         $modalidade = $this->input->post("modalidade");
@@ -120,13 +120,13 @@ class Turma extends CI_Controller{
         $this->load->template_admin("turma/alterar_turma", $dados);
     }
 
-    public function buscarAlterarTurma($cd_mat_turma){
+    public function buscarAlterarTurma($cd_mat_turma,$id_unidade){
         autoriza(2);
         $this->load->model("turma_model");
         $turma = $this->turma_model->buscarTurma($cd_mat_turma);
 
         $this->load->model("curso_model");
-        $cursos = $this->curso_model->dropDownCurso();
+        $cursos = $this->curso_model->dropDownCurso($id_unidade);
 
         if($turma!=null){
             $dados = array("turma" => $turma, 'cursos'=>$cursos);
@@ -160,6 +160,7 @@ class Turma extends CI_Controller{
         $opcao = $this->input->post("opcao");
         $this->load->model("turma_model");
         $this->load->model("unidade_model");
+        $idCurso = $this->input->post("cursos");
 
         $unidade = $this->unidade_model->buscarUnidadeId($idUnidade);
         $turmas = $this->turma_model->buscarTurmasUnidade($idUnidade);
@@ -168,6 +169,15 @@ class Turma extends CI_Controller{
         $cursos = $this->curso_model->dropDownCurso();
 
         $dados = array("turmas" => $turmas, "unidade" => $unidade, 'cursos' => $cursos);
+        $turmasCurso = array();
+
+        // Filtrando por curso
+        foreach ($turmas as $turma){
+            if($turma['id_curso'] == $idCurso){
+                $turmasCurso[] = $turma;
+            }
+        }
+        $dados["turmas"] = $turmasCurso;
 
         if ($turmas) {
             if($opcao=='Alterar'){
