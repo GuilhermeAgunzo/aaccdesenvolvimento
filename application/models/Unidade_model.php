@@ -48,7 +48,7 @@ class Unidade_model extends CI_Model{
     
     public function dropDownUnidade(){
         $result = $this->db->query("select concat(cd_cpsouza, ' - ' , nm_unidade) as unidade, id_unidade from tb_unidade ORDER BY cd_cpsouza;");
-        $retorno = array("0" => "Selecione");
+        $retorno = array("" => "Selecione");
         if($result->num_rows() > 0) {
             foreach($result->result_array() as $row) {
                 $retorno[$row['id_unidade']] = $row['unidade'];
