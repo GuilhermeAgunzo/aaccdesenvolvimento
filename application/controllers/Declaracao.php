@@ -93,10 +93,11 @@ class Declaracao extends CI_Controller{
         // Informações de controle
         $ctrl_dec = $this->Declaracao_model->buscaInfoControleDec($id_declaracao);
         $motivoIndeferimento = null;
-        if($ctrl_dec[0]['id_motivo_indeferimento'] != null){
-            $motivoIndeferimento = $this->Indeferimento_model->buscaMotivo($ctrl_dec[0]['id_motivo_indeferimento']);
+        if($ctrl_dec != null){
+            if($ctrl_dec[0]['id_motivo_indeferimento'] != null){
+                $motivoIndeferimento = $this->Indeferimento_model->buscaMotivo($ctrl_dec[0]['id_motivo_indeferimento']);
+            }
         }
-
         //montando matriz de informações que aparecerão na view cadastro_view
         $dados = array("dadosUsuario" => $dadosUsuario,
                         "declaracao" => $declaracao,
