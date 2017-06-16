@@ -11,21 +11,25 @@
 <?php
 echo form_fieldset("<h1>Meus Relatórios</h1>");
 
+$horasRestantes =  $horasNecessarias['qt_horas_aacc'] - $aluno['total_geral_hora'];
+
 if ($aluno['total_geral_hora'] == 0)
     $mensagem = "Você ainda não possui horas aprovadas na disciplina de AACC";
 if($aluno['total_geral_hora'] >= $horasNecessarias['qt_horas_aacc'])
     $mensagem = "Parabéns, você tem ".$aluno['total_geral_hora']." horas aprovadas. Concluiu com sucesso a disciplina de AACC! ";
-if($aluno['total_geral_hora'] > 0 && $aluno['total_geral_hora'] <   $horasNecessarias['qt_horas_aacc']){
-    $mensagem = "Você já possui <span style='color: green'>". $aluno['total_geral_hora']. "</span> horas aprovadas na disciplina de AACC, vamos lá, falta pouco!";
+if($aluno['total_geral_hora'] > 0 && $aluno['total_geral_hora'] < $horasNecessarias['qt_horas_aacc']){
+    $mensagem = "Você já possui <span style='color: green'>". $aluno['total_geral_hora']. "</span> horas aprovadas na disciplina de AACC, vamos lá, falta pouco!".
+                "<br>".
+                "Faltam <span style='color: green'>". $horasRestantes. "</span> horas para conclusão da disciplina de AACC, não desanime, você está quase lá!";
 }
 
-$horasRestantes =  $horasNecessarias['qt_horas_aacc'] - $aluno['total_geral_hora'];
-$horasRestantes = "Faltam <span style='color: green'>". $horasRestantes. "</span> horas para conclusão da disciplina de AACC, não desanime, você está quase lá!";
+
+
 
 echo "<div class='row'>";
 echo "<div class='col-md-10'>";
 if(!empty($declaracoes)){ ?>
-    <h4 class="text-center" style="margin-bottom: 40px"><?= $mensagem."<br>".$horasRestantes ?></h4>
+    <h4 class="text-center" style="margin-bottom: 40px"><?= $mensagem?></h4>
     <table  class="table-responsive table-striped table-bordered">
         <thead>
         <tr class="info">
