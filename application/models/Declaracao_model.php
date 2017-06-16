@@ -75,5 +75,13 @@ class Declaracao_model extends CI_Model{
         return $this->db->get("tb_declaracao")->result_array();
     }
 
+    public function buscaInfoControleDec($id_declaracao){
+        return $this->db->query("SELECT * FROM tb_ctrl_dec 
+                                 WHERE id_declaracao = {$id_declaracao} 
+                                 AND id_ctrl_dec = (SELECT MAX(id_ctrl_dec) 
+                                                          FROM tb_ctrl_dec 
+                                                          WHERE id_declaracao = {$id_declaracao})")->result_array();
+    }
+
 }
 

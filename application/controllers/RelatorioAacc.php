@@ -312,10 +312,11 @@ class RelatorioAacc extends CI_Controller{
         $this->load->model("turma_model");
         $this->load->model("aluno_model");
         $this->load->model("declaracao_model");
-        
+        $this->load->model("indeferimento_model");
+
         $declaracaoCompleta = $this->declaracao_model->buscaDeclaracaoCompleta($id_declaracao);
         $motivoIdIndeferimento = $this->declaracao_model->buscaIdMotivoIndeferimento();
-        $motivoNomeIndeferimento = $this->declaracao_model->buscaNomeMotivoIndeferimento();
+        $motivoNomeIndeferimento = $this->indeferimento_model->DropDownMotivo();
         
         $aluno = $this->aluno_model->buscarAlunoId($declaracaoCompleta['id_aluno']);
         $turma = $this->turma_model->buscarTurmaId($aluno['id_turma']);
@@ -376,7 +377,7 @@ class RelatorioAacc extends CI_Controller{
             $dt_aprovacao = dataPtBrParaMysql($this->input->post("dt_aprovacao"));
             $observacao = $this->input->post("observacao");
             $statusDeclaracao = $this->input->post("aprovacao");
-            $id_motivoInd = $this->input->post("id_motivoInd");
+            $id_motivoInd = $this->input->post("motivoIdIndeferimento");
             $totalHorasAprovada = $this->input->post("totalHorasAprovada");
             $id_aluno = $this->input->post("id_aluno");
             $id_declaracao = $this->input->post("id_declaracao");

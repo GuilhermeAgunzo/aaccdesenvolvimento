@@ -158,6 +158,7 @@ if(isset($declaracaoCompleta)) {
     echo "<div class='form-group col-md-3'>";
     $motivoNomeIndeferimento = array('' => "Selecione") + $motivoNomeIndeferimento;
     echo form_dropdown("motivoIdIndeferimento", $motivoNomeIndeferimento, "", array("name" => "motivoIndeferimento", "class" => "form-control", "value" => set_value("motivoIdIndeferimento", "")));
+
     echo form_error("id_motivoInd");
     echo "</div>";
     echo "</div>";

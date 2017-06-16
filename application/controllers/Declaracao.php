@@ -72,7 +72,7 @@ class Declaracao extends CI_Controller{
         $this->load->model("Evento_model");
         $this->load->model("Aluno_model");
         $this->load->model("Professor_model");
-
+        $this->load->model("Indeferimento_model");
         //Buscando aluno pelo id do usuario logado
         $aluno = $this->Aluno_model->buscarAlunoUsuario($usuarioLogado['id_usuario']);
 
@@ -89,8 +89,22 @@ class Declaracao extends CI_Controller{
         //buscar nome do tipo de atividade
         $tipoAtividade = $this->TipoAtividade_model->buscarTipoAtividade($declaracao['id_tipo_atividade']);
         $tipoAtividade = $tipoAtividade['nm_tipo_atividade'];
+
+        // Informações de controle
+        $ctrl_dec = $this->Declaracao_model->buscaInfoControleDec($id_declaracao);
+        $motivoIndeferimento = null;
+        if($ctrl_dec[0]['id_motivo_indeferimento'] != null){
+            $motivoIndeferimento = $this->Indeferimento_model->buscaMotivo($ctrl_dec[0]['id_motivo_indeferimento']);
+        }
+
         //montando matriz de informações que aparecerão na view cadastro_view
-        $dados = array("dadosUsuario" => $dadosUsuario, "declaracao" => $declaracao, "tipoAtividade" => $tipoAtividade, "evento" => $evento, "professor" => $professor);
+        $dados = array("dadosUsuario" => $dadosUsuario,
+                        "declaracao" => $declaracao,
+                        "tipoAtividade" => $tipoAtividade,
+                        "evento" => $evento,
+                        "professor" => $professor,
+                        "ctrlDeclaracao" => $ctrl_dec,
+                        "motivo" => $motivoIndeferimento);
         //carregando view e enviando os dados
         $this->load->template_usuario_aluno("declaracao/detalhes_declaracao", $dados);
     }
