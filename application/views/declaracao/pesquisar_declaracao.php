@@ -78,7 +78,10 @@ if(!empty($declaracoes)){ ?>
         $declaracao['dt_declaracao'] = date('d/m/Y',  strtotime($declaracao['dt_declaracao']));
         //$declaracao['dt_aprovacao_doc'] = date('d/m/Y',  strtotime($declaracao['dt_aprovacao_doc']));
         if($declaracao['status_declaracao'] == "1"){
-            $impressao = 0;
+            /*
+             *  Descomente a linha abaixo para adicionar a regra de desabilitar o botão de visualização de relatório para relatórios com status pendente
+             */
+            //$impressao = 0;
             $classeAprovacao = "Pendente";
             $declaracao['status_declaracao'] = "Pendente";
         }else if($declaracao['status_declaracao'] == "2") {
