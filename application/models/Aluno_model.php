@@ -32,9 +32,9 @@ class Aluno_model extends CI_Model{
         return $this->db->get("tb_aluno")->result_array();
     }
 
-    public function alterarAluno($dados){
-        $this->db->where('id_aluno', $dados['id_aluno']);
-        $this->db->update('tb_aluno', $dados['aluno']);
+    public function alterarAluno($aluno){
+        $this->db->where('cd_mat_aluno', $aluno['cd_mat_aluno']);
+        return $this->db->update('tb_aluno', $aluno);
     }
 
     public function desativarAluno($matricula, $aluno){

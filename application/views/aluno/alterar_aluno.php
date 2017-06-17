@@ -1,27 +1,31 @@
 <?php
     echo form_fieldset("<h1>Alteração de Aluno</h1>");
+$atributos = array('class' => 'form-horizontal');
 
-    $atributos = array('class' => 'form-horizontal');
-    echo form_open('aluno/buscarAlteraAluno', $atributos);
-    echo "<div class='row'>";
-    echo form_label("Número de matrícula", "matricula", array("class" => "col-sm-2 control-label"));
-    echo "<div class='form-group col-sm-3'>";
-    echo "<div class='input-group'>";
-    echo form_input(array("name" => "matricula", "value" => set_value("matricula",""),"required" => "required", "id" => "matricula" ,"class" => "form-control", "maxlength" => "13", "minlength" => "13", "min" => "0"));
-    echo form_error("matricula");
-    echo "<span class='input-group-btn'>";
-    echo form_button(array("class" => "btn btn-default", "content" => "Pesquisar", "type" => "submit"));
-    echo "</span>";
-    echo "</div>";
-    echo "</div>";
-    echo "</div>";
-    echo form_close();
+if(!isset($aluno)){
 
-    echo "<br/><br/>";
+echo form_open('', $atributos);
+
+echo "<div class='row'>";
+echo form_label("Unidade", "id_unidade", array("class" => "col-sm-2 control-label"));
+echo "<div class='form-group col-md-3'>";
+
+echo form_dropdown('id_unidade',$unidades, "", array("class" => "form-control", "onchange" => "curso(this.value)"));
+echo form_error("id_unidade");
+echo "</div>";
+echo "</div>";
+
+echo '<div id="curso"></div>';
+
+echo form_close();
+
+}
+
+    // ------------------------------------------------------------------------------------------------------------------------------
 
     if(isset($aluno)) {
         if ($aluno != null) {
-            echo form_open("aluno/alteraraluno", $atributos);
+            echo form_open("aluno/alterarAluno", $atributos);
             echo form_hidden('id_aluno', $aluno['id_aluno']);
             echo "<div class='row'>";
             echo form_label("Número de matrícula", "matricula", array("class" => "col-sm-2 control-label"));
@@ -79,4 +83,77 @@
         echo "ERRO";
         }
     }
+
 ?>
+
+<script>
+    //função ajax
+    function GetXMLHttp() {
+        if(navigator.appName == "Microsoft Internet Explorer") {
+            xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        else {
+            xmlHttp = new XMLHttpRequest();
+        }
+        return xmlHttp;
+    } var xmlRequest = GetXMLHttp();
+</script>
+
+<script>
+    function curso(valor){
+
+        var url = "curso/"+valor+"/?"+Math.random();
+        xmlRequest.open("GET",url,true);
+        xmlRequest.onreadystatechange = mudancaEstadoCurso;
+        xmlRequest.send(null);
+        if (xmlRequest.readyState == 1) {
+            document.getElementById("curso").innerHTML = "<div style='text-align:center; margin-top:20px;'><img src='<?= base_url("images/carregando.gif")?>'></div>";
+        }
+        return url;
+    }
+
+    function mudancaEstadoCurso(){
+        if (xmlRequest.readyState == 4){
+            document.getElementById("curso").innerHTML = xmlRequest.responseText;
+        }
+    }
+</script>
+
+<script>
+    function turma2(valor){
+
+        var url = "turma/"+valor+"/?"+Math.random();
+        xmlRequest.open("GET",url,true);
+        xmlRequest.onreadystatechange = mudancaEstadoTurma;
+        xmlRequest.send(null);
+        if (xmlRequest.readyState == 1) {
+            document.getElementById("turma2").innerHTML = "<div style='text-align:center; margin-top:20px;'><img src='<?= base_url("images/carregando.gif")?>'></div>";
+        }
+        return url;
+    }
+
+    function mudancaEstadoTurma(){
+        if (xmlRequest.readyState == 4){
+            document.getElementById("turma2").innerHTML = xmlRequest.responseText;
+        }
+    }
+</script>
+
+<script>
+    function alunos(valor){
+        var url = "alunos2/"+valor+"/1/?"+Math.random();
+        xmlRequest.open("GET",url,true);
+        xmlRequest.onreadystatechange = mudancaEstadoAluno;
+        xmlRequest.send(null);
+        if (xmlRequest.readyState == 1) {
+            document.getElementById("alunos").innerHTML = "<div style='text-align:center; margin-top:20px;'><img src='<?= base_url("images/carregando.gif")?>'></div>";
+        }
+        return url;
+    }
+
+    function mudancaEstadoAluno(){
+        if (xmlRequest.readyState == 4){
+            document.getElementById("alunos").innerHTML = xmlRequest.responseText;
+        }
+    }
+</script>

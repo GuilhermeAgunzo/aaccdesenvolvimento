@@ -27,7 +27,12 @@ class Aluno extends CI_Controller{
 
     public function alterar_aluno(){
         autoriza(2);
-        $this->load->template_admin("aluno/alterar_aluno");
+        $this->load->model("unidade_model");
+        $unidades = $this->unidade_model->dropDownUnidade();
+
+        $dados = array("unidades" => $unidades);
+
+        $this->load->template_admin("aluno/alterar_aluno",$dados);
     }
 
     public function pesquisar_aluno(){
@@ -154,7 +159,7 @@ class Aluno extends CI_Controller{
         }
 
         if($this->_validaFormulario($emailUnique, $matriculaUnique)){
-            $this->aluno_model->alterarAluno($dados);
+            $this->aluno_model->alterarAluno($aluno);
             $this->session->set_flashdata("success", "AlteraÃ§Ã£o efetuada com sucesso!");
             redirect('/aluno/alterar_aluno');
         }
@@ -162,10 +167,11 @@ class Aluno extends CI_Controller{
         $this->load->template_admin("aluno/alterar_aluno", $dados);
     }
 
-    public function buscarAlteraAluno()
+    public function buscarAlteraAluno($matricula)
     {
         autoriza(2);
         $this->load->library("form_validation");
+        /*
         $this->form_validation->set_rules("matricula", "matricula", "required|is_natural|exact_length[13]",
             array(
                 'required' => 'VocÃª precisa preencher a matricula.',
@@ -173,10 +179,11 @@ class Aluno extends CI_Controller{
             )
         );
         $this->form_validation->set_error_delimiters('<p class="alert alert-danger">', '</p>');
-        $sucesso = $this->form_validation->run();
+*/
+        $sucesso = true; //$this->form_validation->run();
 
         if ($sucesso) {
-            $matricula = $this->input->post("matricula");
+            //$matricula = $this->input->post("matricula");
 
             $this->load->model("aluno_model");
             $aluno = $this->aluno_model->buscarAluno($matricula);
@@ -538,6 +545,21 @@ class Aluno extends CI_Controller{
         $this->load->view("aluno/lista_alunos", $dados);
     }
 
+    public function alunos2($id_turma, $alterar = null){
+        autoriza(2);
+        $this->load->model("aluno_model");
+        $this->load->model("turma_model");
+        $alunos = $this->aluno_model->buscaAlunosInTurmas($id_turma);
+        $dados = array(
+            "alunos" => $alunos,
+            "id_turma" => $id_turma,
+        );
+
+        if($alterar == 1){
+            $dados["alterar"] = 1;
+        }
+        $this->load->view("aluno/lista_alterar_alunos", $dados);
+    }
     /**
      * @param null $id_turma
      */

@@ -161,7 +161,7 @@ if(isset($alunos)) {
         echo "<p class='alert alert-danger'> Nenhum Aluno cadastrado nessa Turma.</p>";
         echo "</br>";
 
-        echo form_open('aluno/pesquisaTurmasUnidade', 'class=form-horizontal');
+        echo form_open('aluno/pesquisar_aluno', 'class=form-horizontal');
         echo "<div class='col-md-2'>";
         echo form_button(array("class" => "btn btn-default", "content" => "Voltar", "type" => "submit"));
         echo form_hidden("Unidade", $turma["id_unidade"]);
