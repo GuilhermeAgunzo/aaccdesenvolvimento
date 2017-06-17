@@ -71,6 +71,7 @@ if(isset($declaracaoCompleta)) {
     echo "<th>Descrição do Evento</th>";
     echo "<th>Status da Declaração</th>";
     echo "<th></th>";
+    echo "<th></th>";
     echo "</tr>";
     echo "</thead>";
     echo "<tbody>";
@@ -115,8 +116,8 @@ if(isset($declaracaoCompleta)) {
                 break;
         }
     }
-
-    echo "<td>" . anchor($url, "Exibir declaração", array("target" => "_blank", "class" => "btn btn-default")) . "</td>";
+    echo "<td>" . anchor(base_url("/index.php/declaracao/imprimirDeclaracao/{$declaracaoCompleta['id_declaracao']}"),"Exibir relatório", array("target" => "_blank", "class" => "btn btn-default"));
+    echo "<td>" . anchor($url, "Exibir anexo", array("target" => "_blank", "class" => "btn btn-default")) . "</td>";
     echo form_hidden("id_aluno", $declaracaoCompleta["id_aluno"]);
     echo form_hidden("id_declaracao", $declaracaoCompleta["id_declaracao"]);
     echo form_hidden("id_tipo_atividade", $declaracaoCompleta["id_tipo_atividade"]);

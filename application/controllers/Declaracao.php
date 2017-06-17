@@ -203,7 +203,11 @@ class Declaracao extends CI_Controller{
         $declaracao = $this->Declaracao_model->buscaDeclaracaoCompleta($declaracaoId);
         $ctrl_dec = $this->Declaracao_model->buscaDetalhesValidacao($declaracaoId);
         $aluno = $this->Aluno_model->buscarAlunoId($declaracao['id_aluno']);
-        $professor = $this->Professor_model->buscaProfessor($ctrl_dec[0]['id_professor']);
+        if($ctrl_dec != null){
+            $professor = $this->Professor_model->buscaProfessor($ctrl_dec[0]['id_professor']);
+        }else {
+            $professor = null;
+        }
         $turma = $this->Turma_model->buscarTurmaId($aluno['id_turma']);
         $curso = $this->Curso_model->buscaCurso($turma['id_curso']);
         $tipoAtividade = $this->TipoAtividade_model->buscarTipoAtividade($declaracao['id_tipo_atividade']);

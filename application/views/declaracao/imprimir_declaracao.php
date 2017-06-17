@@ -50,7 +50,7 @@
                 <tr>
                     <td>
                         <p><b>Especifique a data e duração da realização da Atividade: </b></p>
-                        <?php if($declaracao['dt_evento_externo'] != null || $declaracao['dt_evento_externo'] != ""){
+                        <?php if($declaracao['dt_evento_externo'] != null && $declaracao['dt_evento_externo'] != ""){
                             echo "<p>".dataMysqlParaPtBr($declaracao['dt_evento_externo'])."</p>";
                             echo "<p>".$declaracao['qt_horas_atividade']." horas</p>";
                         }else{
@@ -71,7 +71,7 @@
                 <tr>
                     <td>
                         <p><b>Assinatura do aluno:  </b></p>
-                        <p><b>Data: </b><?=dataMysqlParaPtBr($ctrl_dec[0]['dt_aprovacao_doc'])?></p>
+                        <p><b>Data: </b><?php if($ctrl_dec != null) echo dataMysqlParaPtBr($ctrl_dec[0]['dt_aprovacao_doc'])?></p>
                     </td>
                 </tr>
             </table>
@@ -82,15 +82,15 @@
                 </tr>
                 <tr>
                     <td>
-                        <p>Esta atividade equivale a <b><?=$ctrl_dec[0]['qt_horas_aprovadas']?></b> hora(s).
-                            Avaliação: <?php if($declaracao['status_declaracao'] == 1){
+                        <p>Esta atividade equivale a <b><?php if($ctrl_dec != null) echo $ctrl_dec[0]['qt_horas_aprovadas']?></b> hora(s).
+                            Avaliação: <?php if($declaracao['status_declaracao'] == 2){
                                 echo "Satisfatória";
-                            }else{
+                            }else if($declaracao['status_declaracao'] == 3){
                                 echo "Insatisfatória";
                             }?>
                         </p>
-                        <p><b>Data: </b><?=dataMysqlParaPtBr($ctrl_dec[0]['dt_aprovacao_doc'])?> &#160;&#160;&#160;&#160;&#160;&#160;&#160;<b>Assinatura do professor: </b>______________________________</p>
-                        <p><b>Observações: </b><?=$ctrl_dec[0]['ds_observacao']?></p>
+                        <p><b>Data: </b><?php if($ctrl_dec != null) echo dataMysqlParaPtBr($ctrl_dec[0]['dt_aprovacao_doc'])?> &#160;&#160;&#160;&#160;&#160;&#160;&#160;<b>Assinatura do professor: </b>______________________________</p>
+                        <p><b>Observações: </b><?php if($ctrl_dec != null) echo $ctrl_dec[0]['ds_observacao']?></p>
                     </td>
                 </tr>
             </table>
