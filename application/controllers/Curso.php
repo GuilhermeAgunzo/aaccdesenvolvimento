@@ -92,7 +92,7 @@ class curso extends CI_Controller{
                 "qt_horas_aacc" => $this->input->post("qtd_horas_aacc"),
                 "id_user_adm_cadastrou" => $usuarioLogado['id_usuario'],
                 "dt_cadastro" => mdate("%Y-%m-%d %H:%i:%s", time())
-            );
+           );
 
             $this->load->model("curso_model");
             if($this-> curso_model->alteraCurso($curso)){
@@ -103,8 +103,9 @@ class curso extends CI_Controller{
                 $this->load->template_admin("curso/altera_curso2.php",$dados);
             }
         }else{
-            $this->buscarDetalhesCursoAlteracao();
-            //echo validation_errors();
+            $this->session->set_flashdata("danger", "A alteração não foi efetuada. Tente novamente mais tarde.");
+            redirect('/curso/altera_curso');
+            echo validation_errors();
         }
     }
     //Metodos auxiliares
@@ -203,7 +204,7 @@ class curso extends CI_Controller{
         $this->load->library("form_validation");
         $this->form_validation->set_rules("abreviacao_curso", "Abreviação", "required|max_length[10]");
         $this->form_validation->set_rules("nome_curso", "nome do curso", "required|max_length[70]");
-        $this->form_validation->set_rules("codigo_curso", "Código do curso", "required|max_length[20]|numeric|is_natural");
+        $this->form_validation->set_rules("codigo_curso", "Código do curso", "required|max_length[20]");
         $this->form_validation->set_rules("nome_coordenador", "nome do coordenador", "required|max_length[100]");
         $this->form_validation->set_rules("cpf_coordenador", "CPF", "required|max_length[50]|exact_length[14]|valid_cpf");
         $this->form_validation->set_rules("qtd_horas_aacc", "Quantidade de horas AACC", "required|numeric|is_natural");
