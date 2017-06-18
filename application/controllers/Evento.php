@@ -267,4 +267,44 @@ class Evento extends CI_Controller
             return false;
     }
 
+    public function pesquisarEventoData(){
+        autoriza(2);
+
+        if($this->_validaFormulario(true)){
+            $dataInicial = dataPtBrParaMysql($this->input->post("dtEvento"));
+            $dataFinal = dataPtBrParaMysql($this->input->post("dtFinalEvento"));
+
+            if ($dataInicial <= $dataFinal){
+                $this->load->model("Evento_model");
+                $eventos = $this->Evento_model->buscaEventosEntreDatas($dataInicial,$dataFinal);
+
+                $dados = array(
+                    'eventos' => $eventos,
+                );
+
+                $this->load->template_admin("evento/pesquisar_evento", $dados);
+
+            }else{
+                $this->session->set_flashdata("danger", "Você deve escolher um período válido.");
+                $this->load->template_admin("evento/pesquisar_evento");
+            }
+
+        }else{
+            $this->session->set_flashdata("danger", "Você deve escolher as datas.");
+            $this->load->template_admin("evento/pesquisar_evento");
+        }
+    }
+
+    public function _validaFormulario(){
+        $this->load->library("form_validation");
+
+        $this->form_validation->set_rules("dtEvento", "dtEvento", "required", array());
+        $this->form_validation->set_rules("dtFinalEvento", "dtFinalEvento", "required", array());
+
+        $this->form_validation->set_error_delimiters('<p class="alert alert-danger">', '</p>');
+
+        return $this->form_validation->run();
+    }
+
+
 }

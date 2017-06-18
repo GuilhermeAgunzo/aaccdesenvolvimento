@@ -42,6 +42,8 @@ class Evento_model extends CI_Model{
         return $retorno;
     }
 
+
+    //Antiga busca de eventos com current date 
     public function buscaEventoDcl(){
 
         //pegar data de ontem pra menos
@@ -56,6 +58,23 @@ class Evento_model extends CI_Model{
         return $retorno;
 
     }
+
+    //Busca de evento sem current date parar mostrar todos
+    public function buscaEventoDc2(){
+
+        //pegar data de ontem pra menos
+        $result = $this->db->query("select nm_evento as evento, id_evento from tb_evento ORDER BY nm_evento;");
+
+        $retorno = array();
+        if($result->num_rows() > 0) {
+            foreach($result->result_array() as $row) {
+                $retorno[$row['id_evento']] = $row['evento'];
+            }
+        }
+        return $retorno;
+
+    }
+
     public function buscaEventoIdDeclaracao($id_declaracao){
         return $this->db->query("SELECT e.id_evento,
             e.id_tipo_atividade,
