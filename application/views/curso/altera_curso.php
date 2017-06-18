@@ -3,6 +3,14 @@
         $("#cpf_coordenador").mask("999.999.999-99");
     });
 </script>
+
+<!--Função de mascara universal-->
+<?php
+function mask($val, $mask){ $maskared = '';  $k = 0; for($i = 0; $i<=strlen($mask)-1; $i++) {
+ if($mask[$i] == '#') { if(isset($val[$k])) $maskared .= $val[$k++]; }
+ else { if(isset($mask[$i])) $maskared .= $mask[$i]; } }
+ return $maskared; } ?>
+
 <?php
 
 echo form_fieldset("<h1>Alteração de Curso</h1>");
@@ -49,13 +57,19 @@ if(!isset($cursos)){
             </tr>
             </thead>
             <?php
+                
             foreach ($cursos as $curso) :
+
+                $c = $curso['cd_cpf_coordenador_curso']; $cpf='';
+                if (strlen($c) == 11) $cpf = mask($c,'###.###.###-##');
+                if (strlen($c) > 11) $cpf = $c;
+
                 echo "<tr>";
                 echo "<td class='texto-esquerda'>{$curso['nm_curso']}</td>";
                 echo "<td class='texto-esquerda' id=''>{$curso['cd_curso']}</td>";
                 echo "<td>{$curso['nm_abreviacao']}</td>";
                 echo "<td>{$curso['nm_coordenador_curso']}</td>";
-                echo "<td>{$curso['cd_cpf_coordenador_curso']}</td>";
+                echo "<td>$cpf</td>";
                 echo "<td>{$curso['qt_horas_aacc']}</td>";
                 echo "<td>".anchor("curso/buscarAlteraCurso/{$curso['id_curso']}","Alterar", "class = 'btn btn-default btn-alterar btn-xs'")."</td>";
                 echo "</tr>";
