@@ -30,6 +30,9 @@ $content .= '
         <td> Telefone</td>
         <td> Celular</td>
         <td> Status</td>
+        <td> Horas Aprovadas</td>
+        <td> Horas Não Aprovadas</td>
+        <td> Horas Pendentes</td>
     </tr>';
 
 
@@ -47,6 +50,52 @@ foreach ($alunos as $aluno){
     } else {
         $content .= "<td>Inativo</td>";
     }
+
+    if($aluno["total_geral_hora"] == 1 || $aluno["total_geral_hora"] == '1'){
+        $content .= "<td>". $aluno["total_geral_hora"] . " hora</td>";
+    }else{
+        $content .= "<td>". $aluno["total_geral_hora"] . " horas</td>";
+    }
+
+    foreach($horas as $hora){
+        if($aluno['id_aluno'] == $hora['id_aluno']){
+            if($hora['status_declaracao'] == 3){
+                if($hora['soma'] == 1){
+                    $content .= "<td>". $hora['soma'] ." hora</td>";
+                }else{
+                    if($hora['soma'] == null){
+                        $content .= "<td>0 horas</td>";
+                    }else{
+                        $content .= "<td>". $hora['soma'] ." horas</td>";
+                    }
+                }
+
+            }
+        }
+    }
+
+    foreach($horas as $hora){
+        if($aluno['id_aluno'] == $hora['id_aluno']){
+            if($hora['status_declaracao'] == 1){
+                if($hora['soma'] == 1){
+                    $content .= "<td>". $hora['soma'] ." hora</td>";
+                }else{
+                    if($hora['soma'] == null){
+                        $content .= "<td>0 horas</td>";
+                    }else{
+                        $content .= "<td>". $hora['soma'] ." horas</td>";
+                    }
+
+                }
+
+            }
+        }
+    }
+
+
+
+
+
     $content .='</tr>';
 }
 

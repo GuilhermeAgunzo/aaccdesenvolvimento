@@ -538,9 +538,11 @@ class Aluno extends CI_Controller{
         $this->load->model("aluno_model");
         $this->load->model("turma_model");
         $alunos = $this->aluno_model->buscaAlunosInTurmas($id_turma);
+        $horas = $this->aluno_model->buscaHorasPendentesReprovadas();
         $dados = array(
             "alunos" => $alunos,
             "id_turma" => $id_turma,
+            "horas" => $horas
         );
         $this->load->view("aluno/lista_alunos", $dados);
     }
@@ -577,8 +579,8 @@ class Aluno extends CI_Controller{
             $this->load->model("turma_model");
             $alunos = $this->aluno_model->buscaAlunosInTurmas($id_turma);
             $turma = $this->turma_model->buscarTurmaId($id_turma);
-
-            $titulo = "RelatÃ³rio de alunos da turma de {$turma['aa_ingresso']} - {$turma['dt_semestre']}Âº Sem - {$turma['nm_turno']}";
+            $horas = $this->aluno_model->buscaHorasPendentesReprovadas();
+            $titulo = "Relatório de alunos da turma de {$turma['aa_ingresso']} - {$turma['dt_semestre']}º Sem - {$turma['nm_turno']}";
             $arquivo = "relatorio-de-alunos-da-turma-de-{$turma['aa_ingresso']}-{$turma['dt_semestre']}Sem-{$turma['nm_turno']}";
 
             $data = array(
@@ -586,6 +588,7 @@ class Aluno extends CI_Controller{
                 'turma' => $turma,
                 'alunos'=> $alunos,
                 'arquivo' => $arquivo,
+                'horas' => $horas
             );
 
             $this->load->view('aluno/relatorio_pdf', $data);

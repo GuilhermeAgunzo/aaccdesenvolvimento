@@ -28,6 +28,9 @@ if(isset($alunos)) {
         echo "<th>Telefone</th>";
         echo "<th>Celular</th>";
         echo "<th>Status</th>";
+        echo "<th>Horas Aprovadas</th>";
+        echo "<th>Horas Não Aprovadas</th>";
+        echo "<th>Horas Pendentes</th>";
         echo "</tr>";
         echo "</thead>";
         echo "<tbody>";
@@ -44,6 +47,39 @@ if(isset($alunos)) {
             } else {
                 echo "<td>Inativo</td>";
             }
+            if($aluno['total_geral_hora'] == 1 || $aluno['total_geral_hora'] == '1'){
+                echo "<td>". $aluno['total_geral_hora'] . " hora</td>";
+            }else{
+                echo "<td>". $aluno['total_geral_hora']. " horas</td>";
+            }
+
+            foreach($horas as $hora){
+                if($aluno['id_aluno'] == $hora['id_aluno']){
+                    if($hora['status_declaracao'] == 3){
+                        if($hora['soma'] == 1){
+                            echo "<td>". $hora['soma'] ." hora</td>";
+                        }else{
+                            echo "<td>". $hora['soma'] ." horas</td>";
+                        }
+
+                    }
+                }
+            }
+
+            foreach($horas as $hora){
+                if($aluno['id_aluno'] == $hora['id_aluno']){
+                    if($hora['status_declaracao'] == 1){
+                        if($hora['soma'] == 1){
+                            echo "<td>". $hora['soma'] ." hora</td>";
+                        }else{
+                            echo "<td>". $hora['soma'] ." horas</td>";
+                        }
+
+                    }
+                }
+            }
+
+
             echo "</tr>";
         }
         echo "</tbody>";

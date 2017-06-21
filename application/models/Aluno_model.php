@@ -80,5 +80,9 @@ class Aluno_model extends CI_Model{
         return $this->db->query("SELECT DISTINCT a.nm_aluno, d.id_aluno from tb_aluno a inner join tb_declaracao d on a.id_aluno = d.id_aluno where d.id_turma = {$id_turma} and d.status_declaracao = {$escolhaStatusDeclaracao} ORDER BY a.nm_aluno")->result_array();
     }
 
+    public function buscaHorasPendentesReprovadas(){
+        return $this->db->query("SELECT id_aluno, status_declaracao, SUM(qt_horas_atividade) as soma FROM `tb_declaracao`
+                                 GROUP BY id_aluno, status_declaracao")->result_array();
+    }
 
 }
