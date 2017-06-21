@@ -34,20 +34,20 @@ if(isset($declaracoes)) {
             if($declaracao['status_declaracao'] == $statusDeclaracao){
 
                 echo "<tr>";
-                    if($declaracao['id_evento'] != null){
-                        echo "<td>".anchor("relatorioAacc/exibeDeclaracaoCompleta/{$declaracao["id_declaracao"]}",
-                                dataMysqlParaPtBr($datasEventos[$declaracao['id_evento']]).
-                                " - ". $eventos[$declaracao['id_evento']].
-                                " - ". $qtdHorasEventos[$declaracao['id_evento']].
-                                " - ".dataMysqlParaPtBr($declaracao['dt_declaracao']),
-                                "class = ''")."</td>";
-                    }else{
+                    if($declaracao['dt_evento_externo'] != null){
                         echo "<td>".anchor("relatorioAacc/exibeDeclaracaoCompleta/{$declaracao["id_declaracao"]}",
                                 dataMysqlParaPtBr($declaracao['dt_evento_externo']).
                                 " - ". $declaracao['nm_evento_externo'].
                                 " - ". $declaracao['qt_horas_atividade'].
                                 " - ". dataMysqlParaPtBr($declaracao['dt_declaracao'])
                                 , "class = ''")."</td>";
+                    }else{
+                        echo "<td>".anchor("relatorioAacc/exibeDeclaracaoCompleta/{$declaracao["id_declaracao"]}",
+                                dataMysqlParaPtBr($datasEventos[$declaracao['id_evento']]).
+                                " - ". $eventos[$declaracao['id_evento']].
+                                " - ". $qtdHorasEventos[$declaracao['id_evento']].
+                                " - ".dataMysqlParaPtBr($declaracao['dt_declaracao']),
+                                "class = ''")."</td>";
                     }
 
                 echo "</tr>";
