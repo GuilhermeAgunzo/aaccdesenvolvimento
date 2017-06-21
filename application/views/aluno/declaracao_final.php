@@ -120,7 +120,7 @@ $anoAtual = intval(strftime('%Y', strtotime('today')));
     <p>&#160;</p>
     <p class="text-left" style="line-height: normal;">____________________________________</p>
     <p class="text-left" style="line-height: normal;">Prof. <?=$unidade['nm_diretor']?></p>
-    <p class="text-left" style="line-height: normal;">(Diretora da unidade)</p>
+    <p class="text-left" style="line-height: normal;">(Diretor da unidade)</p>
 </div>
 </body>
 </html>
