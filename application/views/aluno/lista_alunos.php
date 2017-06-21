@@ -59,7 +59,12 @@ if(isset($alunos)) {
                         if($hora['soma'] == 1){
                             echo "<td>". $hora['soma'] ." hora</td>";
                         }else{
-                            echo "<td>". $hora['soma'] ." horas</td>";
+                            if($hora['soma'] == null){
+                                echo "<td>0 horas</td>";
+                            }else{
+                                echo "<td>". $hora['soma'] ." horas</td>";
+                            }
+
                         }
 
                     }
