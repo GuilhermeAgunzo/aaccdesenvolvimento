@@ -577,10 +577,17 @@ class Aluno extends CI_Controller{
 
             $this->load->model("aluno_model");
             $this->load->model("turma_model");
+            $this->load->model("unidade_model");
+            $this->load->model("curso_model");
+
+
             $alunos = $this->aluno_model->buscaAlunosInTurmas($id_turma);
             $turma = $this->turma_model->buscarTurmaId($id_turma);
+            $curso = $this->curso_model->buscaCurso($turma['id_curso']);
+            $unidade = $this->unidade_model->buscarUnidadeId($turma['id_unidade']);
             $horas = $this->aluno_model->buscaHorasPendentesReprovadas();
-            $titulo = "Relatório de alunos da turma de {$turma['aa_ingresso']} - {$turma['dt_semestre']}º Sem - {$turma['nm_turno']}";
+            $titulo = "{$unidade['nm_unidade']} - {$curso['nm_curso']} - {$turma['aa_ingresso']} - {$turma['dt_semestre']}º Sem - {$turma['nm_turno']}";
+
             $arquivo = "relatorio-de-alunos-da-turma-de-{$turma['aa_ingresso']}-{$turma['dt_semestre']}Sem-{$turma['nm_turno']}";
 
             $data = array(
