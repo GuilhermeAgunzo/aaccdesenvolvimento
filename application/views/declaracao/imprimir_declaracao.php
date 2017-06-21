@@ -55,7 +55,7 @@
                             echo "<p>".$declaracao['qt_horas_atividade']." horas</p>";
                         }else{
                             echo "<p>".dataMysqlParaPtBr($evento['dt_inicio_evento'])."</p>>";
-                            echo "<p>".dataMysqlParaPtBr($evento['qt_horas_evento'])."</p>>";
+                            echo "<p>".$evento['qt_horas_evento']."</p>>";
                         }?>
                     </td>
                 </tr>
