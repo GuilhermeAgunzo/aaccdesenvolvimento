@@ -52,10 +52,10 @@
                         <p><b>Especifique a data e duração da realização da Atividade: </b></p>
                         <?php if($declaracao['dt_evento_externo'] != null && $declaracao['dt_evento_externo'] != ""){
                             echo "<p>".dataMysqlParaPtBr($declaracao['dt_evento_externo'])."</p>";
-                            echo "<p>".$declaracao['qt_horas_atividade']." horas</p>";
+                            echo "<p>".$declaracao['qt_horas_atividade']." hora(s)</p>";
                         }else{
                             echo "<p>".dataMysqlParaPtBr($evento['dt_inicio_evento'])."</p>>";
-                            echo "<p>".$evento['qt_horas_evento']."</p>>";
+                            echo "<p>".$evento['qt_horas_evento']." hora(s)</p>>";
                         }?>
                     </td>
                 </tr>
