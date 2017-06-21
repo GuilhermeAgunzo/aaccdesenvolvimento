@@ -6,14 +6,6 @@ echo form_input(array("name" => "data", "id" => "data", "value" => $declaracao['
 echo "</div>";
 echo "</div>";
 
-echo "<div class='form-group col-sm-6'>";
-echo form_label("Hora do Evento", "hora", array("class" => "col-sm-4 control-label"));
-echo "<div class='col-sm-6'>";
-echo form_input(array("name" => "hora", "id" => "hora", "type" => "time" ,"class" => "form-control","Disabled" => "Disabled"));
-echo "</div>";
-echo "</div>";
-
-
 echo "<div class='form-group'>";
 echo form_label("Local do Evento", "local", array("class" => "col-sm-2 control-label"));
 echo "<div class='col-sm-8'>";
