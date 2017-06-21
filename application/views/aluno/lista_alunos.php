@@ -29,8 +29,8 @@ if(isset($alunos)) {
         echo "<th>Celular</th>";
         echo "<th>Status</th>";
         echo "<th>Horas Aprovadas</th>";
-        echo "<th>Horas Não Aprovadas</th>";
-        echo "<th>Horas Pendentes</th>";
+        //echo "<th>Horas Não Aprovadas</th>";
+        //echo "<th>Horas Pendentes</th>";
         echo "</tr>";
         echo "</thead>";
         echo "<tbody>";
@@ -47,12 +47,16 @@ if(isset($alunos)) {
             } else {
                 echo "<td>Inativo</td>";
             }
-            if($aluno['total_geral_hora'] == 1 || $aluno['total_geral_hora'] == '1'){
-                echo "<td>". $aluno['total_geral_hora'] . " hora</td>";
-            }else{
-                echo "<td>". $aluno['total_geral_hora']. " horas</td>";
+            if($aluno['total_geral_hora'] != null){
+                if($aluno['total_geral_hora'] == 1 || $aluno['total_geral_hora'] == '1'){
+                    echo "<td>". $aluno['total_geral_hora'] . " hora</td>";
+                }else{
+                    echo "<td>". $aluno['total_geral_hora']. " horas</td>";
+                }
+            } else{
+                echo "<td>0 horas</td>";
             }
-
+/*
             foreach($horas as $hora){
                 if($aluno['id_aluno'] == $hora['id_aluno']){
                     if($hora['status_declaracao'] == 3){
@@ -84,7 +88,7 @@ if(isset($alunos)) {
                 }
             }
 
-
+*/
             echo "</tr>";
         }
         echo "</tbody>";
