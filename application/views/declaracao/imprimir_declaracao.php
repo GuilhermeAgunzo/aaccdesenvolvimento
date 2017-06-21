@@ -11,8 +11,8 @@
     <p>&#160;</p>
     <p class="text-right"><button class="btn btn-success" onclick="window.print();">IMPRIMIR</button></p>
     <div align="center">
-        <img src="<?=base_url('images/CPSLogo2.png')?>">
-        <img src="<?=base_url('images/LogoSP.png')?>">
+        <img src="<?=base_url('images/CPSLogo1.png')?>">
+        <img src="<?=base_url('images/FatecLogo1.jpg')?>">
 
     </div>
     <div align="center">
